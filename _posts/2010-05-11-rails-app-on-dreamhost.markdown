@@ -1,9 +1,10 @@
 ---
 id: 10
 title: DreamHostでRailsアプリケーションを再起動
-categories: Ruby on Rails
+category: Rails
 layout: post
 ---
+
 
 レンタルサーバーみたいな共有サーバーとか `sudo` 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。
 

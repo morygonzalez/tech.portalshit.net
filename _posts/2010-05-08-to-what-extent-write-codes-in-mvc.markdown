@@ -1,7 +1,7 @@
 ---
 id: 8
 title: MVCのViewにどこまで書くか
-categories: CakePHP
+category: CakePHP
 layout: post
 ---
 

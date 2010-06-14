@@ -1,9 +1,10 @@
 ---
 id: 2
 title: CakePHPのMedia Pluginは神だけど設置が面倒
-categories: CakePHP
+category: CakePHP
 layout: post
 ---
+
 
 CakePHPには [Media Plugin](http://github.com/davidpersson/media) というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。
 

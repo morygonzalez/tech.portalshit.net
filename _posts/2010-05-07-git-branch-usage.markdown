@@ -2,7 +2,7 @@
 id: 7
 layout: post
 title: Gitのbranchの使い方
-categories: git
+category: git
 ---
 
 Gitでbranchの効率的な使い方みたいのがよくわからない。

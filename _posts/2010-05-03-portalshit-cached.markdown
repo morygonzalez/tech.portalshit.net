@@ -1,9 +1,10 @@
 ---
 id: 5
 title: ポータルシットにキャッシュを効かせた
-categories: PHP
+category: PHP
 layout: post
 ---
+
 
 ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。
 

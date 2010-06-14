@@ -3,9 +3,10 @@ id: 9
 title: CakePHP 1.2.xのRSSヘルパーはわかりにくい
 categories:
 - CakePHP
-- Ruby on Rails
+- Rails
 layout: post
 ---
+
 
 ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。
 

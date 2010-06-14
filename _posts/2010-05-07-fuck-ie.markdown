@@ -2,42 +2,43 @@
 id: 6
 layout: post
 title: IE6, 7, 8でJavaScriptがうまく動いてくれない
-categories: JavaScript
+category: JavaScript
 ---
+
 
 こういうコード書いてます。
 
 <pre><code>
-	function getAttrName(attrObj) {
-		var attrName = attrObj.firstChild.data;
-	//	items = document.getElementsByClassName('item');
-		var items = $('li.item');
-		$(items).fadeOut('slow');
-		for (var i = 0; i < items.length; i++) {
-		//	var keywordList = items[i].getElementsByClassName('keyword-list');
-			var keywordList = $('.keyword-list', items[i]);
-			for (var j = 0; j < keywordList.length; j++) {
-				//var keywords = keywordList[j].getElementsByTagName('li');
-				var keywords = $('li', keywordList[j]);
-				for (var k = 0; k < keywords.length; k++) {
-					if (attrName == keywords[k].textContent) {
-						$(items[i]).fadeIn('slow');
-					}
+function getAttrName(attrObj) {
+	var attrName = attrObj.firstChild.data;
+//	items = document.getElementsByClassName('item');
+	var items = $('li.item');
+	$(items).fadeOut('slow');
+	for (var i = 0; i &lt; items.length; i++) {
+	//	var keywordList = items[i].getElementsByClassName('keyword-list');
+		var keywordList = $('.keyword-list', items[i]);
+		for (var j = 0; j &lt; keywordList.length; j++) {
+			//var keywords = keywordList[j].getElementsByTagName('li');
+			var keywords = $('li', keywordList[j]);
+			for (var k = 0; k &lt; keywords.length; k++) {
+				if (attrName == keywords[k].textContent) {
+					$(items[i]).fadeIn('slow');
 				}
 			}
 		}
-		getCurAttr(attrName);
 	}
-	function getCurAttr(attrName) {
-		var curAttr = $("#keySelector li a");
-		for (var l = 0; l < curAttr.length; l++) {
-			if ($(curAttr[l]).text() == attrName) {
-				$(curAttr[l].parentNode).addClass('current-keyword');
-			} else {
-				$(curAttr[l].parentNode).removeClass('current-keyword');
-			}
+	getCurAttr(attrName);
+}
+function getCurAttr(attrName) {
+	var curAttr = $("#keySelector li a");
+	for (var l = 0; l &lt; curAttr.length; l++) {
+		if ($(curAttr[l]).text() == attrName) {
+			$(curAttr[l].parentNode).addClass('current-keyword');
+		} else {
+			$(curAttr[l].parentNode).removeClass('current-keyword');
 		}
 	}
+}
 </code></pre>
 
 やりたいことは以下のような感じ。

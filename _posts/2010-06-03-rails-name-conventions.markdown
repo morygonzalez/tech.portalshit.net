@@ -1,9 +1,12 @@
 ---
 id: 14
 title: RailsのMVC間の命名規約
-categories: CakePHP, Ruby on Rails
+categories:
+- CakePHP
+- Rails
 layout: post
 ---
+
 
 ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。
 

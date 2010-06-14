@@ -7,6 +7,7 @@ categories:
 layout: post
 ---
 
+
 この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと "Twitter Streaming APIをRubyで試してみる - しばそんノート":http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。
 
 <pre><code>

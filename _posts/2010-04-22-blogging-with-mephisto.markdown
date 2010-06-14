@@ -2,7 +2,7 @@
 id: 1
 title: Mephistoで技術ブログをやることにした
 layout: post
-categories: misc
+category: misc
 ---
 
 
