@@ -1,0 +1,84 @@
+---
+id: 6
+layout: post
+title: IE6, 7, 8でJavaScriptがうまく動いてくれない
+categories: JavaScript
+---
+
+こういうコード書いてます。
+
+<pre><code>
+	function getAttrName(attrObj) {
+		var attrName = attrObj.firstChild.data;
+	//	items = document.getElementsByClassName('item');
+		var items = $('li.item');
+		$(items).fadeOut('slow');
+		for (var i = 0; i < items.length; i++) {
+		//	var keywordList = items[i].getElementsByClassName('keyword-list');
+			var keywordList = $('.keyword-list', items[i]);
+			for (var j = 0; j < keywordList.length; j++) {
+				//var keywords = keywordList[j].getElementsByTagName('li');
+				var keywords = $('li', keywordList[j]);
+				for (var k = 0; k < keywords.length; k++) {
+					if (attrName == keywords[k].textContent) {
+						$(items[i]).fadeIn('slow');
+					}
+				}
+			}
+		}
+		getCurAttr(attrName);
+	}
+	function getCurAttr(attrName) {
+		var curAttr = $("#keySelector li a");
+		for (var l = 0; l < curAttr.length; l++) {
+			if ($(curAttr[l]).text() == attrName) {
+				$(curAttr[l].parentNode).addClass('current-keyword');
+			} else {
+				$(curAttr[l].parentNode).removeClass('current-keyword');
+			}
+		}
+	}
+</code></pre>
+
+やりたいことは以下のような感じ。
+
+1. onclickで `attrObj` が `getAttrName` に渡される
+2. クリックされた文字列を `attrName` に格納
+3. すべての `item` をjQueryを使って非表示
+4. `item` の中の `ul.keyword-list li` 内のテキストに一致したらjQueryで表示
+
+Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は `getElementByClassName` とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。
+
+ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。
+
+サーバーサイドで実装する方法もないではないけど、
+
+1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも）
+2. 大した機能じゃないのに大手術したくない
+3. ずっとPHPばっかり触ってるのはつまらん
+
+などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。
+
+### 追記
+
+"Twitterでcxxさんに教えてもらった":http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。
+
+そういうわけで
+
+<pre><code>var keywords = $('li', keywordList[j]);</code></pre>
+
+を
+
+<pre><code>var keywords = $('li a', keywordList[j]);</code></pre>
+
+とし、
+
+<pre><code>if (attrName == keywords[k].textContent)</code></pre>
+
+を
+
+<pre><code>if (attrName == keywords[k].firstChild.data)</code></pre>
+
+にしてみたところ、ばっちりIEで動くようになった。
+
+cxxさんありがとうございます。今度焼き肉デートしましょう。

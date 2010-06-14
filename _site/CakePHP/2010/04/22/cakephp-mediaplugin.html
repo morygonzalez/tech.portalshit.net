@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>CakePHPのMedia Pluginは神だけど設置が面倒 |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+<body>
+
+		<div id="header">
+		
+				<h1><a href="/">tech.portalshit.net</a></h1>
+
+				<h3>CakePHP, Rails, JavaScript</h3>
+				
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+					
+				</ul>
+		</div>
+		<div id="container">
+			<div id="content">
+				<h2>CakePHPのMedia Pluginは神だけど設置が面倒</h2>
+				<p>CakePHPには <a href='http://github.com/davidpersson/media'>Media Plugin</a> というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。</p>
+
+<p>しかしこのMedia Plugin、設置が少々面倒だ。情報も英語のものも含めて少ない。僕は二つのプロジェクトでこのMedia Pluginを使ったけど、とても設置に苦労した。はまるポイントはいくつかあるんだけど、今日はDBについて書いておこうと思う。</p>
+
+<p>Media Pluginは <code>attachments</code> というテーブルをつくり、ここにファイルのメタデータを格納していく。これはアプリケーションのルート（ <code>APP</code> ディレクトリ）で <code>cake media init</code> というコマンドをTerminalで打ってやると（ただし <code>/cake/console</code> にパスを通しておく必要あり）、Bakeのときのような画面が出てきて初期設定をやってくれる（ <code>app/config/database.php</code> の情報にあわせてテーブルも作ってくれる）。しかしCakePHPのデフォルトDBがMySQLであるためMedia PluginもMySQLを想定しているのか、 <code>app/plugins/media/config/sql/media.sql</code> のSQL文を単純に実行してしまうと不具合が生じる。実は僕はここで結構はまってた。僕は全部のプロジェクトでSQLiteを使っているので、単純にこのSQLを実行すると、 <code>attachments.id</code> のデータ型が <code>INT(10)</code> とかになってしまい、エラーに遭遇し続けることになってしまった。SQLiteの場合、idカラムのデータ型は <code>INTEGER</code> でなければならないのだ。</p>
+
+<p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>
+			</div>
+			
+			<div id="sidebar">
+			<h3>Search</h3>
+      		<form method="get" id="sform" action="/search">
+
+       		 <label for="q">Search:</label>
+				<input type="text" id="q" value="" name="q" size="15" />
+				</form>
+				<h3>Categories</h3>
+				<ul>
+					<li><a class="selected" href="/" title="Home">Home</a></li>
+				</ul>
+
+				
+				<h3>Latest Posts</h3>
+			</div>
+		
+		</div>
+		<div id="footer">
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+
+<!-- Please leave this line intact -->
+<p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />
+
+Theme by <a href="http://www.stuartloxton.com">Stuart Loxton</a><br />
+
+Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>
+<!-- you can delete below here --></p>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1110156-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>

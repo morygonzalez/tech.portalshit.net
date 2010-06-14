@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>CakePHP 1.2.xのRSSヘルパーはわかりにくい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+<body>
+
+		<div id="header">
+		
+				<h1><a href="/">tech.portalshit.net</a></h1>
+
+				<h3>CakePHP, Rails, JavaScript</h3>
+				
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+					
+				</ul>
+		</div>
+		<div id="container">
+			<div id="content">
+				<h2>CakePHP 1.2.xのRSSヘルパーはわかりにくい</h2>
+				<p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
+
+<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
+<pre><code>
+    respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @products }
+    end
+</code></pre>
+<p><code>config/routes.rb</code> に</p>
+<pre><code>
+    map.connect ':controller/:action/:id.:format'
+</code></pre>
+<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
+
+<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
+
+<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
+
+<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
+
+<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
+
+<p>僕はファッションの観点からRailsを選びたい。</p>
+			</div>
+			
+			<div id="sidebar">
+			<h3>Search</h3>
+      		<form method="get" id="sform" action="/search">
+
+       		 <label for="q">Search:</label>
+				<input type="text" id="q" value="" name="q" size="15" />
+				</form>
+				<h3>Categories</h3>
+				<ul>
+					<li><a class="selected" href="/" title="Home">Home</a></li>
+				</ul>
+
+				
+				<h3>Latest Posts</h3>
+			</div>
+		
+		</div>
+		<div id="footer">
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+
+<!-- Please leave this line intact -->
+<p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />
+
+Theme by <a href="http://www.stuartloxton.com">Stuart Loxton</a><br />
+
+Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>
+<!-- you can delete below here --></p>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1110156-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>

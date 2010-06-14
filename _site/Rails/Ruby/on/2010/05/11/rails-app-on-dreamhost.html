@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>DreamHostでRailsアプリケーションを再起動 |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+<body>
+
+		<div id="header">
+		
+				<h1><a href="/">tech.portalshit.net</a></h1>
+
+				<h3>CakePHP, Rails, JavaScript</h3>
+				
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+					
+				</ul>
+		</div>
+		<div id="container">
+			<div id="content">
+				<h2>DreamHostでRailsアプリケーションを再起動</h2>
+				<p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
+
+<blockquote>
+<p>To restart your rails app do a &#8220;ps x&#8221; to get the pid of your dispatch.fcgi process(let&#8217;s say it&#8217;s 1234) then do a &#8220;kill 1234&#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. <cite><a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'>How do I restart rails app? - DreamHost Forum</a></cite></p>
+</blockquote>
+
+<p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
+
+<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>
+			</div>
+			
+			<div id="sidebar">
+			<h3>Search</h3>
+      		<form method="get" id="sform" action="/search">
+
+       		 <label for="q">Search:</label>
+				<input type="text" id="q" value="" name="q" size="15" />
+				</form>
+				<h3>Categories</h3>
+				<ul>
+					<li><a class="selected" href="/" title="Home">Home</a></li>
+				</ul>
+
+				
+				<h3>Latest Posts</h3>
+			</div>
+		
+		</div>
+		<div id="footer">
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+
+<!-- Please leave this line intact -->
+<p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />
+
+Theme by <a href="http://www.stuartloxton.com">Stuart Loxton</a><br />
+
+Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>
+<!-- you can delete below here --></p>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1110156-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
