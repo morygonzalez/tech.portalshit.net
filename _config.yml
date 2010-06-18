@@ -1,2 +1,4 @@
-paginate: 10
+paginate: true
+paginator: 10
 permalink: /:year/:month/:day/:title
+exclude: task

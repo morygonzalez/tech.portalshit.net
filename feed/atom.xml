@@ -19,7 +19,7 @@ title: tech.portalshit.net
   <entry>
     <title>{{ post.title }}</title>
     <link href="{{ post.url }}" />
-    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <updated>{{ post.time | date_to_xmlschema }}</updated>
     <id>http://tech.portalshit.net/{{ post.id }}</id>
     <content type="html">{{ post.content | xml_escape }}</content>
   </entry>
