@@ -1,5 +1,5 @@
 ---
-id: 22
+id: 21
 title: Rubyがエレガントだって言われるのがわかってきたような気がする
 category: Ruby
 layout: post

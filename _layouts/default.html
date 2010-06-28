@@ -21,15 +21,20 @@
 				</ul>
 		</div>
 		<div id="container">
+
+		  <div class="paginator">
+		    {% if paginator.page != 1 %}
+				  <a href="http://tech.portalshit.net/page{{ paginator.previous_page }}/">Previous Page</a>
+				{% endif %}
+				{% if paginator.page != paginator.total_page %}
+				  <a href="http://tech.portalshit.net/page{{ paginator.next_page }}/">Next Page</a>
+				{% endif %}
+			</div>
+		  
 			<div id="content">
 				{{ content }}
 			</div>
-			
-			<div class="paginator">
-				{{ paginator.previous_page }}
-				{{ paginator.next_page }}
-			</div>
-			
+						
 			<div id="sidebar">
 				<h3>Categories</h3>
 				{{ page.categories }}
