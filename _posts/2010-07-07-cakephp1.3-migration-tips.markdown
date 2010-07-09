@@ -1,0 +1,17 @@
+---
+id: 25
+title: CakePHP 1.2から1.3への移行の個人的メモ
+category: CakePHP
+layout: post
+---
+
+CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。
+
+1. `$html->link()` などHTMLヘルパーでエスケープを `false` にしたいときは `$options['escape']` を使う。
+2. `$cakeDebug` は廃止されたのでエラーが出る。
+3. `$sessions->flash()` は `echo $sessions->flash()` とする必要がある。また AppController でヘルパーとして呼び出さなければならない。
+4. debug_kit は github から最新版を `git clone` する。
+
+参照:
+
+- [1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook](http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3 "1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook")
