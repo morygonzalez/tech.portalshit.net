@@ -23,7 +23,21 @@
 		<div id="container">
 		  
 			<div id="content">
-				<h2 id='oauthwakaranai'><a href='/2010/07/09/cant-live-up-with-oauth'>OAuthがwakaranai</a></h2>
+				<h2 id='githookdreamhostjekyll'><a href='/2010/07/14/deploy-with-git-hook'>Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></h2>
+<div class='articleinfo'>
+Posted on 14 Jul 2010 by morygonzalez |
+	
+		<a href='http://tech.portalshit.net/jekyll/'>jekyll</a>
+	
+		<a href='http://tech.portalshit.net/git/'>git</a>
+	
+</div><p>やってみた。以下を参考にした。</p><p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p><p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p><p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p><p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p><pre><code>#! /bin/sh
+unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code></pre><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id3'>まとめ</h3><p>まとめると、</p><p>1. 記事を作成するローカルリポジトリ</p><ol>
+<li>ローカルリポジトリをpushするリモートリポジトリ</li>
+
+<li>リモートリポジトリをcloneする公開用リポジトリ</li>
+</ol><p>の三つが必要なことを忘れないようにしてくだしあ。</p><p>これであなたもハイド博士だ！</p>
+<h2 id='oauthwakaranai'><a href='/2010/07/09/cant-live-up-with-oauth'>OAuthがwakaranai</a></h2>
 <div class='articleinfo'>
 Posted on 09 Jul 2010 by morygonzalez |
 	
@@ -101,7 +115,7 @@ Posted on 02 Jul 2010 by morygonzalez |
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
 </div><p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
-<h2 id='id3'><a href='/2010/06/28/i-had-better-review-ruby'>インスタンス変数</a></h2>
+<h2 id='id4'><a href='/2010/06/28/i-had-better-review-ruby'>インスタンス変数</a></h2>
 <div class='articleinfo'>
 Posted on 28 Jun 2010 by morygonzalez |
 	
@@ -387,7 +401,7 @@ function getCurAttr(attrName) {
 
 <li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
 </ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id2'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><pre><code>var keywords = $('li', keywordList[j]);</code></pre><p>を</p><pre><code>var keywords = $('li a', keywordList[j]);</code></pre><p>とし、</p><pre><code>if (attrName == keywords[k].textContent)</code></pre><p>を</p><pre><code>if (attrName == keywords[k].firstChild.data)</code></pre><p>にしてみたところ、ばっちりIEで動くようになった。</p><p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
-<h2 id='id4'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
+<h2 id='id5'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
 <div class='articleinfo'>
 Posted on 03 May 2010 by morygonzalez |
 	
@@ -431,6 +445,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></li>
 				
 					<li><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></li>
 				
