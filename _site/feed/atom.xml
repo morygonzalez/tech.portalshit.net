@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  
+  <title>tech.portalshit.net</title>
+  <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
+  <link href="http://tech.portalshit.net/" />
+  <updated>2010-07-09T19:51:23+09:00</updated>
+  <id>http://tech.portalshit.net/</id>
+  <author>
+    <name>森井ゴンザレス</name>
+  </author>
+  
+  
+  <entry>
+    <title>OAuthがwakaranai</title>
+    <link href="/2010/07/09/cant-live-up-with-oauth" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/09/cant-live-up-with-oauth</id>
+    <content type="html">&lt;p&gt;RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src='images/27-oauth.png' alt='OAuthの利用イメージ' /&gt;&lt;/p&gt;
+
+&lt;p&gt;疑問点がいくつかある。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Userモデルで &lt;code&gt;validate_presence_of&lt;/code&gt; をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 &lt;code&gt;validate_presence_of&lt;/code&gt; でエラーが出るはず。&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Userモデルで &lt;code&gt;has_many :oauth_tokens&lt;/code&gt; とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 &lt;code&gt;oauth_tokens&lt;/code&gt; にそんな &lt;code&gt;user_id&lt;/code&gt; の人いないし」みたいなエラーが出るような気がする。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Vimで編集を終了した後、元のコンソールの状態を復元したい</title>
+    <link href="/2010/07/07/finish-editing-then-restore-console" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/07/finish-editing-then-restore-console</id>
+    <content type="html">&lt;p&gt;FreeBSDでVimを起動しファイルを編集したあと、 &lt;code&gt;:q&lt;/code&gt; でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。&lt;/p&gt;
+
+&lt;p&gt;ちなみにVimには &lt;code&gt;restorescreen&lt;/code&gt; とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。&lt;/p&gt;
+
+&lt;p&gt;情報元は &lt;a href='http://d.hatena.ne.jp/lurker/20061118/1163810847' title='フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳'&gt;フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳&lt;/a&gt; というページ。&lt;/p&gt;
+
+&lt;p&gt;FreeBSDの場合、 &lt;code&gt;/etc/termcap&lt;/code&gt; ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。&lt;/p&gt;
+
+&lt;p&gt;しかし自分はこのサーバーでroot権限を持ってない。なので &lt;code&gt;cp /etc/termcap ~/.termcap&lt;/code&gt; したあと &lt;code&gt;chmod 644 ~/.termcap&lt;/code&gt; して &lt;code&gt;vim ~/.termcap&lt;/code&gt; し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。&lt;/p&gt;
+
+&lt;p&gt;僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 &lt;code&gt;echo $TERM&lt;/code&gt; してみると &lt;code&gt;xterm-color&lt;/code&gt; と表示されるのでxterm-colorの設定が書いてあるところをいじった。&lt;/p&gt;
+
+&lt;p&gt;くわしくは上のリンク先を見てもらうといいんだけど、とにかく &lt;code&gt;te&lt;/code&gt; ってのと &lt;code&gt;ti&lt;/code&gt; ってのがあって、これをMacの場合は &lt;code&gt;te=\E7\E[?47h&lt;/code&gt; 、 &lt;code&gt;ti=\E[2J\E[?47l\E&lt;/code&gt; としてあげればいい。そんでシェルの設定ファイルに &lt;code&gt;export $TERMPATH=$HOME/.termcap&lt;/code&gt; と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>CakePHP 1.2から1.3への移行の個人的メモ</title>
+    <link href="/2010/07/07/cakephp1.3-migration-tips" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/07/cakephp1.3-migration-tips</id>
+    <content type="html">&lt;p&gt;CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;$html-&amp;gt;link()&lt;/code&gt; などHTMLヘルパーでエスケープを &lt;code&gt;false&lt;/code&gt; にしたいときは &lt;code&gt;$options[&amp;#39;escape&amp;#39;]&lt;/code&gt; を使う。&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;$cakeDebug&lt;/code&gt; は廃止されたのでエラーが出る。&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;$sessions-&amp;gt;flash()&lt;/code&gt; は &lt;code&gt;echo $sessions-&amp;gt;flash()&lt;/code&gt; とする必要がある。また AppController でヘルパーとして呼び出さなければならない。&lt;/li&gt;
+
+&lt;li&gt;debug_kit は github から最新版を &lt;code&gt;git clone&lt;/code&gt; する。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;参照:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'&gt;1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>YAMLで初期データをRailsアプリケーションのDBにぶっ込む</title>
+    <link href="/2010/07/02/import-initial-data-with-yaml" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/02/import-initial-data-with-yaml</id>
+    <content type="html">&lt;p&gt;初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも &lt;code&gt;rake db:migrate&lt;/code&gt; で初期データは入るはずだから楽ちんかなと思って。&lt;/p&gt;
+
+&lt;p&gt;結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoge: #アイテムの名前
+  id: 1
+  name: &amp;quot;hoge&amp;quot;
+  address: &amp;quot;ホゲ県ホゲ村ホゲホゲ&amp;quot;
+
+fuga:
+  id: 2
+  name: &amp;quot;fuga&amp;quot;
+  address: &amp;quot;ホゲ県ホゲ村フガフガ&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hoge:
+  id: 1
+  name: &amp;quot;hoge&amp;quot;
+  address: &amp;quot;ホゲ県ホゲ村ホゲホゲ&amp;quot;
+
+  id: 2
+  name: &amp;quot;fuga&amp;quot;
+  address: &amp;quot;ホゲ県ホゲ村フガフガ&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。&lt;/p&gt;
+
+&lt;p&gt;結局、拾ってきた コードを参考にして&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;#39;yaml&amp;#39;
+	require &amp;#39;pp&amp;#39;
+
+	data = YAML.load_file(&amp;#39;hoge.yml&amp;#39;)
+	pp data&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Active Recordが難しすぎてしょんべんちびりそう</title>
+    <link href="/2010/07/02/active_record-is-so-sticky-for-me" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/02/active_record-is-so-sticky-for-me</id>
+    <content type="html">&lt;p&gt;『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>インスタンス変数</title>
+    <link href="/2010/06/28/i-had-better-review-ruby" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/28/i-had-better-review-ruby</id>
+    <content type="html">&lt;p&gt;一個前の記事（&lt;a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'&gt;Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript&lt;/a&gt;）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。&lt;/p&gt;
+
+&lt;p&gt;そういうわけで正しくは、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Hoge
+  def initialize
+    @a = &amp;quot;&amp;quot;
+  end 
+
+  def hoge
+    @a = &amp;quot;hogehoge&amp;quot;
+  end 
+end
+
+fuga = Hoge.new
+puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;と書くそうです。&lt;/p&gt;
+
+&lt;p&gt;ところでなんで自分は前回、 &lt;code&gt;@a&lt;/code&gt; というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Hoge
+  def initialize
+    a = &amp;quot;&amp;quot;
+  end 
+
+  def hoge
+    a = &amp;quot;hogehoge&amp;quot;
+  end 
+end
+
+fuga = Hoge.new
+puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;でも同じ結果を出力しますね。&lt;/p&gt;
+
+&lt;p&gt;インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;@&lt;/code&gt; で始まる変数は &lt;em&gt;インスタンス変数&lt;/em&gt; といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Hoge
+  def initialize(b=&amp;quot;&amp;quot;)
+    @a = b
+  end
+
+  def hoge
+    print @a, &amp;quot;\n&amp;quot;
+  end
+end
+
+fuga = Hoge.new(&amp;quot;Fuga&amp;quot;)
+piyo = Hoge.new(&amp;quot;Piyo&amp;quot;)
+
+fuga.hoge
+piyo.hoge&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;で、これを実行すると&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Fuga
+Piyo&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Rubyがエレガントだって言われるのがわかってきたような気がする</title>
+    <link href="/2010/06/25/i-realized-php-is-crap" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/25/i-realized-php-is-crap</id>
+    <content type="html">&lt;p&gt;「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。&lt;/p&gt;
+
+&lt;p&gt;オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+class Hoge {
+  var $a; 
+  function hoge() {
+    return $this-&amp;gt;a = &amp;quot;hogehoge&amp;quot;;
+  }
+}
+
+$fuga = new Hoge();
+echo $fuga-&amp;gt;hoge();
+?&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;つぎにRubyで同じコードを書いてみる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Hoge
+  @a  
+  def hoge
+    @a = &amp;quot;hogehoge&amp;quot;
+  end 
+end
+
+fuga = Hoge.new
+puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは &lt;code&gt;shift + [&lt;/code&gt; とか &lt;code&gt;shift + ]&lt;/code&gt; とかだから、 &lt;code&gt;shift&lt;/code&gt; の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。&lt;/p&gt;
+
+&lt;p&gt;さらにメソッドとか変数へのアクセスもめんどい。Rubyだと &lt;code&gt;.&lt;/code&gt; でアクセスできるのに、PHPだと &lt;code&gt;-&amp;gt;&lt;/code&gt; だ。入力するときはキーボードに &lt;code&gt;-&lt;/code&gt; と &lt;code&gt;shift + .&lt;/code&gt; と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。&lt;/p&gt;
+
+&lt;p&gt;他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。&lt;/p&gt;
+
+&lt;p&gt;PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>RailsアプリケーションでMarkdownを使う</title>
+    <link href="/2010/06/23/how-to-use-markdown-with-rails" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/23/how-to-use-markdown-with-rails</id>
+    <content type="html">&lt;p&gt;RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）&lt;/p&gt;
+
+&lt;p&gt;調べてみたところ、 &lt;a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'&gt;BlueCloth&lt;/a&gt; というライブラリを使うといいらしい。&lt;/p&gt;
+
+&lt;p&gt;これはRailsのプラグインではないのでgemでインストール。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo gem install bluecloth&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;その後viewで&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;%= markdwon(@item.text) %&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とか書けばいい。&lt;/p&gt;
+
+&lt;p&gt;しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;config.gem &amp;quot;bluecloth&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;と書いてやる。するとめでたくMarkdownが使えるようになる。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>XREAにRubyGemsをインストール</title>
+    <link href="/2010/06/22/installed-rubygems-on-xrea" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/22/installed-rubygems-on-xrea</id>
+    <content type="html">&lt;p&gt;XREAでRailsを使おうと思っていろいろ調べてみた。Railsは &lt;code&gt;rake rails:freeze:gems&lt;/code&gt; してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &amp;#8216;rubygemsをrequireできねーぞゴラ！&amp;#8217; みたいなエラーが出る。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;.profile&lt;/code&gt; で記述した &lt;code&gt;GEM_HOME&lt;/code&gt; や &lt;code&gt;RUBY_LIB&lt;/code&gt; のパスは間違ってないと思うんだけど、何回やっても &lt;code&gt;$HOME/lib/&lt;/code&gt; 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で &lt;code&gt;guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb&lt;/code&gt; を &lt;code&gt;$HOME/lib/ruby/site_ruby/1.8&lt;/code&gt; に移動させた。その後 &lt;code&gt;source ~/.profile&lt;/code&gt; して適当な場所で &lt;code&gt;gem -v&lt;/code&gt; してみたところ、ちゃんと &lt;code&gt;1.3.5&lt;/code&gt; と表示された。&lt;/p&gt;
+
+&lt;p&gt;蛇足だけど最初、RubyGems 1.3.7をインストールしようとしたら、利用予定地のサーバーのRubyのバージョンが1.8.5なためにインストールできなかった。そういうわけでRubyGemsは1.3.5を入れた。&lt;/p&gt;
+
+&lt;p&gt;あとRubyGemsが入ったからといってシェルで &lt;code&gt;gem install rails&lt;/code&gt; とかやってもプロセスを &lt;code&gt;kill&lt;/code&gt; されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>CakePHPはSchemaとかがしょぼいしうんざりする</title>
+    <link href="/2010/06/15/im-fed-up-with-cakephp" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/15/im-fed-up-with-cakephp</id>
+    <content type="html">&lt;p&gt;CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ &lt;code&gt;longitude&lt;/code&gt; を &lt;code&gt;longtitude&lt;/code&gt; としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！&lt;/p&gt;
+
+&lt;p&gt;これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。&lt;/p&gt;
+
+&lt;p&gt;確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Jekyllに変えた</title>
+    <link href="/2010/06/14/migrated-to-jekyll" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/14/migrated-to-jekyll</id>
+    <content type="html">&lt;p&gt;このブログのCMSをMephistoから&lt;a href='http://github.com/mojombo/jekyll' title='mojombo&amp;apos;s jekyll at master - GitHub'&gt;jekyll&lt;/a&gt;に変えてみた。&lt;/p&gt;
+
+&lt;p&gt;Mephistoは公式サイトつながらないし、Mephisto使ってた外国のGeek連中がここ一年くらいでこぞってJekyllに移行してるみたいなのでこのビッグウェーブに乗ってみた。&lt;/p&gt;
+
+&lt;h3 id='jekyll__cms'&gt;Jekyll = 静的CMS&lt;/h3&gt;
+
+&lt;p&gt;しばらくJekyllの使い方が分からなくて格闘してたけど、やっと使い方が分かった。これは静的なCMSであって動的なCMSではない。Movable Typeに似てる。それをGeekなスタイルでやる感じ。&lt;/p&gt;
+
+&lt;h3 id='ruby'&gt;Rubyが入ってるサーバーはいらない&lt;/h3&gt;
+
+&lt;p&gt;コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は&lt;a href='http://disqus.com/overview/' title='DISQUS | Overview'&gt;DISQUS&lt;/a&gt;とかに外注すればOK。&lt;/p&gt;
+
+&lt;p&gt;ちょっと話題がずれるけど、DISQUSって便利そうですよね。他人のブログにコメント書いたあとってそのコントロール権みたいのはブログの持ち主に移行するけど、DISQUSみたいなサービスを利用すればコメントを書いた本人が過去の自分のコメントをトラックしやすくなる。ブログ主にしたってスパム対策とかもやりやすくなる。自前で自分のブログにコメント欄を持つって時代は終わったのかもね。いまはTwitterとかもあるし。&lt;/p&gt;
+
+&lt;h3 id='mephisto'&gt;Mephistoからの移行について&lt;/h3&gt;
+
+&lt;p&gt;Jekyllのgithubのwikiに移行方法が載っけてあるけど（&lt;a href='http://wiki.github.com/mojombo/jekyll/blog-migrations' title='Blog Migrations - jekyll - GitHub'&gt;Blog Migrations - jekyll - GitHub&lt;/a&gt;）、これわかりにくい。というかMephistoをMySQLで運用してないとスクリプトをそのまんまでは利用できない。結果から書くと僕はMephistoはSQLite3で運用してたので移行スクリプトを使えなかった。&lt;/p&gt;
+
+&lt;p&gt;一応MephistoのDBをSQLite3からMySQLに変更してコンバートすることも試してみたけど、DreamHost上では &lt;code&gt;gem install mysqlplus&lt;/code&gt; が &lt;code&gt;sudo&lt;/code&gt; 権限がないために実行できず（なぜかユーザーディレクトリへのインストールもはねられる）、ローカルのMacBook上ではActiveRecordとかその辺でエラーが出て（MephistoはRails 2.2.2以下じゃないと動かないみたい）、Railsのバージョンを下げるとかも試してみたんだけどエラーが出続けるので諦めてしまった。&lt;/p&gt;
+
+&lt;p&gt;そういうわけでして、記事数が16本と少なかったこともあり、ちまちま手書きでMephistoからJekyllに移行しました。&lt;/p&gt;
+
+&lt;p&gt;コメント欄の設置（DISQUSを利用）とかフィードの生成とかカテゴリーの表示とかができてないけど、暇を見つけていじっていく予定です。&lt;/p&gt;
+
+&lt;h3 id='jekyll'&gt;全般的なJekyllの使用感&lt;/h3&gt;
+
+&lt;p&gt;DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 &lt;code&gt;jekyll&lt;/code&gt; コマンドを実行するだけでhtmlファイルが &lt;code&gt;_site&lt;/code&gt; ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（&lt;a href='http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy' title='tasks/deploy at master from henrik&amp;apos;s henrik.nyh.se - GitHub'&gt;tasks/deploy at master from henrik&amp;#8217;s henrik.nyh.se - GitHub&lt;/a&gt;）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。&lt;/p&gt;
+
+&lt;p&gt;Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Rubyいいわー</title>
+    <link href="/2010/06/04/i-like-ruby" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/04/i-like-ruby</id>
+    <content type="html">&lt;p&gt;irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>RailsのMVC間の命名規約</title>
+    <link href="/2010/06/03/rails-name-conventions" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/03/rails-name-conventions</id>
+    <content type="html">&lt;p&gt;ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。&lt;/p&gt;
+&lt;blockquote cite='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'&gt;
+&lt;h3&gt;コントロールとモデルが密すぎる。&lt;/h3&gt;
+&lt;p&gt;CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。&lt;/p&gt;
+&lt;cite&gt;&lt;a href='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'&gt;Blog-side CakePHP わかりずらい３点&lt;/a&gt;&lt;/cite&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ふむふむ〜、ナルホディウスですぞ〜！！！&lt;/p&gt;
+
+&lt;p&gt;確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち&lt;/p&gt;
+&lt;code&gt;&lt;pre&gt;$use = array(&quot;Hoge&quot;);&lt;/pre&gt;&lt;/code&gt;
+&lt;p&gt;とかしなきゃいけなかった。&lt;/p&gt;
+
+&lt;p&gt;最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。&lt;/p&gt;
+
+&lt;p&gt;そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</title>
+    <link href="/2010/06/03/rails-has-subdirectory-in-controller" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/03/rails-has-subdirectory-in-controller</id>
+    <content type="html">&lt;p&gt;なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ &lt;code&gt;app/controllers/admin/book_controller.rb&lt;/code&gt; ということができるらしい！ んで、そのときのクラス宣言は&lt;/p&gt;
+&lt;code&gt;&lt;pre&gt;class Admin::BookController &amp;lt; ActionController::Base&lt;/pre&gt;&lt;/code&gt;
+&lt;p&gt;となるらしい！ 変態だ！！ ぜったい変態だ！！！&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Railsむずい</title>
+    <link href="/2010/06/03/hard-to-learn-rails" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/03/hard-to-learn-rails</id>
+    <content type="html">&lt;p&gt;CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Mephistoから引っ越したい</title>
+    <link href="/2010/06/03/feel-like-migrating-from-mephisto" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/06/03/feel-like-migrating-from-mephisto</id>
+    <content type="html">&lt;p&gt;なんか &lt;a href='http://mephistoblog.com/'&gt;Mephistoの公式サイト&lt;/a&gt; 死んでるし、&lt;a href='http://jekyllrb.com/'&gt;jekyll&lt;/a&gt; に変えようかなと思ってるんだけど、 &lt;a href='http://wiki.github.com/mojombo/jekyll/blog-migrations'&gt;移行ガイド&lt;/a&gt; の通りにやってもうまくいかない。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>たのしいネットストーキング with Ruby</title>
+    <link href="/2010/05/18/happy-netstalking-with-ruby" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/18/happy-netstalking-with-ruby</id>
+    <content type="html">&lt;p&gt;この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜&lt;del&gt;ネットストーキング&lt;/del&gt;プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &amp;#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&amp;#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+#!/usr/bin/env ruby
+# coding: utf-8
+
+require 'net/http'
+require 'uri'
+require 'rubygems'
+require 'json'
+
+USERNAME = 'morygonzalez'
+PASSWORD = '***'
+
+uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
+begin
+  Net::HTTP.start(uri.host, uri.port) do |http|
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth(USERNAME, PASSWORD)
+    http.request(request) do |response|
+      raise 'Response is not chunked' unless response.chunked?
+      response.read_body do |chunk|
+        #空行は無視
+        status = JSON.parse(chunk) rescue next
+        #eventを含まないものは無視
+        next unless status['event']
+        source = status['source']
+        if status['target_object']
+          target_obj = status['target_object']
+          target_user = target_obj['user']
+          puts &quot;#{status['event']}: #{source['screen_name']} -&amp;gt; #{target_user['screen_name']}: #{target_obj['text']}&quot;
+        elsif status['target']
+          target = status['target']
+          puts &quot;#{status['event']}: #{source['screen_name']} -&amp;gt; #{target['screen_name']}&quot;
+        end
+      end
+    end
+  end
+
+rescue Timeout::Error =&gt; ex
+  p &quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;
+  
+  retry
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。&lt;/p&gt;
+
+&lt;p&gt;でもまぁ一歩前進したことは確か。Rubyがんばるぜ。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>DreamHostでRailsアプリケーションを再起動</title>
+    <link href="/2010/05/11/rails-app-on-dreamhost" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/11/rails-app-on-dreamhost</id>
+    <content type="html">&lt;p&gt;レンタルサーバーみたいな共有サーバーとか &lt;code&gt;sudo&lt;/code&gt; 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To restart your rails app do a &amp;#8220;ps x&amp;#8221; to get the pid of your dispatch.fcgi process(let&amp;#8217;s say it&amp;#8217;s 1234) then do a &amp;#8220;kill 1234&amp;#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. &lt;cite&gt;&lt;a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'&gt;How do I restart rails app? - DreamHost Forum&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;要するに &lt;code&gt;ps x&lt;/code&gt; でRailsアプリケーションのプロセスIDを調べ、 &lt;code&gt;kill #pid&lt;/code&gt; しちゃうというわけ。 &lt;code&gt;kill&lt;/code&gt; できんのかなと半信半疑だったけどちゃんとできた。&lt;/p&gt;
+
+&lt;p&gt;他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>CakePHP 1.2.xのRSSヘルパーはわかりにくい</title>
+    <link href="/2010/05/11/cakephp-rss-helper-sucks" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/11/cakephp-rss-helper-sucks</id>
+    <content type="html">&lt;p&gt;ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。&lt;/p&gt;
+
+&lt;p&gt;『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+    respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml =&gt; @products }
+    end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;config/routes.rb&lt;/code&gt; に&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+    map.connect ':controller/:action/:id.:format'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。&lt;/p&gt;
+
+&lt;p&gt;CakePHPで同じことをやるためには以下の手順が必要。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'&gt;Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。&lt;/p&gt;
+
+&lt;p&gt;Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。&lt;/p&gt;
+
+&lt;p&gt;僕はファッションの観点からRailsを選びたい。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>MVCのViewにどこまで書くか</title>
+    <link href="/2010/05/08/to-what-extent-write-codes-in-mvc" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/08/to-what-extent-write-codes-in-mvc</id>
+    <content type="html">&lt;p&gt;『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。&lt;/p&gt;
+
+&lt;p&gt;だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。&lt;/p&gt;
+
+&lt;p&gt;そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。&lt;/p&gt;
+
+&lt;p&gt;加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。&lt;/p&gt;
+
+&lt;p&gt;MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Gitのbranchの使い方</title>
+    <link href="/2010/05/07/git-branch-usage" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/07/git-branch-usage</id>
+    <content type="html">&lt;p&gt;Gitでbranchの効率的な使い方みたいのがよくわからない。&lt;/p&gt;
+
+&lt;p&gt;* 実験的な機能をつけたい&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ブランチを分ける（例えば開発用に alternate というブランチを作る）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;* 開発する&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;開発完了後、 master にマージ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;みたいな感じかなと思ってた。&lt;/p&gt;
+
+&lt;p&gt;しかし実際に運用してみると、実験的な機能の実装の他に、日常的にmasterでコードの改良みたいな作業があり、alternateで開発が完了した後にmasterにマージしたら多分コンフリクト起こりまくりになるような気がしてきた。&lt;/p&gt;
+
+&lt;p&gt;それで日常メンテみたいな作業はmasterブランチで行い、それをalternateにマージするという手順をとってる。正しい開発方法かどうかはわからないけど、一応alternateブランチもmasterの最新の変更を追跡できる。んでalternateではしこしこ開発を続けて、開発完了時にmasterにマージしても多分派手なコンフリクトは起こらないんじゃないかと思ってますがどうなんでしょう。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>IE6, 7, 8でJavaScriptがうまく動いてくれない</title>
+    <link href="/2010/05/07/fuck-ie" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/07/fuck-ie</id>
+    <content type="html">&lt;p&gt;こういうコード書いてます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+function getAttrName(attrObj) {
+	var attrName = attrObj.firstChild.data;
+//	items = document.getElementsByClassName('item');
+	var items = $('li.item');
+	$(items).fadeOut('slow');
+	for (var i = 0; i &amp;lt; items.length; i++) {
+	//	var keywordList = items[i].getElementsByClassName('keyword-list');
+		var keywordList = $('.keyword-list', items[i]);
+		for (var j = 0; j &amp;lt; keywordList.length; j++) {
+			//var keywords = keywordList[j].getElementsByTagName('li');
+			var keywords = $('li', keywordList[j]);
+			for (var k = 0; k &amp;lt; keywords.length; k++) {
+				if (attrName == keywords[k].textContent) {
+					$(items[i]).fadeIn('slow');
+				}
+			}
+		}
+	}
+	getCurAttr(attrName);
+}
+function getCurAttr(attrName) {
+	var curAttr = $(&quot;#keySelector li a&quot;);
+	for (var l = 0; l &amp;lt; curAttr.length; l++) {
+		if ($(curAttr[l]).text() == attrName) {
+			$(curAttr[l].parentNode).addClass('current-keyword');
+		} else {
+			$(curAttr[l].parentNode).removeClass('current-keyword');
+		}
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;やりたいことは以下のような感じ。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;onclickで &lt;code&gt;attrObj&lt;/code&gt; が &lt;code&gt;getAttrName&lt;/code&gt; に渡される&lt;/li&gt;
+
+&lt;li&gt;クリックされた文字列を &lt;code&gt;attrName&lt;/code&gt; に格納&lt;/li&gt;
+
+&lt;li&gt;すべての &lt;code&gt;item&lt;/code&gt; をjQueryを使って非表示&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;item&lt;/code&gt; の中の &lt;code&gt;ul.keyword-list li&lt;/code&gt; 内のテキストに一致したらjQueryで表示&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は &lt;code&gt;getElementByClassName&lt;/code&gt; とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。&lt;/p&gt;
+
+&lt;p&gt;ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。&lt;/p&gt;
+
+&lt;p&gt;サーバーサイドで実装する方法もないではないけど、&lt;/p&gt;
+
+&lt;p&gt;1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん&lt;/p&gt;
+
+&lt;p&gt;などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。&lt;/p&gt;
+
+&lt;h3 id='id2'&gt;追記&lt;/h3&gt;
+
+&lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
+
+&lt;p&gt;そういうわけで&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var keywords = $('li', keywordList[j]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;を&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var keywords = $('li a', keywordList[j]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;とし、&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;if (attrName == keywords[k].textContent)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;を&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;if (attrName == keywords[k].firstChild.data)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;にしてみたところ、ばっちりIEで動くようになった。&lt;/p&gt;
+
+&lt;p&gt;cxxさんありがとうございます。今度焼き肉デートしましょう。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>ポータルシットにキャッシュを効かせた</title>
+    <link href="/2010/05/03/portalshit-cached" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/03/portalshit-cached</id>
+    <content type="html">&lt;p&gt;ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。&lt;/p&gt;
+
+&lt;p&gt;おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ &lt;code&gt;p_page_analyze&lt;/code&gt; ）をDROPするとまた速さが回復するので時々空にしていた。&lt;/p&gt;
+
+&lt;p&gt;しかしよくよくアクセス解析プラグインのコードを覗いてみると、ヴュー部分で使っていないSQLクエリが発行されており、このせいでクエリの回数が必要な回数の何倍にもなっていた。ポータルシットのアクセスなんて大したことないんだから、DBのサイズがちょっとでかくなっただけでこんなに遅くなるはずがないのだ。&lt;/p&gt;
+
+&lt;p&gt;そういうわけで不必要なクエリのトリガーになるコードをコメントアウトしてみた。すると1秒台だった表示速度は0.2秒から0.5秒程度に収まるようになった。しかしそれでもなんか遅く感じる。&lt;/p&gt;
+
+&lt;p&gt;それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://wiki.dreamhost.com/Pecl_APC'&gt;Pecl APC - DreamHost&lt;/a&gt; を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが &lt;code&gt;/home/username/tmp/apc.*XXXXXX*&lt;/code&gt; だったり &lt;code&gt;/home/username/tmp/apc.*XXXXX*&lt;/code&gt; だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。&lt;/p&gt;
+
+&lt;p&gt;キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>CakePHP 1.3</title>
+    <link href="/2010/05/01/cakephp13" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/05/01/cakephp13</id>
+    <content type="html">&lt;p&gt;&lt;a href='http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable'&gt;CakePHP 1.3のStableがリリース&lt;/a&gt; された。 &lt;a href='http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3'&gt;JavascriptヘルパーとかAjaxヘルパーが非推奨になってる&lt;/a&gt; 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 &lt;code&gt;$html-&amp;gt;js(&amp;#39;&amp;#39;)&lt;/code&gt; みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。&lt;/p&gt;
+
+&lt;p&gt;JavascriptヘルパーとAjaxヘルパーが非推奨になった件については、わざわざ別のヘルパーにせんでもいいよなー、という印象は確かに持ってた。Htmlをいじるメソッドは一つのヘルパークラスにまとめてしまった方がすっきりする。1.2.xのときはAjaxヘルパーが使いづらすぎて結局jQueryでAjaxすることもあったし、あまり存在意義を見いだせなかったので良かったんじゃないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;でも既存のプロジェクトの1.3への移行はめんどくさそうなのでたぶんやんない気がする。新しくCakePHPでなんか作るときは使ってみようと思います。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Google Analytics Pluginが動かない</title>
+    <link href="/2010/04/22/google-analytics-plugin" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/04/22/google-analytics-plugin</id>
+    <content type="html">&lt;p&gt;MephistoでGoogle Analytics使おうと思ってググったら &lt;a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'&gt;Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design&lt;/a&gt; というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。&lt;/p&gt;
+
+&lt;p&gt;Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。&lt;/p&gt;
+
+&lt;h3 id='id1'&gt;追記&lt;/h3&gt;
+
+&lt;p&gt;一晩寝て起きたら動いてた。&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>CakePHPのMedia Pluginは神だけど設置が面倒</title>
+    <link href="/2010/04/22/cakephp-mediaplugin" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/04/22/cakephp-mediaplugin</id>
+    <content type="html">&lt;p&gt;CakePHPには &lt;a href='http://github.com/davidpersson/media'&gt;Media Plugin&lt;/a&gt; というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。&lt;/p&gt;
+
+&lt;p&gt;しかしこのMedia Plugin、設置が少々面倒だ。情報も英語のものも含めて少ない。僕は二つのプロジェクトでこのMedia Pluginを使ったけど、とても設置に苦労した。はまるポイントはいくつかあるんだけど、今日はDBについて書いておこうと思う。&lt;/p&gt;
+
+&lt;p&gt;Media Pluginは &lt;code&gt;attachments&lt;/code&gt; というテーブルをつくり、ここにファイルのメタデータを格納していく。これはアプリケーションのルート（ &lt;code&gt;APP&lt;/code&gt; ディレクトリ）で &lt;code&gt;cake media init&lt;/code&gt; というコマンドをTerminalで打ってやると（ただし &lt;code&gt;/cake/console&lt;/code&gt; にパスを通しておく必要あり）、Bakeのときのような画面が出てきて初期設定をやってくれる（ &lt;code&gt;app/config/database.php&lt;/code&gt; の情報にあわせてテーブルも作ってくれる）。しかしCakePHPのデフォルトDBがMySQLであるためMedia PluginもMySQLを想定しているのか、 &lt;code&gt;app/plugins/media/config/sql/media.sql&lt;/code&gt; のSQL文を単純に実行してしまうと不具合が生じる。実は僕はここで結構はまってた。僕は全部のプロジェクトでSQLiteを使っているので、単純にこのSQLを実行すると、 &lt;code&gt;attachments.id&lt;/code&gt; のデータ型が &lt;code&gt;INT(10)&lt;/code&gt; とかになってしまい、エラーに遭遇し続けることになってしまった。SQLiteの場合、idカラムのデータ型は &lt;code&gt;INTEGER&lt;/code&gt; でなければならないのだ。&lt;/p&gt;
+
+&lt;p&gt;これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Mephistoで技術ブログをやることにした</title>
+    <link href="/2010/04/22/blogging-with-mephisto" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/04/22/blogging-with-mephisto</id>
+    <content type="html">&lt;p&gt;なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。&lt;/p&gt;
+
+&lt;p&gt;とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone git://github.com/emk/mephisto.git&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;してgithubからプロジェクトをclone。&lt;/p&gt;
+
+&lt;p&gt;Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rake gems:install&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、&lt;code&gt;gem install&lt;/code&gt; するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install nokogiri \
+--with-xslt-include=/home/morygonzalez/php5/include/ \
+--with-xslt-lib=/home/morygonzalez/php5/lib/&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;無事インストール成功。その後もう一回 &lt;code&gt;rake gems:install&lt;/code&gt; を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに &lt;code&gt;development:&lt;/code&gt; のDB環境しか記述していなかったこと、 &lt;code&gt;rake db:bootstrap&lt;/code&gt; のときに &lt;code&gt;RAILS_ENV=production&lt;/code&gt; をつけていなかったことが原因だった。そういうわけでdatabase.ymlに &lt;code&gt;production:&lt;/code&gt; の設定（sqlite3を使用）を書き、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rake db:bootstrap RAILS_ENV=production&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ですべてのインストール作業完了。いまこうして動いております。&lt;/p&gt;
+
+&lt;p&gt;今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。&lt;/p&gt;</content>
+  </entry>
+  
+
+</feed>

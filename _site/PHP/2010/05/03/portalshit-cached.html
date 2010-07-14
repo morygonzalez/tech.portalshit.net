@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>ポータルシットにキャッシュを効かせた |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+<body>
+
+		<div id="header">
+		
+				<h1><a href="/">tech.portalshit.net</a></h1>
+
+				<h3>CakePHP, Rails, JavaScript</h3>
+				
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+					
+				</ul>
+		</div>
+		<div id="container">
+			<div id="content">
+				<h2>ポータルシットにキャッシュを効かせた</h2>
+				<p>ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。</p>
+
+<p>おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ <code>p_page_analyze</code> ）をDROPするとまた速さが回復するので時々空にしていた。</p>
+
+<p>しかしよくよくアクセス解析プラグインのコードを覗いてみると、ヴュー部分で使っていないSQLクエリが発行されており、このせいでクエリの回数が必要な回数の何倍にもなっていた。ポータルシットのアクセスなんて大したことないんだから、DBのサイズがちょっとでかくなっただけでこんなに遅くなるはずがないのだ。</p>
+
+<p>そういうわけで不必要なクエリのトリガーになるコードをコメントアウトしてみた。すると1秒台だった表示速度は0.2秒から0.5秒程度に収まるようになった。しかしそれでもなんか遅く感じる。</p>
+
+<p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
+
+<p><a href='http://wiki.dreamhost.com/Pecl_APC'>Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
+
+<p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>
+
+				<div class="paginator">
+					
+					
+				</div>
+				
+				<div id="related-post">
+					
+				</div>
+				<div id="disqus_thread"></div>
+				<script type="text/javascript">
+				  /**
+				    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+				    */
+				  (function() {
+				   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				   dsq.src = 'http://techportalshit.disqus.com/embed.js';
+				   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				  })();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=techportalshit">comments powered by Disqus.</a></noscript>
+				<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+			</div>
+			
+			<div id="sidebar">
+				<h3>Categories</h3>
+				<ul>
+				
+					<li><a href="http://tech.portalshit.net/PHP/">PHP</a></li>
+				
+				</ul>
+				
+				<h3>Latest Posts</h3>
+				<ul>
+				
+					<li><a href="/CakePHP/2010/06/15/im-fed-up-with-cakephp.html">CakePHPはSchemaとかがしょぼいしうんざりする</a></li>
+				
+					<li><a href="/misc/2010/06/14/migrated-to-jekyll.html">Jekyllに変えた</a></li>
+				
+					<li><a href="/Ruby/2010/06/04/i-like-ruby.html">Rubyいいわー</a></li>
+				
+					<li><a href="/CakePHP/Rails/2010/06/03/rails-name-conventions.html">RailsのMVC間の命名規約</a></li>
+				
+					<li><a href="/Rails/2010/06/03/rails-has-subdirectory-in-controller.html">Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></li>
+				
+					<li><a href="/Rails/2010/06/03/hard-to-learn-rails.html">Railsむずい</a></li>
+				
+					<li><a href="/misc/2010/06/03/feel-like-migrating-from-mephisto.html">Mephistoから引っ越したい</a></li>
+				
+					<li><a href="/Ruby/Twitter/2010/05/18/happy-netstalking-with-ruby.html">たのしいネットストーキング with Ruby</a></li>
+				
+					<li><a href="/Rails/2010/05/11/rails-app-on-dreamhost.html">DreamHostでRailsアプリケーションを再起動</a></li>
+				
+					<li><a href="/CakePHP/Rails/2010/05/11/cakephp-rss-helper-sucks.html">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></li>
+				
+					<li><a href="/CakePHP/2010/05/08/to-what-extent-write-codes-in-mvc.html">MVCのViewにどこまで書くか</a></li>
+				
+					<li><a href="/git/2010/05/07/git-branch-usage.html">Gitのbranchの使い方</a></li>
+				
+					<li><a href="/JavaScript/2010/05/07/fuck-ie.html">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></li>
+				
+					<li><a href="/PHP/2010/05/03/portalshit-cached.html">ポータルシットにキャッシュを効かせた</a></li>
+				
+					<li><a href="/CakePHP/2010/05/01/cakephp13.html">CakePHP 1.3</a></li>
+				
+					<li><a href="/misc/2010/04/22/google-analytics-plugin.html">Google Analytics Pluginが動かない</a></li>
+				
+					<li><a href="/CakePHP/2010/04/22/cakephp-mediaplugin.html">CakePHPのMedia Pluginは神だけど設置が面倒</a></li>
+				
+					<li><a href="/misc/2010/04/22/blogging-with-mephisto.html">Mephistoで技術ブログをやることにした</a></li>
+				
+				</ul>
+			</div>
+		
+		</div>
+		<div id="footer">
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+
+<!-- Please leave this line intact -->
+<p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />
+
+Theme by <a href="http://www.stuartloxton.com">Stuart Loxton</a><br />
+
+Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>
+<!-- you can delete below here --></p>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1110156-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+		if(links[i].href.indexOf('#disqus_thread') >= 0) {
+			query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+		}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/techportalshit/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+</body>

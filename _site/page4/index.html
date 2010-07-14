@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title> tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+<body>
+
+		<div id="header">
+		
+				<h1><a href="/">tech.portalshit.net</a></h1>
+
+				<h3>CakePHP, Rails, JavaScript</h3>
+				
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+					
+				</ul>
+		</div>
+		<div id="container">
+		  
+			<div id="content">
+				
+  <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
+<div class="articleinfo">
+pageed on 03 Jun 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/misc/">misc</a>
+  
+</div>
+<p>なんか <a href='http://mephistoblog.com/'>Mephistoの公式サイト</a> 死んでるし、<a href='http://jekyllrb.com/'>jekyll</a> に変えようかなと思ってるんだけど、 <a href='http://wiki.github.com/mojombo/jekyll/blog-migrations'>移行ガイド</a> の通りにやってもうまくいかない。</p>  
+
+  <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
+<div class="articleinfo">
+pageed on 18 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+    <a href="http://tech.portalshit.net/Twitter/">Twitter</a>
+  
+</div>
+<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
+<pre><code>
+#!/usr/bin/env ruby
+# coding: utf-8
+
+require 'net/http'
+require 'uri'
+require 'rubygems'
+require 'json'
+
+USERNAME = 'morygonzalez'
+PASSWORD = '***'
+
+uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
+begin
+  Net::HTTP.start(uri.host, uri.port) do |http|
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth(USERNAME, PASSWORD)
+    http.request(request) do |response|
+      raise 'Response is not chunked' unless response.chunked?
+      response.read_body do |chunk|
+        #空行は無視
+        status = JSON.parse(chunk) rescue next
+        #eventを含まないものは無視
+        next unless status['event']
+        source = status['source']
+        if status['target_object']
+          target_obj = status['target_object']
+          target_user = target_obj['user']
+          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target_user['screen_name']}: #{target_obj['text']}"
+        elsif status['target']
+          target = status['target']
+          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target['screen_name']}"
+        end
+      end
+    end
+  end
+
+rescue Timeout::Error => ex
+  p "&lt;-----!!!! Timeout::Error!!!!-----&gt;"
+  
+  retry
+end
+</code></pre>
+<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
+
+<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>  
+
+  <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
+<div class="articleinfo">
+pageed on 11 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
+
+<blockquote>
+<p>To restart your rails app do a &#8220;ps x&#8221; to get the pid of your dispatch.fcgi process(let&#8217;s say it&#8217;s 1234) then do a &#8220;kill 1234&#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. <cite><a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'>How do I restart rails app? - DreamHost Forum</a></cite></p>
+</blockquote>
+
+<p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
+
+<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>  
+
+  <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
+<div class="articleinfo">
+pageed on 11 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
+
+<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
+<pre><code>
+    respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @products }
+    end
+</code></pre>
+<p><code>config/routes.rb</code> に</p>
+<pre><code>
+    map.connect ':controller/:action/:id.:format'
+</code></pre>
+<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
+
+<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
+
+<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
+
+<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
+
+<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
+
+<p>僕はファッションの観点からRailsを選びたい。</p>  
+
+  <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
+<div class="articleinfo">
+pageed on 08 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+  
+</div>
+<p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
+
+<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
+
+<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+
+<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+
+<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>  
+
+			</div>
+						
+			<div id="sidebar">
+				<h3>Categories</h3>
+				
+				<h3>Latest Posts</h3>
+				<ul>
+				
+					<li><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></li>
+				
+					<li><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></li>
+				
+					<li><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></li>
+				
+					<li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
+				
+					<li><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></li>
+				
+					<li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+				
+					<li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
+				
+					<li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
+				
+					<li><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></li>
+				
+					<li><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></li>
+				
+					<li><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></li>
+				
+					<li><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></li>
+				
+					<li><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></li>
+				
+					<li><a href="/2010/06/03/rails-has-subdirectory-in-controller">Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></li>
+				
+					<li><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></li>
+				
+					<li><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></li>
+				
+					<li><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></li>
+				
+					<li><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></li>
+				
+					<li><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></li>
+				
+					<li><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></li>
+				
+					<li><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></li>
+				
+					<li><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></li>
+				
+					<li><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></li>
+				
+					<li><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></li>
+				
+					<li><a href="/2010/04/22/google-analytics-plugin">Google Analytics Pluginが動かない</a></li>
+				
+					<li><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></li>
+				
+					<li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
+				
+				</ul>
+			</div>
+		
+		</div>
+		<div id="footer">
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+
+<!-- Please leave this line intact -->
+<p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />
+
+Theme by <a href="http://www.stuartloxton.com">Stuart Loxton</a><br />
+
+Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>
+<!-- you can delete below here --></p>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1110156-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
