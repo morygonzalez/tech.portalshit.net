@@ -24,6 +24,40 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
+<div class="articleinfo">
+pageed on 11 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
+
+<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
+<pre><code>
+    respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @products }
+    end
+</code></pre>
+<p><code>config/routes.rb</code> に</p>
+<pre><code>
+    map.connect ':controller/:action/:id.:format'
+</code></pre>
+<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
+
+<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
+
+<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
+
+<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
+
+<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
+
+<p>僕はファッションの観点からRailsを選びたい。</p>  
+
   <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
 <div class="articleinfo">
 pageed on 08 May 2010 by morygonzalez |
@@ -167,19 +201,6 @@ pageed on 03 May 2010 by morygonzalez |
 
 <p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>  
 
-  <h2><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></h2>
-<div class="articleinfo">
-pageed on 01 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-</div>
-<p><a href='http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable'>CakePHP 1.3のStableがリリース</a> された。 <a href='http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3'>JavascriptヘルパーとかAjaxヘルパーが非推奨になってる</a> 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 <code>$html-&gt;js(&#39;&#39;)</code> みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。</p>
-
-<p>JavascriptヘルパーとAjaxヘルパーが非推奨になった件については、わざわざ別のヘルパーにせんでもいいよなー、という印象は確かに持ってた。Htmlをいじるメソッドは一つのヘルパークラスにまとめてしまった方がすっきりする。1.2.xのときはAjaxヘルパーが使いづらすぎて結局jQueryでAjaxすることもあったし、あまり存在意義を見いだせなかったので良かったんじゃないでしょうか。</p>
-
-<p>でも既存のプロジェクトの1.3への移行はめんどくさそうなのでたぶんやんない気がする。新しくCakePHPでなんか作るときは使ってみようと思います。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -187,6 +208,8 @@ pageed on 01 May 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></li>
 				
 					<li><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></li>
 				

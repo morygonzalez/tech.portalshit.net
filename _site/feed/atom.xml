@@ -4,12 +4,28 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-07-14T13:06:22+09:00</updated>
+  <updated>2010-07-15T19:40:00+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>oauth-pluginではまった</title>
+    <link href="/2010/07/15/get-stuck-with-oauth" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/15/get-stuck-with-oauth</id>
+    <content type="html">&lt;p&gt;OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。&lt;/p&gt;
+
+&lt;p&gt;まずoauthとoauth-pluginをただ入れるだけじゃ動かない。 &lt;q&gt;acts_as_authenticated, restful_authentication  or restful_openid_authentication&lt;/q&gt; というプラグインが入ってて、ユーザー認証をこれらのgemに任せてないとダメ。&lt;/p&gt;
+
+&lt;p&gt;作者がrestful_authenticationをすすめてたのでこれを導入した。（usersテーブルの構造自体が変わるので、ただ単にインストールするだけじゃなくて &lt;code&gt;rake db:drop&lt;/code&gt; して古い &lt;code&gt;db/migrate/(日付)_create_users.rb&lt;/code&gt; を削除し、もう一回 &lt;code&gt;rake db:migrate&lt;/code&gt; しないといけない。さらにControllerとかViewとかもいじらなきゃいけないので地味に結構面倒くさい。&lt;/p&gt;
+
+&lt;p&gt;しかし何度やってもうまくいかない。「 &lt;code&gt;login_required&lt;/code&gt; みたいなメソッドねーし」とかエラーが出る。どうやら昔の restful_authentication にはそういうメソッドがあったらしんだけど、現在の restful_authentication からは削除されてるらしい。他にも &lt;code&gt;current_user&lt;/code&gt; っていうのも未定義で、この辺のエラーのおかげで完全に萎えた。&lt;/p&gt;
+
+&lt;p&gt;そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Gitのhookを使ってDreamhost上のJekyllに記事を公開</title>

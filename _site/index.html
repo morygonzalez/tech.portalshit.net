@@ -24,6 +24,25 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></h2>
+<div class="articleinfo">
+pageed on 15 Jul 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+    <a href="http://tech.portalshit.net/OAuth/">OAuth</a>
+  
+</div>
+<p>OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。</p>
+
+<p>まずoauthとoauth-pluginをただ入れるだけじゃ動かない。 <q>acts_as_authenticated, restful_authentication  or restful_openid_authentication</q> というプラグインが入ってて、ユーザー認証をこれらのgemに任せてないとダメ。</p>
+
+<p>作者がrestful_authenticationをすすめてたのでこれを導入した。（usersテーブルの構造自体が変わるので、ただ単にインストールするだけじゃなくて <code>rake db:drop</code> して古い <code>db/migrate/(日付)_create_users.rb</code> を削除し、もう一回 <code>rake db:migrate</code> しないといけない。さらにControllerとかViewとかもいじらなきゃいけないので地味に結構面倒くさい。</p>
+
+<p>しかし何度やってもうまくいかない。「 <code>login_required</code> みたいなメソッドねーし」とかエラーが出る。どうやら昔の restful_authentication にはそういうメソッドがあったらしんだけど、現在の restful_authentication からは削除されてるらしい。他にも <code>current_user</code> っていうのも未定義で、この辺のエラーのおかげで完全に萎えた。</p>
+
+<p>そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。</p>  
+
   <h2><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></h2>
 <div class="articleinfo">
 pageed on 14 Jul 2010 by morygonzalez |
@@ -139,52 +158,6 @@ pageed on 07 Jul 2010 by morygonzalez |
 <li><a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'>1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
 </ul>  
 
-  <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
-<div class="articleinfo">
-pageed on 02 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-    <a href="http://tech.portalshit.net/YAML/">YAML</a>
-  
-</div>
-<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
-
-<p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
-
-<pre><code>hoge: #アイテムの名前
-  id: 1
-  name: &quot;hoge&quot;
-  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
-
-fuga:
-  id: 2
-  name: &quot;fuga&quot;
-  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code></pre>
-
-<p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
-
-<pre><code>hoge:
-  id: 1
-  name: &quot;hoge&quot;
-  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
-
-  id: 2
-  name: &quot;fuga&quot;
-  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code></pre>
-
-<p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
-
-<p>結局、拾ってきた コードを参考にして</p>
-
-<pre><code>require &#39;yaml&#39;
-	require &#39;pp&#39;
-
-	data = YAML.load_file(&#39;hoge.yml&#39;)
-	pp data</code></pre>
-
-<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -192,6 +165,8 @@ fuga:
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></li>
 				
 					<li><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></li>
 				

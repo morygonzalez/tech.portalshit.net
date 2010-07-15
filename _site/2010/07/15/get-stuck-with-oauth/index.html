@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>ポータルシットにキャッシュを効かせた |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>oauth-pluginではまった |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -22,20 +22,16 @@
 		</div>
 		<div id="container">
 			<div id="content">
-				<h2>ポータルシットにキャッシュを効かせた</h2>
-				<p>ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。</p>
+				<h2>oauth-pluginではまった</h2>
+				<p>OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。</p>
 
-<p>おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ <code>p_page_analyze</code> ）をDROPするとまた速さが回復するので時々空にしていた。</p>
+<p>まずoauthとoauth-pluginをただ入れるだけじゃ動かない。 <q>acts_as_authenticated, restful_authentication  or restful_openid_authentication</q> というプラグインが入ってて、ユーザー認証をこれらのgemに任せてないとダメ。</p>
 
-<p>しかしよくよくアクセス解析プラグインのコードを覗いてみると、ヴュー部分で使っていないSQLクエリが発行されており、このせいでクエリの回数が必要な回数の何倍にもなっていた。ポータルシットのアクセスなんて大したことないんだから、DBのサイズがちょっとでかくなっただけでこんなに遅くなるはずがないのだ。</p>
+<p>作者がrestful_authenticationをすすめてたのでこれを導入した。（usersテーブルの構造自体が変わるので、ただ単にインストールするだけじゃなくて <code>rake db:drop</code> して古い <code>db/migrate/(日付)_create_users.rb</code> を削除し、もう一回 <code>rake db:migrate</code> しないといけない。さらにControllerとかViewとかもいじらなきゃいけないので地味に結構面倒くさい。</p>
 
-<p>そういうわけで不必要なクエリのトリガーになるコードをコメントアウトしてみた。すると1秒台だった表示速度は0.2秒から0.5秒程度に収まるようになった。しかしそれでもなんか遅く感じる。</p>
+<p>しかし何度やってもうまくいかない。「 <code>login_required</code> みたいなメソッドねーし」とかエラーが出る。どうやら昔の restful_authentication にはそういうメソッドがあったらしんだけど、現在の restful_authentication からは削除されてるらしい。他にも <code>current_user</code> っていうのも未定義で、この辺のエラーのおかげで完全に萎えた。</p>
 
-<p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
-
-<p><a href='http://wiki.dreamhost.com/Pecl_APC'>Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
-
-<p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>
+<p>そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。</p>
 
 				<div class="paginator">
 					
@@ -64,7 +60,9 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/PHP/">PHP</a></li>
+					<li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
+				
+					<li><a href="http://tech.portalshit.net/OAuth/">OAuth</a></li>
 				
 				</ul>
 				
