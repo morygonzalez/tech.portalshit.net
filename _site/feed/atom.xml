@@ -4,12 +4,28 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-07-15T19:40:00+09:00</updated>
+  <updated>2010-07-26T19:02:37+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</title>
+    <link href="/2010/07/26/trial-with-tokyo-tyrant" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/26/trial-with-tokyo-tyrant</id>
+    <content type="html">&lt;p&gt;tilyさんのgist&lt;a href='http://gist.github.com/427398' title='gist: 427398'&gt;gist: 427398&lt;/a&gt;を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。&lt;/p&gt;
+
+&lt;p&gt;しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;new_tweets = neta_tweets - used_tweets&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とかしてみようとした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://gist.github.com/427398' title='gist: 427398'&gt;gist: 427398&lt;/a&gt;自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし &lt;code&gt;rdb.put&lt;/code&gt; しようとすると、 &lt;code&gt;ArgumentError&lt;/code&gt; というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>oauth-pluginではまった</title>

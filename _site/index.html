@@ -24,6 +24,23 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
+<div class="articleinfo">
+pageed on 26 Jul 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+</div>
+<p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
+
+<p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
+
+<pre><code>new_tweets = neta_tweets - used_tweets</code></pre>
+
+<p>とかしてみようとした。</p>
+
+<p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>  
+
   <h2><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></h2>
 <div class="articleinfo">
 pageed on 15 Jul 2010 by morygonzalez |
@@ -133,31 +150,6 @@ pageed on 07 Jul 2010 by morygonzalez |
 
 <p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>  
 
-  <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
-<div class="articleinfo">
-pageed on 07 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-</div>
-<p>CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。</p>
-
-<ol>
-<li><code>$html-&gt;link()</code> などHTMLヘルパーでエスケープを <code>false</code> にしたいときは <code>$options[&#39;escape&#39;]</code> を使う。</li>
-
-<li><code>$cakeDebug</code> は廃止されたのでエラーが出る。</li>
-
-<li><code>$sessions-&gt;flash()</code> は <code>echo $sessions-&gt;flash()</code> とする必要がある。また AppController でヘルパーとして呼び出さなければならない。</li>
-
-<li>debug_kit は github から最新版を <code>git clone</code> する。</li>
-</ol>
-
-<p>参照:</p>
-
-<ul>
-<li><a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'>1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
-</ul>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -165,6 +157,8 @@ pageed on 07 Jul 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				
 					<li><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></li>
 				

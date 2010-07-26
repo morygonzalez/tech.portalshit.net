@@ -24,6 +24,35 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
+<div class="articleinfo">
+pageed on 23 Jun 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p>
+
+<p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p>
+
+<p>これはRailsのプラグインではないのでgemでインストール。</p>
+
+<pre><code>sudo gem install bluecloth</code></pre>
+
+<p>その後viewで</p>
+
+<pre><code>&lt;%= markdwon(@item.text) %&gt;</code></pre>
+
+<p>とか書けばいい。</p>
+
+<p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
+
+<pre><code>config.gem &quot;bluecloth&quot;</code></pre>
+
+<p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>  
+
   <h2><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></h2>
 <div class="articleinfo">
 pageed on 22 Jun 2010 by morygonzalez |
@@ -98,31 +127,6 @@ pageed on 04 Jun 2010 by morygonzalez |
 </div>
 <p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>  
 
-  <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
-<div class="articleinfo">
-pageed on 03 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。</p>
-<blockquote cite='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>
-<h3>コントロールとモデルが密すぎる。</h3>
-<p>CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。</p>
-<cite><a href='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>Blog-side CakePHP わかりずらい３点</a></cite>
-</blockquote>
-<p>ふむふむ〜、ナルホディウスですぞ〜！！！</p>
-
-<p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p>
-<code><pre>$use = array("Hoge");</pre></code>
-<p>とかしなきゃいけなかった。</p>
-
-<p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p>
-
-<p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -130,6 +134,8 @@ pageed on 03 Jun 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				
 					<li><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></li>
 				

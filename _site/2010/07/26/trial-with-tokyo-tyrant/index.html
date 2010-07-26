@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Gitのbranchの使い方 |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -22,26 +22,16 @@
 		</div>
 		<div id="container">
 			<div id="content">
-				<h2>Gitのbranchの使い方</h2>
-				<p>Gitでbranchの効率的な使い方みたいのがよくわからない。</p>
+				<h2>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</h2>
+				<p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
 
-<p>* 実験的な機能をつけたい</p>
+<p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
 
-<ul>
-<li>ブランチを分ける（例えば開発用に alternate というブランチを作る）</li>
-</ul>
+<pre><code>new_tweets = neta_tweets - used_tweets</code></pre>
 
-<p>* 開発する</p>
+<p>とかしてみようとした。</p>
 
-<ul>
-<li>開発完了後、 master にマージ</li>
-</ul>
-
-<p>みたいな感じかなと思ってた。</p>
-
-<p>しかし実際に運用してみると、実験的な機能の実装の他に、日常的にmasterでコードの改良みたいな作業があり、alternateで開発が完了した後にmasterにマージしたら多分コンフリクト起こりまくりになるような気がしてきた。</p>
-
-<p>それで日常メンテみたいな作業はmasterブランチで行い、それをalternateにマージするという手順をとってる。正しい開発方法かどうかはわからないけど、一応alternateブランチもmasterの最新の変更を追跡できる。んでalternateではしこしこ開発を続けて、開発完了時にmasterにマージしても多分派手なコンフリクトは起こらないんじゃないかと思ってますがどうなんでしょう。</p>
+<p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
 
 				<div class="paginator">
 					
@@ -70,7 +60,7 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/git/">git</a></li>
+					<li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
 				
 				</ul>
 				
