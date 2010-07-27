@@ -1,7 +1,9 @@
 ---
 id: 30
 title: Tokyo Tyrantでvalueに配列を保存したらダメなのかしら
-category: Ruby
+categories:
+- Ruby
+- bot
 layout: post
 ---
 

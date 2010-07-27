@@ -4,12 +4,24 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-07-26T19:02:37+09:00</updated>
+  <updated>2010-07-27T12:12:28+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</title>
+    <link href="/2010/07/27/masuda-san" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/07/27/masuda-san</id>
+    <content type="html">&lt;p&gt;&lt;a href='http://twitter.com/ningengasinu'&gt;@ningengasinu&lt;/a&gt; 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの &lt;code&gt;RSS::Parser&lt;/code&gt; で読み込もうとすると500 Internal Server Errorが返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。&lt;/p&gt;
+
+&lt;p&gt;しょうがないので &lt;code&gt;open-uri&lt;/code&gt; を使って &lt;code&gt;User-Agent&lt;/code&gt; を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので &lt;code&gt;RSS::Parser&lt;/code&gt; は使わず、 &lt;code&gt;Hpricot&lt;/code&gt; を使った。&lt;/p&gt;
+
+&lt;p&gt;増田ってbotのアクセス弾いてるんですね。これがネットの闇ですか……&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</title>

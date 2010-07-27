@@ -24,6 +24,49 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
+<div class="articleinfo">
+pageed on 25 Jun 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+</div>
+<p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
+
+<p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
+
+<pre><code>&lt;?php
+class Hoge {
+  var $a; 
+  function hoge() {
+    return $this-&gt;a = &quot;hogehoge&quot;;
+  }
+}
+
+$fuga = new Hoge();
+echo $fuga-&gt;hoge();
+?&gt;</code></pre>
+
+<p>つぎにRubyで同じコードを書いてみる。</p>
+
+<pre><code>class Hoge
+  @a  
+  def hoge
+    @a = &quot;hogehoge&quot;
+  end 
+end
+
+fuga = Hoge.new
+puts fuga.hoge</code></pre>
+
+<p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
+
+<p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
+
+<p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
+
+<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>  
+
   <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
 <div class="articleinfo">
 pageed on 23 Jun 2010 by morygonzalez |
@@ -118,15 +161,6 @@ pageed on 14 Jun 2010 by morygonzalez |
 
 <p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>  
 
-  <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
-<div class="articleinfo">
-pageed on 04 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -134,6 +168,8 @@ pageed on 04 Jun 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
 				
 					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				

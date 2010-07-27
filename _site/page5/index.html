@@ -24,6 +24,63 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
+<div class="articleinfo">
+pageed on 18 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+    <a href="http://tech.portalshit.net/Twitter/">Twitter</a>
+  
+</div>
+<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
+<pre><code>
+#!/usr/bin/env ruby
+# coding: utf-8
+
+require 'net/http'
+require 'uri'
+require 'rubygems'
+require 'json'
+
+USERNAME = 'morygonzalez'
+PASSWORD = '***'
+
+uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
+begin
+  Net::HTTP.start(uri.host, uri.port) do |http|
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth(USERNAME, PASSWORD)
+    http.request(request) do |response|
+      raise 'Response is not chunked' unless response.chunked?
+      response.read_body do |chunk|
+        #空行は無視
+        status = JSON.parse(chunk) rescue next
+        #eventを含まないものは無視
+        next unless status['event']
+        source = status['source']
+        if status['target_object']
+          target_obj = status['target_object']
+          target_user = target_obj['user']
+          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target_user['screen_name']}: #{target_obj['text']}"
+        elsif status['target']
+          target = status['target']
+          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target['screen_name']}"
+        end
+      end
+    end
+  end
+
+rescue Timeout::Error => ex
+  p "&lt;-----!!!! Timeout::Error!!!!-----&gt;"
+  
+  retry
+end
+</code></pre>
+<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
+
+<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>  
+
   <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
 <div class="articleinfo">
 pageed on 11 May 2010 by morygonzalez |
@@ -119,84 +176,6 @@ pageed on 07 May 2010 by morygonzalez |
 
 <p>それで日常メンテみたいな作業はmasterブランチで行い、それをalternateにマージするという手順をとってる。正しい開発方法かどうかはわからないけど、一応alternateブランチもmasterの最新の変更を追跡できる。んでalternateではしこしこ開発を続けて、開発完了時にmasterにマージしても多分派手なコンフリクトは起こらないんじゃないかと思ってますがどうなんでしょう。</p>  
 
-  <h2><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></h2>
-<div class="articleinfo">
-pageed on 07 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
-  
-</div>
-<p>こういうコード書いてます。</p>
-<pre><code>
-function getAttrName(attrObj) {
-	var attrName = attrObj.firstChild.data;
-//	items = document.getElementsByClassName('item');
-	var items = $('li.item');
-	$(items).fadeOut('slow');
-	for (var i = 0; i &lt; items.length; i++) {
-	//	var keywordList = items[i].getElementsByClassName('keyword-list');
-		var keywordList = $('.keyword-list', items[i]);
-		for (var j = 0; j &lt; keywordList.length; j++) {
-			//var keywords = keywordList[j].getElementsByTagName('li');
-			var keywords = $('li', keywordList[j]);
-			for (var k = 0; k &lt; keywords.length; k++) {
-				if (attrName == keywords[k].textContent) {
-					$(items[i]).fadeIn('slow');
-				}
-			}
-		}
-	}
-	getCurAttr(attrName);
-}
-function getCurAttr(attrName) {
-	var curAttr = $("#keySelector li a");
-	for (var l = 0; l &lt; curAttr.length; l++) {
-		if ($(curAttr[l]).text() == attrName) {
-			$(curAttr[l].parentNode).addClass('current-keyword');
-		} else {
-			$(curAttr[l].parentNode).removeClass('current-keyword');
-		}
-	}
-}
-</code></pre>
-<p>やりたいことは以下のような感じ。</p>
-
-<ol>
-<li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
-
-<li>クリックされた文字列を <code>attrName</code> に格納</li>
-
-<li>すべての <code>item</code> をjQueryを使って非表示</li>
-
-<li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
-</ol>
-
-<p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
-
-<p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p>
-
-<p>サーバーサイドで実装する方法もないではないけど、</p>
-
-<p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p>
-
-<p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
-
-<h3 id='id2'>追記</h3>
-
-<p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
-
-<p>そういうわけで</p>
-<pre><code>var keywords = $('li', keywordList[j]);</code></pre>
-<p>を</p>
-<pre><code>var keywords = $('li a', keywordList[j]);</code></pre>
-<p>とし、</p>
-<pre><code>if (attrName == keywords[k].textContent)</code></pre>
-<p>を</p>
-<pre><code>if (attrName == keywords[k].firstChild.data)</code></pre>
-<p>にしてみたところ、ばっちりIEで動くようになった。</p>
-
-<p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -204,6 +183,8 @@ function getCurAttr(attrName) {
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
 				
 					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				

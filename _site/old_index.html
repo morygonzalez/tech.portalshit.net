@@ -23,11 +23,22 @@
 		<div id="container">
 		  
 			<div id="content">
-				<h2 id='tokyo_tyrantvalue'><a href='/2010/07/26/trial-with-tokyo-tyrant'>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
+				<h2 id='rssrubyrssparserparsehpricot'><a href='/2010/07/27/masuda-san'>増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
+<div class='articleinfo'>
+Posted on 27 Jul 2010 by morygonzalez |
+	
+		<a href='http://tech.portalshit.net/Ruby/'>Ruby</a>
+	
+		<a href='http://tech.portalshit.net/bot/'>bot</a>
+	
+</div><p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると500 Internal Server Errorが返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p><p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p><p>増田ってbotのアクセス弾いてるんですね。これがネットの闇ですか……</p>
+<h2 id='tokyo_tyrantvalue'><a href='/2010/07/26/trial-with-tokyo-tyrant'>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
 <div class='articleinfo'>
 Posted on 26 Jul 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Ruby/'>Ruby</a>
+	
+		<a href='http://tech.portalshit.net/bot/'>bot</a>
 	
 </div><p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p><p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p><pre><code>new_tweets = neta_tweets - used_tweets</code></pre><p>とかしてみようとした。</p><p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
 <h2 id='oauthplugin'><a href='/2010/07/15/get-stuck-with-oauth'>oauth-pluginではまった</a></h2>
@@ -461,6 +472,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
 				
 					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				

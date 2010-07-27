@@ -24,6 +24,84 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></h2>
+<div class="articleinfo">
+pageed on 07 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
+  
+</div>
+<p>こういうコード書いてます。</p>
+<pre><code>
+function getAttrName(attrObj) {
+	var attrName = attrObj.firstChild.data;
+//	items = document.getElementsByClassName('item');
+	var items = $('li.item');
+	$(items).fadeOut('slow');
+	for (var i = 0; i &lt; items.length; i++) {
+	//	var keywordList = items[i].getElementsByClassName('keyword-list');
+		var keywordList = $('.keyword-list', items[i]);
+		for (var j = 0; j &lt; keywordList.length; j++) {
+			//var keywords = keywordList[j].getElementsByTagName('li');
+			var keywords = $('li', keywordList[j]);
+			for (var k = 0; k &lt; keywords.length; k++) {
+				if (attrName == keywords[k].textContent) {
+					$(items[i]).fadeIn('slow');
+				}
+			}
+		}
+	}
+	getCurAttr(attrName);
+}
+function getCurAttr(attrName) {
+	var curAttr = $("#keySelector li a");
+	for (var l = 0; l &lt; curAttr.length; l++) {
+		if ($(curAttr[l]).text() == attrName) {
+			$(curAttr[l].parentNode).addClass('current-keyword');
+		} else {
+			$(curAttr[l].parentNode).removeClass('current-keyword');
+		}
+	}
+}
+</code></pre>
+<p>やりたいことは以下のような感じ。</p>
+
+<ol>
+<li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
+
+<li>クリックされた文字列を <code>attrName</code> に格納</li>
+
+<li>すべての <code>item</code> をjQueryを使って非表示</li>
+
+<li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
+</ol>
+
+<p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
+
+<p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p>
+
+<p>サーバーサイドで実装する方法もないではないけど、</p>
+
+<p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p>
+
+<p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
+
+<h3 id='id2'>追記</h3>
+
+<p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
+
+<p>そういうわけで</p>
+<pre><code>var keywords = $('li', keywordList[j]);</code></pre>
+<p>を</p>
+<pre><code>var keywords = $('li a', keywordList[j]);</code></pre>
+<p>とし、</p>
+<pre><code>if (attrName == keywords[k].textContent)</code></pre>
+<p>を</p>
+<pre><code>if (attrName == keywords[k].firstChild.data)</code></pre>
+<p>にしてみたところ、ばっちりIEで動くようになった。</p>
+
+<p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>  
+
   <h2><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></h2>
 <div class="articleinfo">
 pageed on 03 May 2010 by morygonzalez |
@@ -88,39 +166,6 @@ pageed on 22 Apr 2010 by morygonzalez |
 
 <p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>  
 
-  <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
-<div class="articleinfo">
-pageed on 22 Apr 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/misc/">misc</a>
-  
-</div>
-<p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p>
-
-<p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
-
-<pre><code>git clone git://github.com/emk/mephisto.git</code></pre>
-
-<p>してgithubからプロジェクトをclone。</p>
-
-<p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
-
-<pre><code>rake gems:install</code></pre>
-
-<p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
-
-<pre><code>gem install nokogiri \
---with-xslt-include=/home/morygonzalez/php5/include/ \
---with-xslt-lib=/home/morygonzalez/php5/lib/</code></pre>
-
-<p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
-
-<pre><code>rake db:bootstrap RAILS_ENV=production</code></pre>
-
-<p>ですべてのインストール作業完了。いまこうして動いております。</p>
-
-<p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -128,6 +173,8 @@ pageed on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
 				
 					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				

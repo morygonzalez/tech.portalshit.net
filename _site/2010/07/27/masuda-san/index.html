@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>たのしいネットストーキング with Ruby |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話 |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -22,54 +22,12 @@
 		</div>
 		<div id="container">
 			<div id="content">
-				<h2>たのしいネットストーキング with Ruby</h2>
-				<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
-<pre><code>
-#!/usr/bin/env ruby
-# coding: utf-8
+				<h2>増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</h2>
+				<p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると500 Internal Server Errorが返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
 
-require 'net/http'
-require 'uri'
-require 'rubygems'
-require 'json'
+<p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p>
 
-USERNAME = 'morygonzalez'
-PASSWORD = '***'
-
-uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
-begin
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request.basic_auth(USERNAME, PASSWORD)
-    http.request(request) do |response|
-      raise 'Response is not chunked' unless response.chunked?
-      response.read_body do |chunk|
-        #空行は無視
-        status = JSON.parse(chunk) rescue next
-        #eventを含まないものは無視
-        next unless status['event']
-        source = status['source']
-        if status['target_object']
-          target_obj = status['target_object']
-          target_user = target_obj['user']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target_user['screen_name']}: #{target_obj['text']}"
-        elsif status['target']
-          target = status['target']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target['screen_name']}"
-        end
-      end
-    end
-  end
-
-rescue Timeout::Error => ex
-  p "&lt;-----!!!! Timeout::Error!!!!-----&gt;"
-  
-  retry
-end
-</code></pre>
-<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
-
-<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
+<p>増田ってbotのアクセス弾いてるんですね。これがネットの闇ですか……</p>
 
 				<div class="paginator">
 					
@@ -100,7 +58,7 @@ end
 				
 					<li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
 				
-					<li><a href="http://tech.portalshit.net/Twitter/">Twitter</a></li>
+					<li><a href="http://tech.portalshit.net/bot/">bot</a></li>
 				
 				</ul>
 				

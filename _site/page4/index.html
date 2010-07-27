@@ -24,6 +24,15 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
+<div class="articleinfo">
+pageed on 04 Jun 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+</div>
+<p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>  
+
   <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
 <div class="articleinfo">
 pageed on 03 Jun 2010 by morygonzalez |
@@ -78,63 +87,6 @@ pageed on 03 Jun 2010 by morygonzalez |
 </div>
 <p>なんか <a href='http://mephistoblog.com/'>Mephistoの公式サイト</a> 死んでるし、<a href='http://jekyllrb.com/'>jekyll</a> に変えようかなと思ってるんだけど、 <a href='http://wiki.github.com/mojombo/jekyll/blog-migrations'>移行ガイド</a> の通りにやってもうまくいかない。</p>  
 
-  <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
-<div class="articleinfo">
-pageed on 18 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-    <a href="http://tech.portalshit.net/Twitter/">Twitter</a>
-  
-</div>
-<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
-<pre><code>
-#!/usr/bin/env ruby
-# coding: utf-8
-
-require 'net/http'
-require 'uri'
-require 'rubygems'
-require 'json'
-
-USERNAME = 'morygonzalez'
-PASSWORD = '***'
-
-uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
-begin
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request.basic_auth(USERNAME, PASSWORD)
-    http.request(request) do |response|
-      raise 'Response is not chunked' unless response.chunked?
-      response.read_body do |chunk|
-        #空行は無視
-        status = JSON.parse(chunk) rescue next
-        #eventを含まないものは無視
-        next unless status['event']
-        source = status['source']
-        if status['target_object']
-          target_obj = status['target_object']
-          target_user = target_obj['user']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target_user['screen_name']}: #{target_obj['text']}"
-        elsif status['target']
-          target = status['target']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target['screen_name']}"
-        end
-      end
-    end
-  end
-
-rescue Timeout::Error => ex
-  p "&lt;-----!!!! Timeout::Error!!!!-----&gt;"
-  
-  retry
-end
-</code></pre>
-<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
-
-<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -142,6 +94,8 @@ end
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
 				
 					<li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
 				
