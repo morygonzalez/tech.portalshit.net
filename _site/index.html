@@ -75,11 +75,11 @@ pageed on 27 Jul 2010 by morygonzalez |
     <a href="http://tech.portalshit.net/bot/">bot</a>
   
 </div>
-<p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると500 Internal Server Errorが返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
+<p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると <code>500 Internal Server Error</code> が返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
 
 <p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p>
 
-<p>増田ってbotのアクセス弾いてるんですね。これがネットの闇ですか……</p>  
+<p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>  
 
   <h2><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
 <div class="articleinfo">
@@ -146,15 +146,11 @@ unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code
 <h3 id='id3'>まとめ</h3>
 
 <p>まとめると、</p>
-
-<p>* 記事を作成するローカルリポジトリ</p>
-
-<ul>
+<ol>
+<li>記事を作成するローカルリポジトリ</li>
 <li>ローカルリポジトリをpushするリモートリポジトリ</li>
-
 <li>リモートリポジトリをcloneする公開用リポジトリ</li>
-</ul>
-
+</ol>
 <p>の三つが必要なことを忘れないようにしてくだしあ。</p>
 
 <p>これであなたもハイド博士だ！</p>  
