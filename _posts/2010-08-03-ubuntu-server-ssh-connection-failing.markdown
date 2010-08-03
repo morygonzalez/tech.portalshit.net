@@ -9,12 +9,12 @@ NECの安サーバーを買ってサーバーを作ってるんですけど、SS
 
 まずSSHのおさらいを。クライアント側で
 
-  $ mkdir -p .ssh
-  $ ssh-keygen -t rsa （以下略）
+    $ mkdir -p .ssh
+    $ ssh-keygen -t rsa （以下略）
   
 したのち、サーバー側の `/etc/ssh/sshd_config` の `PasswordAuthentication` を `on` にし、パスワードでSSH接続できるようにして
 
-  $ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
+    $ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
   
 するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で `.ssh/` と `.ssh/authorized_keys` のパーミッションをそれぞれ700と600に変えてあげるわけですよね。
 
@@ -22,17 +22,17 @@ NECの安サーバーを買ってサーバーを作ってるんですけど、SS
 
 前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは
 
-  Permission denied (publickey).
+    Permission denied (publickey).
 
 というエラーが頻繁にお出になるのですよ。
 
 しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して
 
-  $ sudo /etc/init.d/ssh restart
+    $ sudo /etc/init.d/ssh restart
   
 してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、
 
-　Permission denied (publickey).
+    Permission denied (publickey).
 
 となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。
 

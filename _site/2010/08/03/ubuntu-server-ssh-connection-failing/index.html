@@ -2,11 +2,12 @@
 
 <p>まずSSHのおさらいを。クライアント側で</p>
 
-<p>$ mkdir -p .ssh $ ssh-keygen -t rsa （以下略）</p>
+<pre><code>$ mkdir -p .ssh
+$ ssh-keygen -t rsa （以下略）</code></pre>
 
 <p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
 
-<p>$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys</p>
+<pre><code>$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys</code></pre>
 
 <p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
 
@@ -14,17 +15,17 @@
 
 <p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
 
-<p>Permission denied (publickey).</p>
+<pre><code>Permission denied (publickey).</code></pre>
 
 <p>というエラーが頻繁にお出になるのですよ。</p>
 
 <p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
 
-<p>$ sudo /etc/init.d/ssh restart</p>
+<pre><code>$ sudo /etc/init.d/ssh restart</code></pre>
 
 <p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
 
-<p>　Permission denied (publickey).</p>
+<pre><code>Permission denied (publickey).</code></pre>
 
 <p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
 

@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-03T16:34:16+09:00</updated>
+  <updated>2010-08-03T16:47:05+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -20,11 +20,12 @@
 
 &lt;p&gt;まずSSHのおさらいを。クライアント側で&lt;/p&gt;
 
-&lt;p&gt;$ mkdir -p .ssh $ ssh-keygen -t rsa （以下略）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ mkdir -p .ssh
+$ ssh-keygen -t rsa （以下略）&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;したのち、サーバー側の &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にし、パスワードでSSH接続できるようにして&lt;/p&gt;
 
-&lt;p&gt;$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で &lt;code&gt;.ssh/&lt;/code&gt; と &lt;code&gt;.ssh/authorized_keys&lt;/code&gt; のパーミッションをそれぞれ700と600に変えてあげるわけですよね。&lt;/p&gt;
 
@@ -32,17 +33,17 @@
 
 &lt;p&gt;前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは&lt;/p&gt;
 
-&lt;p&gt;Permission denied (publickey).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Permission denied (publickey).&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;というエラーが頻繁にお出になるのですよ。&lt;/p&gt;
 
 &lt;p&gt;しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して&lt;/p&gt;
 
-&lt;p&gt;$ sudo /etc/init.d/ssh restart&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/ssh restart&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、&lt;/p&gt;
 
-&lt;p&gt;　Permission denied (publickey).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Permission denied (publickey).&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。&lt;/p&gt;
 
@@ -119,13 +120,13 @@ unset GIT_DIR &amp;amp;&amp;amp; cd $HOME/tech.portalshit.net/ &amp;amp;&amp;amp
 
 &lt;p&gt;まとめると、&lt;/p&gt;
 
-&lt;p&gt;1. 記事を作成するローカルリポジトリ&lt;/p&gt;
+&lt;p&gt;* 記事を作成するローカルリポジトリ&lt;/p&gt;
 
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;ローカルリポジトリをpushするリモートリポジトリ&lt;/li&gt;
 
 &lt;li&gt;リモートリポジトリをcloneする公開用リポジトリ&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;の三つが必要なことを忘れないようにしてくだしあ。&lt;/p&gt;
 
