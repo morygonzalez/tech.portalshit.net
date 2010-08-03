@@ -4,12 +4,52 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-07-27T12:12:28+09:00</updated>
+  <updated>2010-08-03T16:34:16+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</title>
+    <link href="/2010/08/03/ubuntu-server-ssh-connection-failing" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/08/03/ubuntu-server-ssh-connection-failing</id>
+    <content type="html">&lt;p&gt;NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。&lt;/p&gt;
+
+&lt;p&gt;まずSSHのおさらいを。クライアント側で&lt;/p&gt;
+
+&lt;p&gt;$ mkdir -p .ssh $ ssh-keygen -t rsa （以下略）&lt;/p&gt;
+
+&lt;p&gt;したのち、サーバー側の &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にし、パスワードでSSH接続できるようにして&lt;/p&gt;
+
+&lt;p&gt;$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys&lt;/p&gt;
+
+&lt;p&gt;するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で &lt;code&gt;.ssh/&lt;/code&gt; と &lt;code&gt;.ssh/authorized_keys&lt;/code&gt; のパーミッションをそれぞれ700と600に変えてあげるわけですよね。&lt;/p&gt;
+
+&lt;p&gt;いっぺんクライアント側で &lt;code&gt;id_rsa.pub&lt;/code&gt; を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？&lt;/p&gt;
+
+&lt;p&gt;前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは&lt;/p&gt;
+
+&lt;p&gt;Permission denied (publickey).&lt;/p&gt;
+
+&lt;p&gt;というエラーが頻繁にお出になるのですよ。&lt;/p&gt;
+
+&lt;p&gt;しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して&lt;/p&gt;
+
+&lt;p&gt;$ sudo /etc/init.d/ssh restart&lt;/p&gt;
+
+&lt;p&gt;してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、&lt;/p&gt;
+
+&lt;p&gt;　Permission denied (publickey).&lt;/p&gt;
+
+&lt;p&gt;となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。&lt;/p&gt;
+
+&lt;p&gt;前述の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。&lt;/p&gt;
+
+&lt;p&gt;ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &amp;#8220;Disabling protocol version 1. Could not load host key&amp;#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（&lt;a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'&gt;ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！&lt;/a&gt;）という情報もあるけど面倒くさいのでまだ試していません。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</title>
