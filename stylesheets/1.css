@@ -60,7 +60,7 @@ td {
 	margin:0 auto;
 }
 
-#content ul {
+#content ul, #content ol {
 	margin:15px 0 15px 25px;
 }
 
