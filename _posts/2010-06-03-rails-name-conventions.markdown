@@ -20,7 +20,9 @@ layout: post
 
 確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち
 
-<code><pre>$use = array("Hoge");</pre></code>
+{% highlight php %}
+$use = array("Hoge");
+{% endhighlight %}
 
 とかしなきゃいけなかった。
 

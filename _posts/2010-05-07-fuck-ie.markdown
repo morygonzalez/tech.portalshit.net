@@ -8,7 +8,7 @@ category: JavaScript
 
 こういうコード書いてます。
 
-<pre><code>
+{% highlight javascript %}
 function getAttrName(attrObj) {
 	var attrName = attrObj.firstChild.data;
 //	items = document.getElementsByClassName('item');
@@ -39,7 +39,7 @@ function getCurAttr(attrName) {
 		}
 	}
 }
-</code></pre>
+{% endhighlight %}
 
 やりたいことは以下のような感じ。
 
@@ -66,19 +66,27 @@ Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は 
 
 そういうわけで
 
-<pre><code>var keywords = $('li', keywordList[j]);</code></pre>
+{% highlight javascript %}
+var keywords = $('li', keywordList[j]);
+{% endhighlight %}
 
 を
 
-<pre><code>var keywords = $('li a', keywordList[j]);</code></pre>
+{% highlight javascript %}
+var keywords = $('li a', keywordList[j]);
+{% endhighlight %}
 
 とし、
 
-<pre><code>if (attrName == keywords[k].textContent)</code></pre>
+{% highlight javascript %}
+if (attrName == keywords[k].textContent)
+{% endhighlight %}
 
 を
 
-<pre><code>if (attrName == keywords[k].firstChild.data)</code></pre>
+{% highlight javascript %}
+if (attrName == keywords[k].firstChild.data)
+{% endhighlight %}
 
 にしてみたところ、ばっちりIEで動くようになった。
 

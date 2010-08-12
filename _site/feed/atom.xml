@@ -4,12 +4,20 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-03T17:03:33+09:00</updated>
+  <updated>2010-08-12T16:01:56+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>AuthlogicとAuthlogic-OAuthで詰まってる</title>
+    <link href="/2010/08/12/fed-up-with-authlogic-oauth" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/08/12/fed-up-with-authlogic-oauth</id>
+    <content type="html">&lt;p&gt;AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</title>
@@ -19,32 +27,32 @@
     <content type="html">&lt;p&gt;NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。&lt;/p&gt;
 
 &lt;p&gt;まずSSHのおさらいを。クライアント側で&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ mkdir -p .ssh
-$ ssh-keygen -t rsa （以下略）&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; mkdir -p .ssh
+&lt;span class='gp'&gt;$&lt;/span&gt; ssh-keygen -t rsa （以下略）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;したのち、サーバー側の &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にし、パスワードでSSH接続できるようにして&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で &lt;code&gt;.ssh/&lt;/code&gt; と &lt;code&gt;.ssh/authorized_keys&lt;/code&gt; のパーミッションをそれぞれ700と600に変えてあげるわけですよね。&lt;/p&gt;
 
 &lt;p&gt;いっぺんクライアント側で &lt;code&gt;id_rsa.pub&lt;/code&gt; を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？&lt;/p&gt;
 
 &lt;p&gt;前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Permission denied (publickey).&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;Permission denied (publickey).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;というエラーが頻繁にお出になるのですよ。&lt;/p&gt;
 
 &lt;p&gt;しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/ssh restart&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; sudo /etc/init.d/ssh restart
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Permission denied (publickey).&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;Permission denied (publickey).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。&lt;/p&gt;
 
 &lt;p&gt;前述の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。&lt;/p&gt;
@@ -72,9 +80,9 @@ $ ssh-keygen -t rsa （以下略）&lt;/code&gt;&lt;/pre&gt;
     <content type="html">&lt;p&gt;tilyさんのgist&lt;a href='http://gist.github.com/427398' title='gist: 427398'&gt;gist: 427398&lt;/a&gt;を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。&lt;/p&gt;
 
 &lt;p&gt;しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;new_tweets = neta_tweets - used_tweets&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;new_tweets&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;neta_tweets&lt;/span&gt; &lt;span class='o'&gt;-&lt;/span&gt; &lt;span class='n'&gt;used_tweets&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;とかしてみようとした。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='http://gist.github.com/427398' title='gist: 427398'&gt;gist: 427398&lt;/a&gt;自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし &lt;code&gt;rdb.put&lt;/code&gt; しようとすると、 &lt;code&gt;ArgumentError&lt;/code&gt; というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。&lt;/p&gt;</content>
@@ -110,10 +118,10 @@ $ ssh-keygen -t rsa （以下略）&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。&lt;/p&gt;
 
 &lt;p&gt;まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ &lt;code&gt;git --bare init&lt;/code&gt; ）。ここでは &lt;code&gt;blog.git&lt;/code&gt; という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の &lt;code&gt;/blog.git/hooks/&lt;/code&gt; に &lt;code&gt;post-update&lt;/code&gt; というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#! /bin/sh
-unset GIT_DIR &amp;amp;&amp;amp; cd $HOME/tech.portalshit.net/ &amp;amp;&amp;amp; git pull&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;    &lt;span class='c'&gt;#! /bin/sh&lt;/span&gt;
+    &lt;span class='nb'&gt;unset &lt;/span&gt;GIT_DIR &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='nb'&gt;cd&lt;/span&gt; &lt;span class='nv'&gt;$HOME&lt;/span&gt;/tech.portalshit.net/ &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; git pull
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
 &lt;h3 id='id3'&gt;まとめ&lt;/h3&gt;
@@ -136,7 +144,7 @@ unset GIT_DIR &amp;amp;&amp;amp; cd $HOME/tech.portalshit.net/ &amp;amp;&amp;amp
     <id>http://tech.portalshit.net//2010/07/09/cant-live-up-with-oauth</id>
     <content type="html">&lt;p&gt;RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='images/27-oauth.png' alt='OAuthの利用イメージ' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /&gt;&lt;/p&gt;
 
 &lt;p&gt;疑問点がいくつかある。&lt;/p&gt;
 
@@ -205,38 +213,38 @@ unset GIT_DIR &amp;amp;&amp;amp; cd $HOME/tech.portalshit.net/ &amp;amp;&amp;amp
     <content type="html">&lt;p&gt;初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも &lt;code&gt;rake db:migrate&lt;/code&gt; で初期データは入るはずだから楽ちんかなと思って。&lt;/p&gt;
 
 &lt;p&gt;結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='yaml'&gt;&lt;span class='l-Scalar-Plain'&gt;hoge&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='c1'&gt;#アイテムの名前&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;id&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='l-Scalar-Plain'&gt;1&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;name&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;hoge&amp;quot;&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;address&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;ホゲ県ホゲ村ホゲホゲ&amp;quot;&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;hoge: #アイテムの名前
-  id: 1
-  name: &amp;quot;hoge&amp;quot;
-  address: &amp;quot;ホゲ県ホゲ村ホゲホゲ&amp;quot;
-
-fuga:
-  id: 2
-  name: &amp;quot;fuga&amp;quot;
-  address: &amp;quot;ホゲ県ホゲ村フガフガ&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='l-Scalar-Plain'&gt;fuga&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;id&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='l-Scalar-Plain'&gt;2&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;name&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;fuga&amp;quot;&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;address&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;ホゲ県ホゲ村フガフガ&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='yaml'&gt;&lt;span class='l-Scalar-Plain'&gt;hoge&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;id&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='l-Scalar-Plain'&gt;1&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;name&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;hoge&amp;quot;&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;address&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;ホゲ県ホゲ村ホゲホゲ&amp;quot;&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;hoge:
-  id: 1
-  name: &amp;quot;hoge&amp;quot;
-  address: &amp;quot;ホゲ県ホゲ村ホゲホゲ&amp;quot;
-
-  id: 2
-  name: &amp;quot;fuga&amp;quot;
-  address: &amp;quot;ホゲ県ホゲ村フガフガ&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
+  &lt;span class='l-Scalar-Plain'&gt;id&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='l-Scalar-Plain'&gt;2&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;name&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;fuga&amp;quot;&lt;/span&gt;
+  &lt;span class='l-Scalar-Plain'&gt;address&lt;/span&gt;&lt;span class='p-Indicator'&gt;:&lt;/span&gt; &lt;span class='s'&gt;&amp;quot;ホゲ県ホゲ村フガフガ&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。&lt;/p&gt;
 
 &lt;p&gt;結局、拾ってきた コードを参考にして&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;yaml&amp;#39;&lt;/span&gt;
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;pp&amp;#39;&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;require &amp;#39;yaml&amp;#39;
-	require &amp;#39;pp&amp;#39;
-
-	data = YAML.load_file(&amp;#39;hoge.yml&amp;#39;)
-	pp data&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='n'&gt;data&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;YAML&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;load_file&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;hoge.yml&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;pp&lt;/span&gt; &lt;span class='n'&gt;data&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。&lt;/p&gt;</content>
   </entry>
   
@@ -256,68 +264,66 @@ fuga:
     <content type="html">&lt;p&gt;一個前の記事（&lt;a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'&gt;Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript&lt;/a&gt;）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。&lt;/p&gt;
 
 &lt;p&gt;そういうわけで正しくは、&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Hoge&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;
+    &lt;span class='vi'&gt;@a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;class Hoge
-  def initialize
-    @a = &amp;quot;&amp;quot;
-  end 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;hoge&lt;/span&gt;
+    &lt;span class='vi'&gt;@a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;hogehoge&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
 
-  def hoge
-    @a = &amp;quot;hogehoge&amp;quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='n'&gt;fuga&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;fuga&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;hoge&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;と書くそうです。&lt;/p&gt;
 
 &lt;p&gt;ところでなんで自分は前回、 &lt;code&gt;@a&lt;/code&gt; というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Hoge&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;
+    &lt;span class='n'&gt;a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;class Hoge
-  def initialize
-    a = &amp;quot;&amp;quot;
-  end 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;hoge&lt;/span&gt;
+    &lt;span class='n'&gt;a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;hogehoge&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
 
-  def hoge
-    a = &amp;quot;hogehoge&amp;quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='n'&gt;fuga&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;fuga&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;hoge&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;でも同じ結果を出力しますね。&lt;/p&gt;
 
 &lt;p&gt;インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）&lt;/p&gt;
-
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;@&lt;/code&gt; で始まる変数は &lt;em&gt;インスタンス変数&lt;/em&gt; といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）&lt;/p&gt;
+`@` で始まる変数は *インスタンス変数* といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）
 &lt;/blockquote&gt;
-
 &lt;p&gt;なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Hoge&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;b&lt;/span&gt;&lt;span class='o'&gt;=&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+    &lt;span class='vi'&gt;@a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;b&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;class Hoge
-  def initialize(b=&amp;quot;&amp;quot;)
-    @a = b
-  end
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;hoge&lt;/span&gt;
+    &lt;span class='nb'&gt;print&lt;/span&gt; &lt;span class='vi'&gt;@a&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
 
-  def hoge
-    print @a, &amp;quot;\n&amp;quot;
-  end
-end
+&lt;span class='n'&gt;fuga&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;Fuga&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;piyo&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;Piyo&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
 
-fuga = Hoge.new(&amp;quot;Fuga&amp;quot;)
-piyo = Hoge.new(&amp;quot;Piyo&amp;quot;)
-
-fuga.hoge
-piyo.hoge&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='n'&gt;fuga&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;hoge&lt;/span&gt;
+&lt;span class='n'&gt;piyo&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;hoge&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;で、これを実行すると&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Fuga
-Piyo&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;Fuga&lt;/span&gt;
+&lt;span class='go'&gt;Piyo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。&lt;/p&gt;</content>
   </entry>
   
@@ -329,31 +335,31 @@ Piyo&lt;/code&gt;&lt;/pre&gt;
     <content type="html">&lt;p&gt;「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。&lt;/p&gt;
 
 &lt;p&gt;オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='php'&gt;&lt;span class='cp'&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Hoge&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+  &lt;span class='k'&gt;var&lt;/span&gt; &lt;span class='nv'&gt;$a&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; 
+  &lt;span class='k'&gt;function&lt;/span&gt; &lt;span class='nf'&gt;hoge&lt;/span&gt;&lt;span class='p'&gt;()&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+    &lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='nv'&gt;$this&lt;/span&gt;&lt;span class='o'&gt;-&amp;gt;&lt;/span&gt;&lt;span class='na'&gt;a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;hogehoge&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
+  &lt;span class='p'&gt;}&lt;/span&gt;
+&lt;span class='p'&gt;}&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-class Hoge {
-  var $a; 
-  function hoge() {
-    return $this-&amp;gt;a = &amp;quot;hogehoge&amp;quot;;
-  }
-}
-
-$fuga = new Hoge();
-echo $fuga-&amp;gt;hoge();
-?&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='nv'&gt;$fuga&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='k'&gt;new&lt;/span&gt; &lt;span class='nx'&gt;Hoge&lt;/span&gt;&lt;span class='p'&gt;();&lt;/span&gt;
+&lt;span class='k'&gt;echo&lt;/span&gt; &lt;span class='nv'&gt;$fuga&lt;/span&gt;&lt;span class='o'&gt;-&amp;gt;&lt;/span&gt;&lt;span class='na'&gt;hoge&lt;/span&gt;&lt;span class='p'&gt;();&lt;/span&gt;
+&lt;span class='cp'&gt;?&amp;gt;&lt;/span&gt;&lt;span class='x' /&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;つぎにRubyで同じコードを書いてみる。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Hoge&lt;/span&gt;
+  &lt;span class='vi'&gt;@a&lt;/span&gt;  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;hoge&lt;/span&gt;
+    &lt;span class='vi'&gt;@a&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;hogehoge&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;class Hoge
-  @a  
-  def hoge
-    @a = &amp;quot;hogehoge&amp;quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
-
+&lt;span class='n'&gt;fuga&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;
+&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='n'&gt;fuga&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;hoge&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは &lt;code&gt;shift + [&lt;/code&gt; とか &lt;code&gt;shift + ]&lt;/code&gt; とかだから、 &lt;code&gt;shift&lt;/code&gt; の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。&lt;/p&gt;
 
 &lt;p&gt;さらにメソッドとか変数へのアクセスもめんどい。Rubyだと &lt;code&gt;.&lt;/code&gt; でアクセスできるのに、PHPだと &lt;code&gt;-&amp;gt;&lt;/code&gt; だ。入力するときはキーボードに &lt;code&gt;-&lt;/code&gt; と &lt;code&gt;shift + .&lt;/code&gt; と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。&lt;/p&gt;
@@ -373,19 +379,21 @@ puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;調べてみたところ、 &lt;a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'&gt;BlueCloth&lt;/a&gt; というライブラリを使うといいらしい。&lt;/p&gt;
 
 &lt;p&gt;これはRailsのプラグインではないのでgemでインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo gem install bluecloth&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; sudo gem install bluecloth
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;その後viewで&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;%= markdwon(@item.text) %&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='rhtml'&gt;&lt;span class='cp'&gt;&amp;lt;%=&lt;/span&gt; &lt;span class='n'&gt;markdwon&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='vi'&gt;@item&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;text&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='cp'&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;とか書けばいい。&lt;/p&gt;
 
 &lt;p&gt;しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;config.gem &amp;quot;bluecloth&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;config&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;gem&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;bluecloth&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;と書いてやる。するとめでたくMarkdownが使えるようになる。&lt;/p&gt;</content>
   </entry>
   
@@ -473,7 +481,9 @@ puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;ふむふむ〜、ナルホディウスですぞ〜！！！&lt;/p&gt;
 
 &lt;p&gt;確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち&lt;/p&gt;
-&lt;code&gt;&lt;pre&gt;$use = array(&quot;Hoge&quot;);&lt;/pre&gt;&lt;/code&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='php'&gt;&lt;span class='x'&gt;$use = array(&amp;quot;Hoge&amp;quot;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;とかしなきゃいけなかった。&lt;/p&gt;
 
 &lt;p&gt;最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。&lt;/p&gt;
@@ -487,7 +497,9 @@ puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/06/03/rails-has-subdirectory-in-controller</id>
     <content type="html">&lt;p&gt;なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ &lt;code&gt;app/controllers/admin/book_controller.rb&lt;/code&gt; ということができるらしい！ んで、そのときのクラス宣言は&lt;/p&gt;
-&lt;code&gt;&lt;pre&gt;class Admin::BookController &amp;lt; ActionController::Base&lt;/pre&gt;&lt;/code&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Admin&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;BookController&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;ActionController&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;Base&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;となるらしい！ 変態だ！！ ぜったい変態だ！！！&lt;/p&gt;</content>
   </entry>
   
@@ -513,49 +525,49 @@ puts fuga.hoge&lt;/code&gt;&lt;/pre&gt;
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/05/18/happy-netstalking-with-ruby</id>
     <content type="html">&lt;p&gt;この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜&lt;del&gt;ネットストーキング&lt;/del&gt;プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &amp;#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&amp;#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-#!/usr/bin/env ruby
-# coding: utf-8
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;span class='c1'&gt;# coding: utf-8&lt;/span&gt;
 
-require 'net/http'
-require 'uri'
-require 'rubygems'
-require 'json'
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;net/http&amp;#39;&lt;/span&gt;
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;uri&amp;#39;&lt;/span&gt;
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;json&amp;#39;&lt;/span&gt;
 
-USERNAME = 'morygonzalez'
-PASSWORD = '***'
+&lt;span class='no'&gt;USERNAME&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;morygonzalez&amp;#39;&lt;/span&gt;
+&lt;span class='no'&gt;PASSWORD&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;***&amp;#39;&lt;/span&gt;
 
-uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
-begin
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request.basic_auth(USERNAME, PASSWORD)
-    http.request(request) do |response|
-      raise 'Response is not chunked' unless response.chunked?
-      response.read_body do |chunk|
-        #空行は無視
-        status = JSON.parse(chunk) rescue next
-        #eventを含まないものは無視
-        next unless status['event']
-        source = status['source']
-        if status['target_object']
-          target_obj = status['target_object']
-          target_user = target_obj['user']
-          puts &quot;#{status['event']}: #{source['screen_name']} -&amp;gt; #{target_user['screen_name']}: #{target_obj['text']}&quot;
-        elsif status['target']
-          target = status['target']
-          puts &quot;#{status['event']}: #{source['screen_name']} -&amp;gt; #{target['screen_name']}&quot;
-        end
-      end
-    end
-  end
+&lt;span class='n'&gt;uri&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;URI&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;parse&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;http://chirpstream.twitter.com/2b/user.json&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+&lt;span class='k'&gt;begin&lt;/span&gt;
+  &lt;span class='no'&gt;Net&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;HTTP&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;start&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;uri&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;host&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;uri&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;port&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;http&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+    &lt;span class='n'&gt;request&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Net&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;HTTP&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;Get&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;uri&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;request_uri&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;request&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;basic_auth&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='no'&gt;USERNAME&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='no'&gt;PASSWORD&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+    &lt;span class='n'&gt;http&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;request&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;request&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;response&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+      &lt;span class='k'&gt;raise&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;Response is not chunked&amp;#39;&lt;/span&gt; &lt;span class='k'&gt;unless&lt;/span&gt; &lt;span class='n'&gt;response&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;chunked?&lt;/span&gt;
+      &lt;span class='n'&gt;response&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;read_body&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;chunk&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+        &lt;span class='c1'&gt;#空行は無視&lt;/span&gt;
+        &lt;span class='n'&gt;status&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;JSON&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;parse&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;chunk&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='k'&gt;rescue&lt;/span&gt; &lt;span class='k'&gt;next&lt;/span&gt;
+        &lt;span class='c1'&gt;#eventを含まないものは無視&lt;/span&gt;
+        &lt;span class='k'&gt;next&lt;/span&gt; &lt;span class='k'&gt;unless&lt;/span&gt; &lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;event&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+        &lt;span class='n'&gt;source&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;source&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+        &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;target_object&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+          &lt;span class='n'&gt;target_obj&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;target_object&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+          &lt;span class='n'&gt;target_user&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;target_obj&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+          &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;event&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;source&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;screen_name&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; -&amp;amp;gt; &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;target_user&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;screen_name&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;target_obj&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class='k'&gt;elsif&lt;/span&gt; &lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+          &lt;span class='n'&gt;target&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;
+          &lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;status&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;event&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;source&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;screen_name&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; -&amp;amp;gt; &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;target&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;screen_name&amp;#39;&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class='k'&gt;end&lt;/span&gt;
+      &lt;span class='k'&gt;end&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
 
-rescue Timeout::Error =&gt; ex
-  p &quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;
+&lt;span class='k'&gt;rescue&lt;/span&gt; &lt;span class='no'&gt;Timeout&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;Error&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='n'&gt;ex&lt;/span&gt;
+  &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&amp;amp;lt;-----!!!! Timeout::Error!!!!-----&amp;amp;gt;&amp;quot;&lt;/span&gt;
   
-  retry
-end
+  &lt;span class='k'&gt;retry&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。&lt;/p&gt;
 
 &lt;p&gt;でもまぁ一歩前進したことは確か。Rubyがんばるぜ。&lt;/p&gt;</content>
@@ -585,16 +597,16 @@ end
     <content type="html">&lt;p&gt;ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。&lt;/p&gt;
 
 &lt;p&gt;『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-    respond_to do |format|
-        format.html # index.html.erb
-        format.xml  { render :xml =&gt; @products }
-    end
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;    &lt;span class='n'&gt;respond_to&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='nb'&gt;format&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+        &lt;span class='nb'&gt;format&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;html&lt;/span&gt; &lt;span class='c1'&gt;# index.html.erb&lt;/span&gt;
+        &lt;span class='nb'&gt;format&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;xml&lt;/span&gt;  &lt;span class='p'&gt;{&lt;/span&gt; &lt;span class='n'&gt;render&lt;/span&gt; &lt;span class='ss'&gt;:xml&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='vi'&gt;@products&lt;/span&gt; &lt;span class='p'&gt;}&lt;/span&gt;
+    &lt;span class='k'&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;config/routes.rb&lt;/code&gt; に&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-    map.connect ':controller/:action/:id.:format'
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;    &lt;span class='n'&gt;map&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;connect&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;:controller/:action/:id.:format&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。&lt;/p&gt;
 
 &lt;p&gt;CakePHPで同じことをやるためには以下の手順が必要。&lt;/p&gt;
@@ -656,38 +668,38 @@ end
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/05/07/fuck-ie</id>
     <content type="html">&lt;p&gt;こういうコード書いてます。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
-function getAttrName(attrObj) {
-	var attrName = attrObj.firstChild.data;
-//	items = document.getElementsByClassName('item');
-	var items = $('li.item');
-	$(items).fadeOut('slow');
-	for (var i = 0; i &amp;lt; items.length; i++) {
-	//	var keywordList = items[i].getElementsByClassName('keyword-list');
-		var keywordList = $('.keyword-list', items[i]);
-		for (var j = 0; j &amp;lt; keywordList.length; j++) {
-			//var keywords = keywordList[j].getElementsByTagName('li');
-			var keywords = $('li', keywordList[j]);
-			for (var k = 0; k &amp;lt; keywords.length; k++) {
-				if (attrName == keywords[k].textContent) {
-					$(items[i]).fadeIn('slow');
-				}
-			}
-		}
-	}
-	getCurAttr(attrName);
-}
-function getCurAttr(attrName) {
-	var curAttr = $(&quot;#keySelector li a&quot;);
-	for (var l = 0; l &amp;lt; curAttr.length; l++) {
-		if ($(curAttr[l]).text() == attrName) {
-			$(curAttr[l].parentNode).addClass('current-keyword');
-		} else {
-			$(curAttr[l].parentNode).removeClass('current-keyword');
-		}
-	}
-}
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='kd'&gt;function&lt;/span&gt; &lt;span class='nx'&gt;getAttrName&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;attrObj&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+	&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;attrName&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;attrObj&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;firstChild&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;data&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
+&lt;span class='c1'&gt;//	items = document.getElementsByClassName(&amp;#39;item&amp;#39;);&lt;/span&gt;
+	&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;items&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;li.item&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+	&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;items&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;&lt;span class='nx'&gt;fadeOut&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;slow&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+	&lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;i&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;i&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&lt;/span&gt;&lt;span class='nx'&gt;lt&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;items&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;length&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;i&lt;/span&gt;&lt;span class='o'&gt;++&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+	&lt;span class='c1'&gt;//	var keywordList = items[i].getElementsByClassName(&amp;#39;keyword-list&amp;#39;);&lt;/span&gt;
+		&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;keywordList&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;.keyword-list&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nx'&gt;items&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;i&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
+		&lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;j&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;j&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&lt;/span&gt;&lt;span class='nx'&gt;lt&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;keywordList&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;length&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;j&lt;/span&gt;&lt;span class='o'&gt;++&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+			&lt;span class='c1'&gt;//var keywords = keywordList[j].getElementsByTagName(&amp;#39;li&amp;#39;);&lt;/span&gt;
+			&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;li&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nx'&gt;keywordList&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;j&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
+			&lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;k&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;k&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&lt;/span&gt;&lt;span class='nx'&gt;lt&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;length&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;k&lt;/span&gt;&lt;span class='o'&gt;++&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+				&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;attrName&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;k&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;&lt;span class='nx'&gt;textContent&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+					&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;items&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;i&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;&lt;span class='nx'&gt;fadeIn&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;slow&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+				&lt;span class='p'&gt;}&lt;/span&gt;
+			&lt;span class='p'&gt;}&lt;/span&gt;
+		&lt;span class='p'&gt;}&lt;/span&gt;
+	&lt;span class='p'&gt;}&lt;/span&gt;
+	&lt;span class='nx'&gt;getCurAttr&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;attrName&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;span class='kd'&gt;function&lt;/span&gt; &lt;span class='nx'&gt;getCurAttr&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;attrName&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+	&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;curAttr&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;#keySelector li a&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+	&lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;l&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='mi'&gt;0&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;l&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&lt;/span&gt;&lt;span class='nx'&gt;lt&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;curAttr&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;length&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt; &lt;span class='nx'&gt;l&lt;/span&gt;&lt;span class='o'&gt;++&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+		&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;curAttr&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;l&lt;/span&gt;&lt;span class='p'&gt;]).&lt;/span&gt;&lt;span class='nx'&gt;text&lt;/span&gt;&lt;span class='p'&gt;()&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nx'&gt;attrName&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+			&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;curAttr&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;l&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;&lt;span class='nx'&gt;parentNode&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;&lt;span class='nx'&gt;addClass&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;current-keyword&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+		&lt;span class='p'&gt;}&lt;/span&gt; &lt;span class='k'&gt;else&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+			&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;curAttr&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;l&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;&lt;span class='nx'&gt;parentNode&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;&lt;span class='nx'&gt;removeClass&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;current-keyword&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+		&lt;span class='p'&gt;}&lt;/span&gt;
+	&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;span class='p'&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;やりたいことは以下のような感じ。&lt;/p&gt;
 
 &lt;ol&gt;
@@ -715,13 +727,21 @@ function getCurAttr(attrName) {
 &lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
 &lt;p&gt;そういうわけで&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var keywords = $('li', keywordList[j]);&lt;/code&gt;&lt;/pre&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;li&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nx'&gt;keywordList&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;j&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;を&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var keywords = $('li a', keywordList[j]);&lt;/code&gt;&lt;/pre&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='kd'&gt;var&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;li a&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='nx'&gt;keywordList&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;j&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;とし、&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;if (attrName == keywords[k].textContent)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;attrName&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;k&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;&lt;span class='nx'&gt;textContent&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;を&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;if (attrName == keywords[k].firstChild.data)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;attrName&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='nx'&gt;keywords&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='nx'&gt;k&lt;/span&gt;&lt;span class='p'&gt;].&lt;/span&gt;&lt;span class='nx'&gt;firstChild&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;data&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;にしてみたところ、ばっちりIEで動くようになった。&lt;/p&gt;
 
 &lt;p&gt;cxxさんありがとうございます。今度焼き肉デートしましょう。&lt;/p&gt;</content>
@@ -795,25 +815,25 @@ function getCurAttr(attrName) {
     <content type="html">&lt;p&gt;なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。&lt;/p&gt;
 
 &lt;p&gt;とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone git://github.com/emk/mephisto.git&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;    $ git clone git://github.com/emk/mephisto.git&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;してgithubからプロジェクトをclone。&lt;/p&gt;
 
 &lt;p&gt;Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;rake gems:install&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;    $ rake gems:install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、&lt;code&gt;gem install&lt;/code&gt; するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem install nokogiri \
---with-xslt-include=/home/morygonzalez/php5/include/ \
---with-xslt-lib=/home/morygonzalez/php5/lib/&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;    $ gem install nokogiri \&lt;/span&gt;
+&lt;span class='go'&gt;    --with-xslt-include=/home/morygonzalez/php5/include/ \&lt;/span&gt;
+&lt;span class='go'&gt;    --with-xslt-lib=/home/morygonzalez/php5/lib/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;無事インストール成功。その後もう一回 &lt;code&gt;rake gems:install&lt;/code&gt; を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに &lt;code&gt;development:&lt;/code&gt; のDB環境しか記述していなかったこと、 &lt;code&gt;rake db:bootstrap&lt;/code&gt; のときに &lt;code&gt;RAILS_ENV=production&lt;/code&gt; をつけていなかったことが原因だった。そういうわけでdatabase.ymlに &lt;code&gt;production:&lt;/code&gt; の設定（sqlite3を使用）を書き、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;rake db:bootstrap RAILS_ENV=production&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;    $ rake db:bootstrap RAILS_ENV=production&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;ですべてのインストール作業完了。いまこうして動いております。&lt;/p&gt;
 
 &lt;p&gt;今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。&lt;/p&gt;</content>

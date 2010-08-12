@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -23,14 +24,33 @@
 		<div id="container">
 		  
 			<div id="content">
-				<h2 id='ubuntu_serverssh_permission_denied_publickey_'><a href='/2010/08/03/ubuntu-server-ssh-connection-failing'>Ubuntu ServerにSSH接続しようとして &#8220;Permission denied (publickey).&#8221; が出る</a></h2>
+				<h2 id='authlogicauthlogicoauth'><a href='/2010/08/12/fed-up-with-authlogic-oauth'>AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
+<div class='articleinfo'>
+Posted on 12 Aug 2010 by morygonzalez |
+	
+		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
+	
+		<a href='http://tech.portalshit.net/OAuth/'>OAuth</a>
+	
+</div><p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>
+<h2 id='ubuntu_serverssh_permission_denied_publickey_'><a href='/2010/08/03/ubuntu-server-ssh-connection-failing'>Ubuntu ServerにSSH接続しようとして &#8220;Permission denied (publickey).&#8221; が出る</a></h2>
 <div class='articleinfo'>
 Posted on 03 Aug 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Ubuntu/'>Ubuntu</a>
 	
-</div><p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p><p>まずSSHのおさらいを。クライアント側で</p><pre><code>$ mkdir -p .ssh
-$ ssh-keygen -t rsa （以下略）</code></pre><p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p><pre><code>$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys</code></pre><p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p><p>いっぺんクライアント側で <code>id_rsa.pub</code> を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？</p><p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p><pre><code>Permission denied (publickey).</code></pre><p>というエラーが頻繁にお出になるのですよ。</p><p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p><pre><code>$ sudo /etc/init.d/ssh restart</code></pre><p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p><pre><code>Permission denied (publickey).</code></pre><p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p><p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p><p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
+</div><p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p><p>まずSSHのおさらいを。クライアント側で</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> mkdir -p .ssh
+<span class='gp'>$</span> ssh-keygen -t rsa （以下略）
+</code></pre>
+</div><p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
+</code></pre>
+</div><p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p><p>いっぺんクライアント側で <code>id_rsa.pub</code> を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？</p><p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p><div class='highlight'><pre><code class='console'><span class='go'>Permission denied (publickey).</span>
+</code></pre>
+</div><p>というエラーが頻繁にお出になるのですよ。</p><p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> sudo /etc/init.d/ssh restart
+</code></pre>
+</div><p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p><div class='highlight'><pre><code class='console'><span class='go'>Permission denied (publickey).</span>
+</code></pre>
+</div><p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p><p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p><p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
 <h2 id='rssrubyrssparserparsehpricot'><a href='/2010/07/27/masuda-san'>増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
 <div class='articleinfo'>
 Posted on 27 Jul 2010 by morygonzalez |
@@ -48,7 +68,9 @@ Posted on 26 Jul 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/bot/'>bot</a>
 	
-</div><p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p><p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p><pre><code>new_tweets = neta_tweets - used_tweets</code></pre><p>とかしてみようとした。</p><p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
+</div><p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p><p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p><div class='highlight'><pre><code class='ruby'><span class='n'>new_tweets</span> <span class='o'>=</span> <span class='n'>neta_tweets</span> <span class='o'>-</span> <span class='n'>used_tweets</span>
+</code></pre>
+</div><p>とかしてみようとした。</p><p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
 <h2 id='oauthplugin'><a href='/2010/07/15/get-stuck-with-oauth'>oauth-pluginではまった</a></h2>
 <div class='articleinfo'>
 Posted on 15 Jul 2010 by morygonzalez |
@@ -66,8 +88,10 @@ Posted on 14 Jul 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/git/'>git</a>
 	
-</div><p>やってみた。以下を参考にした。</p><p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p><p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p><p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p><p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p><pre><code>#! /bin/sh
-unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code></pre><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id3'>まとめ</h3><p>まとめると、</p><ol>
+</div><p>やってみた。以下を参考にした。</p><p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p><p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p><p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p><p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p><div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
+    <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
+</code></pre>
+</div><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id3'>まとめ</h3><p>まとめると、</p><ol>
 <li>記事を作成するローカルリポジトリ</li>
 <li>ローカルリポジトリをpushするリモートリポジトリ</li>
 <li>リモートリポジトリをcloneする公開用リポジトリ</li>
@@ -82,7 +106,7 @@ Posted on 09 Jul 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/OAuth/'>OAuth</a>
 	
-</div><p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p><p><img src='images/27-oauth.png' alt='OAuthの利用イメージ' /></p><p>疑問点がいくつかある。</p><ul>
+</div><p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p><p><img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /></p><p>疑問点がいくつかある。</p><ul>
 <li>
 <p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
 </li>
@@ -123,26 +147,32 @@ Posted on 02 Jul 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/YAML/'>YAML</a>
 	
-</div><p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p><p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p><pre><code>hoge: #アイテムの名前
-  id: 1
-  name: &quot;hoge&quot;
-  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
+</div><p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p><p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p><div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span> <span class='c1'>#アイテムの名前</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
 
-fuga:
-  id: 2
-  name: &quot;fuga&quot;
-  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code></pre><p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p><pre><code>hoge:
-  id: 1
-  name: &quot;hoge&quot;
-  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
+<span class='l-Scalar-Plain'>fuga</span><span class='p-Indicator'>:</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div><p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p><div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
 
-  id: 2
-  name: &quot;fuga&quot;
-  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code></pre><p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p><p>結局、拾ってきた コードを参考にして</p><pre><code>require &#39;yaml&#39;
-	require &#39;pp&#39;
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div><p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p><p>結局、拾ってきた コードを参考にして</p><div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;yaml&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;pp&#39;</span>
 
-	data = YAML.load_file(&#39;hoge.yml&#39;)
-	pp data</code></pre><p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
+<span class='n'>data</span> <span class='o'>=</span> <span class='no'>YAML</span><span class='o'>.</span><span class='n'>load_file</span><span class='p'>(</span><span class='s1'>&#39;hoge.yml&#39;</span><span class='p'>)</span>
+<span class='n'>pp</span> <span class='n'>data</span>
+</code></pre>
+</div><p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 <h2 id='active_record'><a href='/2010/07/02/active_record-is-so-sticky-for-me'>Active Recordが難しすぎてしょんべんちびりそう</a></h2>
 <div class='articleinfo'>
 Posted on 02 Jul 2010 by morygonzalez |
@@ -156,73 +186,80 @@ Posted on 28 Jun 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Ruby/'>Ruby</a>
 	
-</div><p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p><p>そういうわけで正しくは、</p><pre><code>class Hoge
-  def initialize
-    @a = &quot;&quot;
-  end 
+</div><p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p><p>そういうわけで正しくは、</p><div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
+  <span class='k'>end</span>
 
-  def hoge
-    @a = &quot;hogehoge&quot;
-  end 
-end
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-fuga = Hoge.new
-puts fuga.hoge</code></pre><p>と書くそうです。</p>
-<p><p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、</p></p>
-<pre><code>class Hoge
-  def initialize
-    a = &quot;&quot;
-  end 
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div><p>と書くそうです。</p>
+<p><p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、</p> <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;div class=&apos;highlight&apos;&gt;&lt;pre&gt;&lt;code class=&apos;ruby&apos;&gt;&lt;span class=&apos;k&apos;&gt;class&lt;/span&gt; &lt;span class=&apos;nc&apos;&gt;Hoge&lt;/span&gt;
+  &lt;span class=&apos;k&apos;&gt;def&lt;/span&gt; &lt;span class=&apos;nf&apos;&gt;initialize&lt;/span&gt;
+    &lt;span class=&apos;n&apos;&gt;a&lt;/span&gt; &lt;span class=&apos;o&apos;&gt;=&lt;/span&gt; &lt;span class=&apos;s2&apos;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+  &lt;span class=&apos;k&apos;&gt;end&lt;/span&gt;</pre></p>
+<span class='k'>def</span>
+<pre><code>&lt;span class=&#39;n&#39;&gt;a&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;s2&#39;&gt;&amp;quot;hogehoge&amp;quot;&lt;/span&gt;</code></pre>
+<span class='k'>end</span><span class='k'>end</span><span class='n'>fuga</span><span class='nb'>puts</span><pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;/code&gt;</pre><pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;/div&gt;</pre><p>でも同じ結果を出力しますね。</p><p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p><blockquote>
+`@` で始まる変数は *インスタンス変数* といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）
+</blockquote><p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p><div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>b</span><span class='o'>=</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='n'>b</span>
+  <span class='k'>end</span>
 
-  def hoge
-    a = &quot;hogehoge&quot;
-  end 
-end
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='nb'>print</span> <span class='vi'>@a</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-fuga = Hoge.new
-puts fuga.hoge</code></pre><p>でも同じ結果を出力しますね。</p><p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p><blockquote>
-<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
-</blockquote><p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p><pre><code>class Hoge
-  def initialize(b=&quot;&quot;)
-    @a = b
-  end
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Fuga&quot;</span><span class='p'>)</span>
+<span class='n'>piyo</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Piyo&quot;</span><span class='p'>)</span>
 
-  def hoge
-    print @a, &quot;\n&quot;
-  end
-end
-
-fuga = Hoge.new(&quot;Fuga&quot;)
-piyo = Hoge.new(&quot;Piyo&quot;)
-
-fuga.hoge
-piyo.hoge</code></pre><p>で、これを実行すると</p><pre><code>Fuga
-Piyo</code></pre><p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
+<span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+<span class='n'>piyo</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div><p>で、これを実行すると</p><div class='highlight'><pre><code class='console'><span class='go'>Fuga</span>
+<span class='go'>Piyo</span>
+</code></pre>
+</div><p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
 <h2 id='ruby'><a href='/2010/06/25/i-realized-php-is-crap'>Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
 <div class='articleinfo'>
 Posted on 25 Jun 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Ruby/'>Ruby</a>
 	
-</div><p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p><p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p><pre><code>&lt;?php
-class Hoge {
-  var $a; 
-  function hoge() {
-    return $this-&gt;a = &quot;hogehoge&quot;;
-  }
-}
+</div><p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p><p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p><div class='highlight'><pre><code class='php'><span class='cp'>&lt;?php</span>
+<span class='k'>class</span> <span class='nc'>Hoge</span> <span class='p'>{</span>
+  <span class='k'>var</span> <span class='nv'>$a</span><span class='p'>;</span> 
+  <span class='k'>function</span> <span class='nf'>hoge</span><span class='p'>()</span> <span class='p'>{</span>
+    <span class='k'>return</span> <span class='nv'>$this</span><span class='o'>-&gt;</span><span class='na'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span><span class='p'>;</span>
+  <span class='p'>}</span>
+<span class='p'>}</span>
 
-$fuga = new Hoge();
-echo $fuga-&gt;hoge();
-?&gt;</code></pre><p>つぎにRubyで同じコードを書いてみる。</p><pre><code>class Hoge
-  @a  
-  def hoge
-    @a = &quot;hogehoge&quot;
-  end 
-end
+<span class='nv'>$fuga</span> <span class='o'>=</span> <span class='k'>new</span> <span class='nx'>Hoge</span><span class='p'>();</span>
+<span class='k'>echo</span> <span class='nv'>$fuga</span><span class='o'>-&gt;</span><span class='na'>hoge</span><span class='p'>();</span>
+<span class='cp'>?&gt;</span><span class='x' />
+</code></pre>
+</div><p>つぎにRubyで同じコードを書いてみる。</p><div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='vi'>@a</span>  
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-fuga = Hoge.new
-puts fuga.hoge</code></pre><p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p><p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p><p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p><p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div><p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p><p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p><p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p><p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
 <h2 id='railsmarkdown'><a href='/2010/06/23/how-to-use-markdown-with-rails'>RailsアプリケーションでMarkdownを使う</a></h2>
 <div class='articleinfo'>
 Posted on 23 Jun 2010 by morygonzalez |
@@ -231,9 +268,15 @@ Posted on 23 Jun 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
-</div><p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p><p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p><p>これはRailsのプラグインではないのでgemでインストール。</p><pre><code>sudo gem install bluecloth</code></pre><p>その後viewで</p>
-<p><pre><code>&lt;%= markdwon(@item.text) %&gt;</code></pre></p>
-<p>とか書けばいい。</p><p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p><pre><code>config.gem &quot;bluecloth&quot;</code></pre><p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
+</div><p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p><p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p><p>これはRailsのプラグインではないのでgemでインストール。</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> sudo gem install bluecloth
+</code></pre>
+</div><p>その後viewで</p>
+<p><p><div class='highlight'><pre><code class='rhtml'><span class='cp'>&lt;%=</span> <span class='n'>markdwon</span><span class='p'>(</span><span class='vi'>@item</span><span class='o'>.</span><span class='n'>text</span><span class='p'>)</span> <span class='cp'>%&gt;</span>
+</code></pre>
+</div></p></p>
+<p>とか書けばいい。</p><p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p><div class='highlight'><pre><code class='ruby'><span class='n'>config</span><span class='o'>.</span><span class='n'>gem</span> <span class='s2'>&quot;bluecloth&quot;</span>
+</code></pre>
+</div><p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
 <h2 id='xrearubygems'><a href='/2010/06/22/installed-rubygems-on-xrea'>XREAにRubyGemsをインストール</a></h2>
 <div class='articleinfo'>
 Posted on 22 Jun 2010 by morygonzalez |
@@ -274,14 +317,18 @@ Posted on 03 Jun 2010 by morygonzalez |
 <h3>コントロールとモデルが密すぎる。</h3>
 <p>CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。</p>
 <cite><a href='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>Blog-side CakePHP わかりずらい３点</a></cite>
-</blockquote><p>ふむふむ〜、ナルホディウスですぞ〜！！！</p><p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p><code><pre>$use = array("Hoge");</pre></code><p>とかしなきゃいけなかった。</p><p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p><p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>
+</blockquote><p>ふむふむ〜、ナルホディウスですぞ〜！！！</p><p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p><div class='highlight'><pre><code class='php'><span class='x'>$use = array(&quot;Hoge&quot;);</span>
+</code></pre>
+</div><p>とかしなきゃいけなかった。</p><p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p><p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>
 <h2 id='rails'><a href='/2010/06/03/rails-has-subdirectory-in-controller'>Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></h2>
 <div class='articleinfo'>
 Posted on 03 Jun 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
-</div><p>なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ <code>app/controllers/admin/book_controller.rb</code> ということができるらしい！ んで、そのときのクラス宣言は</p><code><pre>class Admin::BookController &lt; ActionController::Base</pre></code><p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>
+</div><p>なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ <code>app/controllers/admin/book_controller.rb</code> ということができるらしい！ んで、そのときのクラス宣言は</p><div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Admin</span><span class='o'>::</span><span class='no'>BookController</span> <span class='o'>&lt;</span> <span class='no'>ActionController</span><span class='o'>::</span><span class='no'>Base</span>
+</code></pre>
+</div><p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>
 <h2 id='rails'><a href='/2010/06/03/hard-to-learn-rails'>Railsむずい</a></h2>
 <div class='articleinfo'>
 Posted on 03 Jun 2010 by morygonzalez |
@@ -304,49 +351,49 @@ Posted on 18 May 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Twitter/'>Twitter</a>
 	
-</div><p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p><pre><code>
-#!/usr/bin/env ruby
-# coding: utf-8
+</div><p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p><div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+<span class='c1'># coding: utf-8</span>
 
-require 'net/http'
-require 'uri'
-require 'rubygems'
-require 'json'
+<span class='nb'>require</span> <span class='s1'>&#39;net/http&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;uri&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;json&#39;</span>
 
-USERNAME = 'morygonzalez'
-PASSWORD = '***'
+<span class='no'>USERNAME</span> <span class='o'>=</span> <span class='s1'>&#39;morygonzalez&#39;</span>
+<span class='no'>PASSWORD</span> <span class='o'>=</span> <span class='s1'>&#39;***&#39;</span>
 
-uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
-begin
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request.basic_auth(USERNAME, PASSWORD)
-    http.request(request) do |response|
-      raise 'Response is not chunked' unless response.chunked?
-      response.read_body do |chunk|
-        #空行は無視
-        status = JSON.parse(chunk) rescue next
-        #eventを含まないものは無視
-        next unless status['event']
-        source = status['source']
-        if status['target_object']
-          target_obj = status['target_object']
-          target_user = target_obj['user']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target_user['screen_name']}: #{target_obj['text']}"
-        elsif status['target']
-          target = status['target']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target['screen_name']}"
-        end
-      end
-    end
-  end
+<span class='n'>uri</span> <span class='o'>=</span> <span class='no'>URI</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='s1'>&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class='p'>)</span>
+<span class='k'>begin</span>
+  <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>.</span><span class='n'>start</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>uri</span><span class='o'>.</span><span class='n'>port</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>http</span><span class='o'>|</span>
+    <span class='n'>request</span> <span class='o'>=</span> <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>::</span><span class='no'>Get</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>request_uri</span><span class='p'>)</span>
+    <span class='n'>request</span><span class='o'>.</span><span class='n'>basic_auth</span><span class='p'>(</span><span class='no'>USERNAME</span><span class='p'>,</span> <span class='no'>PASSWORD</span><span class='p'>)</span>
+    <span class='n'>http</span><span class='o'>.</span><span class='n'>request</span><span class='p'>(</span><span class='n'>request</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>response</span><span class='o'>|</span>
+      <span class='k'>raise</span> <span class='s1'>&#39;Response is not chunked&#39;</span> <span class='k'>unless</span> <span class='n'>response</span><span class='o'>.</span><span class='n'>chunked?</span>
+      <span class='n'>response</span><span class='o'>.</span><span class='n'>read_body</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>chunk</span><span class='o'>|</span>
+        <span class='c1'>#空行は無視</span>
+        <span class='n'>status</span> <span class='o'>=</span> <span class='no'>JSON</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='n'>chunk</span><span class='p'>)</span> <span class='k'>rescue</span> <span class='k'>next</span>
+        <span class='c1'>#eventを含まないものは無視</span>
+        <span class='k'>next</span> <span class='k'>unless</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span>
+        <span class='n'>source</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;source&#39;</span><span class='o'>]</span>
+        <span class='k'>if</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
+          <span class='n'>target_obj</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
+          <span class='n'>target_user</span> <span class='o'>=</span> <span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;user&#39;</span><span class='o'>]</span>
+          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target_user</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;text&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
+        <span class='k'>elsif</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
+          <span class='n'>target</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
+          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
+        <span class='k'>end</span>
+      <span class='k'>end</span>
+    <span class='k'>end</span>
+  <span class='k'>end</span>
 
-rescue Timeout::Error => ex
-  p "&lt;-----!!!! Timeout::Error!!!!-----&gt;"
+<span class='k'>rescue</span> <span class='no'>Timeout</span><span class='o'>::</span><span class='no'>Error</span> <span class='o'>=&gt;</span> <span class='n'>ex</span>
+  <span class='nb'>p</span> <span class='s2'>&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
   
-  retry
-end
-</code></pre><p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p><p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
+  <span class='k'>retry</span>
+<span class='k'>end</span>
+</code></pre>
+</div><p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p><p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
 <h2 id='dreamhostrails'><a href='/2010/05/11/rails-app-on-dreamhost'>DreamHostでRailsアプリケーションを再起動</a></h2>
 <div class='articleinfo'>
 Posted on 11 May 2010 by morygonzalez |
@@ -364,14 +411,14 @@ Posted on 11 May 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
-</div><p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p><p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p><pre><code>
-    respond_to do |format|
-        format.html # index.html.erb
-        format.xml  { render :xml => @products }
-    end
-</code></pre><p><code>config/routes.rb</code> に</p><pre><code>
-    map.connect ':controller/:action/:id.:format'
-</code></pre><p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p><p>CakePHPで同じことをやるためには以下の手順が必要。</p><p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p><p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p><p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p><p>僕はファッションの観点からRailsを選びたい。</p>
+</div><p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p><p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p><div class='highlight'><pre><code class='ruby'>    <span class='n'>respond_to</span> <span class='k'>do</span> <span class='o'>|</span><span class='nb'>format</span><span class='o'>|</span>
+        <span class='nb'>format</span><span class='o'>.</span><span class='n'>html</span> <span class='c1'># index.html.erb</span>
+        <span class='nb'>format</span><span class='o'>.</span><span class='n'>xml</span>  <span class='p'>{</span> <span class='n'>render</span> <span class='ss'>:xml</span> <span class='o'>=&gt;</span> <span class='vi'>@products</span> <span class='p'>}</span>
+    <span class='k'>end</span>
+</code></pre>
+</div><p><code>config/routes.rb</code> に</p><div class='highlight'><pre><code class='ruby'>    <span class='n'>map</span><span class='o'>.</span><span class='n'>connect</span> <span class='s1'>&#39;:controller/:action/:id.:format&#39;</span>
+</code></pre>
+</div><p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p><p>CakePHPで同じことをやるためには以下の手順が必要。</p><p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p><p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p><p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p><p>僕はファッションの観点からRailsを選びたい。</p>
 <h2 id='mvcview'><a href='/2010/05/08/to-what-extent-write-codes-in-mvc'>MVCのViewにどこまで書くか</a></h2>
 <div class='articleinfo'>
 Posted on 08 May 2010 by morygonzalez |
@@ -396,38 +443,38 @@ Posted on 07 May 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/JavaScript/'>JavaScript</a>
 	
-</div><p>こういうコード書いてます。</p><pre><code>
-function getAttrName(attrObj) {
-	var attrName = attrObj.firstChild.data;
-//	items = document.getElementsByClassName('item');
-	var items = $('li.item');
-	$(items).fadeOut('slow');
-	for (var i = 0; i &lt; items.length; i++) {
-	//	var keywordList = items[i].getElementsByClassName('keyword-list');
-		var keywordList = $('.keyword-list', items[i]);
-		for (var j = 0; j &lt; keywordList.length; j++) {
-			//var keywords = keywordList[j].getElementsByTagName('li');
-			var keywords = $('li', keywordList[j]);
-			for (var k = 0; k &lt; keywords.length; k++) {
-				if (attrName == keywords[k].textContent) {
-					$(items[i]).fadeIn('slow');
-				}
-			}
-		}
-	}
-	getCurAttr(attrName);
-}
-function getCurAttr(attrName) {
-	var curAttr = $("#keySelector li a");
-	for (var l = 0; l &lt; curAttr.length; l++) {
-		if ($(curAttr[l]).text() == attrName) {
-			$(curAttr[l].parentNode).addClass('current-keyword');
-		} else {
-			$(curAttr[l].parentNode).removeClass('current-keyword');
-		}
-	}
-}
-</code></pre><p>やりたいことは以下のような感じ。</p><ol>
+</div><p>こういうコード書いてます。</p><div class='highlight'><pre><code class='javascript'><span class='kd'>function</span> <span class='nx'>getAttrName</span><span class='p'>(</span><span class='nx'>attrObj</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='kd'>var</span> <span class='nx'>attrName</span> <span class='o'>=</span> <span class='nx'>attrObj</span><span class='p'>.</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>;</span>
+<span class='c1'>//	items = document.getElementsByClassName(&#39;item&#39;);</span>
+	<span class='kd'>var</span> <span class='nx'>items</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li.item&#39;</span><span class='p'>);</span>
+	<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>).</span><span class='nx'>fadeOut</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
+	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>i</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>i</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>items</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>i</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='c1'>//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
+		<span class='kd'>var</span> <span class='nx'>keywordList</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;.keyword-list&#39;</span><span class='p'>,</span> <span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]);</span>
+		<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>j</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>j</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywordList</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>j</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+			<span class='c1'>//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
+			<span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+			<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>k</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>k</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywords</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>k</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+				<span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span> <span class='p'>{</span>
+					<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]).</span><span class='nx'>fadeIn</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
+				<span class='p'>}</span>
+			<span class='p'>}</span>
+		<span class='p'>}</span>
+	<span class='p'>}</span>
+	<span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>);</span>
+<span class='p'>}</span>
+<span class='kd'>function</span> <span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='kd'>var</span> <span class='nx'>curAttr</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#keySelector li a&quot;</span><span class='p'>);</span>
+	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>l</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>l</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>curAttr</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>l</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+		<span class='k'>if</span> <span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>]).</span><span class='nx'>text</span><span class='p'>()</span> <span class='o'>==</span> <span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
+			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
+		<span class='p'>}</span> <span class='k'>else</span> <span class='p'>{</span>
+			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
+		<span class='p'>}</span>
+	<span class='p'>}</span>
+<span class='p'>}</span>
+</code></pre>
+</div><p>やりたいことは以下のような感じ。</p><ol>
 <li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
 
 <li>クリックされた文字列を <code>attrName</code> に格納</li>
@@ -435,7 +482,15 @@ function getCurAttr(attrName) {
 <li>すべての <code>item</code> をjQueryを使って非表示</li>
 
 <li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
-</ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id2'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><pre><code>var keywords = $('li', keywordList[j]);</code></pre><p>を</p><pre><code>var keywords = $('li a', keywordList[j]);</code></pre><p>とし、</p><pre><code>if (attrName == keywords[k].textContent)</code></pre><p>を</p><pre><code>if (attrName == keywords[k].firstChild.data)</code></pre><p>にしてみたところ、ばっちりIEで動くようになった。</p><p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
+</ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id2'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</code></pre>
+</div><p>を</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li a&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</code></pre>
+</div><p>とし、</p><div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span>
+</code></pre>
+</div><p>を</p><div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>)</span>
+</code></pre>
+</div><p>にしてみたところ、ばっちりIEで動くようになった。</p><p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
 <h2 id='id5'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
 <div class='articleinfo'>
 Posted on 03 May 2010 by morygonzalez |
@@ -470,9 +525,17 @@ Posted on 22 Apr 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/misc/'>misc</a>
 	
-</div><p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p><p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p><pre><code>git clone git://github.com/emk/mephisto.git</code></pre><p>してgithubからプロジェクトをclone。</p><p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p><pre><code>rake gems:install</code></pre><p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p><pre><code>gem install nokogiri \
---with-xslt-include=/home/morygonzalez/php5/include/ \
---with-xslt-lib=/home/morygonzalez/php5/lib/</code></pre><p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p><pre><code>rake db:bootstrap RAILS_ENV=production</code></pre><p>ですべてのインストール作業完了。いまこうして動いております。</p><p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
+</div><p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p><p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p><div class='highlight'><pre><code class='console'><span class='go'>    $ git clone git://github.com/emk/mephisto.git</span>
+</code></pre>
+</div><p>してgithubからプロジェクトをclone。</p><p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p><div class='highlight'><pre><code class='console'><span class='go'>    $ rake gems:install</span>
+</code></pre>
+</div><p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p><div class='highlight'><pre><code class='console'><span class='go'>    $ gem install nokogiri \</span>
+<span class='go'>    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
+<span class='go'>    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
+</code></pre>
+</div><p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p><div class='highlight'><pre><code class='console'><span class='go'>    $ rake db:bootstrap RAILS_ENV=production</span>
+</code></pre>
+</div><p>ですべてのインストール作業完了。いまこうして動いております。</p><p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
 			</div>
 						
 			<div id="sidebar">
@@ -480,6 +543,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

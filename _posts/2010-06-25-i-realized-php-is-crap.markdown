@@ -9,29 +9,33 @@ layout: post
 
 オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。
 
-    <?php
-    class Hoge {
-      var $a; 
-      function hoge() {
-        return $this->a = "hogehoge";
-      }
-    }
+{% highlight php %}
+<?php
+class Hoge {
+  var $a; 
+  function hoge() {
+    return $this->a = "hogehoge";
+  }
+}
 
-    $fuga = new Hoge();
-    echo $fuga->hoge();
-    ?>
+$fuga = new Hoge();
+echo $fuga->hoge();
+?>
+{% endhighlight %}
 
 つぎにRubyで同じコードを書いてみる。
 
-    class Hoge
-      @a  
-      def hoge
-        @a = "hogehoge"
-      end 
-    end
+{% highlight ruby %}
+class Hoge
+  @a  
+  def hoge
+    @a = "hogehoge"
+  end
+end
 
-    fuga = Hoge.new
-    puts fuga.hoge
+fuga = Hoge.new
+puts fuga.hoge
+{% endhighlight %}
 
 まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは `shift + [` とか `shift + ]` とかだから、 `shift` の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。
 

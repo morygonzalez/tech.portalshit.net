@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -26,38 +27,38 @@
 				<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
+<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span> <span class='c1'>#アイテムの名前</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
 
-<pre><code>hoge: #アイテムの名前
-  id: 1
-  name: &quot;hoge&quot;
-  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
-
-fuga:
-  id: 2
-  name: &quot;fuga&quot;
-  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code></pre>
-
+<span class='l-Scalar-Plain'>fuga</span><span class='p-Indicator'>:</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div>
 <p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
+<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
 
-<pre><code>hoge:
-  id: 1
-  name: &quot;hoge&quot;
-  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
-
-  id: 2
-  name: &quot;fuga&quot;
-  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code></pre>
-
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div>
 <p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
 
 <p>結局、拾ってきた コードを参考にして</p>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;yaml&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;pp&#39;</span>
 
-<pre><code>require &#39;yaml&#39;
-	require &#39;pp&#39;
-
-	data = YAML.load_file(&#39;hoge.yml&#39;)
-	pp data</code></pre>
-
+<span class='n'>data</span> <span class='o'>=</span> <span class='no'>YAML</span><span class='o'>.</span><span class='n'>load_file</span><span class='p'>(</span><span class='s1'>&#39;hoge.yml&#39;</span><span class='p'>)</span>
+<span class='n'>pp</span> <span class='n'>data</span>
+</code></pre>
+</div>
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 
 				<div class="paginator">
@@ -95,6 +96,8 @@ fuga:
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

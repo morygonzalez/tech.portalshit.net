@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -24,7 +25,9 @@
 			<div id="content">
 				<h2>Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</h2>
 				<p>なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ <code>app/controllers/admin/book_controller.rb</code> ということができるらしい！ んで、そのときのクラス宣言は</p>
-<code><pre>class Admin::BookController &lt; ActionController::Base</pre></code>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Admin</span><span class='o'>::</span><span class='no'>BookController</span> <span class='o'>&lt;</span> <span class='no'>ActionController</span><span class='o'>::</span><span class='no'>Base</span>
+</code></pre>
+</div>
 <p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>
 
 				<div class="paginator">
@@ -60,6 +63,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

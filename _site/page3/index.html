@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -24,179 +25,295 @@
 		  
 			<div id="content">
 				
-  <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
+  <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
 <div class="articleinfo">
-pageed on 28 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
-
-<p>そういうわけで正しくは、</p>
-
-<pre><code>class Hoge
-  def initialize
-    @a = &quot;&quot;
-  end 
-
-  def hoge
-    @a = &quot;hogehoge&quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge</code></pre>
-
-<p>と書くそうです。</p>
-
-<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、</p>
-
-<pre><code>class Hoge
-  def initialize
-    a = &quot;&quot;
-  end 
-
-  def hoge
-    a = &quot;hogehoge&quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge</code></pre>
-
-<p>でも同じ結果を出力しますね。</p>
-
-<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
-
-<blockquote>
-<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
-</blockquote>
-
-<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
-
-<pre><code>class Hoge
-  def initialize(b=&quot;&quot;)
-    @a = b
-  end
-
-  def hoge
-    print @a, &quot;\n&quot;
-  end
-end
-
-fuga = Hoge.new(&quot;Fuga&quot;)
-piyo = Hoge.new(&quot;Piyo&quot;)
-
-fuga.hoge
-piyo.hoge</code></pre>
-
-<p>で、これを実行すると</p>
-
-<pre><code>Fuga
-Piyo</code></pre>
-
-<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>  
-
-  <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
-<div class="articleinfo">
-pageed on 25 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
-
-<p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
-
-<pre><code>&lt;?php
-class Hoge {
-  var $a; 
-  function hoge() {
-    return $this-&gt;a = &quot;hogehoge&quot;;
-  }
-}
-
-$fuga = new Hoge();
-echo $fuga-&gt;hoge();
-?&gt;</code></pre>
-
-<p>つぎにRubyで同じコードを書いてみる。</p>
-
-<pre><code>class Hoge
-  @a  
-  def hoge
-    @a = &quot;hogehoge&quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge</code></pre>
-
-<p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
-
-<p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
-
-<p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
-
-<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>  
-
-  <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
-<div class="articleinfo">
-pageed on 23 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+pageed on 03 Jun 2010 by morygonzalez |
   
     <a href="http://tech.portalshit.net/Rails/">Rails</a>
   
 </div>
-<p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p>
+<p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>  
 
-<p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p>
-
-<p>これはRailsのプラグインではないのでgemでインストール。</p>
-
-<pre><code>sudo gem install bluecloth</code></pre>
-
-<p>その後viewで</p>
-
-<pre><code>&lt;%= markdwon(@item.text) %&gt;</code></pre>
-
-<p>とか書けばいい。</p>
-
-<p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
-
-<pre><code>config.gem &quot;bluecloth&quot;</code></pre>
-
-<p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>  
-
-  <h2><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></h2>
+  <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
 <div class="articleinfo">
-pageed on 22 Jun 2010 by morygonzalez |
+pageed on 03 Jun 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/misc/">misc</a>
+  
+</div>
+<p>なんか <a href='http://mephistoblog.com/'>Mephistoの公式サイト</a> 死んでるし、<a href='http://jekyllrb.com/'>jekyll</a> に変えようかなと思ってるんだけど、 <a href='http://wiki.github.com/mojombo/jekyll/blog-migrations'>移行ガイド</a> の通りにやってもうまくいかない。</p>  
+
+  <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
+<div class="articleinfo">
+pageed on 18 May 2010 by morygonzalez |
   
     <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
   
+    <a href="http://tech.portalshit.net/Twitter/">Twitter</a>
+  
 </div>
-<p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &#8216;rubygemsをrequireできねーぞゴラ！&#8217; みたいなエラーが出る。</p>
+<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+<span class='c1'># coding: utf-8</span>
 
-<p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
+<span class='nb'>require</span> <span class='s1'>&#39;net/http&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;uri&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;json&#39;</span>
 
-<p>蛇足だけど最初、RubyGems 1.3.7をインストールしようとしたら、利用予定地のサーバーのRubyのバージョンが1.8.5なためにインストールできなかった。そういうわけでRubyGemsは1.3.5を入れた。</p>
+<span class='no'>USERNAME</span> <span class='o'>=</span> <span class='s1'>&#39;morygonzalez&#39;</span>
+<span class='no'>PASSWORD</span> <span class='o'>=</span> <span class='s1'>&#39;***&#39;</span>
 
-<p>あとRubyGemsが入ったからといってシェルで <code>gem install rails</code> とかやってもプロセスを <code>kill</code> されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。</p>  
+<span class='n'>uri</span> <span class='o'>=</span> <span class='no'>URI</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='s1'>&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class='p'>)</span>
+<span class='k'>begin</span>
+  <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>.</span><span class='n'>start</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>uri</span><span class='o'>.</span><span class='n'>port</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>http</span><span class='o'>|</span>
+    <span class='n'>request</span> <span class='o'>=</span> <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>::</span><span class='no'>Get</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>request_uri</span><span class='p'>)</span>
+    <span class='n'>request</span><span class='o'>.</span><span class='n'>basic_auth</span><span class='p'>(</span><span class='no'>USERNAME</span><span class='p'>,</span> <span class='no'>PASSWORD</span><span class='p'>)</span>
+    <span class='n'>http</span><span class='o'>.</span><span class='n'>request</span><span class='p'>(</span><span class='n'>request</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>response</span><span class='o'>|</span>
+      <span class='k'>raise</span> <span class='s1'>&#39;Response is not chunked&#39;</span> <span class='k'>unless</span> <span class='n'>response</span><span class='o'>.</span><span class='n'>chunked?</span>
+      <span class='n'>response</span><span class='o'>.</span><span class='n'>read_body</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>chunk</span><span class='o'>|</span>
+        <span class='c1'>#空行は無視</span>
+        <span class='n'>status</span> <span class='o'>=</span> <span class='no'>JSON</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='n'>chunk</span><span class='p'>)</span> <span class='k'>rescue</span> <span class='k'>next</span>
+        <span class='c1'>#eventを含まないものは無視</span>
+        <span class='k'>next</span> <span class='k'>unless</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span>
+        <span class='n'>source</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;source&#39;</span><span class='o'>]</span>
+        <span class='k'>if</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
+          <span class='n'>target_obj</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
+          <span class='n'>target_user</span> <span class='o'>=</span> <span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;user&#39;</span><span class='o'>]</span>
+          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target_user</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;text&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
+        <span class='k'>elsif</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
+          <span class='n'>target</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
+          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
+        <span class='k'>end</span>
+      <span class='k'>end</span>
+    <span class='k'>end</span>
+  <span class='k'>end</span>
 
-  <h2><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></h2>
+<span class='k'>rescue</span> <span class='no'>Timeout</span><span class='o'>::</span><span class='no'>Error</span> <span class='o'>=&gt;</span> <span class='n'>ex</span>
+  <span class='nb'>p</span> <span class='s2'>&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
+  
+  <span class='k'>retry</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
+
+<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>  
+
+  <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
 <div class="articleinfo">
-pageed on 15 Jun 2010 by morygonzalez |
+pageed on 11 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
+
+<blockquote>
+<p>To restart your rails app do a &#8220;ps x&#8221; to get the pid of your dispatch.fcgi process(let&#8217;s say it&#8217;s 1234) then do a &#8220;kill 1234&#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. <cite><a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'>How do I restart rails app? - DreamHost Forum</a></cite></p>
+</blockquote>
+
+<p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
+
+<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>  
+
+  <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
+<div class="articleinfo">
+pageed on 11 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
+
+<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
+<div class='highlight'><pre><code class='ruby'>    <span class='n'>respond_to</span> <span class='k'>do</span> <span class='o'>|</span><span class='nb'>format</span><span class='o'>|</span>
+        <span class='nb'>format</span><span class='o'>.</span><span class='n'>html</span> <span class='c1'># index.html.erb</span>
+        <span class='nb'>format</span><span class='o'>.</span><span class='n'>xml</span>  <span class='p'>{</span> <span class='n'>render</span> <span class='ss'>:xml</span> <span class='o'>=&gt;</span> <span class='vi'>@products</span> <span class='p'>}</span>
+    <span class='k'>end</span>
+</code></pre>
+</div>
+<p><code>config/routes.rb</code> に</p>
+<div class='highlight'><pre><code class='ruby'>    <span class='n'>map</span><span class='o'>.</span><span class='n'>connect</span> <span class='s1'>&#39;:controller/:action/:id.:format&#39;</span>
+</code></pre>
+</div>
+<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
+
+<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
+
+<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
+
+<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
+
+<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
+
+<p>僕はファッションの観点からRailsを選びたい。</p>  
+
+  <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
+<div class="articleinfo">
+pageed on 08 May 2010 by morygonzalez |
   
     <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
   
 </div>
-<p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
+<p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
 
-<p>これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。</p>
+<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
 
-<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>  
+<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+
+<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+
+<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>  
+
+  <h2><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></h2>
+<div class="articleinfo">
+pageed on 07 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/git/">git</a>
+  
+</div>
+<p>Gitでbranchの効率的な使い方みたいのがよくわからない。</p>
+
+<p>* 実験的な機能をつけたい</p>
+
+<ul>
+<li>ブランチを分ける（例えば開発用に alternate というブランチを作る）</li>
+</ul>
+
+<p>* 開発する</p>
+
+<ul>
+<li>開発完了後、 master にマージ</li>
+</ul>
+
+<p>みたいな感じかなと思ってた。</p>
+
+<p>しかし実際に運用してみると、実験的な機能の実装の他に、日常的にmasterでコードの改良みたいな作業があり、alternateで開発が完了した後にmasterにマージしたら多分コンフリクト起こりまくりになるような気がしてきた。</p>
+
+<p>それで日常メンテみたいな作業はmasterブランチで行い、それをalternateにマージするという手順をとってる。正しい開発方法かどうかはわからないけど、一応alternateブランチもmasterの最新の変更を追跡できる。んでalternateではしこしこ開発を続けて、開発完了時にmasterにマージしても多分派手なコンフリクトは起こらないんじゃないかと思ってますがどうなんでしょう。</p>  
+
+  <h2><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></h2>
+<div class="articleinfo">
+pageed on 07 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
+  
+</div>
+<p>こういうコード書いてます。</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>function</span> <span class='nx'>getAttrName</span><span class='p'>(</span><span class='nx'>attrObj</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='kd'>var</span> <span class='nx'>attrName</span> <span class='o'>=</span> <span class='nx'>attrObj</span><span class='p'>.</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>;</span>
+<span class='c1'>//	items = document.getElementsByClassName(&#39;item&#39;);</span>
+	<span class='kd'>var</span> <span class='nx'>items</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li.item&#39;</span><span class='p'>);</span>
+	<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>).</span><span class='nx'>fadeOut</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
+	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>i</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>i</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>items</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>i</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='c1'>//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
+		<span class='kd'>var</span> <span class='nx'>keywordList</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;.keyword-list&#39;</span><span class='p'>,</span> <span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]);</span>
+		<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>j</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>j</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywordList</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>j</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+			<span class='c1'>//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
+			<span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+			<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>k</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>k</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywords</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>k</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+				<span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span> <span class='p'>{</span>
+					<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]).</span><span class='nx'>fadeIn</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
+				<span class='p'>}</span>
+			<span class='p'>}</span>
+		<span class='p'>}</span>
+	<span class='p'>}</span>
+	<span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>);</span>
+<span class='p'>}</span>
+<span class='kd'>function</span> <span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='kd'>var</span> <span class='nx'>curAttr</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#keySelector li a&quot;</span><span class='p'>);</span>
+	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>l</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>l</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>curAttr</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>l</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+		<span class='k'>if</span> <span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>]).</span><span class='nx'>text</span><span class='p'>()</span> <span class='o'>==</span> <span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
+			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
+		<span class='p'>}</span> <span class='k'>else</span> <span class='p'>{</span>
+			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
+		<span class='p'>}</span>
+	<span class='p'>}</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
+<p>やりたいことは以下のような感じ。</p>
+
+<ol>
+<li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
+
+<li>クリックされた文字列を <code>attrName</code> に格納</li>
+
+<li>すべての <code>item</code> をjQueryを使って非表示</li>
+
+<li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
+</ol>
+
+<p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
+
+<p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p>
+
+<p>サーバーサイドで実装する方法もないではないけど、</p>
+
+<p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p>
+
+<p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
+
+<h3 id='id2'>追記</h3>
+
+<p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
+
+<p>そういうわけで</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</code></pre>
+</div>
+<p>を</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li a&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</code></pre>
+</div>
+<p>とし、</p>
+<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>を</p>
+<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>にしてみたところ、ばっちりIEで動くようになった。</p>
+
+<p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>  
+
+  <h2><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></h2>
+<div class="articleinfo">
+pageed on 03 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/PHP/">PHP</a>
+  
+</div>
+<p>ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。</p>
+
+<p>おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ <code>p_page_analyze</code> ）をDROPするとまた速さが回復するので時々空にしていた。</p>
+
+<p>しかしよくよくアクセス解析プラグインのコードを覗いてみると、ヴュー部分で使っていないSQLクエリが発行されており、このせいでクエリの回数が必要な回数の何倍にもなっていた。ポータルシットのアクセスなんて大したことないんだから、DBのサイズがちょっとでかくなっただけでこんなに遅くなるはずがないのだ。</p>
+
+<p>そういうわけで不必要なクエリのトリガーになるコードをコメントアウトしてみた。すると1秒台だった表示速度は0.2秒から0.5秒程度に収まるようになった。しかしそれでもなんか遅く感じる。</p>
+
+<p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
+
+<p><a href='http://wiki.dreamhost.com/Pecl_APC'>Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
+
+<p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>  
+
+  <h2><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></h2>
+<div class="articleinfo">
+pageed on 01 May 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+  
+</div>
+<p><a href='http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable'>CakePHP 1.3のStableがリリース</a> された。 <a href='http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3'>JavascriptヘルパーとかAjaxヘルパーが非推奨になってる</a> 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 <code>$html-&gt;js(&#39;&#39;)</code> みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。</p>
+
+<p>JavascriptヘルパーとAjaxヘルパーが非推奨になった件については、わざわざ別のヘルパーにせんでもいいよなー、という印象は確かに持ってた。Htmlをいじるメソッドは一つのヘルパークラスにまとめてしまった方がすっきりする。1.2.xのときはAjaxヘルパーが使いづらすぎて結局jQueryでAjaxすることもあったし、あまり存在意義を見いだせなかったので良かったんじゃないでしょうか。</p>
+
+<p>でも既存のプロジェクトの1.3への移行はめんどくさそうなのでたぶんやんない気がする。新しくCakePHPでなんか作るときは使ってみようと思います。</p>  
 
 			</div>
 						
@@ -205,6 +322,8 @@ pageed on 15 Jun 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

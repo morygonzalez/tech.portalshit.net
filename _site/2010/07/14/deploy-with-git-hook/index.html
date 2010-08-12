@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -32,10 +33,10 @@
 <p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p>
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
-
-<pre><code>#! /bin/sh
-unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code></pre>
-
+<div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
+    <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
+</code></pre>
+</div>
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
 <h3 id='id3'>まとめ</h3>
@@ -85,6 +86,8 @@ unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

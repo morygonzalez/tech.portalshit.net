@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -26,68 +27,66 @@
 				<p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
 
 <p>そういうわけで正しくは、</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
+  <span class='k'>end</span>
 
-<pre><code>class Hoge
-  def initialize
-    @a = &quot;&quot;
-  end 
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-  def hoge
-    @a = &quot;hogehoge&quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge</code></pre>
-
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
 <p>と書くそうです。</p>
 
 <p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span>
+    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
+  <span class='k'>end</span>
 
-<pre><code>class Hoge
-  def initialize
-    a = &quot;&quot;
-  end 
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-  def hoge
-    a = &quot;hogehoge&quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge</code></pre>
-
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
 <p>でも同じ結果を出力しますね。</p>
 
 <p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
-
 <blockquote>
-<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
+`@` で始まる変数は *インスタンス変数* といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）
 </blockquote>
-
 <p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>b</span><span class='o'>=</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='n'>b</span>
+  <span class='k'>end</span>
 
-<pre><code>class Hoge
-  def initialize(b=&quot;&quot;)
-    @a = b
-  end
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='nb'>print</span> <span class='vi'>@a</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-  def hoge
-    print @a, &quot;\n&quot;
-  end
-end
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Fuga&quot;</span><span class='p'>)</span>
+<span class='n'>piyo</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Piyo&quot;</span><span class='p'>)</span>
 
-fuga = Hoge.new(&quot;Fuga&quot;)
-piyo = Hoge.new(&quot;Piyo&quot;)
-
-fuga.hoge
-piyo.hoge</code></pre>
-
+<span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+<span class='n'>piyo</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
 <p>で、これを実行すると</p>
-
-<pre><code>Fuga
-Piyo</code></pre>
-
+<div class='highlight'><pre><code class='console'><span class='go'>Fuga</span>
+<span class='go'>Piyo</span>
+</code></pre>
+</div>
 <p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
 
 				<div class="paginator">
@@ -123,6 +122,8 @@ Piyo</code></pre>
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

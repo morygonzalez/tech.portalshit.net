@@ -2,37 +2,47 @@
 id: 32
 title: Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る
 category: Ubuntu
-laytou: post
+layout: post
 ---
 
 NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。
 
 まずSSHのおさらいを。クライアント側で
 
-    $ mkdir -p .ssh
-    $ ssh-keygen -t rsa （以下略）
-  
+{% highlight console %}
+$ mkdir -p .ssh
+$ ssh-keygen -t rsa （以下略）
+{% endhighlight %}
+
 したのち、サーバー側の `/etc/ssh/sshd_config` の `PasswordAuthentication` を `on` にし、パスワードでSSH接続できるようにして
 
-    $ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
-  
+{% highlight console %}
+$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
+{% endhighlight %}
+
 するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で `.ssh/` と `.ssh/authorized_keys` のパーミッションをそれぞれ700と600に変えてあげるわけですよね。
 
 いっぺんクライアント側で `id_rsa.pub` を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？
 
 前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは
 
-    Permission denied (publickey).
+{% highlight console %}
+Permission denied (publickey).
+{% endhighlight %}
 
 というエラーが頻繁にお出になるのですよ。
 
 しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して
 
-    $ sudo /etc/init.d/ssh restart
-  
+{% highlight console %}
+$ sudo /etc/init.d/ssh restart
+{% endhighlight %}
+
 してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、
 
-    Permission denied (publickey).
+{% highlight console %}
+Permission denied (publickey).
+{% endhighlight %}
 
 となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。
 

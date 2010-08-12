@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -26,31 +27,31 @@
 				<p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
 
 <p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
+<div class='highlight'><pre><code class='php'><span class='cp'>&lt;?php</span>
+<span class='k'>class</span> <span class='nc'>Hoge</span> <span class='p'>{</span>
+  <span class='k'>var</span> <span class='nv'>$a</span><span class='p'>;</span> 
+  <span class='k'>function</span> <span class='nf'>hoge</span><span class='p'>()</span> <span class='p'>{</span>
+    <span class='k'>return</span> <span class='nv'>$this</span><span class='o'>-&gt;</span><span class='na'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span><span class='p'>;</span>
+  <span class='p'>}</span>
+<span class='p'>}</span>
 
-<pre><code>&lt;?php
-class Hoge {
-  var $a; 
-  function hoge() {
-    return $this-&gt;a = &quot;hogehoge&quot;;
-  }
-}
-
-$fuga = new Hoge();
-echo $fuga-&gt;hoge();
-?&gt;</code></pre>
-
+<span class='nv'>$fuga</span> <span class='o'>=</span> <span class='k'>new</span> <span class='nx'>Hoge</span><span class='p'>();</span>
+<span class='k'>echo</span> <span class='nv'>$fuga</span><span class='o'>-&gt;</span><span class='na'>hoge</span><span class='p'>();</span>
+<span class='cp'>?&gt;</span><span class='x' />
+</code></pre>
+</div>
 <p>つぎにRubyで同じコードを書いてみる。</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='vi'>@a</span>  
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
 
-<pre><code>class Hoge
-  @a  
-  def hoge
-    @a = &quot;hogehoge&quot;
-  end 
-end
-
-fuga = Hoge.new
-puts fuga.hoge</code></pre>
-
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
 <p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
 
 <p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
@@ -92,6 +93,8 @@ puts fuga.hoge</code></pre>
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

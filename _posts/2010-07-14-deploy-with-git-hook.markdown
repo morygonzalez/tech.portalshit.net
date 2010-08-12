@@ -17,8 +17,10 @@ layout: post
 
 まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ `git --bare init` ）。ここでは `blog.git` という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の `/blog.git/hooks/` に `post-update` というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。
 
+{% highlight bash %}
     #! /bin/sh
     unset GIT_DIR && cd $HOME/tech.portalshit.net/ && git pull
+{% endhighlight %}
 
 そんでもって `git clone blog.git <公開用のディレクトリ名>` する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる `_site` というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、`git push` する度にhookが発動されて、めでたく記事が公開されるという次第です。
 

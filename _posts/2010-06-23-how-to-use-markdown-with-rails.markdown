@@ -13,16 +13,22 @@ RailsアプリケーションでMarkdownを使いたと思った。（Markdown�
 
 これはRailsのプラグインではないのでgemでインストール。
 
-    sudo gem install bluecloth
+{% highlight console %}
+$ sudo gem install bluecloth
+{% endhighlight %}
 
 その後viewで
 
-    <%= markdwon(@item.text) %>
+{% highlight rhtml %}
+<%= markdwon(@item.text) %>
+{% endhighlight %}
 
 とか書けばいい。
 
 しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに
 
-    config.gem "bluecloth"
+{% highlight ruby %}
+config.gem "bluecloth"
+{% endhighlight %}
 
 と書いてやる。するとめでたくMarkdownが使えるようになる。

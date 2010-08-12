@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
@@ -24,6 +25,17 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
+<div class="articleinfo">
+pageed on 12 Aug 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+    <a href="http://tech.portalshit.net/OAuth/">OAuth</a>
+  
+</div>
+<p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>  
+
   <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
 <div class="articleinfo">
 pageed on 03 Aug 2010 by morygonzalez |
@@ -34,32 +46,32 @@ pageed on 03 Aug 2010 by morygonzalez |
 <p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p>
 
 <p>まずSSHのおさらいを。クライアント側で</p>
-
-<pre><code>$ mkdir -p .ssh
-$ ssh-keygen -t rsa （以下略）</code></pre>
-
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> mkdir -p .ssh
+<span class='gp'>$</span> ssh-keygen -t rsa （以下略）
+</code></pre>
+</div>
 <p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
-
-<pre><code>$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys</code></pre>
-
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
+</code></pre>
+</div>
 <p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
 
 <p>いっぺんクライアント側で <code>id_rsa.pub</code> を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？</p>
 
 <p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
-
-<pre><code>Permission denied (publickey).</code></pre>
-
+<div class='highlight'><pre><code class='console'><span class='go'>Permission denied (publickey).</span>
+</code></pre>
+</div>
 <p>というエラーが頻繁にお出になるのですよ。</p>
 
 <p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
-
-<pre><code>$ sudo /etc/init.d/ssh restart</code></pre>
-
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> sudo /etc/init.d/ssh restart
+</code></pre>
+</div>
 <p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
-
-<pre><code>Permission denied (publickey).</code></pre>
-
+<div class='highlight'><pre><code class='console'><span class='go'>Permission denied (publickey).</span>
+</code></pre>
+</div>
 <p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
 
 <p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p>
@@ -93,9 +105,9 @@ pageed on 26 Jul 2010 by morygonzalez |
 <p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
 
 <p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
-
-<pre><code>new_tweets = neta_tweets - used_tweets</code></pre>
-
+<div class='highlight'><pre><code class='ruby'><span class='n'>new_tweets</span> <span class='o'>=</span> <span class='n'>neta_tweets</span> <span class='o'>-</span> <span class='n'>used_tweets</span>
+</code></pre>
+</div>
 <p>とかしてみようとした。</p>
 
 <p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>  
@@ -137,10 +149,10 @@ pageed on 14 Jul 2010 by morygonzalez |
 <p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p>
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
-
-<pre><code>#! /bin/sh
-unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code></pre>
-
+<div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
+    <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
+</code></pre>
+</div>
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
 <h3 id='id3'>まとめ</h3>
@@ -155,6 +167,127 @@ unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code
 
 <p>これであなたもハイド博士だ！</p>  
 
+  <h2><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></h2>
+<div class="articleinfo">
+pageed on 09 Jul 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+  
+    <a href="http://tech.portalshit.net/OAuth/">OAuth</a>
+  
+</div>
+<p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
+
+<p><img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /></p>
+
+<p>疑問点がいくつかある。</p>
+
+<ul>
+<li>
+<p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
+</li>
+
+<li>
+<p>Userモデルで <code>has_many :oauth_tokens</code> とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 <code>oauth_tokens</code> にそんな <code>user_id</code> の人いないし」みたいなエラーが出るような気がする。</p>
+</li>
+</ul>
+
+<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>  
+
+  <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
+<div class="articleinfo">
+pageed on 07 Jul 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Unix/">Unix</a>
+  
+</div>
+<p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
+
+<p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
+
+<p>情報元は <a href='http://d.hatena.ne.jp/lurker/20061118/1163810847' title='フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳'>フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
+
+<p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
+
+<p>しかし自分はこのサーバーでroot権限を持ってない。なので <code>cp /etc/termcap ~/.termcap</code> したあと <code>chmod 644 ~/.termcap</code> して <code>vim ~/.termcap</code> し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。</p>
+
+<p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
+
+<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>  
+
+  <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
+<div class="articleinfo">
+pageed on 07 Jul 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+  
+</div>
+<p>CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。</p>
+
+<ol>
+<li><code>$html-&gt;link()</code> などHTMLヘルパーでエスケープを <code>false</code> にしたいときは <code>$options[&#39;escape&#39;]</code> を使う。</li>
+
+<li><code>$cakeDebug</code> は廃止されたのでエラーが出る。</li>
+
+<li><code>$sessions-&gt;flash()</code> は <code>echo $sessions-&gt;flash()</code> とする必要がある。また AppController でヘルパーとして呼び出さなければならない。</li>
+
+<li>debug_kit は github から最新版を <code>git clone</code> する。</li>
+</ol>
+
+<p>参照:</p>
+
+<ul>
+<li><a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'>1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
+</ul>  
+
+  <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
+<div class="articleinfo">
+pageed on 02 Jul 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+    <a href="http://tech.portalshit.net/YAML/">YAML</a>
+  
+</div>
+<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
+
+<p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
+<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span> <span class='c1'>#アイテムの名前</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
+
+<span class='l-Scalar-Plain'>fuga</span><span class='p-Indicator'>:</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div>
+<p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
+<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span>
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
+
+  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
+  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
+  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div>
+<p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
+
+<p>結局、拾ってきた コードを参考にして</p>
+<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;yaml&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;pp&#39;</span>
+
+<span class='n'>data</span> <span class='o'>=</span> <span class='no'>YAML</span><span class='o'>.</span><span class='n'>load_file</span><span class='p'>(</span><span class='s1'>&#39;hoge.yml&#39;</span><span class='p'>)</span>
+<span class='n'>pp</span> <span class='n'>data</span>
+</code></pre>
+</div>
+<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>  
+
 			</div>
 						
 			<div id="sidebar">
@@ -162,6 +295,8 @@ unset GIT_DIR &amp;&amp; cd $HOME/tech.portalshit.net/ &amp;&amp; git pull</code
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				

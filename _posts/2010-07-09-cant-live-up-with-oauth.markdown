@@ -10,7 +10,7 @@ layout: post
 
 RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。
 
-![OAuthの利用イメージ](images/27-oauth.png)
+![OAuthの利用イメージ](http://tech.portalshit.net/images/27-oauth.png)
 
 疑問点がいくつかある。
 

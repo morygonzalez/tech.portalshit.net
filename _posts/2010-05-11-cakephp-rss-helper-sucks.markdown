@@ -12,18 +12,18 @@ layout: post
 
 『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、
 
-<pre><code>
+{% highlight ruby %}
     respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @products }
     end
-</code></pre>
+{% endhighlight %}
 
 `config/routes.rb` に
 
-<pre><code>
+{% highlight ruby %}
     map.connect ':controller/:action/:id.:format'
-</code></pre>
+{% endhighlight %}
 
 と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。
 
