@@ -34,77 +34,12 @@ pageed on 02 Jul 2010 by morygonzalez |
 </div>
 <p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>  
 
-  <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
+  <h2><a href="/2010/06/28/i-had-better-review-ruby">I Had Better Review Ruby</a></h2>
 <div class="articleinfo">
 pageed on 28 Jun 2010 by morygonzalez |
   
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+</div>
   
-</div>
-<p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
-
-<p>そういうわけで正しくは、</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>と書くそうです。</p>
-
-<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。↑のコードでは別にインスタンス変数を使う必要はなくて、</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span>
-    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>でも同じ結果を出力しますね。</p>
-
-<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
-<blockquote>
-`@` で始まる変数は *インスタンス変数* といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）
-</blockquote>
-<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>b</span><span class='o'>=</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='n'>b</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='nb'>print</span> <span class='vi'>@a</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Fuga&quot;</span><span class='p'>)</span>
-<span class='n'>piyo</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Piyo&quot;</span><span class='p'>)</span>
-
-<span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-<span class='n'>piyo</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>で、これを実行すると</p>
-<div class='highlight'><pre><code class='console'><span class='go'>Fuga</span>
-<span class='go'>Piyo</span>
-</code></pre>
-</div>
-<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>  
 
   <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
 <div class="articleinfo">
@@ -324,7 +259,7 @@ pageed on 03 Jun 2010 by morygonzalez |
 				
 					<li><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></li>
 				
-					<li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+					<li><a href="/2010/06/28/i-had-better-review-ruby">I Had Better Review Ruby</a></li>
 				
 					<li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
 				
