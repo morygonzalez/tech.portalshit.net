@@ -25,6 +25,19 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/06/03/rails-has-subdirectory-in-controller">Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></h2>
+<div class="articleinfo">
+pageed on 03 Jun 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Rails/">Rails</a>
+  
+</div>
+<p>なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ <code>app/controllers/admin/book_controller.rb</code> ということができるらしい！ んで、そのときのクラス宣言は</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Admin</span><span class='o'>::</span><span class='no'>BookController</span> <span class='o'>&lt;</span> <span class='no'>ActionController</span><span class='o'>::</span><span class='no'>Base</span>
+</code></pre>
+</div>
+<p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>  
+
   <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
 <div class="articleinfo">
 pageed on 03 Jun 2010 by morygonzalez |
@@ -302,19 +315,6 @@ pageed on 03 May 2010 by morygonzalez |
 
 <p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>  
 
-  <h2><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></h2>
-<div class="articleinfo">
-pageed on 01 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-</div>
-<p><a href='http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable'>CakePHP 1.3のStableがリリース</a> された。 <a href='http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3'>JavascriptヘルパーとかAjaxヘルパーが非推奨になってる</a> 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 <code>$html-&gt;js(&#39;&#39;)</code> みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。</p>
-
-<p>JavascriptヘルパーとAjaxヘルパーが非推奨になった件については、わざわざ別のヘルパーにせんでもいいよなー、という印象は確かに持ってた。Htmlをいじるメソッドは一つのヘルパークラスにまとめてしまった方がすっきりする。1.2.xのときはAjaxヘルパーが使いづらすぎて結局jQueryでAjaxすることもあったし、あまり存在意義を見いだせなかったので良かったんじゃないでしょうか。</p>
-
-<p>でも既存のプロジェクトの1.3への移行はめんどくさそうなのでたぶんやんない気がする。新しくCakePHPでなんか作るときは使ってみようと思います。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -322,6 +322,8 @@ pageed on 01 May 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
 				
 					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				

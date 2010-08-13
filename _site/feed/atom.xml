@@ -4,12 +4,62 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-12T16:18:42+09:00</updated>
+  <updated>2010-08-14T07:56:54+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Pygmentsを使ってコードをシンタックスハイライトするようにした</title>
+    <link href="/2010/08/13/jekyll-with-pygments" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/08/13/jekyll-with-pygments</id>
+    <content type="html">&lt;p&gt;外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは &lt;code&gt;jekyll --pygments&lt;/code&gt; しろや、みたいなことが書いてあるんだけど（&lt;a href='http://wiki.github.com/mojombo/jekyll/liquid-extensions' title='Liquid Extensions - jekyll - GitHub'&gt;Liquid Extensions - jekyll - GitHub&lt;/a&gt;）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。&lt;/p&gt;
+
+&lt;p&gt;しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;  $ port search pygments&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;してみたところ、MacPortsでは三つヒットした。&lt;/p&gt;
+
+&lt;p&gt;&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;  py-pygments @1.0 (python, devel)&lt;/span&gt;
+&lt;span class='go'&gt;      Python syntax highlighter&lt;/span&gt;
+&lt;span class='go'&gt;  &lt;/span&gt;
+&lt;span class='go'&gt;  py25-pygments @1.0 (python, devel)&lt;/span&gt;
+&lt;span class='go'&gt;      Python syntax highlighter&lt;/span&gt;
+&lt;span class='go'&gt;  &lt;/span&gt;
+&lt;span class='go'&gt;  py26-pygments @1.3.1 (python, devel)&lt;/span&gt;
+&lt;span class='go'&gt;      Python syntax highlighter&lt;/span&gt;
+&lt;span class='go'&gt;  &lt;/span&gt;
+&lt;span class='go'&gt;  Found 3 ports.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;しかしSnow LeopardにはPython 2.6.1が入ってるので、&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;  $ easy_install Pygments&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから &lt;code&gt;py26-pygments&lt;/code&gt; を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 &lt;code&gt;/opt/local/bin/&lt;/code&gt; に &lt;code&gt;python-2.6.5&lt;/code&gt; が入ったが、長々と時間がかかった。&lt;sup&gt;&lt;a href='#footnote-34-1'&gt;※1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;インストール完了後、これでシャレオツシンタックスハイライティングできるようになったと思い、意気揚々と&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;  $ jekyll --pygments&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;してみたのだが、一向にハイライトされない。なんか「pygmentizeとか見つからないし」みたいなエラーが出る。なんでじゃ〜とイライラしながら公式Wikiを読んでると、次のような記述があった。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the pygmentize binary must be in your path&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;そうなのよ。 &lt;code&gt;pygmentize-1.3.1&lt;/code&gt; っていうバイナリファイルはあってパスは通ってるんだけど、 &lt;code&gt;pygmentize&lt;/code&gt; そのものがないのよ。そういうわけで&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;  $ sudo ln -s /opt/local/bin/pygmentize-1.3.1 /opt/local/bin/pygmentize&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;してやった。すると &lt;code&gt;pygmentize&lt;/code&gt; というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは&lt;a href='http://github.com/mojombo/tpw/tree/master/css/syntax.css' title='syntax.css'&gt;Github互換のもの&lt;/a&gt;を拾ってきて入れといた。&lt;/p&gt;
+&lt;hr /&gt;&lt;p id='footnote-34-1'&gt;※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>AuthlogicとAuthlogic-OAuthで詰まってる</title>

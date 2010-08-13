@@ -25,6 +25,57 @@
 		  
 			<div id="content">
 				
+  <h2><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
+<div class="articleinfo">
+pageed on 13 Aug 2010 by morygonzalez |
+  
+    <a href="http://tech.portalshit.net/Jekyll/">Jekyll</a>
+  
+</div>
+<p>外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは <code>jekyll --pygments</code> しろや、みたいなことが書いてあるんだけど（<a href='http://wiki.github.com/mojombo/jekyll/liquid-extensions' title='Liquid Extensions - jekyll - GitHub'>Liquid Extensions - jekyll - GitHub</a>）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。</p>
+
+<p>しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで</p>
+<div class='highlight'><pre><code class='console'><span class='go'>  $ port search pygments</span>
+</code></pre>
+</div>
+<p>してみたところ、MacPortsでは三つヒットした。</p>
+
+<p><div class='highlight'><pre><code class='console'><span class='go'>  py-pygments @1.0 (python, devel)</span>
+<span class='go'>      Python syntax highlighter</span>
+<span class='go'>  </span>
+<span class='go'>  py25-pygments @1.0 (python, devel)</span>
+<span class='go'>      Python syntax highlighter</span>
+<span class='go'>  </span>
+<span class='go'>  py26-pygments @1.3.1 (python, devel)</span>
+<span class='go'>      Python syntax highlighter</span>
+<span class='go'>  </span>
+<span class='go'>  Found 3 ports.</span>
+</code></pre>
+</div></p>
+
+<p>しかしSnow LeopardにはPython 2.6.1が入ってるので、</p>
+<div class='highlight'><pre><code class='console'><span class='go'>  $ easy_install Pygments</span>
+</code></pre>
+</div>
+<p>でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから <code>py26-pygments</code> を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 <code>/opt/local/bin/</code> に <code>python-2.6.5</code> が入ったが、長々と時間がかかった。<sup><a href='#footnote-34-1'>※1</a></sup></p>
+
+<p>インストール完了後、これでシャレオツシンタックスハイライティングできるようになったと思い、意気揚々と</p>
+<div class='highlight'><pre><code class='console'><span class='go'>  $ jekyll --pygments</span>
+</code></pre>
+</div>
+<p>してみたのだが、一向にハイライトされない。なんか「pygmentizeとか見つからないし」みたいなエラーが出る。なんでじゃ〜とイライラしながら公式Wikiを読んでると、次のような記述があった。</p>
+
+<blockquote>
+<p>the pygmentize binary must be in your path</p>
+</blockquote>
+
+<p>そうなのよ。 <code>pygmentize-1.3.1</code> っていうバイナリファイルはあってパスは通ってるんだけど、 <code>pygmentize</code> そのものがないのよ。そういうわけで</p>
+<div class='highlight'><pre><code class='console'><span class='go'>  $ sudo ln -s /opt/local/bin/pygmentize-1.3.1 /opt/local/bin/pygmentize</span>
+</code></pre>
+</div>
+<p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href='http://github.com/mojombo/tpw/tree/master/css/syntax.css' title='syntax.css'>Github互換のもの</a>を拾ってきて入れといた。</p>
+<hr /><p id='footnote-34-1'>※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>  
+
   <h2><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
 <div class="articleinfo">
 pageed on 12 Aug 2010 by morygonzalez |
@@ -242,52 +293,6 @@ pageed on 07 Jul 2010 by morygonzalez |
 <li><a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'>1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
 </ul>  
 
-  <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
-<div class="articleinfo">
-pageed on 02 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-    <a href="http://tech.portalshit.net/YAML/">YAML</a>
-  
-</div>
-<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
-
-<p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
-<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span> <span class='c1'>#アイテムの名前</span>
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
-
-<span class='l-Scalar-Plain'>fuga</span><span class='p-Indicator'>:</span>
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
-</code></pre>
-</div>
-<p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
-<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span>
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
-
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
-</code></pre>
-</div>
-<p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
-
-<p>結局、拾ってきた コードを参考にして</p>
-<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;yaml&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;pp&#39;</span>
-
-<span class='n'>data</span> <span class='o'>=</span> <span class='no'>YAML</span><span class='o'>.</span><span class='n'>load_file</span><span class='p'>(</span><span class='s1'>&#39;hoge.yml&#39;</span><span class='p'>)</span>
-<span class='n'>pp</span> <span class='n'>data</span>
-</code></pre>
-</div>
-<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>  
-
 			</div>
 						
 			<div id="sidebar">
@@ -295,6 +300,8 @@ pageed on 02 Jul 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
 				
 					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
