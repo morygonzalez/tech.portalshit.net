@@ -5,7 +5,10 @@ layout: default
 
 {% for post in paginator.posts %}
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="articleinfo">{{ post.date | date_to_string }}</div>
+    <div class="articleinfo">Posted on {{ post.date | date_to_string }} by morygonzalez |
+	{% for category in post.categories %}
+		<a href="http://tech.portalshit.net/{{ category }}/">{{ category }}</a>
+	{% endfor %}</div>
     {{ post.content }}
     <a href="http://tech.portalshit.net{{ post.url }}#disqus_thread">Comments</a>
 {% endfor %}
