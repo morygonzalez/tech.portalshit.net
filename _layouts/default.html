@@ -18,10 +18,18 @@
 				
 				<ul id="nav">
 					<li><a href="/">Home</a></li>
-					
 				</ul>
 		</div>
 		<div id="container">
+		
+			<div class="paginator">
+				{% if paginator.previous_page %}
+  				<a href="../page{{ paginator.previous_page }}/" rel="prev">Previous Page</a>
+				{% endif %}
+				{% if paginator.next_page %}
+  				<a href="../page{{ paginator.next_page }}/" rel="next">Next Page</a>
+  		  {% endif %}
+			</div>
 		  
 			<div id="content">
 				{{ content }}

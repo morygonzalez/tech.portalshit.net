@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title> tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>tech.portalshit.net |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -18,23 +18,24 @@
 				
 				<ul id="nav">
 					<li><a href="/">Home</a></li>
-					
 				</ul>
 		</div>
 		<div id="container">
+		
+			<div class="paginator">
+				
+  				<a href="../page1/" rel="prev">Previous Page</a>
+				
+				
+  				<a href="../page3/" rel="next">Next Page</a>
+  		  
+			</div>
 		  
 			<div id="content">
 				
-  <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
-<div class="articleinfo">
-pageed on 02 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-    <a href="http://tech.portalshit.net/YAML/">YAML</a>
-  
-</div>
-<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
+    <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
+    <div class="articleinfo">02 Jul 2010</div>
+    <p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
 <div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span> <span class='c1'>#アイテムの名前</span>
@@ -69,25 +70,17 @@ pageed on 02 Jul 2010 by morygonzalez |
 <span class='n'>pp</span> <span class='n'>data</span>
 </code></pre>
 </div>
-<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>  
+<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
+    <a href="http://tech.portalshit.net/2010/07/02/import-initial-data-with-yaml#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></h2>
-<div class="articleinfo">
-pageed on 02 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>  
+    <h2><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></h2>
+    <div class="articleinfo">02 Jul 2010</div>
+    <p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
+    <a href="http://tech.portalshit.net/2010/07/02/active_record-is-so-sticky-for-me#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
-<div class="articleinfo">
-pageed on 28 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
+    <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
+    <div class="articleinfo">28 Jun 2010</div>
+    <p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
 
 <p>そういうわけで正しくは、</p>
 <div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
@@ -152,16 +145,12 @@ pageed on 28 Jun 2010 by morygonzalez |
 <span class='go'>Piyo</span>
 </code></pre>
 </div>
-<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>  
+<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
+    <a href="http://tech.portalshit.net/2010/06/28/i-had-better-review-ruby#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
-<div class="articleinfo">
-pageed on 25 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
+    <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
+    <div class="articleinfo">25 Jun 2010</div>
+    <p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
 
 <p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
 <div class='highlight'><pre><code class='php'><span class='cp'>&lt;?php</span>
@@ -195,18 +184,12 @@ pageed on 25 Jun 2010 by morygonzalez |
 
 <p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
 
-<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>  
+<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
+    <a href="http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
-<div class="articleinfo">
-pageed on 23 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p>
+    <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
+    <div class="articleinfo">23 Jun 2010</div>
+    <p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p>
 
 <p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p>
 
@@ -226,44 +209,32 @@ pageed on 23 Jun 2010 by morygonzalez |
 <div class='highlight'><pre><code class='ruby'><span class='n'>config</span><span class='o'>.</span><span class='n'>gem</span> <span class='s2'>&quot;bluecloth&quot;</span>
 </code></pre>
 </div>
-<p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>  
+<p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
+    <a href="http://tech.portalshit.net/2010/06/23/how-to-use-markdown-with-rails#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></h2>
-<div class="articleinfo">
-pageed on 22 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &#8216;rubygemsをrequireできねーぞゴラ！&#8217; みたいなエラーが出る。</p>
+    <h2><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></h2>
+    <div class="articleinfo">22 Jun 2010</div>
+    <p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &#8216;rubygemsをrequireできねーぞゴラ！&#8217; みたいなエラーが出る。</p>
 
 <p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
 
 <p>蛇足だけど最初、RubyGems 1.3.7をインストールしようとしたら、利用予定地のサーバーのRubyのバージョンが1.8.5なためにインストールできなかった。そういうわけでRubyGemsは1.3.5を入れた。</p>
 
-<p>あとRubyGemsが入ったからといってシェルで <code>gem install rails</code> とかやってもプロセスを <code>kill</code> されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。</p>  
+<p>あとRubyGemsが入ったからといってシェルで <code>gem install rails</code> とかやってもプロセスを <code>kill</code> されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。</p>
+    <a href="http://tech.portalshit.net/2010/06/22/installed-rubygems-on-xrea#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></h2>
-<div class="articleinfo">
-pageed on 15 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-</div>
-<p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
+    <h2><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></h2>
+    <div class="articleinfo">15 Jun 2010</div>
+    <p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
 
 <p>これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。</p>
 
-<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>  
+<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>
+    <a href="http://tech.portalshit.net/2010/06/15/im-fed-up-with-cakephp#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
-<div class="articleinfo">
-pageed on 14 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/misc/">misc</a>
-  
-</div>
-<p>このブログのCMSをMephistoから<a href='http://github.com/mojombo/jekyll' title='mojombo&apos;s jekyll at master - GitHub'>jekyll</a>に変えてみた。</p>
+    <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
+    <div class="articleinfo">14 Jun 2010</div>
+    <p>このブログのCMSをMephistoから<a href='http://github.com/mojombo/jekyll' title='mojombo&apos;s jekyll at master - GitHub'>jekyll</a>に変えてみた。</p>
 
 <p>Mephistoは公式サイトつながらないし、Mephisto使ってた外国のGeek連中がここ一年くらいでこぞってJekyllに移行してるみたいなのでこのビッグウェーブに乗ってみた。</p>
 
@@ -291,27 +262,17 @@ pageed on 14 Jun 2010 by morygonzalez |
 
 <p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href='http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy' title='tasks/deploy at master from henrik&apos;s henrik.nyh.se - GitHub'>tasks/deploy at master from henrik&#8217;s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
 
-<p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>  
+<p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>
+    <a href="http://tech.portalshit.net/2010/06/14/migrated-to-jekyll#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
-<div class="articleinfo">
-pageed on 04 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-</div>
-<p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>  
+    <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
+    <div class="articleinfo">04 Jun 2010</div>
+    <p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>
+    <a href="http://tech.portalshit.net/2010/06/04/i-like-ruby#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
-<div class="articleinfo">
-pageed on 03 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。</p>
+    <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
+    <div class="articleinfo">03 Jun 2010</div>
+    <p>ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。</p>
 <blockquote cite='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>
 <h3>コントロールとモデルが密すぎる。</h3>
 <p>CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。</p>
@@ -327,7 +288,8 @@ pageed on 03 Jun 2010 by morygonzalez |
 
 <p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p>
 
-<p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>  
+<p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>
+    <a href="http://tech.portalshit.net/2010/06/03/rails-name-conventions#disqus_thread">Comments</a>
 
 			</div>
 						

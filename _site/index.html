@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title> tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>tech.portalshit.net |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -18,21 +18,22 @@
 				
 				<ul id="nav">
 					<li><a href="/">Home</a></li>
-					
 				</ul>
 		</div>
 		<div id="container">
+		
+			<div class="paginator">
+				
+				
+  				<a href="../page2/" rel="next">Next Page</a>
+  		  
+			</div>
 		  
 			<div id="content">
 				
-  <h2><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
-<div class="articleinfo">
-pageed on 13 Aug 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Jekyll/">Jekyll</a>
-  
-</div>
-<p>外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは <code>jekyll --pygments</code> しろや、みたいなことが書いてあるんだけど（<a href='http://wiki.github.com/mojombo/jekyll/liquid-extensions' title='Liquid Extensions - jekyll - GitHub'>Liquid Extensions - jekyll - GitHub</a>）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。</p>
+    <h2><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
+    <div class="articleinfo">13 Aug 2010</div>
+    <p>外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは <code>jekyll --pygments</code> しろや、みたいなことが書いてあるんだけど（<a href='http://wiki.github.com/mojombo/jekyll/liquid-extensions' title='Liquid Extensions - jekyll - GitHub'>Liquid Extensions - jekyll - GitHub</a>）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。</p>
 
 <p>しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで</p>
 <div class='highlight'><pre><code class='console'><span class='go'>  $ port search pygments</span>
@@ -74,27 +75,17 @@ pageed on 13 Aug 2010 by morygonzalez |
 </code></pre>
 </div>
 <p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href='http://github.com/mojombo/tpw/tree/master/css/syntax.css' title='syntax.css'>Github互換のもの</a>を拾ってきて入れといた。</p>
-<hr /><p id='footnote-34-1'>※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>  
+<hr /><p id='footnote-34-1'>※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>
+    <a href="http://tech.portalshit.net/2010/08/13/jekyll-with-pygments#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
-<div class="articleinfo">
-pageed on 12 Aug 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-    <a href="http://tech.portalshit.net/OAuth/">OAuth</a>
-  
-</div>
-<p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>  
+    <h2><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
+    <div class="articleinfo">12 Aug 2010</div>
+    <p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>
+    <a href="http://tech.portalshit.net/2010/08/12/fed-up-with-authlogic-oauth#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
-<div class="articleinfo">
-pageed on 03 Aug 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ubuntu/">Ubuntu</a>
-  
-</div>
-<p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p>
+    <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
+    <div class="articleinfo">03 Aug 2010</div>
+    <p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p>
 
 <p>まずSSHのおさらいを。クライアント側で</p>
 <div class='highlight'><pre><code class='console'><span class='gp'>$</span> mkdir -p .ssh
@@ -127,33 +118,21 @@ pageed on 03 Aug 2010 by morygonzalez |
 
 <p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p>
 
-<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>  
+<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
+    <a href="http://tech.portalshit.net/2010/08/03/ubuntu-server-ssh-connection-failing#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
-<div class="articleinfo">
-pageed on 27 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-    <a href="http://tech.portalshit.net/bot/">bot</a>
-  
-</div>
-<p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると <code>500 Internal Server Error</code> が返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
+    <h2><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
+    <div class="articleinfo">27 Jul 2010</div>
+    <p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると <code>500 Internal Server Error</code> が返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
 
 <p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p>
 
-<p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>  
+<p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>
+    <a href="http://tech.portalshit.net/2010/07/27/masuda-san#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
-<div class="articleinfo">
-pageed on 26 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-    <a href="http://tech.portalshit.net/bot/">bot</a>
-  
-</div>
-<p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
+    <h2><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
+    <div class="articleinfo">26 Jul 2010</div>
+    <p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
 
 <p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
 <div class='highlight'><pre><code class='ruby'><span class='n'>new_tweets</span> <span class='o'>=</span> <span class='n'>neta_tweets</span> <span class='o'>-</span> <span class='n'>used_tweets</span>
@@ -161,18 +140,12 @@ pageed on 26 Jul 2010 by morygonzalez |
 </div>
 <p>とかしてみようとした。</p>
 
-<p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>  
+<p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
+    <a href="http://tech.portalshit.net/2010/07/26/trial-with-tokyo-tyrant#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></h2>
-<div class="articleinfo">
-pageed on 15 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-    <a href="http://tech.portalshit.net/OAuth/">OAuth</a>
-  
-</div>
-<p>OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。</p>
+    <h2><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></h2>
+    <div class="articleinfo">15 Jul 2010</div>
+    <p>OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。</p>
 
 <p>まずoauthとoauth-pluginをただ入れるだけじゃ動かない。 <q>acts_as_authenticated, restful_authentication  or restful_openid_authentication</q> というプラグインが入ってて、ユーザー認証をこれらのgemに任せてないとダメ。</p>
 
@@ -180,18 +153,12 @@ pageed on 15 Jul 2010 by morygonzalez |
 
 <p>しかし何度やってもうまくいかない。「 <code>login_required</code> みたいなメソッドねーし」とかエラーが出る。どうやら昔の restful_authentication にはそういうメソッドがあったらしんだけど、現在の restful_authentication からは削除されてるらしい。他にも <code>current_user</code> っていうのも未定義で、この辺のエラーのおかげで完全に萎えた。</p>
 
-<p>そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。</p>  
+<p>そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。</p>
+    <a href="http://tech.portalshit.net/2010/07/15/get-stuck-with-oauth#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></h2>
-<div class="articleinfo">
-pageed on 14 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/jekyll/">jekyll</a>
-  
-    <a href="http://tech.portalshit.net/git/">git</a>
-  
-</div>
-<p>やってみた。以下を参考にした。</p>
+    <h2><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></h2>
+    <div class="articleinfo">14 Jul 2010</div>
+    <p>やってみた。以下を参考にした。</p>
 
 <p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p>
 
@@ -206,7 +173,7 @@ pageed on 14 Jul 2010 by morygonzalez |
 </div>
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
-<h3 id='id3'>まとめ</h3>
+<h3 id='id18'>まとめ</h3>
 
 <p>まとめると、</p>
 <ol>
@@ -216,20 +183,12 @@ pageed on 14 Jul 2010 by morygonzalez |
 </ol>
 <p>の三つが必要なことを忘れないようにしてくだしあ。</p>
 
-<p>これであなたもハイド博士だ！</p>  
+<p>これであなたもハイド博士だ！</p>
+    <a href="http://tech.portalshit.net/2010/07/14/deploy-with-git-hook#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></h2>
-<div class="articleinfo">
-pageed on 09 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-    <a href="http://tech.portalshit.net/OAuth/">OAuth</a>
-  
-</div>
-<p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
+    <h2><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></h2>
+    <div class="articleinfo">09 Jul 2010</div>
+    <p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
 
 <p><img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /></p>
 
@@ -245,16 +204,12 @@ pageed on 09 Jul 2010 by morygonzalez |
 </li>
 </ul>
 
-<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>  
+<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
+    <a href="http://tech.portalshit.net/2010/07/09/cant-live-up-with-oauth#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
-<div class="articleinfo">
-pageed on 07 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Unix/">Unix</a>
-  
-</div>
-<p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
+    <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
+    <div class="articleinfo">07 Jul 2010</div>
+    <p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
 
 <p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
 
@@ -266,16 +221,12 @@ pageed on 07 Jul 2010 by morygonzalez |
 
 <p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
 
-<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>  
+<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
+    <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
-<div class="articleinfo">
-pageed on 07 Jul 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-</div>
-<p>CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。</p>
+    <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
+    <div class="articleinfo">07 Jul 2010</div>
+    <p>CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。</p>
 
 <ol>
 <li><code>$html-&gt;link()</code> などHTMLヘルパーでエスケープを <code>false</code> にしたいときは <code>$options[&#39;escape&#39;]</code> を使う。</li>
@@ -291,7 +242,8 @@ pageed on 07 Jul 2010 by morygonzalez |
 
 <ul>
 <li><a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'>1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
-</ul>  
+</ul>
+    <a href="http://tech.portalshit.net/2010/07/07/cakephp1.3-migration-tips#disqus_thread">Comments</a>
 
 			</div>
 						
