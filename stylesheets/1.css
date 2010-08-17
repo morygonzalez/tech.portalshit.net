@@ -177,7 +177,7 @@ blockquote {
 
 #content h2 {
 	font:190% Times;
-	margin-top:45px;
+	margin-top: 20px;
 }
 
 #content h2 a {
@@ -281,6 +281,11 @@ span.sIFR-alternate {
 	font-size: 55px;
 }
 
+.paginator {
+  display: block;
+  height: 1%;
+  overflow: hidden;
+}
 
 .previous {
   float: left;

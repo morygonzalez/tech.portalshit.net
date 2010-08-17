@@ -25,10 +25,10 @@
 			<div id="content">
   			<div class="paginator">
   				{% if page.previous.url %}
-  			    <span class="previous"><a href="{{ page.previous.url }}">{{ page.previous.title }}</a></span>
+  			    <span class="previous"><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">前の記事</a></a></span>
   			  {% endif %}
   			  {% if page.next.url %}
-  					<span class="next"><a href="{{ page.next.url }}">{{ page.next.title }}</a></span>
+  					<span class="next"><a href="{{ page.next.url }}" title="{{ page.next.title }}">次の記事</a></span>
   				{% endif %}
   			</div>
 			
