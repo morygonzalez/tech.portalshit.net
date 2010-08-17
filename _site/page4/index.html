@@ -28,81 +28,109 @@
   				  </span>
   				
   				
+    				<span class="next">
+    				  <a href="../page5/" rel="next">Next Page</a>
+    		    </span>
+    		  
   			</div>
   			
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></h2>
-    <div class="articleinfo">Posted on 01 May 2010 by morygonzalez |
+    <h2><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></h2>
+    <div class="articleinfo">Posted on 22 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &#8216;rubygemsをrequireできねーぞゴラ！&#8217; みたいなエラーが出る。</p>
+
+<p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
+
+<p>蛇足だけど最初、RubyGems 1.3.7をインストールしようとしたら、利用予定地のサーバーのRubyのバージョンが1.8.5なためにインストールできなかった。そういうわけでRubyGemsは1.3.5を入れた。</p>
+
+<p>あとRubyGemsが入ったからといってシェルで <code>gem install rails</code> とかやってもプロセスを <code>kill</code> されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。</p>
+    <a href="http://tech.portalshit.net/2010/06/22/installed-rubygems-on-xrea#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></h2>
+    <div class="articleinfo">Posted on 15 Jun 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
 	</div>
-    <p><a href='http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable'>CakePHP 1.3のStableがリリース</a> された。 <a href='http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3'>JavascriptヘルパーとかAjaxヘルパーが非推奨になってる</a> 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 <code>$html-&gt;js(&#39;&#39;)</code> みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。</p>
+    <p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
 
-<p>JavascriptヘルパーとAjaxヘルパーが非推奨になった件については、わざわざ別のヘルパーにせんでもいいよなー、という印象は確かに持ってた。Htmlをいじるメソッドは一つのヘルパークラスにまとめてしまった方がすっきりする。1.2.xのときはAjaxヘルパーが使いづらすぎて結局jQueryでAjaxすることもあったし、あまり存在意義を見いだせなかったので良かったんじゃないでしょうか。</p>
+<p>これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。</p>
 
-<p>でも既存のプロジェクトの1.3への移行はめんどくさそうなのでたぶんやんない気がする。新しくCakePHPでなんか作るときは使ってみようと思います。</p>
-    <a href="http://tech.portalshit.net/2010/05/01/cakephp13#disqus_thread">Comments</a>
+<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>
+    <a href="http://tech.portalshit.net/2010/06/15/im-fed-up-with-cakephp#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/04/22/google-analytics-plugin">Google Analytics Pluginが動かない</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
+    <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
+    <div class="articleinfo">Posted on 14 Jun 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/misc/">misc</a>
 	</div>
-    <p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p>
+    <p>このブログのCMSをMephistoから<a href='http://github.com/mojombo/jekyll' title='mojombo&apos;s jekyll at master - GitHub'>jekyll</a>に変えてみた。</p>
 
-<p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p>
+<p>Mephistoは公式サイトつながらないし、Mephisto使ってた外国のGeek連中がここ一年くらいでこぞってJekyllに移行してるみたいなのでこのビッグウェーブに乗ってみた。</p>
 
-<h3 id='id1'>追記</h3>
+<h3 id='jekyll__cms'>Jekyll = 静的CMS</h3>
 
-<p>一晩寝て起きたら動いてた。</p>
-    <a href="http://tech.portalshit.net/2010/04/22/google-analytics-plugin#disqus_thread">Comments</a>
+<p>しばらくJekyllの使い方が分からなくて格闘してたけど、やっと使い方が分かった。これは静的なCMSであって動的なCMSではない。Movable Typeに似てる。それをGeekなスタイルでやる感じ。</p>
 
-    <h2><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
+<h3 id='ruby'>Rubyが入ってるサーバーはいらない</h3>
+
+<p>コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は<a href='http://disqus.com/overview/' title='DISQUS | Overview'>DISQUS</a>とかに外注すればOK。</p>
+
+<p>ちょっと話題がずれるけど、DISQUSって便利そうですよね。他人のブログにコメント書いたあとってそのコントロール権みたいのはブログの持ち主に移行するけど、DISQUSみたいなサービスを利用すればコメントを書いた本人が過去の自分のコメントをトラックしやすくなる。ブログ主にしたってスパム対策とかもやりやすくなる。自前で自分のブログにコメント欄を持つって時代は終わったのかもね。いまはTwitterとかもあるし。</p>
+
+<h3 id='mephisto'>Mephistoからの移行について</h3>
+
+<p>Jekyllのgithubのwikiに移行方法が載っけてあるけど（<a href='http://wiki.github.com/mojombo/jekyll/blog-migrations' title='Blog Migrations - jekyll - GitHub'>Blog Migrations - jekyll - GitHub</a>）、これわかりにくい。というかMephistoをMySQLで運用してないとスクリプトをそのまんまでは利用できない。結果から書くと僕はMephistoはSQLite3で運用してたので移行スクリプトを使えなかった。</p>
+
+<p>一応MephistoのDBをSQLite3からMySQLに変更してコンバートすることも試してみたけど、DreamHost上では <code>gem install mysqlplus</code> が <code>sudo</code> 権限がないために実行できず（なぜかユーザーディレクトリへのインストールもはねられる）、ローカルのMacBook上ではActiveRecordとかその辺でエラーが出て（MephistoはRails 2.2.2以下じゃないと動かないみたい）、Railsのバージョンを下げるとかも試してみたんだけどエラーが出続けるので諦めてしまった。</p>
+
+<p>そういうわけでして、記事数が16本と少なかったこともあり、ちまちま手書きでMephistoからJekyllに移行しました。</p>
+
+<p>コメント欄の設置（DISQUSを利用）とかフィードの生成とかカテゴリーの表示とかができてないけど、暇を見つけていじっていく予定です。</p>
+
+<h3 id='jekyll'>全般的なJekyllの使用感</h3>
+
+<p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href='http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy' title='tasks/deploy at master from henrik&apos;s henrik.nyh.se - GitHub'>tasks/deploy at master from henrik&#8217;s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
+
+<p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>
+    <a href="http://tech.portalshit.net/2010/06/14/migrated-to-jekyll#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
+    <div class="articleinfo">Posted on 04 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>
+    <a href="http://tech.portalshit.net/2010/06/04/i-like-ruby#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	</div>
-    <p>CakePHPには <a href='http://github.com/davidpersson/media'>Media Plugin</a> というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。</p>
-
-<p>しかしこのMedia Plugin、設置が少々面倒だ。情報も英語のものも含めて少ない。僕は二つのプロジェクトでこのMedia Pluginを使ったけど、とても設置に苦労した。はまるポイントはいくつかあるんだけど、今日はDBについて書いておこうと思う。</p>
-
-<p>Media Pluginは <code>attachments</code> というテーブルをつくり、ここにファイルのメタデータを格納していく。これはアプリケーションのルート（ <code>APP</code> ディレクトリ）で <code>cake media init</code> というコマンドをTerminalで打ってやると（ただし <code>/cake/console</code> にパスを通しておく必要あり）、Bakeのときのような画面が出てきて初期設定をやってくれる（ <code>app/config/database.php</code> の情報にあわせてテーブルも作ってくれる）。しかしCakePHPのデフォルトDBがMySQLであるためMedia PluginもMySQLを想定しているのか、 <code>app/plugins/media/config/sql/media.sql</code> のSQL文を単純に実行してしまうと不具合が生じる。実は僕はここで結構はまってた。僕は全部のプロジェクトでSQLiteを使っているので、単純にこのSQLを実行すると、 <code>attachments.id</code> のデータ型が <code>INT(10)</code> とかになってしまい、エラーに遭遇し続けることになってしまった。SQLiteの場合、idカラムのデータ型は <code>INTEGER</code> でなければならないのだ。</p>
-
-<p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>
-    <a href="http://tech.portalshit.net/2010/04/22/cakephp-mediaplugin#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
 	
-		<a href="http://tech.portalshit.net/misc/">misc</a>
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
 	</div>
-    <p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p>
+    <p>ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。</p>
+<blockquote cite='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>
+<h3>コントロールとモデルが密すぎる。</h3>
+<p>CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。</p>
+<cite><a href='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>Blog-side CakePHP わかりずらい３点</a></cite>
+</blockquote>
+<p>ふむふむ〜、ナルホディウスですぞ〜！！！</p>
 
-<p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ git clone git://github.com/emk/mephisto.git</span>
+<p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p>
+<div class='highlight'><pre><code class='php'><span class='x'>$use = array(&quot;Hoge&quot;);</span>
 </code></pre>
 </div>
-<p>してgithubからプロジェクトをclone。</p>
+<p>とかしなきゃいけなかった。</p>
 
-<p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ rake gems:install</span>
-</code></pre>
-</div>
-<p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ gem install nokogiri \</span>
-<span class='go'>    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
-<span class='go'>    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
-</code></pre>
-</div>
-<p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ rake db:bootstrap RAILS_ENV=production</span>
-</code></pre>
-</div>
-<p>ですべてのインストール作業完了。いまこうして動いております。</p>
+<p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p>
 
-<p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
-    <a href="http://tech.portalshit.net/2010/04/22/blogging-with-mephisto#disqus_thread">Comments</a>
+<p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>
+    <a href="http://tech.portalshit.net/2010/06/03/rails-name-conventions#disqus_thread">Comments</a>
 
 				</div>
 				
@@ -115,6 +143,8 @@
   				  
   				
   				
+    				<a href="../page5/" rel="next">Next Page</a>
+    		  
   			</div>
 		  </div>
 		  

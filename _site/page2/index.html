@@ -36,299 +36,130 @@
   			
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
-    <div class="articleinfo">Posted on 02 Jul 2010 by morygonzalez |
+    <h2><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></h2>
+    <div class="articleinfo">Posted on 15 Jul 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/Rails/">Rails</a>
 	
-		<a href="http://tech.portalshit.net/YAML/">YAML</a>
+		<a href="http://tech.portalshit.net/OAuth/">OAuth</a>
 	</div>
-    <p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
+    <p>OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。</p>
 
-<p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
-<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span> <span class='c1'>#アイテムの名前</span>
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
+<p>まずoauthとoauth-pluginをただ入れるだけじゃ動かない。 <q>acts_as_authenticated, restful_authentication  or restful_openid_authentication</q> というプラグインが入ってて、ユーザー認証をこれらのgemに任せてないとダメ。</p>
 
-<span class='l-Scalar-Plain'>fuga</span><span class='p-Indicator'>:</span>
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+<p>作者がrestful_authenticationをすすめてたのでこれを導入した。（usersテーブルの構造自体が変わるので、ただ単にインストールするだけじゃなくて <code>rake db:drop</code> して古い <code>db/migrate/(日付)_create_users.rb</code> を削除し、もう一回 <code>rake db:migrate</code> しないといけない。さらにControllerとかViewとかもいじらなきゃいけないので地味に結構面倒くさい。</p>
+
+<p>しかし何度やってもうまくいかない。「 <code>login_required</code> みたいなメソッドねーし」とかエラーが出る。どうやら昔の restful_authentication にはそういうメソッドがあったらしんだけど、現在の restful_authentication からは削除されてるらしい。他にも <code>current_user</code> っていうのも未定義で、この辺のエラーのおかげで完全に萎えた。</p>
+
+<p>そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。</p>
+    <a href="http://tech.portalshit.net/2010/07/15/get-stuck-with-oauth#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></h2>
+    <div class="articleinfo">Posted on 14 Jul 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/jekyll/">jekyll</a>
+	
+		<a href="http://tech.portalshit.net/git/">git</a>
+	</div>
+    <p>やってみた。以下を参考にした。</p>
+
+<p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p>
+
+<p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p>
+
+<p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p>
+
+<p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
+<div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
+    <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
 </code></pre>
 </div>
-<p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
-<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>hoge</span><span class='p-Indicator'>:</span>
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>1</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;hoge&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
+<p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
-  <span class='l-Scalar-Plain'>id</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>2</span>
-  <span class='l-Scalar-Plain'>name</span><span class='p-Indicator'>:</span> <span class='s'>&quot;fuga&quot;</span>
-  <span class='l-Scalar-Plain'>address</span><span class='p-Indicator'>:</span> <span class='s'>&quot;ホゲ県ホゲ村フガフガ&quot;</span>
-</code></pre>
-</div>
-<p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
+<h3 id='id3'>まとめ</h3>
 
-<p>結局、拾ってきた コードを参考にして</p>
-<div class='highlight'><pre><code class='ruby'><span class='nb'>require</span> <span class='s1'>&#39;yaml&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;pp&#39;</span>
+<p>まとめると、</p>
+<ol>
+<li>記事を作成するローカルリポジトリ</li>
+<li>ローカルリポジトリをpushするリモートリポジトリ</li>
+<li>リモートリポジトリをcloneする公開用リポジトリ</li>
+</ol>
+<p>の三つが必要なことを忘れないようにしてくだしあ。</p>
 
-<span class='n'>data</span> <span class='o'>=</span> <span class='no'>YAML</span><span class='o'>.</span><span class='n'>load_file</span><span class='p'>(</span><span class='s1'>&#39;hoge.yml&#39;</span><span class='p'>)</span>
-<span class='n'>pp</span> <span class='n'>data</span>
-</code></pre>
-</div>
-<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
-    <a href="http://tech.portalshit.net/2010/07/02/import-initial-data-with-yaml#disqus_thread">Comments</a>
+<p>これであなたもハイド博士だ！</p>
+    <a href="http://tech.portalshit.net/2010/07/14/deploy-with-git-hook#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></h2>
-    <div class="articleinfo">Posted on 02 Jul 2010 by morygonzalez |
+    <h2><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></h2>
+    <div class="articleinfo">Posted on 09 Jul 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	</div>
-    <p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
-    <a href="http://tech.portalshit.net/2010/07/02/active_record-is-so-sticky-for-me#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
-    <div class="articleinfo">Posted on 28 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	</div>
-    <p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
-
-<p>そういうわけで正しくは、</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>と書くそうです。</p>
-
-<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span>
-    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>でも同じ結果を出力しますね。</p>
-
-<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
-
-<blockquote>
-<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
-</blockquote>
-
-<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>b</span><span class='o'>=</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='n'>b</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='nb'>print</span> <span class='vi'>@a</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Fuga&quot;</span><span class='p'>)</span>
-<span class='n'>piyo</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Piyo&quot;</span><span class='p'>)</span>
-
-<span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-<span class='n'>piyo</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>で、これを実行すると</p>
-<div class='highlight'><pre><code class='console'><span class='go'>Fuga</span>
-<span class='go'>Piyo</span>
-</code></pre>
-</div>
-<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
-    <a href="http://tech.portalshit.net/2010/06/28/i-had-better-review-ruby#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
-    <div class="articleinfo">Posted on 25 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	</div>
-    <p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
-
-<p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
-<div class='highlight'><pre><code class='php'><span class='cp'>&lt;?php</span>
-<span class='k'>class</span> <span class='nc'>Hoge</span> <span class='p'>{</span>
-  <span class='k'>var</span> <span class='nv'>$a</span><span class='p'>;</span> 
-  <span class='k'>function</span> <span class='nf'>hoge</span><span class='p'>()</span> <span class='p'>{</span>
-    <span class='k'>return</span> <span class='nv'>$this</span><span class='o'>-&gt;</span><span class='na'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span><span class='p'>;</span>
-  <span class='p'>}</span>
-<span class='p'>}</span>
-
-<span class='nv'>$fuga</span> <span class='o'>=</span> <span class='k'>new</span> <span class='nx'>Hoge</span><span class='p'>();</span>
-<span class='k'>echo</span> <span class='nv'>$fuga</span><span class='o'>-&gt;</span><span class='na'>hoge</span><span class='p'>();</span>
-<span class='cp'>?&gt;</span><span class='x' />
-</code></pre>
-</div>
-<p>つぎにRubyで同じコードを書いてみる。</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='vi'>@a</span>  
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
-
-<p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
-
-<p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
-
-<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
-    <a href="http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
-    <div class="articleinfo">Posted on 23 Jun 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
 	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+		<a href="http://tech.portalshit.net/OAuth/">OAuth</a>
 	</div>
-    <p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p>
+    <p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
 
-<p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p>
+<p><img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /></p>
 
-<p>これはRailsのプラグインではないのでgemでインストール。</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> sudo gem install bluecloth
-</code></pre>
-</div>
-<p>その後viewで</p>
+<p>疑問点がいくつかある。</p>
 
-<p><div class='highlight'><pre><code class='rhtml'><span class='cp'>&lt;%=</span> <span class='n'>markdwon</span><span class='p'>(</span><span class='vi'>@item</span><span class='o'>.</span><span class='n'>text</span><span class='p'>)</span> <span class='cp'>%&gt;</span>
-</code></pre>
-</div></p>
+<ul>
+<li>
+<p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
+</li>
 
-<p>とか書けばいい。</p>
+<li>
+<p>Userモデルで <code>has_many :oauth_tokens</code> とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 <code>oauth_tokens</code> にそんな <code>user_id</code> の人いないし」みたいなエラーが出るような気がする。</p>
+</li>
+</ul>
 
-<p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
-<div class='highlight'><pre><code class='ruby'><span class='n'>config</span><span class='o'>.</span><span class='n'>gem</span> <span class='s2'>&quot;bluecloth&quot;</span>
-</code></pre>
-</div>
-<p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
-    <a href="http://tech.portalshit.net/2010/06/23/how-to-use-markdown-with-rails#disqus_thread">Comments</a>
+<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
+    <a href="http://tech.portalshit.net/2010/07/09/cant-live-up-with-oauth#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></h2>
-    <div class="articleinfo">Posted on 22 Jun 2010 by morygonzalez |
+    <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
+    <div class="articleinfo">Posted on 07 Jul 2010 by morygonzalez |
 	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+		<a href="http://tech.portalshit.net/Unix/">Unix</a>
 	</div>
-    <p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &#8216;rubygemsをrequireできねーぞゴラ！&#8217; みたいなエラーが出る。</p>
+    <p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
 
-<p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
+<p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
 
-<p>蛇足だけど最初、RubyGems 1.3.7をインストールしようとしたら、利用予定地のサーバーのRubyのバージョンが1.8.5なためにインストールできなかった。そういうわけでRubyGemsは1.3.5を入れた。</p>
+<p>情報元は <a href='http://d.hatena.ne.jp/lurker/20061118/1163810847' title='フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳'>フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
 
-<p>あとRubyGemsが入ったからといってシェルで <code>gem install rails</code> とかやってもプロセスを <code>kill</code> されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。</p>
-    <a href="http://tech.portalshit.net/2010/06/22/installed-rubygems-on-xrea#disqus_thread">Comments</a>
+<p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
 
-    <h2><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></h2>
-    <div class="articleinfo">Posted on 15 Jun 2010 by morygonzalez |
+<p>しかし自分はこのサーバーでroot権限を持ってない。なので <code>cp /etc/termcap ~/.termcap</code> したあと <code>chmod 644 ~/.termcap</code> して <code>vim ~/.termcap</code> し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。</p>
+
+<p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
+
+<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
+    <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
+    <div class="articleinfo">Posted on 07 Jul 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
 	</div>
-    <p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
+    <p>CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。</p>
 
-<p>これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。</p>
+<ol>
+<li><code>$html-&gt;link()</code> などHTMLヘルパーでエスケープを <code>false</code> にしたいときは <code>$options[&#39;escape&#39;]</code> を使う。</li>
 
-<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>
-    <a href="http://tech.portalshit.net/2010/06/15/im-fed-up-with-cakephp#disqus_thread">Comments</a>
+<li><code>$cakeDebug</code> は廃止されたのでエラーが出る。</li>
 
-    <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
-    <div class="articleinfo">Posted on 14 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/misc/">misc</a>
-	</div>
-    <p>このブログのCMSをMephistoから<a href='http://github.com/mojombo/jekyll' title='mojombo&apos;s jekyll at master - GitHub'>jekyll</a>に変えてみた。</p>
+<li><code>$sessions-&gt;flash()</code> は <code>echo $sessions-&gt;flash()</code> とする必要がある。また AppController でヘルパーとして呼び出さなければならない。</li>
 
-<p>Mephistoは公式サイトつながらないし、Mephisto使ってた外国のGeek連中がここ一年くらいでこぞってJekyllに移行してるみたいなのでこのビッグウェーブに乗ってみた。</p>
+<li>debug_kit は github から最新版を <code>git clone</code> する。</li>
+</ol>
 
-<h3 id='jekyll__cms'>Jekyll = 静的CMS</h3>
+<p>参照:</p>
 
-<p>しばらくJekyllの使い方が分からなくて格闘してたけど、やっと使い方が分かった。これは静的なCMSであって動的なCMSではない。Movable Typeに似てる。それをGeekなスタイルでやる感じ。</p>
-
-<h3 id='ruby'>Rubyが入ってるサーバーはいらない</h3>
-
-<p>コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は<a href='http://disqus.com/overview/' title='DISQUS | Overview'>DISQUS</a>とかに外注すればOK。</p>
-
-<p>ちょっと話題がずれるけど、DISQUSって便利そうですよね。他人のブログにコメント書いたあとってそのコントロール権みたいのはブログの持ち主に移行するけど、DISQUSみたいなサービスを利用すればコメントを書いた本人が過去の自分のコメントをトラックしやすくなる。ブログ主にしたってスパム対策とかもやりやすくなる。自前で自分のブログにコメント欄を持つって時代は終わったのかもね。いまはTwitterとかもあるし。</p>
-
-<h3 id='mephisto'>Mephistoからの移行について</h3>
-
-<p>Jekyllのgithubのwikiに移行方法が載っけてあるけど（<a href='http://wiki.github.com/mojombo/jekyll/blog-migrations' title='Blog Migrations - jekyll - GitHub'>Blog Migrations - jekyll - GitHub</a>）、これわかりにくい。というかMephistoをMySQLで運用してないとスクリプトをそのまんまでは利用できない。結果から書くと僕はMephistoはSQLite3で運用してたので移行スクリプトを使えなかった。</p>
-
-<p>一応MephistoのDBをSQLite3からMySQLに変更してコンバートすることも試してみたけど、DreamHost上では <code>gem install mysqlplus</code> が <code>sudo</code> 権限がないために実行できず（なぜかユーザーディレクトリへのインストールもはねられる）、ローカルのMacBook上ではActiveRecordとかその辺でエラーが出て（MephistoはRails 2.2.2以下じゃないと動かないみたい）、Railsのバージョンを下げるとかも試してみたんだけどエラーが出続けるので諦めてしまった。</p>
-
-<p>そういうわけでして、記事数が16本と少なかったこともあり、ちまちま手書きでMephistoからJekyllに移行しました。</p>
-
-<p>コメント欄の設置（DISQUSを利用）とかフィードの生成とかカテゴリーの表示とかができてないけど、暇を見つけていじっていく予定です。</p>
-
-<h3 id='jekyll'>全般的なJekyllの使用感</h3>
-
-<p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href='http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy' title='tasks/deploy at master from henrik&apos;s henrik.nyh.se - GitHub'>tasks/deploy at master from henrik&#8217;s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
-
-<p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>
-    <a href="http://tech.portalshit.net/2010/06/14/migrated-to-jekyll#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
-    <div class="articleinfo">Posted on 04 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	</div>
-    <p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>
-    <a href="http://tech.portalshit.net/2010/06/04/i-like-ruby#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
-    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	</div>
-    <p>ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。</p>
-<blockquote cite='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>
-<h3>コントロールとモデルが密すぎる。</h3>
-<p>CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。</p>
-<cite><a href='http://rails.takeda-soft.jp/blog/show/190' title='Blog-side CakePHP わかりずらい３点'>Blog-side CakePHP わかりずらい３点</a></cite>
-</blockquote>
-<p>ふむふむ〜、ナルホディウスですぞ〜！！！</p>
-
-<p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p>
-<div class='highlight'><pre><code class='php'><span class='x'>$use = array(&quot;Hoge&quot;);</span>
-</code></pre>
-</div>
-<p>とかしなきゃいけなかった。</p>
-
-<p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p>
-
-<p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>
-    <a href="http://tech.portalshit.net/2010/06/03/rails-name-conventions#disqus_thread">Comments</a>
+<ul>
+<li><a href='http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3' title='1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook'>1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
+</ul>
+    <a href="http://tech.portalshit.net/2010/07/07/cakephp1.3-migration-tips#disqus_thread">Comments</a>
 
 				</div>
 				

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title> tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>tech.portalshit.net |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -9,105 +9,123 @@
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
-
 		<div id="header">
-		
 				<h1><a href="/">tech.portalshit.net</a></h1>
-
 				<h3>CakePHP, Rails, JavaScript</h3>
-				
 				<ul id="nav">
 					<li><a href="/">Home</a></li>
-					
 				</ul>
 		</div>
 		<div id="container">
-		  
+			
 			<div id="content">
-				
-  <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
-<div class="articleinfo">
-pageed on 03 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>  
-
-  <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
-<div class="articleinfo">
-pageed on 03 Jun 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/misc/">misc</a>
-  
-</div>
-<p>なんか <a href='http://mephistoblog.com/'>Mephistoの公式サイト</a> 死んでるし、<a href='http://jekyllrb.com/'>jekyll</a> に変えようかなと思ってるんだけど、 <a href='http://wiki.github.com/mojombo/jekyll/blog-migrations'>移行ガイド</a> の通りにやってもうまくいかない。</p>  
-
-  <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
-<div class="articleinfo">
-pageed on 18 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-  
-    <a href="http://tech.portalshit.net/Twitter/">Twitter</a>
-  
-</div>
-<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
-<pre><code>
-#!/usr/bin/env ruby
-# coding: utf-8
-
-require 'net/http'
-require 'uri'
-require 'rubygems'
-require 'json'
-
-USERNAME = 'morygonzalez'
-PASSWORD = '***'
-
-uri = URI.parse('http://chirpstream.twitter.com/2b/user.json')
-begin
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request.basic_auth(USERNAME, PASSWORD)
-    http.request(request) do |response|
-      raise 'Response is not chunked' unless response.chunked?
-      response.read_body do |chunk|
-        #空行は無視
-        status = JSON.parse(chunk) rescue next
-        #eventを含まないものは無視
-        next unless status['event']
-        source = status['source']
-        if status['target_object']
-          target_obj = status['target_object']
-          target_user = target_obj['user']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target_user['screen_name']}: #{target_obj['text']}"
-        elsif status['target']
-          target = status['target']
-          puts "#{status['event']}: #{source['screen_name']} -&gt; #{target['screen_name']}"
-        end
-      end
-    end
-  end
-
-rescue Timeout::Error => ex
-  p "&lt;-----!!!! Timeout::Error!!!!-----&gt;"
-  
-  retry
-end
+  			<div class="paginator">
+  				
+  				  <span class="previous">
+  				  
+    				  <a href="../page4/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
+  				
+  				
+    				<span class="next">
+    				  <a href="../page6/" rel="next">Next Page</a>
+    		    </span>
+    		  
+  			</div>
+  			
+  			<div class="autopagerize_page_element">
+				  
+    <h2><a href="/2010/06/03/rails-has-subdirectory-in-controller">Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！ <code>app/controllers/admin/book_controller.rb</code> ということができるらしい！ んで、そのときのクラス宣言は</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Admin</span><span class='o'>::</span><span class='no'>BookController</span> <span class='o'>&lt;</span> <span class='no'>ActionController</span><span class='o'>::</span><span class='no'>Base</span>
 </code></pre>
+</div>
+<p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>
+    <a href="http://tech.portalshit.net/2010/06/03/rails-has-subdirectory-in-controller#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
+    <a href="http://tech.portalshit.net/2010/06/03/hard-to-learn-rails#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/misc/">misc</a>
+	</div>
+    <p>なんか <a href='http://mephistoblog.com/'>Mephistoの公式サイト</a> 死んでるし、<a href='http://jekyllrb.com/'>jekyll</a> に変えようかなと思ってるんだけど、 <a href='http://wiki.github.com/mojombo/jekyll/blog-migrations'>移行ガイド</a> の通りにやってもうまくいかない。</p>
+    <a href="http://tech.portalshit.net/2010/06/03/feel-like-migrating-from-mephisto#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
+    <div class="articleinfo">Posted on 18 May 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	
+		<a href="http://tech.portalshit.net/Twitter/">Twitter</a>
+	</div>
+    <p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+<span class='c1'># coding: utf-8</span>
+
+<span class='nb'>require</span> <span class='s1'>&#39;net/http&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;uri&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
+<span class='nb'>require</span> <span class='s1'>&#39;json&#39;</span>
+
+<span class='no'>USERNAME</span> <span class='o'>=</span> <span class='s1'>&#39;morygonzalez&#39;</span>
+<span class='no'>PASSWORD</span> <span class='o'>=</span> <span class='s1'>&#39;***&#39;</span>
+
+<span class='n'>uri</span> <span class='o'>=</span> <span class='no'>URI</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='s1'>&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class='p'>)</span>
+<span class='k'>begin</span>
+  <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>.</span><span class='n'>start</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>uri</span><span class='o'>.</span><span class='n'>port</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>http</span><span class='o'>|</span>
+    <span class='n'>request</span> <span class='o'>=</span> <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>::</span><span class='no'>Get</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>request_uri</span><span class='p'>)</span>
+    <span class='n'>request</span><span class='o'>.</span><span class='n'>basic_auth</span><span class='p'>(</span><span class='no'>USERNAME</span><span class='p'>,</span> <span class='no'>PASSWORD</span><span class='p'>)</span>
+    <span class='n'>http</span><span class='o'>.</span><span class='n'>request</span><span class='p'>(</span><span class='n'>request</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>response</span><span class='o'>|</span>
+      <span class='k'>raise</span> <span class='s1'>&#39;Response is not chunked&#39;</span> <span class='k'>unless</span> <span class='n'>response</span><span class='o'>.</span><span class='n'>chunked?</span>
+      <span class='n'>response</span><span class='o'>.</span><span class='n'>read_body</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>chunk</span><span class='o'>|</span>
+        <span class='c1'>#空行は無視</span>
+        <span class='n'>status</span> <span class='o'>=</span> <span class='no'>JSON</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='n'>chunk</span><span class='p'>)</span> <span class='k'>rescue</span> <span class='k'>next</span>
+        <span class='c1'>#eventを含まないものは無視</span>
+        <span class='k'>next</span> <span class='k'>unless</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span>
+        <span class='n'>source</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;source&#39;</span><span class='o'>]</span>
+        <span class='k'>if</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
+          <span class='n'>target_obj</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
+          <span class='n'>target_user</span> <span class='o'>=</span> <span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;user&#39;</span><span class='o'>]</span>
+          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target_user</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;text&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
+        <span class='k'>elsif</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
+          <span class='n'>target</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
+          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
+        <span class='k'>end</span>
+      <span class='k'>end</span>
+    <span class='k'>end</span>
+  <span class='k'>end</span>
+
+<span class='k'>rescue</span> <span class='no'>Timeout</span><span class='o'>::</span><span class='no'>Error</span> <span class='o'>=&gt;</span> <span class='n'>ex</span>
+  <span class='nb'>p</span> <span class='s2'>&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
+  
+  <span class='k'>retry</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
 <p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
 
-<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>  
+<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
+    <a href="http://tech.portalshit.net/2010/05/18/happy-netstalking-with-ruby#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
-<div class="articleinfo">
-pageed on 11 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
+    <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
+    <div class="articleinfo">Posted on 11 May 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
 
 <blockquote>
 <p>To restart your rails app do a &#8220;ps x&#8221; to get the pid of your dispatch.fcgi process(let&#8217;s say it&#8217;s 1234) then do a &#8220;kill 1234&#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. <cite><a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'>How do I restart rails app? - DreamHost Forum</a></cite></p>
@@ -115,51 +133,34 @@ pageed on 11 May 2010 by morygonzalez |
 
 <p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
 
-<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>  
+<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>
+    <a href="http://tech.portalshit.net/2010/05/11/rails-app-on-dreamhost#disqus_thread">Comments</a>
 
-  <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
-<div class="articleinfo">
-pageed on 11 May 2010 by morygonzalez |
-  
-    <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-  
-    <a href="http://tech.portalshit.net/Rails/">Rails</a>
-  
-</div>
-<p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
-
-<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
-<pre><code>
-    respond_to do |format|
-        format.html # index.html.erb
-        format.xml  { render :xml => @products }
-    end
-</code></pre>
-<p><code>config/routes.rb</code> に</p>
-<pre><code>
-    map.connect ':controller/:action/:id.:format'
-</code></pre>
-<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
-
-<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
-
-<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
-
-<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
-
-<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
-
-<p>僕はファッションの観点からRailsを選びたい。</p>  
-
-			</div>
-						
+				</div>
+				
+				<div class="autopagerize_insert_before"></div>
+  			
+  			<div class="paginator">
+  				
+  				  
+    				  <a href="../page4/" rel="prev">Previous Page</a>
+  				  
+  				
+  				
+    				<a href="../page6/" rel="next">Next Page</a>
+    		  
+  			</div>
+		  </div>
+		  
 			<div id="sidebar">
 				<h3>Categories</h3>
 				
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2010/08/11/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
+					<li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
+				
+					<li><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></li>
 				
 					<li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
 				
@@ -250,5 +251,26 @@ Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll a
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+</script>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /**
+    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+    */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://techportalshit.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=techportalshit">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<script type="text/javascript">
+var disqus_shortname = 'techportalshit';
+(function () {
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'http://disqus.com/forums/techportalshit/count.js';
+  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
 </script>
 </body>
