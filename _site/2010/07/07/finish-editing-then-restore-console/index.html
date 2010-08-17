@@ -22,18 +22,17 @@
 				</ul>
 		</div>
 		<div id="container">
+			<div class="paginator">
+				
+			    <span class="previous"><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></span>
+			  
+			  
+					<span class="next"><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></span>
+				
+			</div>
+
 			<div id="content">
 				<h2>Vimで編集を終了した後、元のコンソールの状態を復元したい</h2>
-			
-				<div class="paginator">
-					
-				    <span class="previous"><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></span>
-				  
-				  
-  					<span class="next"><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></span>
-					
-				</div>
-			
 				<p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
 
 <p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
@@ -47,16 +46,7 @@
 <p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
 
 <p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
-			
-				<div class="paginator">
-					
-				    <span class="previous"><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></span>
-				  
-				  
-  					<span class="next"><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></span>
-					
-				</div>
-				
+							
 				<div id="related-post">
 					<ul>
 					

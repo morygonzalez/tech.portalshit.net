@@ -22,16 +22,15 @@
 				</ul>
 		</div>
 		<div id="container">
+			<div class="paginator">
+				
+			    <span class="previous"><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></span>
+			  
+			  
+			</div>
+
 			<div id="content">
 				<h2>Pygmentsを使ってコードをシンタックスハイライトするようにした</h2>
-			
-				<div class="paginator">
-					
-				    <span class="previous"><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></span>
-				  
-				  
-				</div>
-			
 				<p>外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは <code>jekyll --pygments</code> しろや、みたいなことが書いてあるんだけど（<a href='http://wiki.github.com/mojombo/jekyll/liquid-extensions' title='Liquid Extensions - jekyll - GitHub'>Liquid Extensions - jekyll - GitHub</a>）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。</p>
 
 <p>しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで</p>
@@ -75,14 +74,7 @@
 </div>
 <p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href='http://github.com/mojombo/tpw/tree/master/css/syntax.css' title='syntax.css'>Github互換のもの</a>を拾ってきて入れといた。</p>
 <hr /><p id='footnote-34-1'>※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>
-			
-				<div class="paginator">
-					
-				    <span class="previous"><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></span>
-				  
-				  
-				</div>
-				
+							
 				<div id="related-post">
 					<ul>
 					

@@ -22,18 +22,17 @@
 				</ul>
 		</div>
 		<div id="container">
+			<div class="paginator">
+				
+			    <span class="previous"><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></span>
+			  
+			  
+					<span class="next"><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></span>
+				
+			</div>
+
 			<div id="content">
 				<h2>YAMLで初期データをRailsアプリケーションのDBにぶっ込む</h2>
-			
-				<div class="paginator">
-					
-				    <span class="previous"><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></span>
-				  
-				  
-  					<span class="next"><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></span>
-					
-				</div>
-			
 				<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
@@ -70,16 +69,7 @@
 </code></pre>
 </div>
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
-			
-				<div class="paginator">
-					
-				    <span class="previous"><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></span>
-				  
-				  
-  					<span class="next"><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></span>
-					
-				</div>
-				
+							
 				<div id="related-post">
 					<ul>
 					

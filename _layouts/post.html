@@ -22,29 +22,19 @@
 				</ul>
 		</div>
 		<div id="container">
+			<div class="paginator">
+				{% if page.previous.url %}
+			    <span class="previous"><a href="{{ page.previous.url }}">{{ page.previous.title }}</a></span>
+			  {% endif %}
+			  {% if page.next.url %}
+					<span class="next"><a href="{{ page.next.url }}">{{ page.next.title }}</a></span>
+				{% endif %}
+			</div>
+
 			<div id="content">
 				<h2>{{ page.title }}</h2>
-			
-				<div class="paginator">
-					{% if page.previous.url %}
-				    <span class="previous"><a href="{{ page.previous.url }}">{{ page.previous.title }}</a></span>
-				  {% endif %}
-				  {% if page.next.url %}
-  					<span class="next"><a href="{{ page.next.url }}">{{ page.next.title }}</a></span>
-					{% endif %}
-				</div>
-			
 				{{ content }}
-			
-				<div class="paginator">
-					{% if page.previous.url %}
-				    <span class="previous"><a href="{{ page.previous.url }}">{{ page.previous.title }}</a></span>
-				  {% endif %}
-				  {% if page.next.url %}
-  					<span class="next"><a href="{{ page.next.url }}">{{ page.next.title }}</a></span>
-					{% endif %}
-				</div>
-				
+							
 				<div id="related-post">
 					<ul>
 					{% for relate in page.related_posts %}
