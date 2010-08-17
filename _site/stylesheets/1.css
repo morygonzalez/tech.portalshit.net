@@ -282,3 +282,10 @@ span.sIFR-alternate {
 }
 
 
+.previous {
+  float: left;
+}
+
+.next {
+  float: right;
+}

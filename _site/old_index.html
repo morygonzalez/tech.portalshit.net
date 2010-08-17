@@ -9,26 +9,23 @@
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
-
 		<div id="header">
-		
 				<h1><a href="/">tech.portalshit.net</a></h1>
-
 				<h3>CakePHP, Rails, JavaScript</h3>
-				
 				<ul id="nav">
 					<li><a href="/">Home</a></li>
 				</ul>
 		</div>
 		<div id="container">
-		
-			<div class="paginator">
-				
-				
-			</div>
-		  
+			
 			<div id="content">
-				<h2 id='pygments'><a href='/2010/08/13/jekyll-with-pygments'>Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
+  			<div class="paginator">
+  				
+  				
+  			</div>
+  			
+  			<div class="autopagerize_page_element">
+				  <h2 id='pygments'><a href='/2010/08/13/jekyll-with-pygments'>Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
 <div class='articleinfo'>
 Posted on 13 Aug 2010 by morygonzalez |
 	
@@ -125,7 +122,7 @@ Posted on 14 Jul 2010 by morygonzalez |
 </div><p>やってみた。以下を参考にした。</p><p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p><p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p><p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p><p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p><div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
     <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
 </code></pre>
-</div><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id3'>まとめ</h3><p>まとめると、</p><ol>
+</div><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id13'>まとめ</h3><p>まとめると、</p><ol>
 <li>記事を作成するローカルリポジトリ</li>
 <li>ローカルリポジトリをpushするリモートリポジトリ</li>
 <li>リモートリポジトリをcloneする公開用リポジトリ</li>
@@ -214,7 +211,7 @@ Posted on 02 Jul 2010 by morygonzalez |
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
 </div><p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
-<h2 id='id4'><a href='/2010/06/28/i-had-better-review-ruby'>インスタンス変数</a></h2>
+<h2 id='id14'><a href='/2010/06/28/i-had-better-review-ruby'>インスタンス変数</a></h2>
 <div class='articleinfo'>
 Posted on 28 Jun 2010 by morygonzalez |
 	
@@ -516,7 +513,7 @@ Posted on 07 May 2010 by morygonzalez |
 <li>すべての <code>item</code> をjQueryを使って非表示</li>
 
 <li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
-</ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id2'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id12'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
 </code></pre>
 </div><p>を</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li a&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
 </code></pre>
@@ -525,7 +522,7 @@ Posted on 07 May 2010 by morygonzalez |
 </div><p>を</p><div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>)</span>
 </code></pre>
 </div><p>にしてみたところ、ばっちりIEで動くようになった。</p><p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
-<h2 id='id5'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
+<h2 id='id15'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
 <div class='articleinfo'>
 Posted on 03 May 2010 by morygonzalez |
 	
@@ -545,7 +542,7 @@ Posted on 22 Apr 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/misc/'>misc</a>
 	
-</div><p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p><p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p><h3 id='id1'>追記</h3><p>一晩寝て起きたら動いてた。</p>
+</div><p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p><p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p><h3 id='id11'>追記</h3><p>一晩寝て起きたら動いてた。</p>
 <h2 id='cakephpmedia_plugin'><a href='/2010/04/22/cakephp-mediaplugin'>CakePHPのMedia Pluginは神だけど設置が面倒</a></h2>
 <div class='articleinfo'>
 Posted on 22 Apr 2010 by morygonzalez |
@@ -570,8 +567,16 @@ Posted on 22 Apr 2010 by morygonzalez |
 </div><p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p><div class='highlight'><pre><code class='console'><span class='go'>    $ rake db:bootstrap RAILS_ENV=production</span>
 </code></pre>
 </div><p>ですべてのインストール作業完了。いまこうして動いております。</p><p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
-			</div>
-						
+				</div>
+				
+				<div class="autopagerize_insert_before"></div>
+  			
+  			<div class="paginator">
+  				
+  				
+  			</div>
+		  </div>
+		  
 			<div id="sidebar">
 				<h3>Categories</h3>
 				

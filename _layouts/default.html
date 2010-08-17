@@ -9,32 +9,53 @@
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
-
 		<div id="header">
-		
 				<h1><a href="/">tech.portalshit.net</a></h1>
-
 				<h3>CakePHP, Rails, JavaScript</h3>
-				
 				<ul id="nav">
 					<li><a href="/">Home</a></li>
 				</ul>
 		</div>
 		<div id="container">
-		
-			<div class="paginator">
-				{% if paginator.previous_page %}
-  				<a href="../page{{ paginator.previous_page }}/" rel="prev">Previous Page</a>
-				{% endif %}
-				{% if paginator.next_page %}
-  				<a href="../page{{ paginator.next_page }}/" rel="next">Next Page</a>
-  		  {% endif %}
-			</div>
-		  
+			
 			<div id="content">
-				{{ content }}
-			</div>
-						
+  			<div class="paginator">
+  				{% if paginator.previous_page %}
+  				  <span class="previous">
+  				  {% if paginator.previous_page == 1 %}
+  				    <a href="../" rel="prev">Previous Page</a>
+  				  {% else %}
+    				  <a href="../page{{ paginator.previous_page }}/" rel="prev">Previous Page</a>
+  				  {% endif %}
+  				  </span>
+  				{% endif %}
+  				{% if paginator.next_page %}
+    				<span class="next">
+    				  <a href="../page{{ paginator.next_page }}/" rel="next">Next Page</a>
+    		    </span>
+    		  {% endif %}
+  			</div>
+  			
+  			<div class="autopagerize_page_element">
+				  {{ content }}
+				</div>
+				
+				<div class="autopagerize_insert_before"></div>
+  			
+  			<div class="paginator">
+  				{% if paginator.previous_page %}
+  				  {% if paginator.previous_page == 1 %}
+  				    <a href="../" rel="prev">Previous Page</a>
+  				  {% else %}
+    				  <a href="../page{{ paginator.previous_page }}/" rel="prev">Previous Page</a>
+  				  {% endif %}
+  				{% endif %}
+  				{% if paginator.next_page %}
+    				<a href="../page{{ paginator.next_page }}/" rel="next">Next Page</a>
+    		  {% endif %}
+  			</div>
+		  </div>
+		  
 			<div id="sidebar">
 				<h3>Categories</h3>
 				{{ page.categories }}
