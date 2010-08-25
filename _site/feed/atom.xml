@@ -4,12 +4,66 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-18T09:58:35+09:00</updated>
+  <updated>2010-08-25T13:17:55+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</title>
+    <link href="/2010/08/25/naughty-boy-am-i" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/08/25/naughty-boy-am-i</id>
+    <content type="html">&lt;p&gt;80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。&lt;/p&gt;
+
+&lt;h3 id='activerecord'&gt;なんでわざわざActiveRecordを使うのか&lt;/h3&gt;
+
+&lt;p&gt;いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。&lt;/p&gt;
+
+&lt;h3 id='id4'&gt;作業詳細&lt;/h3&gt;
+
+&lt;p&gt;このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは &lt;code&gt;sqlite3-ruby&lt;/code&gt; しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。&lt;/p&gt;
+
+&lt;h4 id='id5'&gt;やったこと&lt;/h4&gt;
+
+&lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;#8220;hogehoge&amp;#8221; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
+
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;rubygems&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;sqlite&amp;quot;&lt;/span&gt;
+&lt;span class='nb'&gt;require&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;active_record&amp;quot;&lt;/span&gt;
+
+&lt;span class='no'&gt;ActiveRecord&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;Base&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;establish_connection&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;
+  &lt;span class='ss'&gt;:adapter&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;sqlite&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
+  &lt;span class='ss'&gt;:database&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;path/to/db&amp;quot;&lt;/span&gt;
+&lt;span class='p'&gt;)&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Hoge&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;ActiveRecord&lt;/span&gt;&lt;span class='o'&gt;::&lt;/span&gt;&lt;span class='no'&gt;Base&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='n'&gt;hoges&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;find&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='ss'&gt;:all&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+&lt;span class='n'&gt;hoges&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;hog&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+  &lt;span class='n'&gt;hog&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;gsub!&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='sr'&gt;/hogehoge/&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+  &lt;span class='n'&gt;hoge&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;save&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;まず最初に、 &lt;code&gt;no such file to load -- sqlite&lt;/code&gt; みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず &lt;code&gt;sudo gem install sqlite-ruby&lt;/code&gt; したんだけど、それでも &lt;code&gt;no such file to load — sqlite&lt;/code&gt; が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。&lt;/p&gt;
+
+&lt;p&gt;しかしUpdateの部分で失敗。Railsの感覚で &lt;code&gt;hoge.save&lt;/code&gt; とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 &lt;code&gt;update_attribute()&lt;/code&gt; というメソッドをぶちかましてやった。こんな感じ。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;hoges&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;each&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;hog&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+  &lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='n'&gt;hog&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt; &lt;span class='o'&gt;=~&lt;/span&gt; &lt;span class='sr'&gt;/hogehoge(.*)/&lt;/span&gt;
+    &lt;span class='n'&gt;hog&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;update_attribute&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='vg'&gt;$1&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;これで狙ったことができました。&lt;/p&gt;
+
+&lt;p&gt;Rubyいいわー。ほんといいわー。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Pygmentsを使ってコードをシンタックスハイライトするようにした</title>

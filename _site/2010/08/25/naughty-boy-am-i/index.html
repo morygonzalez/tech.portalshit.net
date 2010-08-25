@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Rubyいいわー |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,15 +25,59 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/06/03/rails-name-conventions" title="RailsのMVC間の命名規約">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2010/08/13/jekyll-with-pygments" title="Pygmentsを使ってコードをシンタックスハイライトするようにした">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/06/14/migrated-to-jekyll" title="Jekyllに変えた">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>Rubyいいわー</h2>
-				<p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>
+				<h2>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</h2>
+				<p>80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。</p>
+
+<h3 id='activerecord'>なんでわざわざActiveRecordを使うのか</h3>
+
+<p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p>
+
+<h3 id='id4'>作業詳細</h3>
+
+<p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p>
+
+<h4 id='id5'>やったこと</h4>
+
+<p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &#8220;hogehoge&#8221; という部分なのが邪魔なので削りたかった。</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+
+<span class='nb'>require</span> <span class='s2'>&quot;rubygems&quot;</span>
+<span class='nb'>require</span> <span class='s2'>&quot;sqlite&quot;</span>
+<span class='nb'>require</span> <span class='s2'>&quot;active_record&quot;</span>
+
+<span class='no'>ActiveRecord</span><span class='o'>::</span><span class='no'>Base</span><span class='o'>.</span><span class='n'>establish_connection</span><span class='p'>(</span>
+  <span class='ss'>:adapter</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;sqlite&quot;</span><span class='p'>,</span>
+  <span class='ss'>:database</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;path/to/db&quot;</span>
+<span class='p'>)</span>
+
+<span class='k'>class</span> <span class='nc'>Hoge</span> <span class='o'>&lt;</span> <span class='no'>ActiveRecord</span><span class='o'>::</span><span class='no'>Base</span>
+<span class='k'>end</span>
+
+<span class='n'>hoges</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>find</span><span class='p'>(</span><span class='ss'>:all</span><span class='p'>)</span>
+<span class='n'>hoges</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>hog</span><span class='o'>|</span>
+  <span class='n'>hog</span><span class='o'>.</span><span class='n'>name</span><span class='o'>.</span><span class='n'>gsub!</span><span class='p'>(</span><span class='sr'>/hogehoge/</span><span class='p'>,</span> <span class='s2'>&quot;&quot;</span><span class='p'>)</span>
+  <span class='n'>hoge</span><span class='o'>.</span><span class='n'>save</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
+
+<p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
+<div class='highlight'><pre><code class='ruby'><span class='n'>hoges</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>hog</span><span class='o'>|</span>
+  <span class='k'>if</span> <span class='n'>hog</span><span class='o'>.</span><span class='n'>name</span> <span class='o'>=~</span> <span class='sr'>/hogehoge(.*)/</span>
+    <span class='n'>hog</span><span class='o'>.</span><span class='n'>update_attribute</span><span class='p'>(</span><span class='s2'>&quot;name&quot;</span><span class='p'>,</span> <span class='vg'>$1</span><span class='p'>)</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>これで狙ったことができました。</p>
+
+<p>Rubyいいわー。ほんといいわー。</p>
 							
 				<div id="related-post">
 					<ul>
@@ -61,6 +105,8 @@
 				<ul>
 				
 					<li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
+				
+					<li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
 				
 				</ul>
 				
