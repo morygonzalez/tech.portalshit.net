@@ -30,6 +30,28 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></h2>
+    <div class="articleinfo">Posted on 31 Aug 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>RubyKaigi 2010に行ったのでその感想を軽く。</p>
+
+<h4 id='id6'>自分のスペック</h4>
+
+<p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p>
+
+<h4 id='id7'>感想</h4>
+
+<p>永和システムさんの「Head First 普通のシステム開発」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p>
+
+<p>MongoDBについてのプログラム（<a href='http://rubykaigi.org/2010/ja/events/73' title='Practical Ruby Projects with MongoDB'>Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p>
+
+<p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p>
+
+<p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p>
+    <a href="http://tech.portalshit.net/2010/08/31/rubykaigi2010/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></h2>
     <div class="articleinfo">Posted on 25 Aug 2010 by morygonzalez |
 	
@@ -187,20 +209,6 @@
 <p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
     <a href="http://tech.portalshit.net/2010/08/03/ubuntu-server-ssh-connection-failing/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
-    <div class="articleinfo">Posted on 27 Jul 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	
-		<a href="http://tech.portalshit.net/bot/">bot</a>
-	</div>
-    <p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると <code>500 Internal Server Error</code> が返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
-
-<p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p>
-
-<p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>
-    <a href="http://tech.portalshit.net/2010/07/27/masuda-san/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -220,6 +228,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
 				
 					<li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
 				

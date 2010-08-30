@@ -4,12 +4,34 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-25T13:17:55+09:00</updated>
+  <updated>2010-08-31T07:58:32+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>RubyKaigi 2010の感想</title>
+    <link href="/2010/08/31/rubykaigi2010" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/08/31/rubykaigi2010</id>
+    <content type="html">&lt;p&gt;RubyKaigi 2010に行ったのでその感想を軽く。&lt;/p&gt;
+
+&lt;h4 id='id6'&gt;自分のスペック&lt;/h4&gt;
+
+&lt;p&gt;Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。&lt;/p&gt;
+
+&lt;h4 id='id7'&gt;感想&lt;/h4&gt;
+
+&lt;p&gt;永和システムさんの「Head First 普通のシステム開発」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。&lt;/p&gt;
+
+&lt;p&gt;MongoDBについてのプログラム（&lt;a href='http://rubykaigi.org/2010/ja/events/73' title='Practical Ruby Projects with MongoDB'&gt;Practical Ruby Projects with MongoDB&lt;/a&gt;）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。&lt;/p&gt;
+
+&lt;p&gt;クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。&lt;/p&gt;
+
+&lt;p&gt;東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</title>

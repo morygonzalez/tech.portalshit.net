@@ -36,6 +36,20 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
+    <div class="articleinfo">Posted on 27 Jul 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	
+		<a href="http://tech.portalshit.net/bot/">bot</a>
+	</div>
+    <p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると <code>500 Internal Server Error</code> が返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
+
+<p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p>
+
+<p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>
+    <a href="http://tech.portalshit.net/2010/07/27/masuda-san/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
     <div class="articleinfo">Posted on 26 Jul 2010 by morygonzalez |
 	
@@ -135,26 +149,6 @@
 <p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
     <a href="http://tech.portalshit.net/2010/07/09/cant-live-up-with-oauth/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
-    <div class="articleinfo">Posted on 07 Jul 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Unix/">Unix</a>
-	</div>
-    <p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
-
-<p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
-
-<p>情報元は <a href='http://d.hatena.ne.jp/lurker/20061118/1163810847' title='フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳'>フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
-
-<p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
-
-<p>しかし自分はこのサーバーでroot権限を持ってない。なので <code>cp /etc/termcap ~/.termcap</code> したあと <code>chmod 644 ~/.termcap</code> して <code>vim ~/.termcap</code> し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。</p>
-
-<p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
-
-<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
-    <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -180,6 +174,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
 				
 					<li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
 				
