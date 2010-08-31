@@ -31,7 +31,24 @@ Posted on 31 Aug 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Ruby/'>Ruby</a>
 	
-</div><p>RubyKaigi 2010に行ったのでその感想を軽く。</p><h4 id='id6'>自分のスペック</h4><p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p><h4 id='id7'>感想</h4><p>永和システムさんの「Head First 普通のシステム開発」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p><p>MongoDBについてのプログラム（<a href='http://rubykaigi.org/2010/ja/events/73' title='Practical Ruby Projects with MongoDB'>Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p><p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p><p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p>
+</div><p>RubyKaigi 2010に行ったのでその感想を軽く。</p><h4 id='id6'>自分のスペック</h4><p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p><h4 id='id7'>感想</h4><p>永和システムさんの「<a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'>Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p><p>MongoDBについてのプログラム（<a href='http://rubykaigi.org/2010/ja/events/73' title='Practical Ruby Projects with MongoDB'>Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p><p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p><p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p>
+<h2 id='macportshomebrew'><a href='/2010/08/31/macports-is-deprecated'>MacPortsからHomebrewに移行しつつある</a></h2>
+<div class='articleinfo'>
+Posted on 31 Aug 2010 by morygonzalez |
+	
+		<a href='http://tech.portalshit.net/Mac/'>Mac</a>
+	
+</div><p>シャレオツプログラマーはみんなMacPortsからHomebrewに移行しつつあるっぽいので、真似してみることにした。</p><h3 id='homebrew'>なんでHomebrew？</h3><p>そもそもなんでみんな移行するのか？ なんかMacPortsはバッドノウハウの塊らしい。</p><p><a href='http://twitter.com/hitode909/status/18526396749' title='Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...'>Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 &#8230;</a></p><p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に <code>#!/usr/bin/perl</code> とか <code>#!/usr/bin/env ruby</code> とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p><p>HomebrewはLinuxのパッケージ管理ソフトみたいに <code>/usr/local/bin/</code> とかに何でもインストールするので精神衛生上ベターだ。</p><p>Homebrewのインストール自体は簡単だ。最近はそこそこRubyも分かるようになってきたので、パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。</p><p><a href='http://mxcl.github.com/homebrew/' title='Homebrew — MacPorts driving you to drink? Try Homebrew!'>Homebrew — MacPorts driving you to drink? Try Homebrew!</a></p><h3 id='vim'>Vimのインストールではまった</h3><p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> brew install vim
+</code></pre>
+</div><p>してみた。しかしながら</p><div class='highlight'><pre><code class='console'><span class='go'>Error: No available formula for dragonball</span>
+</code></pre>
+</div><p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p><p><a href='http://github.com/adamv/homebrew/blob/duplicates/Library/Formula/vim.rb' title='Library/Formula/vim.rb at duplicates from adamv&apos;s homebrew - GitHub'>Library/Formula/vim.rb at duplicates from adamv&#8217;s homebrew - GitHub</a></p><p>そんで今度は意気揚々と</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> brew install vim
+</code></pre>
+</div><p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p><div class='highlight'><pre><code class='console'><span class='go'>ld: warning: in /Library/Frameworks//Python.framework/Python, missing required architecture x86\_64 in file</span>
+</code></pre>
+</div><p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p><p><a href='http://vim.1045645.n5.nabble.com/Python-link-errors-td1214971.html' title='Nabble - Vim - Mac - Python link errors'>Nabble - Vim - Mac - Python link errors</a></p><p>要するに64bit版のPython.frameworkを入れれば良さそうだった。何も考えずにHomebrewで <code>brew install Python</code> とかやって <code>/usr/local/bin/python</code> に新しいPythonを入れてみたりしたんだけど、これは意味なかったっぽい。大人しくPython公式サイトからPython 2.7のインストーラーパッケージをダウンロードしてきてGUIでインストールした。</p><p><a href='http://www.python.org/download/releases/' title='Releases'>Releases</a></p><p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p><div class='highlight'><pre><code class='console'><span class='go'>+ruby</span>
+</code></pre>
+</div><p>となった。</p><p>まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマー仲間入りをしようと思います。</p>
 <h2 id='naughty_boycakephpdbrailsactiverecord'><a href='/2010/08/25/naughty-boy-am-i'>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></h2>
 <div class='articleinfo'>
 Posted on 25 Aug 2010 by morygonzalez |
@@ -626,6 +643,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				<ul>
 				
 					<li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
+				
+					<li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
 				
 					<li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
 				

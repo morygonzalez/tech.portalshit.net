@@ -36,6 +36,34 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></h2>
+    <div class="articleinfo">Posted on 09 Jul 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	
+		<a href="http://tech.portalshit.net/OAuth/">OAuth</a>
+	</div>
+    <p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
+
+<p><img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /></p>
+
+<p>疑問点がいくつかある。</p>
+
+<ul>
+<li>
+<p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
+</li>
+
+<li>
+<p>Userモデルで <code>has_many :oauth_tokens</code> とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 <code>oauth_tokens</code> にそんな <code>user_id</code> の人いないし」みたいなエラーが出るような気がする。</p>
+</li>
+</ul>
+
+<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
+    <a href="http://tech.portalshit.net/2010/07/09/cant-live-up-with-oauth/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
     <div class="articleinfo">Posted on 07 Jul 2010 by morygonzalez |
 	
@@ -133,79 +161,6 @@
     <p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
     <a href="http://tech.portalshit.net/2010/07/02/active_record-is-so-sticky-for-me/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
-    <div class="articleinfo">Posted on 28 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	</div>
-    <p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
-
-<p>そういうわけで正しくは、</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>と書くそうです。</p>
-
-<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span>
-    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>でも同じ結果を出力しますね。</p>
-
-<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
-
-<blockquote>
-<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
-</blockquote>
-
-<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>b</span><span class='o'>=</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='n'>b</span>
-  <span class='k'>end</span>
-
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='nb'>print</span> <span class='vi'>@a</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Fuga&quot;</span><span class='p'>)</span>
-<span class='n'>piyo</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Piyo&quot;</span><span class='p'>)</span>
-
-<span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
-<span class='n'>piyo</span><span class='o'>.</span><span class='n'>hoge</span>
-</code></pre>
-</div>
-<p>で、これを実行すると</p>
-<div class='highlight'><pre><code class='console'><span class='go'>Fuga</span>
-<span class='go'>Piyo</span>
-</code></pre>
-</div>
-<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
-    <a href="http://tech.portalshit.net/2010/06/28/i-had-better-review-ruby/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -233,6 +188,8 @@
 				<ul>
 				
 					<li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
+				
+					<li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
 				
 					<li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
 				
