@@ -5,7 +5,7 @@ category: Mac
 layout: post
 ---
 
-シャレオツプログラマーはみんなMacPortsからHomebrewに移行しつつあるっぽいので、真似してみることにした。
+[シャレオツプログラマーはみんなMacPortsからHomebrewに移行しつつあるっぽい](http://give-me-money.g.hatena.ne.jp/cxx/20100802/1280760811 "MacPortsからHomebrewに移行した - cxxの日記 - give-me-moneyグループ")ので、真似してみることにした。
 
 ### なんでHomebrew？
 

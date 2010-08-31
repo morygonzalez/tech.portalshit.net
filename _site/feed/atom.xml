@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-31T15:47:33+09:00</updated>
+  <updated>2010-08-31T15:51:55+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -38,7 +38,7 @@
     <link href="/2010/08/31/macports-is-deprecated" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/08/31/macports-is-deprecated</id>
-    <content type="html">&lt;p&gt;シャレオツプログラマーはみんなMacPortsからHomebrewに移行しつつあるっぽいので、真似してみることにした。&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;a href='http://give-me-money.g.hatena.ne.jp/cxx/20100802/1280760811' title='MacPortsからHomebrewに移行した - cxxの日記 - give-me-moneyグループ'&gt;シャレオツプログラマーはみんなMacPortsからHomebrewに移行しつつあるっぽい&lt;/a&gt;ので、真似してみることにした。&lt;/p&gt;
 
 &lt;h3 id='homebrew'&gt;なんでHomebrew？&lt;/h3&gt;
 
