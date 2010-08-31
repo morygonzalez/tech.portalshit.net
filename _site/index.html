@@ -65,11 +65,19 @@
 
 <p><a href='http://twitter.com/hitode909/status/18526396749' title='Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...'>Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 &#8230;</a></p>
 
-<p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に <code>#!/usr/bin/perl</code> とか <code>#!/usr/bin/env ruby</code> とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
+<p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
+<div class='highlight'><pre><code class='perl'><span class='c1'>#!/usr/bin/perl</span>
+</code></pre>
+</div>
+<p>とか</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+</code></pre>
+</div>
+<p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
 
 <p>HomebrewはLinuxのパッケージ管理ソフトみたいに <code>/usr/local/bin/</code> とかに何でもインストールするので精神衛生上ベターだ。</p>
 
-<p>Homebrewのインストール自体は簡単だ。最近はそこそこRubyも分かるようになってきたので、パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。</p>
+<p>Homebrewのインストール自体は簡単だ。パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。</p>
 
 <p><a href='http://mxcl.github.com/homebrew/' title='Homebrew — MacPorts driving you to drink? Try Homebrew!'>Homebrew — MacPorts driving you to drink? Try Homebrew!</a></p>
 
@@ -109,7 +117,7 @@
 </div>
 <p>となった。</p>
 
-<p>まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマー仲間入りをしようと思います。</p>
+<p>まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマーの仲間入りをしようと思います。</p>
     <a href="http://tech.portalshit.net/2010/08/31/macports-is-deprecated/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></h2>

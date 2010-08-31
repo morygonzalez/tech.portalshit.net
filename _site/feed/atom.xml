@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-31T15:51:55+09:00</updated>
+  <updated>2010-08-31T15:55:56+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -46,11 +46,19 @@
 
 &lt;p&gt;&lt;a href='http://twitter.com/hitode909/status/18526396749' title='Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...'&gt;Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 &amp;#8230;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは &lt;code&gt;.bash_profile&lt;/code&gt; とか &lt;code&gt;.zshrc&lt;/code&gt; とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に &lt;code&gt;#!/usr/bin/perl&lt;/code&gt; とか &lt;code&gt;#!/usr/bin/env ruby&lt;/code&gt; とか書くのに使ってるバイナリ本体は &lt;code&gt;/opt/local/bin/&lt;/code&gt; にあるとかは気持ち悪いっちゃ気持ち悪い。&lt;/p&gt;
+&lt;p&gt;MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは &lt;code&gt;.bash_profile&lt;/code&gt; とか &lt;code&gt;.zshrc&lt;/code&gt; とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='perl'&gt;&lt;span class='c1'&gt;#!/usr/bin/perl&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;とか&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;とか書くのに使ってるバイナリ本体は &lt;code&gt;/opt/local/bin/&lt;/code&gt; にあるとかは気持ち悪いっちゃ気持ち悪い。&lt;/p&gt;
 
 &lt;p&gt;HomebrewはLinuxのパッケージ管理ソフトみたいに &lt;code&gt;/usr/local/bin/&lt;/code&gt; とかに何でもインストールするので精神衛生上ベターだ。&lt;/p&gt;
 
-&lt;p&gt;Homebrewのインストール自体は簡単だ。最近はそこそこRubyも分かるようになってきたので、パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。&lt;/p&gt;
+&lt;p&gt;Homebrewのインストール自体は簡単だ。パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='http://mxcl.github.com/homebrew/' title='Homebrew — MacPorts driving you to drink? Try Homebrew!'&gt;Homebrew — MacPorts driving you to drink? Try Homebrew!&lt;/a&gt;&lt;/p&gt;
 
@@ -90,7 +98,7 @@
 &lt;/div&gt;
 &lt;p&gt;となった。&lt;/p&gt;
 
-&lt;p&gt;まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマー仲間入りをしようと思います。&lt;/p&gt;</content>
+&lt;p&gt;まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマーの仲間入りをしようと思います。&lt;/p&gt;</content>
   </entry>
   
   <entry>

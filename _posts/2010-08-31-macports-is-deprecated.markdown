@@ -13,11 +13,23 @@ layout: post
 
 [Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...](http://twitter.com/hitode909/status/18526396749 "Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...")
 
-MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは `.bash_profile` とか `.zshrc` とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に `#!/usr/bin/perl` とか `#!/usr/bin/env ruby` とか書くのに使ってるバイナリ本体は `/opt/local/bin/` にあるとかは気持ち悪いっちゃ気持ち悪い。
+MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは `.bash_profile` とか `.zshrc` とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に
+
+{% highlight perl %}
+#!/usr/bin/perl
+{% endhighlight %}
+
+とか 
+
+{% highlight ruby %}
+#!/usr/bin/env ruby
+{% endhighlight %}
+
+とか書くのに使ってるバイナリ本体は `/opt/local/bin/` にあるとかは気持ち悪いっちゃ気持ち悪い。
 
 HomebrewはLinuxのパッケージ管理ソフトみたいに `/usr/local/bin/` とかに何でもインストールするので精神衛生上ベターだ。
 
-Homebrewのインストール自体は簡単だ。最近はそこそこRubyも分かるようになってきたので、パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。
+Homebrewのインストール自体は簡単だ。パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。
 
 [Homebrew — MacPorts driving you to drink? Try Homebrew!](http://mxcl.github.com/homebrew/ "Homebrew — MacPorts driving you to drink? Try Homebrew!")
 
@@ -67,4 +79,4 @@ Appleが配布したのではないPythonを使ってるとこういうエラー
 
 となった。
 
-まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマー仲間入りをしようと思います。
+まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマーの仲間入りをしようと思います。
