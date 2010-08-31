@@ -29,7 +29,7 @@ MacPortsの何がバッドノウハウなのかちょっとよく分からなか
 
 HomebrewはLinuxのパッケージ管理ソフトみたいに `/usr/local/bin/` とかに何でもインストールするので精神衛生上ベターだ。
 
-Homebrewのインストール自体は簡単だ。パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。
+Homebrewのインストール自体はとても簡単。パッケージ管理スクリプトをRubyで書くってのも、UNIXのことよく分かってない僕にはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。
 
 [Homebrew — MacPorts driving you to drink? Try Homebrew!](http://mxcl.github.com/homebrew/ "Homebrew — MacPorts driving you to drink? Try Homebrew!")
 
@@ -44,7 +44,7 @@ $ brew install vim
 してみた。しかしながら
 
 {% highlight console %}
-Error: No available formula for dragonball
+Error: No available formula for vim
 {% endhighlight %}
 
 と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 `/usr/local/Library/Formula/` に `vim.rb` を作ってコピペした。

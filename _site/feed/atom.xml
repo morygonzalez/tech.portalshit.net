@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-08-31T15:55:56+09:00</updated>
+  <updated>2010-08-31T21:54:58+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -58,7 +58,7 @@
 
 &lt;p&gt;HomebrewはLinuxのパッケージ管理ソフトみたいに &lt;code&gt;/usr/local/bin/&lt;/code&gt; とかに何でもインストールするので精神衛生上ベターだ。&lt;/p&gt;
 
-&lt;p&gt;Homebrewのインストール自体は簡単だ。パッケージ管理スクリプトをRubyで書くってのはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。&lt;/p&gt;
+&lt;p&gt;Homebrewのインストール自体はとても簡単。パッケージ管理スクリプトをRubyで書くってのも、UNIXのことよく分かってない僕にはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='http://mxcl.github.com/homebrew/' title='Homebrew — MacPorts driving you to drink? Try Homebrew!'&gt;Homebrew — MacPorts driving you to drink? Try Homebrew!&lt;/a&gt;&lt;/p&gt;
 
@@ -69,7 +69,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;してみた。しかしながら&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;Error: No available formula for dragonball&lt;/span&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='go'&gt;Error: No available formula for vim&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;p&gt;と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 &lt;code&gt;/usr/local/Library/Formula/&lt;/code&gt; に &lt;code&gt;vim.rb&lt;/code&gt; を作ってコピペした。&lt;/p&gt;
