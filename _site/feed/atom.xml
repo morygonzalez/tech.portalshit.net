@@ -4,11 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-<<<<<<< HEAD
-  <updated>2010-09-02T17:36:59+09:00</updated>
-=======
-  <updated>2010-08-31T21:54:58+09:00</updated>
->>>>>>> fcccf6e614d8db917c0cd8c4bf9606cdf3a223d0
+  <updated>2010-09-02T17:40:42+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -17,9 +13,9 @@
   
   <entry>
     <title>JavaScriptでClickable Mapの座標を取得する</title>
-    <link href="/2010/09/02/clickable-map-coodinates-with-javascript" />
+    <link href="/2010/09/02/clickable-map-coordinates-with-javascript" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
-    <id>http://tech.portalshit.net//2010/09/02/clickable-map-coodinates-with-javascript</id>
+    <id>http://tech.portalshit.net//2010/09/02/clickable-map-coordinates-with-javascript</id>
     <content type="html">&lt;p&gt;みなさん、クリッカブルマップしてますか？ あんなくそみたいなもの使って地図をつくるなんて発狂しそうなこと、ここを読みそうな人はやってないと思いますが、僕の職場のお客さんとか上司は「Google Mapsには心がこもってない」とか言うので、クソみたいイラストをクリッカブルマップにして地図を作ってるんですよ。まじでかわいそうな僕ちゃん。&lt;/p&gt;
 
 &lt;p&gt;ご存じない方のためにクリッカブルマップの作り方を説明しておくと、まず画像を作り、それをHTMLに貼り付け、HTMLオーサリングツール（うちの職場ではDreamWeaver）のGUIエディタでちまちま画像上のクリッカブルにしたい位置を選択するという、血尿が出そうなくらい面倒くさい作業を強いられます。&lt;/p&gt;

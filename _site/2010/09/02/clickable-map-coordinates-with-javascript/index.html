@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>XREAにRubyGemsをインストール |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>JavaScriptでClickable Mapの座標を取得する |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,21 +25,52 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/06/15/im-fed-up-with-cakephp" title="CakePHPはSchemaとかがしょぼいしうんざりする">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2010/08/31/rubykaigi2010" title="RubyKaigi 2010の感想">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/06/23/how-to-use-markdown-with-rails" title="RailsアプリケーションでMarkdownを使う">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>XREAにRubyGemsをインストール</h2>
-				<p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &#8216;rubygemsをrequireできねーぞゴラ！&#8217; みたいなエラーが出る。</p>
+				<h2>JavaScriptでClickable Mapの座標を取得する</h2>
+				<p>みなさん、クリッカブルマップしてますか？ あんなくそみたいなもの使って地図をつくるなんて発狂しそうなこと、ここを読みそうな人はやってないと思いますが、僕の職場のお客さんとか上司は「Google Mapsには心がこもってない」とか言うので、クソみたいイラストをクリッカブルマップにして地図を作ってるんですよ。まじでかわいそうな僕ちゃん。</p>
 
-<p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
+<p>ご存じない方のためにクリッカブルマップの作り方を説明しておくと、まず画像を作り、それをHTMLに貼り付け、HTMLオーサリングツール（うちの職場ではDreamWeaver）のGUIエディタでちまちま画像上のクリッカブルにしたい位置を選択するという、血尿が出そうなくらい面倒くさい作業を強いられます。</p>
 
-<p>蛇足だけど最初、RubyGems 1.3.7をインストールしようとしたら、利用予定地のサーバーのRubyのバージョンが1.8.5なためにインストールできなかった。そういうわけでRubyGemsは1.3.5を入れた。</p>
+<p>最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。</p>
 
-<p>あとRubyGemsが入ったからといってシェルで <code>gem install rails</code> とかやってもプロセスを <code>kill</code> されるっぽいのでよい子のみなさんは必要な gem は自分のパソコンでインストールしてからアップロードした方がよさげです。</p>
+<p>コードはこんな感じ。</p>
+<div class='highlight'><pre><code class='html'><span class='nt'>&lt;html&gt;</span>
+  <span class='nt'>&lt;head&gt;</span>
+    <span class='nt'>&lt;script&gt;</span>
+      <span class='kd'>function</span> <span class='nx'>getPosition</span><span class='p'>(){</span>
+        <span class='kd'>var</span> <span class='nx'>x</span><span class='p'>,</span> <span class='nx'>y</span><span class='p'>;</span>
+        <span class='kd'>var</span> <span class='nx'>image</span> <span class='o'>=</span> <span class='nb'>document</span><span class='p'>.</span><span class='nx'>getElementById</span><span class='p'>(</span><span class='s1'>&#39;image&#39;</span><span class='p'>);</span>
+        <span class='nx'>image</span><span class='p'>.</span><span class='nx'>onclick</span> <span class='o'>=</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>e</span><span class='p'>)</span> <span class='p'>{</span>
+          <span class='nx'>x</span> <span class='o'>=</span> <span class='nx'>e</span><span class='p'>.</span><span class='nx'>layerX</span><span class='p'>;</span>
+          <span class='nx'>y</span> <span class='o'>=</span> <span class='nx'>e</span><span class='p'>.</span><span class='nx'>layerY</span><span class='p'>;</span>
+          <span class='nb'>document</span><span class='p'>.</span><span class='nx'>getElementById</span><span class='p'>(</span><span class='s2'>&quot;pointX&quot;</span><span class='p'>).</span><span class='nx'>value</span> <span class='o'>=</span> <span class='nx'>x</span><span class='p'>;</span>
+          <span class='nb'>document</span><span class='p'>.</span><span class='nx'>getElementById</span><span class='p'>(</span><span class='s2'>&quot;pointY&quot;</span><span class='p'>).</span><span class='nx'>value</span> <span class='o'>=</span> <span class='nx'>y</span><span class='p'>;</span>
+        <span class='p'>}</span>
+      <span class='p'>}</span>
+
+      <span class='nb'>window</span><span class='p'>.</span><span class='nx'>onload</span> <span class='o'>=</span> <span class='nx'>getPosition</span><span class='p'>;</span>
+    <span class='nt'>&lt;/script&gt;</span>
+  <span class='nt'>&lt;/head&gt;</span>
+  <span class='nt'>&lt;body&gt;</span>
+    <span class='nt'>&lt;div&gt;</span>
+      <span class='nt'>&lt;img</span> <span class='na'>src=</span><span class='s'>&quot;path/to/image&quot;</span> <span class='na'>id=</span><span class='s'>&quot;image&quot;</span> <span class='na'>style=</span><span class='s'>&quot;position: absolute; top: auto; left: auto; width: 500px; height: 332px&quot;</span> <span class='nt'>/&gt;</span>
+    <span class='nt'>&lt;/div&gt;</span>
+    <span class='nt'>&lt;form</span> <span class='na'>action=</span><span class='s'>&quot;/&quot;</span> <span class='na'>method=</span><span class='s'>&quot;post&quot;</span><span class='nt'>&gt;</span>
+      <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>id=</span><span class='s'>&quot;pointX&quot;</span> <span class='na'>name=</span><span class='s'>&quot;pointX&quot;</span> <span class='na'>value=</span><span class='s'>&quot;&quot;</span> <span class='nt'>/&gt;</span>
+      <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>id=</span><span class='s'>&quot;pointY&quot;</span> <span class='na'>name=</span><span class='s'>&quot;pointY&quot;</span> <span class='na'>value=</span><span class='s'>&quot;&quot;</span> <span class='nt'>/&gt;</span>
+      <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;submit&quot;</span> <span class='na'>value=</span><span class='s'>&quot;発射！&quot;</span> <span class='nt'>&gt;</span>
+    <span class='nt'>&lt;/form&gt;</span>
+  <span class='nt'>&lt;/body&gt;</span>
+<span class='nt'>&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。</p>
+
+<p><a href='http://d.hatena.ne.jp/sandai/20091105/p1' title='座標取得するプロパティのそれぞれの違い - 三等兵'>座標取得するプロパティのそれぞれの違い - 三等兵</a></p>
 							
 				<div id="related-post">
 					<ul>
@@ -66,7 +97,7 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
+					<li><a href="http://tech.portalshit.net/JavaScript/">JavaScript</a></li>
 				
 				</ul>
 				
