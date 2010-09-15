@@ -4,12 +4,36 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-09-02T18:20:41+09:00</updated>
+  <updated>2010-09-15T14:35:13+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>RVMのRubyをTextMateで使う</title>
+    <link href="/2010/09/15/textmate-with-rvm-ruby" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/09/15/textmate-with-rvm-ruby</id>
+    <content type="html">&lt;p&gt;いやまぁテキストエディターにはいろいろあるわけでして、皆さんEmacsとかVimで日夜しこしこコードを書いておられると思うんですけど、僕はGUIしか使えない情報弱者なので主にTextMateを使ってます。&lt;/p&gt;
+
+&lt;p&gt;TextMateで便利なのが &amp;#8220;Run&amp;#8221; っていう機能です。Rubyのコードを書いていて、&lt;kbd&gt;&amp;#8984;&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; でさくっと実行結果を確認できます。いちいちTerminal開いて&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; ruby hogehoge.rb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;とか面倒くさいことうやらずにすみます。&lt;/p&gt;
+
+&lt;p&gt;で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに &lt;code&gt;gem update&lt;/code&gt; でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。&lt;/p&gt;
+
+&lt;p&gt;上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、&lt;kbd&gt;&amp;#8984;&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（&lt;a href='http://rvm.beginrescueend.com/integration/textmate/' title='RVM: Ruby Version Manager - Textmate Integration with RVM'&gt;RVM: Ruby Version Manager - Textmate Integration with RVM&lt;/a&gt;）、結局この通りにやってもうまくいかず。&lt;/p&gt;
+
+&lt;p&gt;しかし先ほどなにげなく&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; rvm 1.9.2 --default
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;としてあげたところ、TextMateでもRVMのRubyが走るようになりました。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>JavaScriptでClickable Mapの座標を取得する</title>
