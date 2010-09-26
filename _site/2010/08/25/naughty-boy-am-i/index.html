@@ -39,11 +39,11 @@
 
 <p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p>
 
-<h3 id='id4'>作業詳細</h3>
+<h3 id='id58'>作業詳細</h3>
 
 <p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p>
 
-<h4 id='id5'>やったこと</h4>
+<h4 id='id59'>やったこと</h4>
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &#8220;hogehoge&#8221; という部分なのが邪魔なので削りたかった。</p>
 <div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
