@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Google Analytics Pluginが動かない |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>CakePHPのMedia Plugin 1.3が動かない |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,21 +25,23 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/04/22/cakephp-mediaplugin" title="CakePHPのMedia Pluginは神だけど設置が面倒">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2010/09/15/textmate-with-rvm-ruby" title="RVMのRubyをTextMateで使う">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/05/01/cakephp13" title="CakePHP 1.3">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>Google Analytics Pluginが動かない</h2>
-				<p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p>
+				<h2>CakePHPのMedia Plugin 1.3が動かない</h2>
+				<p>動かしてるサイトのCakePHPのバージョンを最新版の1.3.4に上げようと思って、Media PluginもCakePHP 1.3対応バージョンの1.3alphaにアップデートしようとした。</p>
 
-<p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p>
+<p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p>
 
-<h3 id='id1'>追記</h3>
+<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。結局、プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&apos;s media - GitHub'>docs at 1.3 from davidpersson&#8217;s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど結局できなかった。</p>
 
-<p>一晩寝て起きたら動いてた。</p>
+<p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p>
+
+<p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href='http://github.com/davidpersson/mm' title='davidpersson&apos;s mm at master - GitHub'>davidpersson&#8217;s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
+
+<p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れた身からするとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
 							
 				<div id="related-post">
 					<ul>
@@ -66,7 +68,7 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/misc/">misc</a></li>
+					<li><a href="http://tech.portalshit.net/CakePHP/">CakePHP</a></li>
 				
 				</ul>
 				

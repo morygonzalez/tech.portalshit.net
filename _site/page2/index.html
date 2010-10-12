@@ -36,6 +36,62 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></h2>
+    <div class="articleinfo">Posted on 25 Aug 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。</p>
+
+<h3 id='activerecord'>なんでわざわざActiveRecordを使うのか</h3>
+
+<p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p>
+
+<h3 id='id4'>作業詳細</h3>
+
+<p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p>
+
+<h4 id='id5'>やったこと</h4>
+
+<p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &#8220;hogehoge&#8221; という部分なのが邪魔なので削りたかった。</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+
+<span class='nb'>require</span> <span class='s2'>&quot;rubygems&quot;</span>
+<span class='nb'>require</span> <span class='s2'>&quot;sqlite&quot;</span>
+<span class='nb'>require</span> <span class='s2'>&quot;active_record&quot;</span>
+
+<span class='no'>ActiveRecord</span><span class='o'>::</span><span class='no'>Base</span><span class='o'>.</span><span class='n'>establish_connection</span><span class='p'>(</span>
+  <span class='ss'>:adapter</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;sqlite&quot;</span><span class='p'>,</span>
+  <span class='ss'>:database</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;path/to/db&quot;</span>
+<span class='p'>)</span>
+
+<span class='k'>class</span> <span class='nc'>Hoge</span> <span class='o'>&lt;</span> <span class='no'>ActiveRecord</span><span class='o'>::</span><span class='no'>Base</span>
+<span class='k'>end</span>
+
+<span class='n'>hoges</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>find</span><span class='p'>(</span><span class='ss'>:all</span><span class='p'>)</span>
+<span class='n'>hoges</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>hog</span><span class='o'>|</span>
+  <span class='n'>hog</span><span class='o'>.</span><span class='n'>name</span><span class='o'>.</span><span class='n'>gsub!</span><span class='p'>(</span><span class='sr'>/hogehoge/</span><span class='p'>,</span> <span class='s2'>&quot;&quot;</span><span class='p'>)</span>
+  <span class='n'>hoge</span><span class='o'>.</span><span class='n'>save</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
+
+<p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
+<div class='highlight'><pre><code class='ruby'><span class='n'>hoges</span><span class='o'>.</span><span class='n'>each</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>hog</span><span class='o'>|</span>
+  <span class='k'>if</span> <span class='n'>hog</span><span class='o'>.</span><span class='n'>name</span> <span class='o'>=~</span> <span class='sr'>/hogehoge(.*)/</span>
+    <span class='n'>hog</span><span class='o'>.</span><span class='n'>update_attribute</span><span class='p'>(</span><span class='s2'>&quot;name&quot;</span><span class='p'>,</span> <span class='vg'>$1</span><span class='p'>)</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>これで狙ったことができました。</p>
+
+<p>Rubyいいわー。ほんといいわー。</p>
+    <a href="http://tech.portalshit.net/2010/08/25/naughty-boy-am-i/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
     <div class="articleinfo">Posted on 13 Aug 2010 by morygonzalez |
 	
@@ -151,24 +207,6 @@
 <p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>
     <a href="http://tech.portalshit.net/2010/07/27/masuda-san/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></h2>
-    <div class="articleinfo">Posted on 26 Jul 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	
-		<a href="http://tech.portalshit.net/bot/">bot</a>
-	</div>
-    <p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
-
-<p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
-<div class='highlight'><pre><code class='ruby'><span class='n'>new_tweets</span> <span class='o'>=</span> <span class='n'>neta_tweets</span> <span class='o'>-</span> <span class='n'>used_tweets</span>
-</code></pre>
-</div>
-<p>とかしてみようとした。</p>
-
-<p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
-    <a href="http://tech.portalshit.net/2010/07/26/trial-with-tokyo-tyrant/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -194,6 +232,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/10/12/media-plugin-1.3-not-work">CakePHPのMedia Plugin 1.3が動かない</a></li>
 				
 					<li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
 				

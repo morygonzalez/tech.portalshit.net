@@ -25,7 +25,14 @@
   			</div>
   			
   			<div class="autopagerize_page_element">
-				  <h2 id='rvmrubytextmate'><a href='/2010/09/15/textmate-with-rvm-ruby'>RVMのRubyをTextMateで使う</a></h2>
+				  <h2 id='cakephpmedia_plugin_13'><a href='/2010/10/12/media-plugin-1.3-not-work'>CakePHPのMedia Plugin 1.3が動かない</a></h2>
+<div class='articleinfo'>
+Posted on 12 Oct 2010 by morygonzalez |
+	
+		<a href='http://tech.portalshit.net/CakePHP/'>CakePHP</a>
+	
+</div><p>動かしてるサイトのCakePHPのバージョンを最新版の1.3.4に上げようと思って、Media PluginもCakePHP 1.3対応バージョンの1.3alphaにアップデートしようとした。</p><p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p><p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。結局、プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&apos;s media - GitHub'>docs at 1.3 from davidpersson&#8217;s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど結局できなかった。</p><p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p><p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href='http://github.com/davidpersson/mm' title='davidpersson&apos;s mm at master - GitHub'>davidpersson&#8217;s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p><p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れた身からするとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
+<h2 id='rvmrubytextmate'><a href='/2010/09/15/textmate-with-rvm-ruby'>RVMのRubyをTextMateで使う</a></h2>
 <div class='articleinfo'>
 Posted on 15 Sep 2010 by morygonzalez |
 	
@@ -33,7 +40,7 @@ Posted on 15 Sep 2010 by morygonzalez |
 	
 </div><p>いやまぁテキストエディターにはいろいろあるわけでして、皆さんEmacsとかVimで日夜しこしこコードを書いておられると思うんですけど、僕はGUIしか使えない情報弱者なので主にTextMateを使ってます。</p><p>TextMateで便利なのが &#8220;Run&#8221; っていう機能です。Rubyのコードを書いていて、<kbd>&#8984;</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> ruby hogehoge.rb
 </code></pre>
-</div><p>とか面倒くさいことうやらずにすみます。</p><p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p><p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>&#8984;</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href='http://rvm.beginrescueend.com/integration/textmate/' title='RVM: Ruby Version Manager - Textmate Integration with RVM'>RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p><p>しかし先ほどなにげなく</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> rvm 1.9.2 --default
+</div><p>とか面倒くさいことをやらずにすみます。</p><p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p><p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>&#8984;</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href='http://rvm.beginrescueend.com/integration/textmate/' title='RVM: Ruby Version Manager - Textmate Integration with RVM'>RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p><p>しかし先ほどなにげなく</p><div class='highlight'><pre><code class='console'><span class='gp'>$</span> rvm 1.9.2 --default
 </code></pre>
 </div><p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
 <h2 id='javascriptclickable_map'><a href='/2010/09/02/clickable-map-coordinates-with-javascript'>JavaScriptでClickable Mapの座標を取得する</a></h2>
@@ -78,7 +85,7 @@ Posted on 31 Aug 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Ruby/'>Ruby</a>
 	
-</div><p>RubyKaigi 2010に行ったのでその感想を軽く。</p><h4 id='id60'>自分のスペック</h4><p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p><h4 id='id61'>感想</h4><p>永和システムマネジメント<del>永和システム</del>さんの「<a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'>Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p><p>MongoDBについてのプログラム（<a href='http://rubykaigi.org/2010/ja/events/73' title='Practical Ruby Projects with MongoDB'>Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p><p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p><p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p><h4 id='2010926'>2010年9月26日修正</h4><p>すみません、永和システムマネジメントさんのことを「永和システムさん」と書いてました。はてブのコメント欄で角谷さんに指摘されてた！</p>
+</div><p>RubyKaigi 2010に行ったのでその感想を軽く。</p><h4 id='id6'>自分のスペック</h4><p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p><h4 id='id7'>感想</h4><p>永和システムマネジメント<del>永和システム</del>さんの「<a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'>Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p><p>MongoDBについてのプログラム（<a href='http://rubykaigi.org/2010/ja/events/73' title='Practical Ruby Projects with MongoDB'>Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p><p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p><p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p><h4 id='2010926'>2010年9月26日修正</h4><p>すみません、永和システムマネジメントさんのことを「永和システムさん」と書いてました。はてブのコメント欄で角谷さんに指摘されてた！</p>
 <h2 id='macportshomebrew'><a href='/2010/08/31/macports-is-deprecated'>MacPortsからHomebrewに移行しつつある</a></h2>
 <div class='articleinfo'>
 Posted on 31 Aug 2010 by morygonzalez |
@@ -108,7 +115,7 @@ Posted on 25 Aug 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
-</div><p>80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。</p><h3 id='activerecord'>なんでわざわざActiveRecordを使うのか</h3><p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p><h3 id='id58'>作業詳細</h3><p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p><h4 id='id59'>やったこと</h4><p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &#8220;hogehoge&#8221; という部分なのが邪魔なので削りたかった。</p><div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+</div><p>80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。</p><h3 id='activerecord'>なんでわざわざActiveRecordを使うのか</h3><p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p><h3 id='id4'>作業詳細</h3><p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p><h4 id='id5'>やったこと</h4><p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &#8220;hogehoge&#8221; という部分なのが邪魔なので削りたかった。</p><div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
 
 <span class='nb'>require</span> <span class='s2'>&quot;rubygems&quot;</span>
 <span class='nb'>require</span> <span class='s2'>&quot;sqlite&quot;</span>
@@ -232,7 +239,7 @@ Posted on 14 Jul 2010 by morygonzalez |
 </div><p>やってみた。以下を参考にした。</p><p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p><p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p><p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p><p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p><div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
     <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
 </code></pre>
-</div><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id57'>まとめ</h3><p>まとめると、</p><ol>
+</div><p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p><h3 id='id3'>まとめ</h3><p>まとめると、</p><ol>
 <li>記事を作成するローカルリポジトリ</li>
 <li>ローカルリポジトリをpushするリモートリポジトリ</li>
 <li>リモートリポジトリをcloneする公開用リポジトリ</li>
@@ -321,7 +328,7 @@ Posted on 02 Jul 2010 by morygonzalez |
 		<a href='http://tech.portalshit.net/Rails/'>Rails</a>
 	
 </div><p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
-<h2 id='id62'><a href='/2010/06/28/i-had-better-review-ruby'>インスタンス変数</a></h2>
+<h2 id='id8'><a href='/2010/06/28/i-had-better-review-ruby'>インスタンス変数</a></h2>
 <div class='articleinfo'>
 Posted on 28 Jun 2010 by morygonzalez |
 	
@@ -623,7 +630,7 @@ Posted on 07 May 2010 by morygonzalez |
 <li>すべての <code>item</code> をjQueryを使って非表示</li>
 
 <li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
-</ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id56'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</ol><p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p><p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p><p>サーバーサイドで実装する方法もないではないけど、</p><p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p><p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p><h3 id='id2'>追記</h3><p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p><p>そういうわけで</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
 </code></pre>
 </div><p>を</p><div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li a&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
 </code></pre>
@@ -632,7 +639,7 @@ Posted on 07 May 2010 by morygonzalez |
 </div><p>を</p><div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>)</span>
 </code></pre>
 </div><p>にしてみたところ、ばっちりIEで動くようになった。</p><p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
-<h2 id='id63'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
+<h2 id='id9'><a href='/2010/05/03/portalshit-cached'>ポータルシットにキャッシュを効かせた</a></h2>
 <div class='articleinfo'>
 Posted on 03 May 2010 by morygonzalez |
 	
@@ -652,7 +659,7 @@ Posted on 22 Apr 2010 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/misc/'>misc</a>
 	
-</div><p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p><p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p><h3 id='id55'>追記</h3><p>一晩寝て起きたら動いてた。</p>
+</div><p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p><p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p><h3 id='id1'>追記</h3><p>一晩寝て起きたら動いてた。</p>
 <h2 id='cakephpmedia_plugin'><a href='/2010/04/22/cakephp-mediaplugin'>CakePHPのMedia Pluginは神だけど設置が面倒</a></h2>
 <div class='articleinfo'>
 Posted on 22 Apr 2010 by morygonzalez |
@@ -692,6 +699,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/10/12/media-plugin-1.3-not-work">CakePHPのMedia Plugin 1.3が動かない</a></li>
 				
 					<li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
 				

@@ -4,12 +4,30 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-09-26T13:43:06+09:00</updated>
+  <updated>2010-10-12T20:10:48+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>CakePHPのMedia Plugin 1.3が動かない</title>
+    <link href="/2010/10/12/media-plugin-1.3-not-work" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/10/12/media-plugin-1.3-not-work</id>
+    <content type="html">&lt;p&gt;動かしてるサイトのCakePHPのバージョンを最新版の1.3.4に上げようと思って、Media PluginもCakePHP 1.3対応バージョンの1.3alphaにアップデートしようとした。&lt;/p&gt;
+
+&lt;p&gt;とりあえず本体を &lt;code&gt;git clone http://github.com/cakephp/cakephp.git&lt;/code&gt; し、Media Pluginを &lt;code&gt;git clone http://github.com/davidpersson/media.git&lt;/code&gt; してみた。&lt;/p&gt;
+
+&lt;p&gt;Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。結局、プロジェクトの中の &lt;code&gt;docs&lt;/code&gt; ディレクトリにドキュメントが格納されていたのを発見したので（&lt;a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&amp;apos;s media - GitHub'&gt;docs at 1.3 from davidpersson&amp;#8217;s media - GitHub&lt;/a&gt;）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど結局できなかった。&lt;/p&gt;
+
+&lt;p&gt;まず第一に、クラス名が変わってる。&lt;code&gt;Media.Medium&lt;/code&gt; だったのが &lt;code&gt;Media.Media&lt;/code&gt; になってる。Viewファイル内での変数も &lt;code&gt;$medium&lt;/code&gt; ではなく、 &lt;code&gt;$media&lt;/code&gt; になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。&lt;/p&gt;
+
+&lt;p&gt;さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（&lt;a href='http://github.com/davidpersson/mm' title='davidpersson&amp;apos;s mm at master - GitHub'&gt;davidpersson&amp;#8217;s mm at master - GitHub&lt;/a&gt;）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。&lt;/p&gt;
+
+&lt;p&gt;RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れた身からするとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>RVMのRubyをTextMateで使う</title>
@@ -22,7 +40,7 @@
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; ruby hogehoge.rb
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;とか面倒くさいことうやらずにすみます。&lt;/p&gt;
+&lt;p&gt;とか面倒くさいことをやらずにすみます。&lt;/p&gt;
 
 &lt;p&gt;で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに &lt;code&gt;gem update&lt;/code&gt; でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。&lt;/p&gt;
 
@@ -89,11 +107,11 @@
     <id>http://tech.portalshit.net//2010/08/31/rubykaigi2010</id>
     <content type="html">&lt;p&gt;RubyKaigi 2010に行ったのでその感想を軽く。&lt;/p&gt;
 
-&lt;h4 id='id60'&gt;自分のスペック&lt;/h4&gt;
+&lt;h4 id='id6'&gt;自分のスペック&lt;/h4&gt;
 
 &lt;p&gt;Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。&lt;/p&gt;
 
-&lt;h4 id='id61'&gt;感想&lt;/h4&gt;
+&lt;h4 id='id7'&gt;感想&lt;/h4&gt;
 
 &lt;p&gt;永和システムマネジメント&lt;del&gt;永和システム&lt;/del&gt;さんの「&lt;a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'&gt;Head First ふつうのシステム開発&lt;/a&gt;」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。&lt;/p&gt;
 
@@ -187,11 +205,11 @@
 
 &lt;p&gt;いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。&lt;/p&gt;
 
-&lt;h3 id='id58'&gt;作業詳細&lt;/h3&gt;
+&lt;h3 id='id4'&gt;作業詳細&lt;/h3&gt;
 
 &lt;p&gt;このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは &lt;code&gt;sqlite3-ruby&lt;/code&gt; しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。&lt;/p&gt;
 
-&lt;h4 id='id59'&gt;やったこと&lt;/h4&gt;
+&lt;h4 id='id5'&gt;やったこと&lt;/h4&gt;
 
 &lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;#8220;hogehoge&amp;#8221; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
@@ -393,7 +411,7 @@
 &lt;/div&gt;
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
-&lt;h3 id='id57'&gt;まとめ&lt;/h3&gt;
+&lt;h3 id='id3'&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;まとめると、&lt;/p&gt;
 &lt;ol&gt;
@@ -993,7 +1011,7 @@
 
 &lt;p&gt;などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。&lt;/p&gt;
 
-&lt;h3 id='id56'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id2'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
@@ -1059,7 +1077,7 @@
 
 &lt;p&gt;Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。&lt;/p&gt;
 
-&lt;h3 id='id55'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id1'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;一晩寝て起きたら動いてた。&lt;/p&gt;</content>
   </entry>
