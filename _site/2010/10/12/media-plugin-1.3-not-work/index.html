@@ -35,13 +35,15 @@
 
 <p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p>
 
-<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。結局、プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&apos;s media - GitHub'>docs at 1.3 from davidpersson&#8217;s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど結局できなかった。</p>
+<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&apos;s media - GitHub'>docs at 1.3 from davidpersson&#8217;s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。</p>
 
 <p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p>
 
 <p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href='http://github.com/davidpersson/mm' title='davidpersson&apos;s mm at master - GitHub'>davidpersson&#8217;s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
 
-<p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れた身からするとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
+<p>Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。</p>
+
+<p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
 							
 				<div id="related-post">
 					<ul>

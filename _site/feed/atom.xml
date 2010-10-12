@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-10-12T20:10:48+09:00</updated>
+  <updated>2010-10-13T08:38:04+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -20,13 +20,15 @@
 
 &lt;p&gt;とりあえず本体を &lt;code&gt;git clone http://github.com/cakephp/cakephp.git&lt;/code&gt; し、Media Pluginを &lt;code&gt;git clone http://github.com/davidpersson/media.git&lt;/code&gt; してみた。&lt;/p&gt;
 
-&lt;p&gt;Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。結局、プロジェクトの中の &lt;code&gt;docs&lt;/code&gt; ディレクトリにドキュメントが格納されていたのを発見したので（&lt;a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&amp;apos;s media - GitHub'&gt;docs at 1.3 from davidpersson&amp;#8217;s media - GitHub&lt;/a&gt;）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど結局できなかった。&lt;/p&gt;
+&lt;p&gt;Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の &lt;code&gt;docs&lt;/code&gt; ディレクトリにドキュメントが格納されていたのを発見したので（&lt;a href='http://github.com/davidpersson/media/tree/1.3/docs/' title='docs at 1.3 from davidpersson&amp;apos;s media - GitHub'&gt;docs at 1.3 from davidpersson&amp;#8217;s media - GitHub&lt;/a&gt;）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。&lt;/p&gt;
 
 &lt;p&gt;まず第一に、クラス名が変わってる。&lt;code&gt;Media.Medium&lt;/code&gt; だったのが &lt;code&gt;Media.Media&lt;/code&gt; になってる。Viewファイル内での変数も &lt;code&gt;$medium&lt;/code&gt; ではなく、 &lt;code&gt;$media&lt;/code&gt; になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。&lt;/p&gt;
 
 &lt;p&gt;さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（&lt;a href='http://github.com/davidpersson/mm' title='davidpersson&amp;apos;s mm at master - GitHub'&gt;davidpersson&amp;#8217;s mm at master - GitHub&lt;/a&gt;）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。&lt;/p&gt;
 
-&lt;p&gt;RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れた身からするとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。&lt;/p&gt;</content>
+&lt;p&gt;Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。&lt;/p&gt;
+
+&lt;p&gt;RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。&lt;/p&gt;</content>
   </entry>
   
   <entry>

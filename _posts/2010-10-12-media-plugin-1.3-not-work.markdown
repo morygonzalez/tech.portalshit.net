@@ -9,10 +9,12 @@ layout: post
 
 とりあえず本体を `git clone http://github.com/cakephp/cakephp.git` し、Media Pluginを `git clone http://github.com/davidpersson/media.git` してみた。
 
-Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。結局、プロジェクトの中の `docs` ディレクトリにドキュメントが格納されていたのを発見したので（[docs at 1.3 from davidpersson's media - GitHub](http://github.com/davidpersson/media/tree/1.3/docs/ "docs at 1.3 from davidpersson's media - GitHub")）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。
+Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の `docs` ディレクトリにドキュメントが格納されていたのを発見したので（[docs at 1.3 from davidpersson's media - GitHub](http://github.com/davidpersson/media/tree/1.3/docs/ "docs at 1.3 from davidpersson's media - GitHub")）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。
 
 まず第一に、クラス名が変わってる。`Media.Medium` だったのが `Media.Media` になってる。Viewファイル内での変数も `$medium` ではなく、 `$media` になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。
 
 さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（[davidpersson's mm at master - GitHub](http://github.com/davidpersson/mm "davidpersson's mm at master - GitHub")）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。
 
-RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れた身からするとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。
+Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。
+
+RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。
