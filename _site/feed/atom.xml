@@ -4,12 +4,38 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-10-13T08:38:04+09:00</updated>
+  <updated>2010-10-20T10:33:05+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Ruby 1.9とRails 3とRSpec 2と</title>
+    <link href="/2010/10/20/ruby1.9-rails3-rspec-2" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/10/20/ruby1.9-rails3-rspec-2</id>
+    <content type="html">&lt;p&gt;Ruby 1.9、Rails 3、RSpec 2で開発してる。いままでRubyとRailsになれるのに一杯一杯でテスト駆動開発できてなかったので、きちんとテストファーストでやることにした。&lt;/p&gt;
+
+&lt;p&gt;そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; spec -c spec/*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;とかやってもエラーが出る。 &lt;code&gt;which spec&lt;/code&gt; すると &lt;code&gt;/usr/bin/spec&lt;/code&gt; と出ちゃう。どうやら &lt;code&gt;spec&lt;/code&gt; で発動されるのはRSpec 1.3のものみたい。&lt;/p&gt;
+
+&lt;p&gt;RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; rspec -c spec/*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;これできちんとテストコードが実行された。かと思いきやFailureが。&lt;/p&gt;
+
+&lt;p&gt;Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;と書いてテキストエンコーディングを明示してあげないといけない。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>CakePHPのMedia Plugin 1.3が動かない</title>
@@ -109,11 +135,11 @@
     <id>http://tech.portalshit.net//2010/08/31/rubykaigi2010</id>
     <content type="html">&lt;p&gt;RubyKaigi 2010に行ったのでその感想を軽く。&lt;/p&gt;
 
-&lt;h4 id='id6'&gt;自分のスペック&lt;/h4&gt;
+&lt;h4 id='id24'&gt;自分のスペック&lt;/h4&gt;
 
 &lt;p&gt;Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。&lt;/p&gt;
 
-&lt;h4 id='id7'&gt;感想&lt;/h4&gt;
+&lt;h4 id='id25'&gt;感想&lt;/h4&gt;
 
 &lt;p&gt;永和システムマネジメント&lt;del&gt;永和システム&lt;/del&gt;さんの「&lt;a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'&gt;Head First ふつうのシステム開発&lt;/a&gt;」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。&lt;/p&gt;
 
@@ -207,11 +233,11 @@
 
 &lt;p&gt;いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。&lt;/p&gt;
 
-&lt;h3 id='id4'&gt;作業詳細&lt;/h3&gt;
+&lt;h3 id='id22'&gt;作業詳細&lt;/h3&gt;
 
 &lt;p&gt;このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは &lt;code&gt;sqlite3-ruby&lt;/code&gt; しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。&lt;/p&gt;
 
-&lt;h4 id='id5'&gt;やったこと&lt;/h4&gt;
+&lt;h4 id='id23'&gt;やったこと&lt;/h4&gt;
 
 &lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;#8220;hogehoge&amp;#8221; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
@@ -413,7 +439,7 @@
 &lt;/div&gt;
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
-&lt;h3 id='id3'&gt;まとめ&lt;/h3&gt;
+&lt;h3 id='id21'&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;まとめると、&lt;/p&gt;
 &lt;ol&gt;
@@ -1013,7 +1039,7 @@
 
 &lt;p&gt;などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。&lt;/p&gt;
 
-&lt;h3 id='id2'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id20'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
@@ -1079,7 +1105,7 @@
 
 &lt;p&gt;Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。&lt;/p&gt;
 
-&lt;h3 id='id1'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id19'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;一晩寝て起きたら動いてた。&lt;/p&gt;</content>
   </entry>

@@ -1,0 +1,34 @@
+---
+id: 41
+title: Ruby 1.9とRails 3とRSpec 2と
+categories:
+- Ruby
+- Rails
+layout: post
+---
+
+Ruby 1.9、Rails 3、RSpec 2で開発してる。いままでRubyとRailsになれるのに一杯一杯でテスト駆動開発できてなかったので、きちんとテストファーストでやることにした。
+
+そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。
+
+{% highlight console %}
+$ spec -c spec/*
+{% endhighlight %}
+
+とかやってもエラーが出る。 `which spec` すると `/usr/bin/spec` と出ちゃう。どうやら `spec` で発動されるのはRSpec 1.3のものみたい。
+
+RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。
+
+{% highlight console %}
+$ rspec -c spec/*
+{% endhighlight %}
+
+これできちんとテストコードが実行された。かと思いきやFailureが。
+
+Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に
+
+{% highlight ruby %}
+# -*- coding: utf-8 -*-
+{% endhighlight %}
+
+と書いてテキストエンコーディングを明示してあげないといけない。
