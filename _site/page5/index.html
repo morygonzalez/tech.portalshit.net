@@ -36,6 +36,79 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
+    <div class="articleinfo">Posted on 28 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
+
+<p>そういうわけで正しくは、</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
+  <span class='k'>end</span>
+
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
+<p>と書くそうです。</p>
+
+<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span>
+    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;&quot;</span>
+  <span class='k'>end</span>
+
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='n'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
+<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
+<p>でも同じ結果を出力しますね。</p>
+
+<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
+
+<blockquote>
+<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
+</blockquote>
+
+<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
+  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>b</span><span class='o'>=</span><span class='s2'>&quot;&quot;</span><span class='p'>)</span>
+    <span class='vi'>@a</span> <span class='o'>=</span> <span class='n'>b</span>
+  <span class='k'>end</span>
+
+  <span class='k'>def</span> <span class='nf'>hoge</span>
+    <span class='nb'>print</span> <span class='vi'>@a</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='s2'>&quot;</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+
+<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Fuga&quot;</span><span class='p'>)</span>
+<span class='n'>piyo</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;Piyo&quot;</span><span class='p'>)</span>
+
+<span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+<span class='n'>piyo</span><span class='o'>.</span><span class='n'>hoge</span>
+</code></pre>
+</div>
+<p>で、これを実行すると</p>
+<div class='highlight'><pre><code class='console'><span class='go'>Fuga</span>
+<span class='go'>Piyo</span>
+</code></pre>
+</div>
+<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
+    <a href="http://tech.portalshit.net/2010/06/28/i-had-better-review-ruby/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
     <div class="articleinfo">Posted on 25 Jun 2010 by morygonzalez |
 	
@@ -134,42 +207,6 @@
 <p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>
     <a href="http://tech.portalshit.net/2010/06/15/im-fed-up-with-cakephp/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
-    <div class="articleinfo">Posted on 14 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/misc/">misc</a>
-	</div>
-    <p>このブログのCMSをMephistoから<a href='http://github.com/mojombo/jekyll' title='mojombo&apos;s jekyll at master - GitHub'>jekyll</a>に変えてみた。</p>
-
-<p>Mephistoは公式サイトつながらないし、Mephisto使ってた外国のGeek連中がここ一年くらいでこぞってJekyllに移行してるみたいなのでこのビッグウェーブに乗ってみた。</p>
-
-<h3 id='jekyll__cms'>Jekyll = 静的CMS</h3>
-
-<p>しばらくJekyllの使い方が分からなくて格闘してたけど、やっと使い方が分かった。これは静的なCMSであって動的なCMSではない。Movable Typeに似てる。それをGeekなスタイルでやる感じ。</p>
-
-<h3 id='ruby'>Rubyが入ってるサーバーはいらない</h3>
-
-<p>コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は<a href='http://disqus.com/overview/' title='DISQUS | Overview'>DISQUS</a>とかに外注すればOK。</p>
-
-<p>ちょっと話題がずれるけど、DISQUSって便利そうですよね。他人のブログにコメント書いたあとってそのコントロール権みたいのはブログの持ち主に移行するけど、DISQUSみたいなサービスを利用すればコメントを書いた本人が過去の自分のコメントをトラックしやすくなる。ブログ主にしたってスパム対策とかもやりやすくなる。自前で自分のブログにコメント欄を持つって時代は終わったのかもね。いまはTwitterとかもあるし。</p>
-
-<h3 id='mephisto'>Mephistoからの移行について</h3>
-
-<p>Jekyllのgithubのwikiに移行方法が載っけてあるけど（<a href='http://wiki.github.com/mojombo/jekyll/blog-migrations' title='Blog Migrations - jekyll - GitHub'>Blog Migrations - jekyll - GitHub</a>）、これわかりにくい。というかMephistoをMySQLで運用してないとスクリプトをそのまんまでは利用できない。結果から書くと僕はMephistoはSQLite3で運用してたので移行スクリプトを使えなかった。</p>
-
-<p>一応MephistoのDBをSQLite3からMySQLに変更してコンバートすることも試してみたけど、DreamHost上では <code>gem install mysqlplus</code> が <code>sudo</code> 権限がないために実行できず（なぜかユーザーディレクトリへのインストールもはねられる）、ローカルのMacBook上ではActiveRecordとかその辺でエラーが出て（MephistoはRails 2.2.2以下じゃないと動かないみたい）、Railsのバージョンを下げるとかも試してみたんだけどエラーが出続けるので諦めてしまった。</p>
-
-<p>そういうわけでして、記事数が16本と少なかったこともあり、ちまちま手書きでMephistoからJekyllに移行しました。</p>
-
-<p>コメント欄の設置（DISQUSを利用）とかフィードの生成とかカテゴリーの表示とかができてないけど、暇を見つけていじっていく予定です。</p>
-
-<h3 id='jekyll'>全般的なJekyllの使用感</h3>
-
-<p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href='http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy' title='tasks/deploy at master from henrik&apos;s henrik.nyh.se - GitHub'>tasks/deploy at master from henrik&#8217;s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
-
-<p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>
-    <a href="http://tech.portalshit.net/2010/06/14/migrated-to-jekyll/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -195,6 +232,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
 				
 					<li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
 				

@@ -4,12 +4,47 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-10-20T10:33:05+09:00</updated>
+  <updated>2010-10-26T21:33:42+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>iTermでVimを使うと矢印キーでカーソル移動できない</title>
+    <link href="/2010/10/26/iterm-arrow-key-issue" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/10/26/iterm-arrow-key-issue</id>
+    <content type="html">&lt;p&gt;iTerm 2が素晴らしいということなのでiTermをぼちぼち使ってるんですけど、Vimを起動したときに矢印キーで移動できないことが分かった。「Vimで矢印キーでカーソル移動とか小学生かよ」みたいなご意見もあるでしょうけど、入力モードのときに移動したくなったら &lt;code&gt;j, k, h, l&lt;/code&gt; じゃ移動できないでしょ？ そこで矢印キーですよ。&lt;/p&gt;
+
+&lt;p&gt;iTermでVimを使っているときも矢印キーでカーソル移動できないものかと、軽くググってみたところ次のような記事に遭遇した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://d.hatena.ne.jp/takimo/20080308/1205047505' title='MacBookのiTermでVimを使う時矢印キーで移動が出来ないときの解決方法 - Nobody is perfect.'&gt;MacBookのiTermでVimを使う時矢印キーで移動が出来ないときの解決方法 - Nobody is perfect.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これを参考にとりあえず以下のように &lt;code&gt;.zshrc&lt;/code&gt; に書いた。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='k'&gt;case&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;${TERM_PROGRAM}&amp;quot;&lt;/span&gt; in
+iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
+  &lt;span class='nb'&gt;export &lt;/span&gt;&lt;span class='nv'&gt;TERM&lt;/span&gt;&lt;span class='o'&gt;=&lt;/span&gt;dtterm
+&lt;span class='k'&gt;esac&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;しかし、これはちょっと自分的にはいただけなかった。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nb'&gt;export &lt;/span&gt;&lt;span class='nv'&gt;TERM&lt;/span&gt;&lt;span class='o'&gt;=&lt;/span&gt;dtterm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： &lt;a href='http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/' title='Vimで編集を終了した後、元のコンソールの状態を復元したい | tech.portalshit.net - CakePHP, Rails, JavaScript'&gt;Vimで編集を終了した後、元のコンソールの状態を復元したい&lt;/a&gt;）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;.termcap&lt;/code&gt; に何か書くことも考えたけど、 &lt;code&gt;.termcap&lt;/code&gt; で条件分岐する書き方が分からなかったのでさらにググってみた。すると外人が「iTermの設定で何とかできる」みたいなことを書いてるのを発見した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.help2go.com/Tutorials/Mac_OS/Using_Arrow_Keys_in_iTerm_with_vi.html' title='Help2Go - free computer help and advice - Using Arrow Keys in iTerm with vi'&gt;Help2Go - free computer help and advice - Using Arrow Keys in iTerm with vi&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;なるほど、 &lt;code&gt;.vimrc&lt;/code&gt; とか &lt;code&gt;.zshrc&lt;/code&gt; とか側で回避する方法ばかり考えていたけどiTermで回避する方法を考えればよいわけか。&lt;/p&gt;
+
+&lt;p&gt;で、iTermを開いてみたところ、iTerm 1の頃から引き継いでいるBookmarkのDefaultの設定がよくなかったみたい。具体的には矢印キーそれぞれに &lt;code&gt;^[[A&lt;/code&gt; とか &lt;code&gt;^[[B&lt;/code&gt; みたいなキーが割り振られていて、このせいで矢印キーが使えなくなっていたわけだ。&lt;/p&gt;
+
+&lt;p&gt;Load Presetから &amp;#8220;Use xterm Defaults&amp;#8221; を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Ruby 1.9とRails 3とRSpec 2と</title>
@@ -135,11 +170,11 @@
     <id>http://tech.portalshit.net//2010/08/31/rubykaigi2010</id>
     <content type="html">&lt;p&gt;RubyKaigi 2010に行ったのでその感想を軽く。&lt;/p&gt;
 
-&lt;h4 id='id24'&gt;自分のスペック&lt;/h4&gt;
+&lt;h4 id='id6'&gt;自分のスペック&lt;/h4&gt;
 
 &lt;p&gt;Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。&lt;/p&gt;
 
-&lt;h4 id='id25'&gt;感想&lt;/h4&gt;
+&lt;h4 id='id7'&gt;感想&lt;/h4&gt;
 
 &lt;p&gt;永和システムマネジメント&lt;del&gt;永和システム&lt;/del&gt;さんの「&lt;a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'&gt;Head First ふつうのシステム開発&lt;/a&gt;」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。&lt;/p&gt;
 
@@ -233,11 +268,11 @@
 
 &lt;p&gt;いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。&lt;/p&gt;
 
-&lt;h3 id='id22'&gt;作業詳細&lt;/h3&gt;
+&lt;h3 id='id4'&gt;作業詳細&lt;/h3&gt;
 
 &lt;p&gt;このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは &lt;code&gt;sqlite3-ruby&lt;/code&gt; しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。&lt;/p&gt;
 
-&lt;h4 id='id23'&gt;やったこと&lt;/h4&gt;
+&lt;h4 id='id5'&gt;やったこと&lt;/h4&gt;
 
 &lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;#8220;hogehoge&amp;#8221; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
@@ -439,7 +474,7 @@
 &lt;/div&gt;
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
-&lt;h3 id='id21'&gt;まとめ&lt;/h3&gt;
+&lt;h3 id='id3'&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;まとめると、&lt;/p&gt;
 &lt;ol&gt;
@@ -459,7 +494,7 @@
     <id>http://tech.portalshit.net//2010/07/09/cant-live-up-with-oauth</id>
     <content type="html">&lt;p&gt;RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src='http://tech.portalshit.net/images/27-oauth.png' alt='OAuthの利用イメージ' /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt='OAuthの利用イメージ' src='http://tech.portalshit.net/images/27-oauth.png' /&gt;&lt;/p&gt;
 
 &lt;p&gt;疑問点がいくつかある。&lt;/p&gt;
 
@@ -1039,7 +1074,7 @@
 
 &lt;p&gt;などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。&lt;/p&gt;
 
-&lt;h3 id='id20'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id2'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
@@ -1105,7 +1140,7 @@
 
 &lt;p&gt;Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。&lt;/p&gt;
 
-&lt;h3 id='id19'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id1'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;一晩寝て起きたら動いてた。&lt;/p&gt;</content>
   </entry>
