@@ -36,6 +36,53 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/09/02/clickable-map-coordinates-with-javascript">JavaScriptでClickable Mapの座標を取得する</a></h2>
+    <div class="articleinfo">Posted on 02 Sep 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
+	</div>
+    <p>みなさん、クリッカブルマップしてますか？ あんなくそみたいなもの使って地図をつくるなんて発狂しそうなこと、ここを読みそうな人はやってないと思いますが、僕の職場のお客さんとか上司は「Google Mapsには心がこもってない」とか言うので、クソみたいイラストをクリッカブルマップにして地図を作ってるんですよ。まじでかわいそうな僕ちゃん。</p>
+
+<p>ご存じない方のためにクリッカブルマップの作り方を説明しておくと、まず画像を作り、それをHTMLに貼り付け、HTMLオーサリングツール（うちの職場ではDreamWeaver）のGUIエディタでちまちま画像上のクリッカブルにしたい位置を選択するという、血尿が出そうなくらい面倒くさい作業を強いられます。</p>
+
+<p>最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。</p>
+
+<p>コードはこんな感じ。</p>
+<div class='highlight'><pre><code class='html'><span class='nt'>&lt;html&gt;</span>
+  <span class='nt'>&lt;head&gt;</span>
+    <span class='nt'>&lt;script&gt;</span>
+      <span class='kd'>function</span> <span class='nx'>getPosition</span><span class='p'>(){</span>
+        <span class='kd'>var</span> <span class='nx'>x</span><span class='p'>,</span> <span class='nx'>y</span><span class='p'>;</span>
+        <span class='kd'>var</span> <span class='nx'>image</span> <span class='o'>=</span> <span class='nb'>document</span><span class='p'>.</span><span class='nx'>getElementById</span><span class='p'>(</span><span class='s1'>&#39;image&#39;</span><span class='p'>);</span>
+        <span class='nx'>image</span><span class='p'>.</span><span class='nx'>onclick</span> <span class='o'>=</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>e</span><span class='p'>)</span> <span class='p'>{</span>
+          <span class='nx'>x</span> <span class='o'>=</span> <span class='nx'>e</span><span class='p'>.</span><span class='nx'>layerX</span><span class='p'>;</span>
+          <span class='nx'>y</span> <span class='o'>=</span> <span class='nx'>e</span><span class='p'>.</span><span class='nx'>layerY</span><span class='p'>;</span>
+          <span class='nb'>document</span><span class='p'>.</span><span class='nx'>getElementById</span><span class='p'>(</span><span class='s2'>&quot;pointX&quot;</span><span class='p'>).</span><span class='nx'>value</span> <span class='o'>=</span> <span class='nx'>x</span><span class='p'>;</span>
+          <span class='nb'>document</span><span class='p'>.</span><span class='nx'>getElementById</span><span class='p'>(</span><span class='s2'>&quot;pointY&quot;</span><span class='p'>).</span><span class='nx'>value</span> <span class='o'>=</span> <span class='nx'>y</span><span class='p'>;</span>
+        <span class='p'>}</span>
+      <span class='p'>}</span>
+
+      <span class='nb'>window</span><span class='p'>.</span><span class='nx'>onload</span> <span class='o'>=</span> <span class='nx'>getPosition</span><span class='p'>;</span>
+    <span class='nt'>&lt;/script&gt;</span>
+  <span class='nt'>&lt;/head&gt;</span>
+  <span class='nt'>&lt;body&gt;</span>
+    <span class='nt'>&lt;div&gt;</span>
+      <span class='nt'>&lt;img</span> <span class='na'>src=</span><span class='s'>&quot;path/to/image&quot;</span> <span class='na'>id=</span><span class='s'>&quot;image&quot;</span> <span class='na'>style=</span><span class='s'>&quot;position: absolute; top: auto; left: auto; width: 500px; height: 332px&quot;</span> <span class='nt'>/&gt;</span>
+    <span class='nt'>&lt;/div&gt;</span>
+    <span class='nt'>&lt;form</span> <span class='na'>action=</span><span class='s'>&quot;/&quot;</span> <span class='na'>method=</span><span class='s'>&quot;post&quot;</span><span class='nt'>&gt;</span>
+      <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>id=</span><span class='s'>&quot;pointX&quot;</span> <span class='na'>name=</span><span class='s'>&quot;pointX&quot;</span> <span class='na'>value=</span><span class='s'>&quot;&quot;</span> <span class='nt'>/&gt;</span>
+      <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;text&quot;</span> <span class='na'>id=</span><span class='s'>&quot;pointY&quot;</span> <span class='na'>name=</span><span class='s'>&quot;pointY&quot;</span> <span class='na'>value=</span><span class='s'>&quot;&quot;</span> <span class='nt'>/&gt;</span>
+      <span class='nt'>&lt;input</span> <span class='na'>type=</span><span class='s'>&quot;submit&quot;</span> <span class='na'>value=</span><span class='s'>&quot;発射！&quot;</span> <span class='nt'>&gt;</span>
+    <span class='nt'>&lt;/form&gt;</span>
+  <span class='nt'>&lt;/body&gt;</span>
+<span class='nt'>&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。</p>
+
+<p><a href='http://d.hatena.ne.jp/sandai/20091105/p1' title='座標取得するプロパティのそれぞれの違い - 三等兵'>座標取得するプロパティのそれぞれの違い - 三等兵</a></p>
+    <a href="http://tech.portalshit.net/2010/09/02/clickable-map-coordinates-with-javascript/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></h2>
     <div class="articleinfo">Posted on 31 Aug 2010 by morygonzalez |
 	
@@ -43,11 +90,11 @@
 	</div>
     <p>RubyKaigi 2010に行ったのでその感想を軽く。</p>
 
-<h4 id='id6'>自分のスペック</h4>
+<h4 id='id33'>自分のスペック</h4>
 
 <p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p>
 
-<h4 id='id7'>感想</h4>
+<h4 id='id34'>感想</h4>
 
 <p>永和システムマネジメント<del>永和システム</del>さんの「<a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'>Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p>
 
@@ -143,11 +190,11 @@
 
 <p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p>
 
-<h3 id='id4'>作業詳細</h3>
+<h3 id='id31'>作業詳細</h3>
 
 <p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p>
 
-<h4 id='id5'>やったこと</h4>
+<h4 id='id32'>やったこと</h4>
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &#8220;hogehoge&#8221; という部分なのが邪魔なので削りたかった。</p>
 <div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
@@ -236,16 +283,6 @@
 <hr /><p id='footnote-34-1'>※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>
     <a href="http://tech.portalshit.net/2010/08/13/jekyll-with-pygments/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
-    <div class="articleinfo">Posted on 12 Aug 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	
-		<a href="http://tech.portalshit.net/OAuth/">OAuth</a>
-	</div>
-    <p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>
-    <a href="http://tech.portalshit.net/2010/08/12/fed-up-with-authlogic-oauth/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -271,6 +308,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
 				

@@ -4,12 +4,22 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-10-26T21:33:42+09:00</updated>
+  <updated>2010-12-12T02:47:19+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>オープンソースカンファレンス福岡2010</title>
+    <link href="/2010/12/11/open-source-conference" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2010/12/11/open-source-conference</id>
+    <content type="html">&lt;p&gt;福岡工業大学で行われた、オープンソースカンファレンス福岡2010に行った。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.usp-lab.com/' title='Universal Shell Programing Laboratory'&gt;usp lab&lt;/a&gt;のシェルスクリプトで業務用基幹システムを開発する話が面白かった。一般的なプログラミング言語は使わずに、シェルで生のLinuxを使って作業を行わせる。DBは使わずデータはTextで持つ。HTTP関連のあれこれもシェルスクリプトで行う。このためセキュリティのことは考えないといけないらしいんだけど（フロントエンドとバックエンドがシェルスクリプトでつながってるため）、大手のシステム会社が100人月とかみたいな見積を出す案件を10人月程度でやったそう。具体的には無印良品のシステムとか。遅めに会場に入ったので資料は売り切れで貰えず、細かい数字は自信がないんだけど、無印のやつは一年間に10億円かかってたシステム関連の費用が2億円程度に抑えられるようになったそう。mknodとかsedコマンドを駆使した並列処理のデモは本当に面白かった。へー、シェルスクリプトだけでこんなにできるんだー、っていう感じ。1億行のテキストデータ処理を53秒で終わらせたりとか。「Linuxはなるべく生で使いましょう」という言葉がとても深く印象に残っている。Railsみたいな便利なフレームワークを使った開発とはまったく異なるけど、UNIXの「小さいものは美しい」という理念のもと、とんでもなく効率的に開発を行っている様がとてつもなくクールだった。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>iTermでVimを使うと矢印キーでカーソル移動できない</title>
@@ -170,11 +180,11 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
     <id>http://tech.portalshit.net//2010/08/31/rubykaigi2010</id>
     <content type="html">&lt;p&gt;RubyKaigi 2010に行ったのでその感想を軽く。&lt;/p&gt;
 
-&lt;h4 id='id6'&gt;自分のスペック&lt;/h4&gt;
+&lt;h4 id='id33'&gt;自分のスペック&lt;/h4&gt;
 
 &lt;p&gt;Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。&lt;/p&gt;
 
-&lt;h4 id='id7'&gt;感想&lt;/h4&gt;
+&lt;h4 id='id34'&gt;感想&lt;/h4&gt;
 
 &lt;p&gt;永和システムマネジメント&lt;del&gt;永和システム&lt;/del&gt;さんの「&lt;a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'&gt;Head First ふつうのシステム開発&lt;/a&gt;」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。&lt;/p&gt;
 
@@ -268,11 +278,11 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;p&gt;いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。&lt;/p&gt;
 
-&lt;h3 id='id4'&gt;作業詳細&lt;/h3&gt;
+&lt;h3 id='id31'&gt;作業詳細&lt;/h3&gt;
 
 &lt;p&gt;このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは &lt;code&gt;sqlite3-ruby&lt;/code&gt; しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。&lt;/p&gt;
 
-&lt;h4 id='id5'&gt;やったこと&lt;/h4&gt;
+&lt;h4 id='id32'&gt;やったこと&lt;/h4&gt;
 
 &lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;#8220;hogehoge&amp;#8221; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
@@ -474,7 +484,7 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;/div&gt;
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
-&lt;h3 id='id3'&gt;まとめ&lt;/h3&gt;
+&lt;h3 id='id30'&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;まとめると、&lt;/p&gt;
 &lt;ol&gt;
@@ -1074,7 +1084,7 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;p&gt;などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。&lt;/p&gt;
 
-&lt;h3 id='id2'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id29'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
@@ -1140,7 +1150,7 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;p&gt;Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。&lt;/p&gt;
 
-&lt;h3 id='id1'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id28'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;一晩寝て起きたら動いてた。&lt;/p&gt;</content>
   </entry>

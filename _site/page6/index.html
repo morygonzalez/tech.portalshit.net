@@ -36,6 +36,18 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/15/im-fed-up-with-cakephp">CakePHPはSchemaとかがしょぼいしうんざりする</a></h2>
+    <div class="articleinfo">Posted on 15 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+	</div>
+    <p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
+
+<p>これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。</p>
+
+<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>
+    <a href="http://tech.portalshit.net/2010/06/15/im-fed-up-with-cakephp/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
     <div class="articleinfo">Posted on 14 Jun 2010 by morygonzalez |
 	
@@ -118,14 +130,6 @@
 <p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>
     <a href="http://tech.portalshit.net/2010/06/03/rails-has-subdirectory-in-controller/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
-    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	</div>
-    <p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
-    <a href="http://tech.portalshit.net/2010/06/03/hard-to-learn-rails/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -151,6 +155,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
 				

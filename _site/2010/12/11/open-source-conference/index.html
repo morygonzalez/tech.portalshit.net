@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Gitのhookを使ってDreamhost上のJekyllに記事を公開 |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>オープンソースカンファレンス福岡2010 |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,40 +25,15 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/07/09/cant-live-up-with-oauth" title="OAuthがwakaranai">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2010/10/26/iterm-arrow-key-issue" title="iTermでVimを使うと矢印キーでカーソル移動できない">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/07/15/get-stuck-with-oauth" title="oauth-pluginではまった">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>Gitのhookを使ってDreamhost上のJekyllに記事を公開</h2>
-				<p>やってみた。以下を参考にした。</p>
+				<h2>オープンソースカンファレンス福岡2010</h2>
+				<p>福岡工業大学で行われた、オープンソースカンファレンス福岡2010に行った。</p>
 
-<p><a href='http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>Deploying a jekyll generated site</a></p>
-
-<p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p>
-
-<p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p>
-
-<p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
-<div class='highlight'><pre><code class='bash'>    <span class='c'>#! /bin/sh</span>
-    <span class='nb'>unset </span>GIT_DIR <span class='o'>&amp;&amp;</span> <span class='nb'>cd</span> <span class='nv'>$HOME</span>/tech.portalshit.net/ <span class='o'>&amp;&amp;</span> git pull
-</code></pre>
-</div>
-<p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
-
-<h3 id='id30'>まとめ</h3>
-
-<p>まとめると、</p>
-<ol>
-<li>記事を作成するローカルリポジトリ</li>
-<li>ローカルリポジトリをpushするリモートリポジトリ</li>
-<li>リモートリポジトリをcloneする公開用リポジトリ</li>
-</ol>
-<p>の三つが必要なことを忘れないようにしてくだしあ。</p>
-
-<p>これであなたもハイド博士だ！</p>
+<p><a href='http://www.usp-lab.com/' title='Universal Shell Programing Laboratory'>usp lab</a>のシェルスクリプトで業務用基幹システムを開発する話が面白かった。一般的なプログラミング言語は使わずに、シェルで生のLinuxを使って作業を行わせる。DBは使わずデータはTextで持つ。HTTP関連のあれこれもシェルスクリプトで行う。このためセキュリティのことは考えないといけないらしいんだけど（フロントエンドとバックエンドがシェルスクリプトでつながってるため）、大手のシステム会社が100人月とかみたいな見積を出す案件を10人月程度でやったそう。具体的には無印良品のシステムとか。遅めに会場に入ったので資料は売り切れで貰えず、細かい数字は自信がないんだけど、無印のやつは一年間に10億円かかってたシステム関連の費用が2億円程度に抑えられるようになったそう。mknodとかsedコマンドを駆使した並列処理のデモは本当に面白かった。へー、シェルスクリプトだけでこんなにできるんだー、っていう感じ。1億行のテキストデータ処理を53秒で終わらせたりとか。「Linuxはなるべく生で使いましょう」という言葉がとても深く印象に残っている。Railsみたいな便利なフレームワークを使った開発とはまったく異なるけど、UNIXの「小さいものは美しい」という理念のもと、とんでもなく効率的に開発を行っている様がとてつもなくクールだった。</p>
 							
 				<div id="related-post">
 					<ul>
@@ -84,10 +59,6 @@
 			<div id="sidebar">
 				<h3>Categories</h3>
 				<ul>
-				
-					<li><a href="http://tech.portalshit.net/jekyll/">jekyll</a></li>
-				
-					<li><a href="http://tech.portalshit.net/git/">git</a></li>
 				
 				</ul>
 				
