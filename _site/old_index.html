@@ -33,7 +33,7 @@ Posted on 02 Jan 2011 by morygonzalez |
 	
 		<a href='http://tech.portalshit.net/jQuery/'>jQuery</a>
 	
-</div><p>あけましておめでとうございます。なんか2011年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。</p><p>AutoPagerize対応なページで、読み込まれた2ページ目以降でもJavaScriptを動かす方法について調べてみた。oAutoPagerizeのos0xさんのページでまとめられてる。</p><p><a href='http://d.hatena.ne.jp/os0x/20090829/1251556449'>AutoPagerizeで継ぎ足された部分に自分のスクリプトを適用する方法あれこれ - 0xFF</a></p><p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p><div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nb'>window</span><span class='p'>.</span><span class='nx'>AutoPagerize</span><span class='p'>)</span> <span class='p'>{</span>
+</div><p>あけましておめでとうございます。なんか2010年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。</p><p>AutoPagerize対応なページで、読み込まれた2ページ目以降でもJavaScriptを動かす方法について調べてみた。oAutoPagerizeのos0xさんのページでまとめられてる。</p><p><a href='http://d.hatena.ne.jp/os0x/20090829/1251556449'>AutoPagerizeで継ぎ足された部分に自分のスクリプトを適用する方法あれこれ - 0xFF</a></p><p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p><div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nb'>window</span><span class='p'>.</span><span class='nx'>AutoPagerize</span><span class='p'>)</span> <span class='p'>{</span>
   <span class='nb'>window</span><span class='p'>.</span><span class='nx'>AutoPagerize</span><span class='p'>.</span><span class='nx'>addFilter</span><span class='p'>(</span><span class='nx'>fucintion</span><span class='p'>(){</span>
     <span class='c1'>// 実行したい処理</span>
   <span class='p'>});</span>

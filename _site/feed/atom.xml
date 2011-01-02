@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-01-02T12:59:23+09:00</updated>
+  <updated>2011-01-02T13:04:03+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -16,7 +16,7 @@
     <link href="/2011/01/02/make-javascript-runnable-with-autopagerize" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/01/02/make-javascript-runnable-with-autopagerize</id>
-    <content type="html">&lt;p&gt;あけましておめでとうございます。なんか2011年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。&lt;/p&gt;
+    <content type="html">&lt;p&gt;あけましておめでとうございます。なんか2010年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。&lt;/p&gt;
 
 &lt;p&gt;AutoPagerize対応なページで、読み込まれた2ページ目以降でもJavaScriptを動かす方法について調べてみた。oAutoPagerizeのos0xさんのページでまとめられてる。&lt;/p&gt;
 
