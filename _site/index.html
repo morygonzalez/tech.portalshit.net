@@ -30,6 +30,44 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></h2>
+    <div class="articleinfo">Posted on 02 Jan 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
+	
+		<a href="http://tech.portalshit.net/jQuery/">jQuery</a>
+	</div>
+    <p>あけましておめでとうございます。なんか2011年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。</p>
+
+<p>AutoPagerize対応なページで、読み込まれた2ページ目以降でもJavaScriptを動かす方法について調べてみた。oAutoPagerizeのos0xさんのページでまとめられてる。</p>
+
+<p><a href='http://d.hatena.ne.jp/os0x/20090829/1251556449'>AutoPagerizeで継ぎ足された部分に自分のスクリプトを適用する方法あれこれ - 0xFF</a></p>
+
+<p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p>
+<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nb'>window</span><span class='p'>.</span><span class='nx'>AutoPagerize</span><span class='p'>)</span> <span class='p'>{</span>
+  <span class='nb'>window</span><span class='p'>.</span><span class='nx'>AutoPagerize</span><span class='p'>.</span><span class='nx'>addFilter</span><span class='p'>(</span><span class='nx'>fucintion</span><span class='p'>(){</span>
+    <span class='c1'>// 実行したい処理</span>
+  <span class='p'>});</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
+<p>ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に <code>function init()</code> みたいのを書き、その中から呼び出せばよい。そしてその <code>init()</code> を上記 <code>// 実行したい処理</code> 内にも書いてあげればオッケーだ（もちろん <code>window.onload</code> で呼び出す必要もある）。</p>
+
+<p>jQueryについては <code>live()</code> というメソッドがある。これは動的に生成された要素にもスクリプトに適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 <code>live()</code> というメソッドと一緒に、処理を一度しか実行しないというメソッド <code>one()</code> も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。</p>
+
+<p><a href='http://stackoverflow.com/questions/3796207/using-one-with-live-jquery'>Using .one() with .live() jQuery - Stack Overflow</a></p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;処理を適用したい要素&#39;</span><span class='p'>).</span><span class='nx'>live</span><span class='p'>(</span><span class='s1'>&#39;click&#39;</span><span class='p'>,</span> <span class='kd'>function</span><span class='p'>(</span><span class='nx'>e</span><span class='p'>)</span> <span class='p'>{</span>
+  <span class='k'>if</span><span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='nx'>e</span><span class='p'>.</span><span class='nx'>target</span><span class='p'>).</span><span class='nx'>data</span><span class='p'>(</span><span class='s1'>&#39;oneclicked&#39;</span><span class='p'>)</span><span class='o'>!=</span><span class='s1'>&#39;yes&#39;</span><span class='p'>)</span>
+  <span class='p'>{</span>
+    <span class='c1'>//Your code</span>
+  <span class='p'>}</span>
+  <span class='nx'>$</span><span class='p'>(</span><span class='nx'>e</span><span class='p'>.</span><span class='nx'>target</span><span class='p'>).</span><span class='nx'>data</span><span class='p'>(</span><span class='s1'>&#39;oneclicked&#39;</span><span class='p'>,</span><span class='s1'>&#39;yes&#39;</span><span class='p'>);</span>
+<span class='p'>});</span>
+</code></pre>
+</div>
+<p><code>jQuery().data()</code> 、なかなか便利そうだ。</p>
+    <a href="http://tech.portalshit.net/2011/01/02/make-javascript-runnable-with-autopagerize/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></h2>
     <div class="articleinfo">Posted on 11 Dec 2010 by morygonzalez |
 	</div>
@@ -123,30 +161,6 @@ iTerm*<span class='o'>)</span>
 <p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
     <a href="http://tech.portalshit.net/2010/10/12/media-plugin-1.3-not-work/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></h2>
-    <div class="articleinfo">Posted on 15 Sep 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	</div>
-    <p>いやまぁテキストエディターにはいろいろあるわけでして、皆さんEmacsとかVimで日夜しこしこコードを書いておられると思うんですけど、僕はGUIしか使えない情報弱者なので主にTextMateを使ってます。</p>
-
-<p>TextMateで便利なのが &#8220;Run&#8221; っていう機能です。Rubyのコードを書いていて、<kbd>&#8984;</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> ruby hogehoge.rb
-</code></pre>
-</div>
-<p>とか面倒くさいことをやらずにすみます。</p>
-
-<p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
-
-<p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>&#8984;</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href='http://rvm.beginrescueend.com/integration/textmate/' title='RVM: Ruby Version Manager - Textmate Integration with RVM'>RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
-
-<p>しかし先ほどなにげなく</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> rvm 1.9.2 --default
-</code></pre>
-</div>
-<p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
-    <a href="http://tech.portalshit.net/2010/09/15/textmate-with-rvm-ruby/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -166,6 +180,8 @@ iTerm*<span class='o'>)</span>
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
 				
 					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				

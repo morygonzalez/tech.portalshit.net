@@ -4,12 +4,48 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2010-12-12T02:47:19+09:00</updated>
+  <updated>2011-01-02T12:59:23+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>AutoPagerizedなページでもJavaScriptを動かす</title>
+    <link href="/2011/01/02/make-javascript-runnable-with-autopagerize" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/01/02/make-javascript-runnable-with-autopagerize</id>
+    <content type="html">&lt;p&gt;あけましておめでとうございます。なんか2011年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。&lt;/p&gt;
+
+&lt;p&gt;AutoPagerize対応なページで、読み込まれた2ページ目以降でもJavaScriptを動かす方法について調べてみた。oAutoPagerizeのos0xさんのページでまとめられてる。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://d.hatena.ne.jp/os0x/20090829/1251556449'&gt;AutoPagerizeで継ぎ足された部分に自分のスクリプトを適用する方法あれこれ - 0xFF&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;いちばん手っ取り早そうだったので、以下のような書き方をした。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;window&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;AutoPagerize&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+  &lt;span class='nb'&gt;window&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;AutoPagerize&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;addFilter&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;fucintion&lt;/span&gt;&lt;span class='p'&gt;(){&lt;/span&gt;
+    &lt;span class='c1'&gt;// 実行したい処理&lt;/span&gt;
+  &lt;span class='p'&gt;});&lt;/span&gt;
+&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に &lt;code&gt;function init()&lt;/code&gt; みたいのを書き、その中から呼び出せばよい。そしてその &lt;code&gt;init()&lt;/code&gt; を上記 &lt;code&gt;// 実行したい処理&lt;/code&gt; 内にも書いてあげればオッケーだ（もちろん &lt;code&gt;window.onload&lt;/code&gt; で呼び出す必要もある）。&lt;/p&gt;
+
+&lt;p&gt;jQueryについては &lt;code&gt;live()&lt;/code&gt; というメソッドがある。これは動的に生成された要素にもスクリプトに適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 &lt;code&gt;live()&lt;/code&gt; というメソッドと一緒に、処理を一度しか実行しないというメソッド &lt;code&gt;one()&lt;/code&gt; も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://stackoverflow.com/questions/3796207/using-one-with-live-jquery'&gt;Using .one() with .live() jQuery - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='javascript'&gt;&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;処理を適用したい要素&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;&lt;span class='nx'&gt;live&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;click&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='kd'&gt;function&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;e&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
+  &lt;span class='k'&gt;if&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;e&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;target&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;&lt;span class='nx'&gt;data&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;oneclicked&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;!=&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+  &lt;span class='p'&gt;{&lt;/span&gt;
+    &lt;span class='c1'&gt;//Your code&lt;/span&gt;
+  &lt;span class='p'&gt;}&lt;/span&gt;
+  &lt;span class='nx'&gt;$&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nx'&gt;e&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='nx'&gt;target&lt;/span&gt;&lt;span class='p'&gt;).&lt;/span&gt;&lt;span class='nx'&gt;data&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;oneclicked&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='s1'&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
+&lt;span class='p'&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;jQuery().data()&lt;/code&gt; 、なかなか便利そうだ。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>オープンソースカンファレンス福岡2010</title>
@@ -180,11 +216,11 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
     <id>http://tech.portalshit.net//2010/08/31/rubykaigi2010</id>
     <content type="html">&lt;p&gt;RubyKaigi 2010に行ったのでその感想を軽く。&lt;/p&gt;
 
-&lt;h4 id='id33'&gt;自分のスペック&lt;/h4&gt;
+&lt;h4 id='id6'&gt;自分のスペック&lt;/h4&gt;
 
 &lt;p&gt;Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。&lt;/p&gt;
 
-&lt;h4 id='id34'&gt;感想&lt;/h4&gt;
+&lt;h4 id='id7'&gt;感想&lt;/h4&gt;
 
 &lt;p&gt;永和システムマネジメント&lt;del&gt;永和システム&lt;/del&gt;さんの「&lt;a href='http://rubykaigi.org/2010/ja/events/23' title='日本Ruby会議2010, 8月27日〜29日'&gt;Head First ふつうのシステム開発&lt;/a&gt;」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。&lt;/p&gt;
 
@@ -278,11 +314,11 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;p&gt;いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。&lt;/p&gt;
 
-&lt;h3 id='id31'&gt;作業詳細&lt;/h3&gt;
+&lt;h3 id='id4'&gt;作業詳細&lt;/h3&gt;
 
 &lt;p&gt;このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは &lt;code&gt;sqlite3-ruby&lt;/code&gt; しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。&lt;/p&gt;
 
-&lt;h4 id='id32'&gt;やったこと&lt;/h4&gt;
+&lt;h4 id='id5'&gt;やったこと&lt;/h4&gt;
 
 &lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;#8220;hogehoge&amp;#8221; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;#!/usr/bin/env ruby&lt;/span&gt;
@@ -484,7 +520,7 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 &lt;/div&gt;
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
-&lt;h3 id='id30'&gt;まとめ&lt;/h3&gt;
+&lt;h3 id='id3'&gt;まとめ&lt;/h3&gt;
 
 &lt;p&gt;まとめると、&lt;/p&gt;
 &lt;ol&gt;
@@ -1084,7 +1120,7 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;p&gt;などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。&lt;/p&gt;
 
-&lt;h3 id='id29'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id2'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;&amp;#8220;Twitterでcxxさんに教えてもらった&amp;#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
@@ -1150,7 +1186,7 @@ iTerm*&lt;span class='o'&gt;)&lt;/span&gt;
 
 &lt;p&gt;Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。&lt;/p&gt;
 
-&lt;h3 id='id28'&gt;追記&lt;/h3&gt;
+&lt;h3 id='id1'&gt;追記&lt;/h3&gt;
 
 &lt;p&gt;一晩寝て起きたら動いてた。&lt;/p&gt;</content>
   </entry>
