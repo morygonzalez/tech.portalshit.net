@@ -15,13 +15,13 @@ puts RUBY_DESCRIPTION
 
 なファイル（hoge.rb）があったとします。これを
 
-{% hilight console %}
+{% highlight console %}
 $ ruby hoge.rb
-{% endhilight %}
+{% endhighlight %}
 
 とシェルから呼び出したときにはちゃんと
 
-{$ highlight %}
+{% highlight console %}
 $ ruby 1.9.2p136 (2010-12-25 revision 30365) [x86_64-darwin10.6.0]
 {% endhighlight %}
 
