@@ -1,0 +1,28 @@
+<hr />
+<p>id: 45 title: RVMで入れたRubyをApacheとかから使いたい category: Ruby</p>
+
+<h2 id='layout_post'>layout: post</h2>
+
+<p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
+
+<p>{% highlight ruby %}</p>
+
+<h1 id='usrbinenv_ruby'>!/usr/bin/env ruby</h1>
+
+<p>puts RUBY_DESCRIPTION {% endhighlight %}</p>
+
+<p>なファイル（hoge.rb）があったとします。これを</p>
+
+<p>{% hilight console %} $ ruby hoge.rb {% endhilight %}</p>
+
+<p>とシェルから呼び出したときにはちゃんと</p>
+
+<p>{$ highlight %} $ ruby 1.9.2p136 (2010-12-25 revision 30365) <span>x86_64-darwin10.6.0</span> {% endhighlight %}</p>
+
+<p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
+
+<p>これ、もう半年くらい解決方法探してる気がする。</p>
+
+<p>TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに <code>~/.rvm/bin/ruby-1.9.2-p136</code> とか書くんじゃろか。</p>
+
+<p>cxxさんに質問したら <a href='http://rvm.beginrescueend.com/deployment/system-wide/'>RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>

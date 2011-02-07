@@ -4,12 +4,47 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-01-02T13:04:03+09:00</updated>
+  <updated>2011-02-08T01:51:26+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Rvm With Apache</title>
+    <link href="/2011/02/08/rvm-with-apache" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/02/08/rvm-with-apache</id>
+    <content type="html">&lt;hr /&gt;
+&lt;p&gt;id: 45 title: RVMで入れたRubyをApacheとかから使いたい category: Ruby&lt;/p&gt;
+
+&lt;h2 id='layout_post'&gt;layout: post&lt;/h2&gt;
+
+&lt;p&gt;RVMを使ってます。RVMで入れたRubyがshebangに &lt;code&gt;#!/usr/bin/env ruby&lt;/code&gt; と書いたときに呼び出されて欲しいと思ってます。シェルから&lt;/p&gt;
+
+&lt;p&gt;{% highlight ruby %}&lt;/p&gt;
+
+&lt;h1 id='usrbinenv_ruby'&gt;!/usr/bin/env ruby&lt;/h1&gt;
+
+&lt;p&gt;puts RUBY_DESCRIPTION {% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;なファイル（hoge.rb）があったとします。これを&lt;/p&gt;
+
+&lt;p&gt;{% hilight console %} $ ruby hoge.rb {% endhilight %}&lt;/p&gt;
+
+&lt;p&gt;とシェルから呼び出したときにはちゃんと&lt;/p&gt;
+
+&lt;p&gt;{$ highlight %} $ ruby 1.9.2p136 (2010-12-25 revision 30365) &lt;span&gt;x86_64-darwin10.6.0&lt;/span&gt; {% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。&lt;/p&gt;
+
+&lt;p&gt;これ、もう半年くらい解決方法探してる気がする。&lt;/p&gt;
+
+&lt;p&gt;TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに &lt;code&gt;~/.rvm/bin/ruby-1.9.2-p136&lt;/code&gt; とか書くんじゃろか。&lt;/p&gt;
+
+&lt;p&gt;cxxさんに質問したら &lt;a href='http://rvm.beginrescueend.com/deployment/system-wide/'&gt;RVM: Ruby Version Manager - Installing RVM System Wide&lt;/a&gt; というURLを教えてもらった。今日は眠いのでまた今度試す。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>AutoPagerizedなページでもJavaScriptを動かす</title>
