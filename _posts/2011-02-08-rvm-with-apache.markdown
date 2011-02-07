@@ -1,9 +1,9 @@
---
+---
 id: 45
 title: RVMで入れたRubyをApacheとかから使いたい
 category: Ruby
 layout: post
---
+---
 
 RVMを使ってます。RVMで入れたRubyがshebangに `#!/usr/bin/env ruby` と書いたときに呼び出されて欲しいと思ってます。シェルから
 

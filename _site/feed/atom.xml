@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-02-08T01:51:26+09:00</updated>
+  <updated>2011-02-08T01:53:14+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -12,16 +12,11 @@
   
   
   <entry>
-    <title>Rvm With Apache</title>
+    <title>RVMで入れたRubyをApacheとかから使いたい</title>
     <link href="/2011/02/08/rvm-with-apache" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/02/08/rvm-with-apache</id>
-    <content type="html">&lt;hr /&gt;
-&lt;p&gt;id: 45 title: RVMで入れたRubyをApacheとかから使いたい category: Ruby&lt;/p&gt;
-
-&lt;h2 id='layout_post'&gt;layout: post&lt;/h2&gt;
-
-&lt;p&gt;RVMを使ってます。RVMで入れたRubyがshebangに &lt;code&gt;#!/usr/bin/env ruby&lt;/code&gt; と書いたときに呼び出されて欲しいと思ってます。シェルから&lt;/p&gt;
+    <content type="html">&lt;p&gt;RVMを使ってます。RVMで入れたRubyがshebangに &lt;code&gt;#!/usr/bin/env ruby&lt;/code&gt; と書いたときに呼び出されて欲しいと思ってます。シェルから&lt;/p&gt;
 
 &lt;p&gt;{% highlight ruby %}&lt;/p&gt;
 
