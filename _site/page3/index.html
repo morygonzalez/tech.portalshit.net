@@ -36,6 +36,74 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></h2>
+    <div class="articleinfo">Posted on 31 Aug 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Mac/">Mac</a>
+	</div>
+    <p><a href='http://give-me-money.g.hatena.ne.jp/cxx/20100802/1280760811' title='MacPortsからHomebrewに移行した - cxxの日記 - give-me-moneyグループ'>シャレオツプログラマーはみんなMacPortsからHomebrewに移行しつつあるっぽい</a>ので、真似してみることにした。</p>
+
+<h3 id='homebrew'>なんでHomebrew？</h3>
+
+<p>そもそもなんでみんな移行するのか？ なんかMacPortsはバッドノウハウの塊らしい。</p>
+
+<p><a href='http://twitter.com/hitode909/status/18526396749' title='Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...'>Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 &#8230;</a></p>
+
+<p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
+<div class='highlight'><pre><code class='perl'><span class='c1'>#!/usr/bin/perl</span>
+</code></pre>
+</div>
+<p>とか</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
+</code></pre>
+</div>
+<p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
+
+<p>HomebrewはLinuxのパッケージ管理ソフトみたいに <code>/usr/local/bin/</code> とかに何でもインストールするので精神衛生上ベターだ。</p>
+
+<p>Homebrewのインストール自体はとても簡単。パッケージ管理スクリプトをRubyで書くってのも、UNIXのことよく分かってない僕にはなかなかよいかもしれない。詳しいことは公式Wikiとかを見て下さい。</p>
+
+<p><a href='http://mxcl.github.com/homebrew/' title='Homebrew — MacPorts driving you to drink? Try Homebrew!'>Homebrew — MacPorts driving you to drink? Try Homebrew!</a></p>
+
+<h3 id='vim'>Vimのインストールではまった</h3>
+
+<p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p>
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> brew install vim
+</code></pre>
+</div>
+<p>してみた。しかしながら</p>
+<div class='highlight'><pre><code class='console'><span class='go'>Error: No available formula for vim</span>
+</code></pre>
+</div>
+<p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
+
+<p><a href='http://github.com/adamv/homebrew/blob/duplicates/Library/Formula/vim.rb' title='Library/Formula/vim.rb at duplicates from adamv&apos;s homebrew - GitHub'>Library/Formula/vim.rb at duplicates from adamv&#8217;s homebrew - GitHub</a></p>
+
+<p>そんで今度は意気揚々と</p>
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> brew install vim
+</code></pre>
+</div>
+<p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
+<div class='highlight'><pre><code class='console'><span class='go'>ld: warning: in /Library/Frameworks//Python.framework/Python, missing required architecture x86\_64 in file</span>
+</code></pre>
+</div>
+<p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
+
+<p><a href='http://vim.1045645.n5.nabble.com/Python-link-errors-td1214971.html' title='Nabble - Vim - Mac - Python link errors'>Nabble - Vim - Mac - Python link errors</a></p>
+
+<p>要するに64bit版のPython.frameworkを入れれば良さそうだった。何も考えずにHomebrewで <code>brew install Python</code> とかやって <code>/usr/local/bin/python</code> に新しいPythonを入れてみたりしたんだけど、これは意味なかったっぽい。大人しくPython公式サイトからPython 2.7のインストーラーパッケージをダウンロードしてきてGUIでインストールした。</p>
+
+<p><a href='http://www.python.org/download/releases/' title='Releases'>Releases</a></p>
+
+<p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p>
+<div class='highlight'><pre><code class='console'><span class='go'>+ruby</span>
+</code></pre>
+</div>
+<p>となった。</p>
+
+<p>まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマーの仲間入りをしようと思います。</p>
+    <a href="http://tech.portalshit.net/2010/08/31/macports-is-deprecated/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></h2>
     <div class="articleinfo">Posted on 25 Aug 2010 by morygonzalez |
 	
@@ -193,20 +261,6 @@
 <p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
     <a href="http://tech.portalshit.net/2010/08/03/ubuntu-server-ssh-connection-failing/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
-    <div class="articleinfo">Posted on 27 Jul 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	
-		<a href="http://tech.portalshit.net/bot/">bot</a>
-	</div>
-    <p><a href='http://twitter.com/ningengasinu'>@ningengasinu</a> 様みたいに、自分で作ったボットに「日記書いた」ってしゃべらせようと思って、増田のRSSを使わせてもらおうと思ったんだけど、Rubyの <code>RSS::Parser</code> で読み込もうとすると <code>500 Internal Server Error</code> が返ってきてしまう。ブラウザから読み込むときはエラーとか出ないんだけど。</p>
-
-<p>しょうがないので <code>open-uri</code> を使って <code>User-Agent</code> を偽装してRSSを読みに行ったところ、正しくレスポンスが返された。しょうがないので <code>RSS::Parser</code> は使わず、 <code>Hpricot</code> を使った。</p>
-
-<p>増田ってbotのアクセス弾いてるわけですね。これがネットの闇ですか……</p>
-    <a href="http://tech.portalshit.net/2010/07/27/masuda-san/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -232,6 +286,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				

@@ -4,12 +4,40 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-02-08T02:01:54+09:00</updated>
+  <updated>2011-02-09T00:49:58+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>RVMきもい</title>
+    <link href="/2011/02/09/rvm-is-kimoi" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/02/09/rvm-is-kimoi</id>
+    <content type="html">&lt;p&gt;昨日の続きのようなもの。LokkaをUbuntu上で動かそうといろいろやってます。passenger入れて、 &lt;code&gt;passenger-install-nginx-module&lt;/code&gt; を実行しようとしたらエラーが出た。お前はrootじゃないからnginxインストールできひんわ、みたいなメッセージが出る。sudoったりrootになってインストールしようとすると今度はpassengerなんていうgemはないわ、って怒られる。sudoしたときには.rvm内のgemパッケージではなくシステムのgemパッケージを見ようとするっぽい。またrootになるとRVMではなくシステムのRubyが実行されるので同じくpassengerなんてgemないわ、って怒られる。システムのRubyは1.8.7だし、なるべくなら使いたくない。RVMのRubyを使ってpassenger + nginxな環境作れないのかよ、とググってたら以下のような記事を発見した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://www.blog.bridgeutopiaweb.com/post/install-rvm-passenger-nginx-and-rails-3-on-ubuntu-lucid-lynx/'&gt;Install RVM, Passenger, Nginx and Rails 3 on Ubuntu Lucid Lynx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;なんと、RVMには &lt;code&gt;rvmsudo&lt;/code&gt; というコマンドがあるらしい！ 試しに&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='console'&gt;&lt;span class='gp'&gt;$&lt;/span&gt; rvmsudo passenger-install-nginx-module
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 &lt;code&gt;nginx.conf&lt;/code&gt; 内で、&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='nginx'&gt;      &lt;span class='k'&gt;passenger_root&lt;/span&gt; &lt;span class='s'&gt;/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
+      &lt;span class='k'&gt;passenger_ruby&lt;/span&gt; &lt;span class='s'&gt;/usr/bin/ruby1.8&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが &lt;code&gt;rvmsudo&lt;/code&gt; のおかげで &lt;code&gt;nginx.conf&lt;/code&gt; に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='nginx'&gt;      &lt;span class='k'&gt;passenger_root&lt;/span&gt; &lt;span class='s'&gt;/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
+      &lt;span class='k'&gt;passenger_ruby&lt;/span&gt; &lt;span class='s'&gt;/home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。&lt;/p&gt;
+
+&lt;p&gt;それにしてもRVMは、本当にきもいと思う。&lt;a href='http://d.hatena.ne.jp/rochefort/20100907/p1' title='rvmのirbで日本語入力できない - うんたらかんたら日記'&gt;readlineとかまで.rvm内にインストールできる&lt;/a&gt;できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>RVMで入れたRubyをApacheとかから使いたい</title>

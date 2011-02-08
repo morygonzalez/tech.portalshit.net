@@ -28,10 +28,99 @@
   				  </span>
   				
   				
+    				<span class="next">
+    				  <a href="../page10/" rel="next">Next Page</a>
+    		    </span>
+    		  
   			</div>
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></h2>
+    <div class="articleinfo">Posted on 07 May 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
+	</div>
+    <p>こういうコード書いてます。</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>function</span> <span class='nx'>getAttrName</span><span class='p'>(</span><span class='nx'>attrObj</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='kd'>var</span> <span class='nx'>attrName</span> <span class='o'>=</span> <span class='nx'>attrObj</span><span class='p'>.</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>;</span>
+<span class='c1'>//	items = document.getElementsByClassName(&#39;item&#39;);</span>
+	<span class='kd'>var</span> <span class='nx'>items</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li.item&#39;</span><span class='p'>);</span>
+	<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>).</span><span class='nx'>fadeOut</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
+	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>i</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>i</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>items</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>i</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='c1'>//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
+		<span class='kd'>var</span> <span class='nx'>keywordList</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;.keyword-list&#39;</span><span class='p'>,</span> <span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]);</span>
+		<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>j</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>j</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywordList</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>j</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+			<span class='c1'>//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
+			<span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+			<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>k</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>k</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywords</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>k</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+				<span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span> <span class='p'>{</span>
+					<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]).</span><span class='nx'>fadeIn</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
+				<span class='p'>}</span>
+			<span class='p'>}</span>
+		<span class='p'>}</span>
+	<span class='p'>}</span>
+	<span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>);</span>
+<span class='p'>}</span>
+<span class='kd'>function</span> <span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
+	<span class='kd'>var</span> <span class='nx'>curAttr</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#keySelector li a&quot;</span><span class='p'>);</span>
+	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>l</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>l</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>curAttr</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>l</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
+		<span class='k'>if</span> <span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>]).</span><span class='nx'>text</span><span class='p'>()</span> <span class='o'>==</span> <span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
+			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
+		<span class='p'>}</span> <span class='k'>else</span> <span class='p'>{</span>
+			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
+		<span class='p'>}</span>
+	<span class='p'>}</span>
+<span class='p'>}</span>
+</code></pre>
+</div>
+<p>やりたいことは以下のような感じ。</p>
+
+<ol>
+<li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
+
+<li>クリックされた文字列を <code>attrName</code> に格納</li>
+
+<li>すべての <code>item</code> をjQueryを使って非表示</li>
+
+<li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
+</ol>
+
+<p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
+
+<p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p>
+
+<p>サーバーサイドで実装する方法もないではないけど、</p>
+
+<p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p>
+
+<p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
+
+<h3 id='id2'>追記</h3>
+
+<p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
+
+<p>そういうわけで</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</code></pre>
+</div>
+<p>を</p>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li a&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+</code></pre>
+</div>
+<p>とし、</p>
+<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>を</p>
+<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>)</span>
+</code></pre>
+</div>
+<p>にしてみたところ、ばっちりIEで動くようになった。</p>
+
+<p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
+    <a href="http://tech.portalshit.net/2010/05/07/fuck-ie/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></h2>
     <div class="articleinfo">Posted on 03 May 2010 by morygonzalez |
 	
@@ -92,38 +181,6 @@
 <p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>
     <a href="http://tech.portalshit.net/2010/04/22/cakephp-mediaplugin/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/misc/">misc</a>
-	</div>
-    <p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p>
-
-<p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ git clone git://github.com/emk/mephisto.git</span>
-</code></pre>
-</div>
-<p>してgithubからプロジェクトをclone。</p>
-
-<p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ rake gems:install</span>
-</code></pre>
-</div>
-<p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ gem install nokogiri \</span>
-<span class='go'>    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
-<span class='go'>    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
-</code></pre>
-</div>
-<p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
-<div class='highlight'><pre><code class='console'><span class='go'>    $ rake db:bootstrap RAILS_ENV=production</span>
-</code></pre>
-</div>
-<p>ですべてのインストール作業完了。いまこうして動いております。</p>
-
-<p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
-    <a href="http://tech.portalshit.net/2010/04/22/blogging-with-mephisto/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -137,6 +194,10 @@
   				  </span>
   				
   				
+    				<span class="next">
+    				  <a href="../page10/" rel="next">Next Page</a>
+    		    </span>
+    		  
   			</div>
 		  </div>
 		  
@@ -145,6 +206,8 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				

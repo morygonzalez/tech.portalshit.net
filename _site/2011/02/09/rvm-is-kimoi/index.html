@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Railsむずい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>RVMきもい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,15 +25,33 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/06/03/feel-like-migrating-from-mephisto" title="Mephistoから引っ越したい">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2011/02/08/rvm-with-apache" title="RVMで入れたRubyをApacheとかから使いたい">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/06/03/rails-has-subdirectory-in-controller" title="Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>Railsむずい</h2>
-				<p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
+				<h2>RVMきもい</h2>
+				<p>昨日の続きのようなもの。LokkaをUbuntu上で動かそうといろいろやってます。passenger入れて、 <code>passenger-install-nginx-module</code> を実行しようとしたらエラーが出た。お前はrootじゃないからnginxインストールできひんわ、みたいなメッセージが出る。sudoったりrootになってインストールしようとすると今度はpassengerなんていうgemはないわ、って怒られる。sudoしたときには.rvm内のgemパッケージではなくシステムのgemパッケージを見ようとするっぽい。またrootになるとRVMではなくシステムのRubyが実行されるので同じくpassengerなんてgemないわ、って怒られる。システムのRubyは1.8.7だし、なるべくなら使いたくない。RVMのRubyを使ってpassenger + nginxな環境作れないのかよ、とググってたら以下のような記事を発見した。</p>
+
+<p><a href='http://www.blog.bridgeutopiaweb.com/post/install-rvm-passenger-nginx-and-rails-3-on-ubuntu-lucid-lynx/'>Install RVM, Passenger, Nginx and Rails 3 on Ubuntu Lucid Lynx</a></p>
+
+<p>なんと、RVMには <code>rvmsudo</code> というコマンドがあるらしい！ 試しに</p>
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> rvmsudo passenger-install-nginx-module
+</code></pre>
+</div>
+<p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
+<div class='highlight'><pre><code class='nginx'>      <span class='k'>passenger_root</span> <span class='s'>/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class='p'>;</span>
+      <span class='k'>passenger_ruby</span> <span class='s'>/usr/bin/ruby1.8</span><span class='p'>;</span>
+</code></pre>
+</div>
+<p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
+<div class='highlight'><pre><code class='nginx'>      <span class='k'>passenger_root</span> <span class='s'>/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class='p'>;</span>
+      <span class='k'>passenger_ruby</span> <span class='s'>/home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby</span><span class='p'>;</span>
+</code></pre>
+</div>
+<p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
+
+<p>それにしてもRVMは、本当にきもいと思う。<a href='http://d.hatena.ne.jp/rochefort/20100907/p1' title='rvmのirbで日本語入力できない - うんたらかんたら日記'>readlineとかまで.rvm内にインストールできる</a>できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。</p>
 							
 				<div id="related-post">
 					<ul>
@@ -60,7 +78,7 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
+					<li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
 				
 				</ul>
 				

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Railsむずい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>tech.portalshit.net |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -9,60 +9,79 @@
 <link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
 </head>
 <body>
-
 		<div id="header">
-		
-			<h1><a href="/">tech.portalshit.net</a></h1>
-
-			<h3>CakePHP, Rails, JavaScript</h3>
-			
-			<ul id="nav">
-				<li><a href="/">Home</a></li>
-				
-			</ul>
+				<h1><a href="/">tech.portalshit.net</a></h1>
+				<h3>CakePHP, Rails, JavaScript</h3>
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+				</ul>
 		</div>
 		<div id="container">
+			
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/06/03/feel-like-migrating-from-mephisto" title="Mephistoから引っ越したい">前の記事</a></a></span>
-  			  
-  			  
-  					<span class="next"><a href="/2010/06/03/rails-has-subdirectory-in-controller" title="Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！">次の記事</a></span>
+  				  <span class="previous">
+  				  
+    				  <a href="../page9/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
+  				
   				
   			</div>
-			
-				<h2>Railsむずい</h2>
-				<p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
-							
-				<div id="related-post">
-					<ul>
-					
-			    </ul>
+  			
+  			<div class="autopagerize_page_element">
+				  
+    <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
+    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/misc/">misc</a>
+	</div>
+    <p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p>
+
+<p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
+<div class='highlight'><pre><code class='console'><span class='go'>    $ git clone git://github.com/emk/mephisto.git</span>
+</code></pre>
+</div>
+<p>してgithubからプロジェクトをclone。</p>
+
+<p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
+<div class='highlight'><pre><code class='console'><span class='go'>    $ rake gems:install</span>
+</code></pre>
+</div>
+<p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
+<div class='highlight'><pre><code class='console'><span class='go'>    $ gem install nokogiri \</span>
+<span class='go'>    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
+<span class='go'>    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
+</code></pre>
+</div>
+<p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
+<div class='highlight'><pre><code class='console'><span class='go'>    $ rake db:bootstrap RAILS_ENV=production</span>
+</code></pre>
+</div>
+<p>ですべてのインストール作業完了。いまこうして動いております。</p>
+
+<p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
+    <a href="http://tech.portalshit.net/2010/04/22/blogging-with-mephisto/#disqus_thread">Comments</a>
+
 				</div>
 				
-				<div id="disqus_thread"></div>
-				<script type="text/javascript">
-				  /**
-				    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
-				    */
-				  (function() {
-				   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-				   dsq.src = 'http://techportalshit.disqus.com/embed.js';
-				   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-				  })();
-				</script>
-				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=techportalshit">comments powered by Disqus.</a></noscript>
-				<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-			</div>
-			
+				<div class="autopagerize_insert_before"></div>
+  			
+  			<div class="paginator">
+  				
+  				  <span class="previous">
+  				  
+    				  <a href="../page9/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
+  				
+  				
+  			</div>
+		  </div>
+		  
 			<div id="sidebar">
 				<h3>Categories</h3>
-				<ul>
-				
-					<li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
-				
-				</ul>
 				
 				<h3>Latest Posts</h3>
 				<ul>
@@ -186,17 +205,11 @@ Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll a
   })();
 </script>
 <script type="text/javascript">
-//<![CDATA[
-(function() {
-	var links = document.getElementsByTagName('a');
-	var query = '?';
-	for(var i = 0; i < links.length; i++) {
-		if(links[i].href.indexOf('#disqus_thread') >= 0) {
-			query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-		}
-	}
-	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/techportalshit/get_num_replies.js' + query + '"></' + 'script>');
-})();
-//]]>
+var disqus_shortname = 'techportalshit';
+(function () {
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'http://disqus.com/forums/techportalshit/count.js';
+  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
 </script>
 </body>

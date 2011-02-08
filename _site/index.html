@@ -30,6 +30,34 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></h2>
+    <div class="articleinfo">Posted on 09 Feb 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>昨日の続きのようなもの。LokkaをUbuntu上で動かそうといろいろやってます。passenger入れて、 <code>passenger-install-nginx-module</code> を実行しようとしたらエラーが出た。お前はrootじゃないからnginxインストールできひんわ、みたいなメッセージが出る。sudoったりrootになってインストールしようとすると今度はpassengerなんていうgemはないわ、って怒られる。sudoしたときには.rvm内のgemパッケージではなくシステムのgemパッケージを見ようとするっぽい。またrootになるとRVMではなくシステムのRubyが実行されるので同じくpassengerなんてgemないわ、って怒られる。システムのRubyは1.8.7だし、なるべくなら使いたくない。RVMのRubyを使ってpassenger + nginxな環境作れないのかよ、とググってたら以下のような記事を発見した。</p>
+
+<p><a href='http://www.blog.bridgeutopiaweb.com/post/install-rvm-passenger-nginx-and-rails-3-on-ubuntu-lucid-lynx/'>Install RVM, Passenger, Nginx and Rails 3 on Ubuntu Lucid Lynx</a></p>
+
+<p>なんと、RVMには <code>rvmsudo</code> というコマンドがあるらしい！ 試しに</p>
+<div class='highlight'><pre><code class='console'><span class='gp'>$</span> rvmsudo passenger-install-nginx-module
+</code></pre>
+</div>
+<p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
+<div class='highlight'><pre><code class='nginx'>      <span class='k'>passenger_root</span> <span class='s'>/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class='p'>;</span>
+      <span class='k'>passenger_ruby</span> <span class='s'>/usr/bin/ruby1.8</span><span class='p'>;</span>
+</code></pre>
+</div>
+<p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
+<div class='highlight'><pre><code class='nginx'>      <span class='k'>passenger_root</span> <span class='s'>/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class='p'>;</span>
+      <span class='k'>passenger_ruby</span> <span class='s'>/home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby</span><span class='p'>;</span>
+</code></pre>
+</div>
+<p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
+
+<p>それにしてもRVMは、本当にきもいと思う。<a href='http://d.hatena.ne.jp/rochefort/20100907/p1' title='rvmのirbで日本語入力できない - うんたらかんたら日記'>readlineとかまで.rvm内にインストールできる</a>できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。</p>
+    <a href="http://tech.portalshit.net/2011/02/09/rvm-is-kimoi/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></h2>
     <div class="articleinfo">Posted on 08 Feb 2011 by morygonzalez |
 	
@@ -141,34 +169,6 @@ iTerm*<span class='o'>)</span>
 <p>Load Presetから &#8220;Use xterm Defaults&#8221; を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。</p>
     <a href="http://tech.portalshit.net/2010/10/26/iterm-arrow-key-issue/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></h2>
-    <div class="articleinfo">Posted on 20 Oct 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	</div>
-    <p>Ruby 1.9、Rails 3、RSpec 2で開発してる。いままでRubyとRailsになれるのに一杯一杯でテスト駆動開発できてなかったので、きちんとテストファーストでやることにした。</p>
-
-<p>そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> spec -c spec/*
-</code></pre>
-</div>
-<p>とかやってもエラーが出る。 <code>which spec</code> すると <code>/usr/bin/spec</code> と出ちゃう。どうやら <code>spec</code> で発動されるのはRSpec 1.3のものみたい。</p>
-
-<p>RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> rspec -c spec/*
-</code></pre>
-</div>
-<p>これできちんとテストコードが実行された。かと思いきやFailureが。</p>
-
-<p>Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'># -*- coding: utf-8 -*-</span>
-</code></pre>
-</div>
-<p>と書いてテキストエンコーディングを明示してあげないといけない。</p>
-    <a href="http://tech.portalshit.net/2010/10/20/ruby1.9-rails3-rspec-2/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -188,6 +188,8 @@ iTerm*<span class='o'>)</span>
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				
