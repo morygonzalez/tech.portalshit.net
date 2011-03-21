@@ -36,15 +36,6 @@
   			
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
-    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	</div>
-    <p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
-
-    <a href="http://tech.portalshit.net/2010/06/03/hard-to-learn-rails/#disqus_thread">Comments</a>
-
     <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
     <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
 	
@@ -169,6 +160,23 @@
 
     <a href="http://tech.portalshit.net/2010/05/11/cakephp-rss-helper-sucks/#disqus_thread">Comments</a>
 
+    <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
+    <div class="articleinfo">Posted on 08 May 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+	</div>
+    <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
+
+<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
+
+<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+
+<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+
+<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
+
+    <a href="http://tech.portalshit.net/2010/05/08/to-what-extent-write-codes-in-mvc/#disqus_thread">Comments</a>
+
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -195,9 +203,7 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
-				
-					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

@@ -1,8 +1,9 @@
 ---
-id: 47
-title: TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします
+id: 48
+title: TDD BootCamp福岡ではじめてペアプログラミングを体験した
 category: Vim
 layout: post
+published: false
 ---
 
 TDD BootCamp福岡に行ってみた。生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。

@@ -30,56 +30,22 @@
   			
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></h2>
+    <h2><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></h2>
     <div class="articleinfo">Posted on 21 Mar 2011 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/TDD/">TDD</a>
 	</div>
-    <p>TDD BootCampに行ってみた。</p>
+    <p>昨日と一昨日の二日間、TDD Boot Camp 福岡に参加した。</p>
 
 <h3 id="section">参加しようと思ったわけ</h3>
 
-<p>いま勤めている会社にはテストがない。いや、テストはある。テストコードがない。エクセルにテスト項目をたくさん書き出していって手動でテストする。人力で三人くらいが夜なべしてテストする。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発し、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。ときにはテストケースを変更することすらある。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない。この状況をなんとかしたいと思っていて、今風の開発手法を身につけたいと思ってTDD BootCampに参加した。</p>
+<p>勤めている会社にはテストがない。いや、テストはある。テストコードがない。エクセルにテスト項目をたくさん書き出していって手動でテストする。人力で三人くらいが夜なべしてテストする（だいたいスケジュールには遅延が発生する）。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発し、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。ときにはテストケースを変更することすらある。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない（福岡に来てからのこのブログの更新状況を見ればおわかりいただけるかと）。この状況をなんとかしたいと思っていて、藁をもすがる思いでTDD Boot Campに参加した。</p>
 
 <h3 id="section-1">感想</h3>
 
-<p>TDDで有名なt_wadaさんのプレゼンテーションは鮮やかで、すごく印象に残った。心に響いた部分を以下箇条書き。</p>
+<p>『プログラマが知るべき97のこと』の監修やTDDで有名な <a href="http://twitter.com/t_wada">@t_wada</a> さんのプレゼンテーションは鮮やかで、すごく印象に残った。</p>
 
 <ul>
-  <li>現代ソフトウェア開発の三本柱
-    <ul>
-      <li>バージョン管理
-        <ul>
-          <li>テスティングや自動化よりも重要</li>
-        </ul>
-      </li>
-      <li>テスティング</li>
-      <li>自動化
-        <ul>
-          <li>デプロイなど単調な作業の自動化し、浮いた時間を設計や顧客との対話に使う</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>xUnit
-    <ul>
-      <li>xUnitの登場により、書き方・語彙・文法が言語の垣根を越えて共有され、キャズムを超えた。
-        <ul>
-          <li>テスト記述方法の共通化</li>
-          <li>テスト実行方法の共通化</li>
-        </ul>
-      </li>
-      <li>テストを書いた人でなくても同じようにテストを実行できるようになった
-        <ul>
-          <li>誰でも実行できるということは、コンピューターでも実行可能
-            <ul>
-              <li>テストの自働化へ（ファイルの保存時、VCSへのコミット時に自働テスト）</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
   <li>良いテスト
     <ul>
       <li>自動化されている</li>
@@ -100,7 +66,7 @@
       <li>単体テストコードに対応する以上に製品コードを書かない</li>
     </ul>
   </li>
-  <li>なぜTDDをするのか
+  <li>なぜTDDするのか
     <ul>
       <li>自分が完璧ではないことがわかっているから
         <ul>
@@ -144,32 +110,35 @@
   </li>
 </ul>
 
-<p>いっぱい本を紹介してもらったので今度給料出たら『レガシー・コード改善ガイド』と『テスト駆動開発入門』を買おうと思った。</p>
+<p>テストのみならず、自動化やバージョンコントロールの重要性が説かれた。</p>
 
-<h3 id="tdd">TDDを導入するには</h3>
+<p>@t_wada さんの話のほかにも <a href="http://twitter.com/bleis">@bleis</a> さんによるGitの効果的な利用方法やJenkinsを利用した継続的インテグレーションの実践例、 <a href="http://twitter.com/akineko">@akineko</a> さんによるOMakeを利用した自動ビルド、自動テスト、自動コミットの話など。</p>
 
-<p>いかにして会社の上司を説得するかが重要だ。TDDは一見するとコード実装時間が延びるので会社では嫌われそうだ。またペアプログラミングも二人で交代交代にコードを書くので見た目の作業効率が悪化する。またプログラムによるテストが何を意味するのか分かってもらうのも大変だろう。品質保証のためのテストとTDDにおけるテストは分けて考える必要があるだろう。しかしTDDによりテストフェーズにおける手戻りが激減し、人もコードも健康的な開発環境が手に入るのではないかと思う。</p>
+<h3 id="section-2">ペアプログラミングを体験した</h3>
+
+<p>ペアプログラミングを生まれて体験した。 <a href="http://twitter.com/mallowlabs">@mallowlabs</a> さんとRubyでペアプログラミングをさせてもらった。講師陣が出題する課題を解いていくというもの。当然テスト駆動。テスティングフレームワークにはRSpecを利用した。</p>
+
+<p>WEB + DB PressなどのRSpec特集を写経したことはあったけど、時間制限がある中で、他の人とペアを組んでプログラムを書いていく作業はかなりエキサイティングだった。</p>
+
+<p>ただ自分のRubyスキルおよびVimのスキルが著しく劣っていたため、@mallowlabs さんの足を引っ張っていた感は否めない。正直申し訳なかったです。</p>
+
+<p>全般的に、自分の知識のなさ、スキルのなさが実感できた</p>
+
+<p>以下、初日に行ったFizzBuzz問題と主に二日目に取り組んだTwitterのタイムラインをカテゴリ分けするという課題の成果物。</p>
+
+<script src="https://gist.github.com/879647.js?file=fizzbuzz.rb"></script>
+
+<script src="https://gist.github.com/879647.js?file=fizzbuzz_spec.rb"></script>
+
+<script src="https://gist.github.com/878159.js?file=tweet_categorizer.rb"></script>
+
+<script src="https://gist.github.com/878159.js?file=tweet_categorizer_spec.rb"></script>
+
+<h3 id="tdd">TDDをいかにして根付かせるか</h3>
+
+<p>勉強会に参加していきなりコードが書けるようになるわけでは当然ないので、継続的な勉強が必要だと感じた。いっぱい本を紹介してもらったので積ん読本を何冊か片付けたら『レガシー・コード改善ガイド』と『テスト駆動開発入門』を買おうと思った。</p>
 
     <a href="http://tech.portalshit.net/2011/03/21/tdd-bootcamp-fukuoka/#disqus_thread">Comments</a>
-
-    <h2><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></h2>
-    <div class="articleinfo">Posted on 21 Mar 2011 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/Vim/">Vim</a>
-	</div>
-    <p>TDD BootCamp福岡に行ってみた。生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。</p>
-
-<p>とりあえず今回、ペアを組んだ方に <code>cw</code> とか <code>数字y</code> とかを教えてもらった。あと</p>
-
-<blockquote>
-  <p>Vimでバックスペース使ったら負けだから</p>
-</blockquote>
-
-<p>と言われてしまったのでバックスペースと矢印キーをなるべく使わずにプログラム書きたいと思います。でもTextMateとかCodaとか便利だからついつい使ってしまうんよね…。</p>
-
-<p>TDD BootCampの感想自体はまた別の記事で。</p>
-
-    <a href="http://tech.portalshit.net/2011/03/21/i-am-impotent-vimmer/#disqus_thread">Comments</a>
 
     <h2><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></h2>
     <div class="articleinfo">Posted on 09 Feb 2011 by morygonzalez |
@@ -284,6 +253,15 @@
 
     <a href="http://tech.portalshit.net/2011/01/02/make-javascript-runnable-with-autopagerize/#disqus_thread">Comments</a>
 
+    <h2><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></h2>
+    <div class="articleinfo">Posted on 11 Dec 2010 by morygonzalez |
+	</div>
+    <p>福岡工業大学で行われた、オープンソースカンファレンス福岡2010に行った。</p>
+
+<p><a href="http://www.usp-lab.com/" title="Universal Shell Programing Laboratory">usp lab</a>のシェルスクリプトで業務用基幹システムを開発する話が面白かった。一般的なプログラミング言語は使わずに、シェルで生のLinuxを使って作業を行わせる。DBは使わずデータはTextで持つ。HTTP関連のあれこれもシェルスクリプトで行う。このためセキュリティのことは考えないといけないらしいんだけど（フロントエンドとバックエンドがシェルスクリプトでつながってるため）、大手のシステム会社が100人月とかみたいな見積を出す案件を10人月程度でやったそう。具体的には無印良品のシステムとか。遅めに会場に入ったので資料は売り切れで貰えず、細かい数字は自信がないんだけど、無印のやつは一年間に10億円かかってたシステム関連の費用が2億円程度に抑えられるようになったそう。mknodとかsedコマンドを駆使した並列処理のデモは本当に面白かった。へー、シェルスクリプトだけでこんなにできるんだー、っていう感じ。1億行のテキストデータ処理を53秒で終わらせたりとか。「Linuxはなるべく生で使いましょう」という言葉がとても深く印象に残っている。Railsみたいな便利なフレームワークを使った開発とはまったく異なるけど、UNIXの「小さいものは美しい」という理念のもと、とんでもなく効率的に開発を行っている様がとてつもなくクールだった。</p>
+
+    <a href="http://tech.portalshit.net/2010/12/11/open-source-conference/#disqus_thread">Comments</a>
+
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -304,9 +282,7 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
-				
-					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

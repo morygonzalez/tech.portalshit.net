@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-03-21T19:08:33+09:00</updated>
+  <updated>2011-03-22T00:49:46+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -12,55 +12,21 @@
   
   
   <entry>
-    <title>TDD BootCamp福岡に行った</title>
+    <title>TDD Boot Camp福岡に参加した</title>
     <link href="/2011/03/21/tdd-bootcamp-fukuoka" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/03/21/tdd-bootcamp-fukuoka</id>
-    <content type="html">&lt;p&gt;TDD BootCampに行ってみた。&lt;/p&gt;
+    <content type="html">&lt;p&gt;昨日と一昨日の二日間、TDD Boot Camp 福岡に参加した。&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;参加しようと思ったわけ&lt;/h3&gt;
 
-&lt;p&gt;いま勤めている会社にはテストがない。いや、テストはある。テストコードがない。エクセルにテスト項目をたくさん書き出していって手動でテストする。人力で三人くらいが夜なべしてテストする。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発し、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。ときにはテストケースを変更することすらある。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない。この状況をなんとかしたいと思っていて、今風の開発手法を身につけたいと思ってTDD BootCampに参加した。&lt;/p&gt;
+&lt;p&gt;勤めている会社にはテストがない。いや、テストはある。テストコードがない。エクセルにテスト項目をたくさん書き出していって手動でテストする。人力で三人くらいが夜なべしてテストする（だいたいスケジュールには遅延が発生する）。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発し、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。ときにはテストケースを変更することすらある。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない（福岡に来てからのこのブログの更新状況を見ればおわかりいただけるかと）。この状況をなんとかしたいと思っていて、藁をもすがる思いでTDD Boot Campに参加した。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;感想&lt;/h3&gt;
 
-&lt;p&gt;TDDで有名なt_wadaさんのプレゼンテーションは鮮やかで、すごく印象に残った。心に響いた部分を以下箇条書き。&lt;/p&gt;
+&lt;p&gt;『プログラマが知るべき97のこと』の監修やTDDで有名な &lt;a href=&quot;http://twitter.com/t_wada&quot;&gt;@t_wada&lt;/a&gt; さんのプレゼンテーションは鮮やかで、すごく印象に残った。&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;現代ソフトウェア開発の三本柱
-    &lt;ul&gt;
-      &lt;li&gt;バージョン管理
-        &lt;ul&gt;
-          &lt;li&gt;テスティングや自動化よりも重要&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;テスティング&lt;/li&gt;
-      &lt;li&gt;自動化
-        &lt;ul&gt;
-          &lt;li&gt;デプロイなど単調な作業の自動化し、浮いた時間を設計や顧客との対話に使う&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;xUnit
-    &lt;ul&gt;
-      &lt;li&gt;xUnitの登場により、書き方・語彙・文法が言語の垣根を越えて共有され、キャズムを超えた。
-        &lt;ul&gt;
-          &lt;li&gt;テスト記述方法の共通化&lt;/li&gt;
-          &lt;li&gt;テスト実行方法の共通化&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;テストを書いた人でなくても同じようにテストを実行できるようになった
-        &lt;ul&gt;
-          &lt;li&gt;誰でも実行できるということは、コンピューターでも実行可能
-            &lt;ul&gt;
-              &lt;li&gt;テストの自働化へ（ファイルの保存時、VCSへのコミット時に自働テスト）&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
   &lt;li&gt;良いテスト
     &lt;ul&gt;
       &lt;li&gt;自動化されている&lt;/li&gt;
@@ -81,7 +47,7 @@
       &lt;li&gt;単体テストコードに対応する以上に製品コードを書かない&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;なぜTDDをするのか
+  &lt;li&gt;なぜTDDするのか
     &lt;ul&gt;
       &lt;li&gt;自分が完璧ではないことがわかっているから
         &lt;ul&gt;
@@ -125,30 +91,33 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;いっぱい本を紹介してもらったので今度給料出たら『レガシー・コード改善ガイド』と『テスト駆動開発入門』を買おうと思った。&lt;/p&gt;
+&lt;p&gt;テストのみならず、自動化やバージョンコントロールの重要性が説かれた。&lt;/p&gt;
 
-&lt;h3 id=&quot;tdd&quot;&gt;TDDを導入するには&lt;/h3&gt;
+&lt;p&gt;@t_wada さんの話のほかにも &lt;a href=&quot;http://twitter.com/bleis&quot;&gt;@bleis&lt;/a&gt; さんによるGitの効果的な利用方法やJenkinsを利用した継続的インテグレーションの実践例、 &lt;a href=&quot;http://twitter.com/akineko&quot;&gt;@akineko&lt;/a&gt; さんによるOMakeを利用した自動ビルド、自動テスト、自動コミットの話など。&lt;/p&gt;
 
-&lt;p&gt;いかにして会社の上司を説得するかが重要だ。TDDは一見するとコード実装時間が延びるので会社では嫌われそうだ。またペアプログラミングも二人で交代交代にコードを書くので見た目の作業効率が悪化する。またプログラムによるテストが何を意味するのか分かってもらうのも大変だろう。品質保証のためのテストとTDDにおけるテストは分けて考える必要があるだろう。しかしTDDによりテストフェーズにおける手戻りが激減し、人もコードも健康的な開発環境が手に入るのではないかと思う。&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</title>
-    <link href="/2011/03/21/i-am-impotent-vimmer" />
-    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
-    <id>http://tech.portalshit.net//2011/03/21/i-am-impotent-vimmer</id>
-    <content type="html">&lt;p&gt;TDD BootCamp福岡に行ってみた。生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。&lt;/p&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;ペアプログラミングを体験した&lt;/h3&gt;
 
-&lt;p&gt;とりあえず今回、ペアを組んだ方に &lt;code&gt;cw&lt;/code&gt; とか &lt;code&gt;数字y&lt;/code&gt; とかを教えてもらった。あと&lt;/p&gt;
+&lt;p&gt;ペアプログラミングを生まれて体験した。 &lt;a href=&quot;http://twitter.com/mallowlabs&quot;&gt;@mallowlabs&lt;/a&gt; さんとRubyでペアプログラミングをさせてもらった。講師陣が出題する課題を解いていくというもの。当然テスト駆動。テスティングフレームワークにはRSpecを利用した。&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Vimでバックスペース使ったら負けだから&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;WEB + DB PressなどのRSpec特集を写経したことはあったけど、時間制限がある中で、他の人とペアを組んでプログラムを書いていく作業はかなりエキサイティングだった。&lt;/p&gt;
 
-&lt;p&gt;と言われてしまったのでバックスペースと矢印キーをなるべく使わずにプログラム書きたいと思います。でもTextMateとかCodaとか便利だからついつい使ってしまうんよね…。&lt;/p&gt;
+&lt;p&gt;ただ自分のRubyスキルおよびVimのスキルが著しく劣っていたため、@mallowlabs さんの足を引っ張っていた感は否めない。正直申し訳なかったです。&lt;/p&gt;
 
-&lt;p&gt;TDD BootCampの感想自体はまた別の記事で。&lt;/p&gt;
+&lt;p&gt;全般的に、自分の知識のなさ、スキルのなさが実感できた&lt;/p&gt;
+
+&lt;p&gt;以下、初日に行ったFizzBuzz問題と主に二日目に取り組んだTwitterのタイムラインをカテゴリ分けするという課題の成果物。&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/879647.js?file=fizzbuzz.rb&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://gist.github.com/879647.js?file=fizzbuzz_spec.rb&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://gist.github.com/878159.js?file=tweet_categorizer.rb&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://gist.github.com/878159.js?file=tweet_categorizer_spec.rb&quot;&gt;&lt;/script&gt;
+
+&lt;h3 id=&quot;tdd&quot;&gt;TDDをいかにして根付かせるか&lt;/h3&gt;
+
+&lt;p&gt;勉強会に参加していきなりコードが書けるようになるわけでは当然ないので、継続的な勉強が必要だと感じた。いっぱい本を紹介してもらったので積ん読本を何冊か片付けたら『レガシー・コード改善ガイド』と『テスト駆動開発入門』を買おうと思った。&lt;/p&gt;
 </content>
   </entry>
   
