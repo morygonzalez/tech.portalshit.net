@@ -37,7 +37,7 @@
 
 <p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
 
-<p>情報元は <a href='http://d.hatena.ne.jp/lurker/20061118/1163810847' title='フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳'>フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
+<p>情報元は <a href="http://d.hatena.ne.jp/lurker/20061118/1163810847" title="フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳">フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
 
 <p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
 
@@ -46,6 +46,7 @@
 <p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
 
 <p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -78,6 +79,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

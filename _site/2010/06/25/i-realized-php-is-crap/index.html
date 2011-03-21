@@ -36,31 +36,35 @@
 				<p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
 
 <p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
-<div class='highlight'><pre><code class='php'><span class='cp'>&lt;?php</span>
-<span class='k'>class</span> <span class='nc'>Hoge</span> <span class='p'>{</span>
-  <span class='k'>var</span> <span class='nv'>$a</span><span class='p'>;</span> 
-  <span class='k'>function</span> <span class='nf'>hoge</span><span class='p'>()</span> <span class='p'>{</span>
-    <span class='k'>return</span> <span class='nv'>$this</span><span class='o'>-&gt;</span><span class='na'>a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span><span class='p'>;</span>
-  <span class='p'>}</span>
-<span class='p'>}</span>
 
-<span class='nv'>$fuga</span> <span class='o'>=</span> <span class='k'>new</span> <span class='nx'>Hoge</span><span class='p'>();</span>
-<span class='k'>echo</span> <span class='nv'>$fuga</span><span class='o'>-&gt;</span><span class='na'>hoge</span><span class='p'>();</span>
-<span class='cp'>?&gt;</span><span class='x' />
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Hoge</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">$a</span><span class="p">;</span> 
+  <span class="k">function</span> <span class="nf">hoge</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$fuga</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Hoge</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$fuga</span><span class="o">-&gt;</span><span class="na">hoge</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="x" />
 </code></pre>
 </div>
+
 <p>つぎにRubyで同じコードを書いてみる。</p>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Hoge</span>
-  <span class='vi'>@a</span>  
-  <span class='k'>def</span> <span class='nf'>hoge</span>
-    <span class='vi'>@a</span> <span class='o'>=</span> <span class='s2'>&quot;hogehoge&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
 
-<span class='n'>fuga</span> <span class='o'>=</span> <span class='no'>Hoge</span><span class='o'>.</span><span class='n'>new</span>
-<span class='nb'>puts</span> <span class='n'>fuga</span><span class='o'>.</span><span class='n'>hoge</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
+  <span class="vi">@a</span>  
+  <span class="k">def</span> <span class="nf">hoge</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
 </code></pre>
 </div>
+
 <p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
 
 <p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
@@ -68,6 +72,7 @@
 <p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
 
 <p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -100,6 +105,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

@@ -43,9 +43,10 @@
 
 <p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
 
-<p><a href='http://wiki.dreamhost.com/Pecl_APC'>Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
+<p><a href="http://wiki.dreamhost.com/Pecl_APC">Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
 
 <p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -78,6 +79,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

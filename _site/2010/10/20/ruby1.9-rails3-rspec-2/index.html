@@ -36,22 +36,29 @@
 				<p>Ruby 1.9、Rails 3、RSpec 2で開発してる。いままでRubyとRailsになれるのに一杯一杯でテスト駆動開発できてなかったので、きちんとテストファーストでやることにした。</p>
 
 <p>そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> spec -c spec/*
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> spec -c spec/*
 </code></pre>
 </div>
+
 <p>とかやってもエラーが出る。 <code>which spec</code> すると <code>/usr/bin/spec</code> と出ちゃう。どうやら <code>spec</code> で発動されるのはRSpec 1.3のものみたい。</p>
 
 <p>RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> rspec -c spec/*
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> rspec -c spec/*
 </code></pre>
 </div>
+
 <p>これできちんとテストコードが実行された。かと思いきやFailureが。</p>
 
 <p>Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'># -*- coding: utf-8 -*-</span>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1"># -*- coding: utf-8 -*-</span>
 </code></pre>
 </div>
+
 <p>と書いてテキストエンコーディングを明示してあげないといけない。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -86,6 +93,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

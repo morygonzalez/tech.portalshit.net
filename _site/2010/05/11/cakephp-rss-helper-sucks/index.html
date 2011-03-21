@@ -36,27 +36,32 @@
 				<p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
 
 <p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
-<div class='highlight'><pre><code class='ruby'>    <span class='n'>respond_to</span> <span class='k'>do</span> <span class='o'>|</span><span class='nb'>format</span><span class='o'>|</span>
-        <span class='nb'>format</span><span class='o'>.</span><span class='n'>html</span> <span class='c1'># index.html.erb</span>
-        <span class='nb'>format</span><span class='o'>.</span><span class='n'>xml</span>  <span class='p'>{</span> <span class='n'>render</span> <span class='ss'>:xml</span> <span class='o'>=&gt;</span> <span class='vi'>@products</span> <span class='p'>}</span>
-    <span class='k'>end</span>
+
+<div class="highlight"><pre><code class="ruby">    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># index.html.erb</span>
+        <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@products</span> <span class="p">}</span>
+    <span class="k">end</span>
 </code></pre>
 </div>
+
 <p><code>config/routes.rb</code> に</p>
-<div class='highlight'><pre><code class='ruby'>    <span class='n'>map</span><span class='o'>.</span><span class='n'>connect</span> <span class='s1'>&#39;:controller/:action/:id.:format&#39;</span>
+
+<div class="highlight"><pre><code class="ruby">    <span class="n">map</span><span class="o">.</span><span class="n">connect</span> <span class="s1">&#39;:controller/:action/:id.:format&#39;</span>
 </code></pre>
 </div>
+
 <p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
 
 <p>CakePHPで同じことをやるためには以下の手順が必要。</p>
 
-<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
+<p><a href="http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper">Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
 
 <p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
 
 <p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
 
 <p>僕はファッションの観点からRailsを選びたい。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -91,6 +96,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

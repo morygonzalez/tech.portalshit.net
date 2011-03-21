@@ -36,37 +36,56 @@
 				<p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p>
 
 <p>まずSSHのおさらいを。クライアント側で</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> mkdir -p .ssh
-<span class='gp'>$</span> ssh-keygen -t rsa （以下略）
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> mkdir -p .ssh
+<span class="gp">$</span> ssh-keygen -t rsa （以下略）
 </code></pre>
 </div>
+
 <p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
 </code></pre>
 </div>
+
 <p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
 
 <p>いっぺんクライアント側で <code>id_rsa.pub</code> を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？</p>
 
 <p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
-<div class='highlight'><pre><code class='console'><span class='go'>Permission denied (publickey).</span>
+
+<div class="highlight"><pre><code class="console"><span class="go">Permission denied (publickey).</span>
 </code></pre>
 </div>
+
 <p>というエラーが頻繁にお出になるのですよ。</p>
 
 <p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> sudo /etc/init.d/ssh restart
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> sudo /etc/init.d/ssh restart
 </code></pre>
 </div>
+
 <p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
-<div class='highlight'><pre><code class='console'><span class='go'>Permission denied (publickey).</span>
+
+<div class="highlight"><pre><code class="console"><span class="go">Permission denied (publickey).</span>
 </code></pre>
 </div>
+
 <p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
 
 <p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p>
 
-<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &#8220;Disabling protocol version 1. Could not load host key&#8221; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href='http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html' title='ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！'>ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
+<table>
+  <tbody>
+    <tr>
+      <td>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら “Disabling protocol version 1. Could not load host key” というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（[ぷらぷらブログ</td>
+      <td>OpenSSH を導入。接続に四苦八苦！](http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html “ぷらぷらブログ</td>
+      <td>OpenSSH を導入。接続に四苦八苦！”)）という情報もあるけど面倒くさいのでまだ試していません。</td>
+    </tr>
+  </tbody>
+</table>
+
 							
 				<div id="related-post">
 					<ul>
@@ -99,6 +118,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

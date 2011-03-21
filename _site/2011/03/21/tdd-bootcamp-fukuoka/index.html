@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>TDD BootCamp福岡に行った |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,65 +25,126 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/08/13/jekyll-with-pygments" title="Pygmentsを使ってコードをシンタックスハイライトするようにした">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2011/03/21/i-am-impotent-vimmer" title="TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/08/31/macports-is-deprecated" title="MacPortsからHomebrewに移行しつつある">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</h2>
-				<p>80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。</p>
+				<h2>TDD BootCamp福岡に行った</h2>
+				<p>TDD BootCampに行ってみた。</p>
 
-<h3 id="activerecord">なんでわざわざActiveRecordを使うのか</h3>
+<h3 id="section">参加しようと思ったわけ</h3>
 
-<p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p>
+<p>いま勤めている会社にはテストがない。いや、テストはある。テストコードがない。エクセルにテスト項目をたくさん書き出していって手動でテストする。人力で三人くらいが夜なべしてテストする。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発し、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。ときにはテストケースを変更することすらある。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない。この状況をなんとかしたいと思っていて、今風の開発手法を身につけたいと思ってTDD BootCampに参加した。</p>
 
-<h3 id="section">作業詳細</h3>
+<h3 id="section-1">感想</h3>
 
-<p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p>
+<p>TDDで有名なt_wadaさんのプレゼンテーションは鮮やかで、すごく印象に残った。心に響いた部分を以下箇条書き。</p>
 
-<h4 id="section-1">やったこと</h4>
+<ul>
+  <li>現代ソフトウェア開発の三本柱
+    <ul>
+      <li>バージョン管理
+        <ul>
+          <li>テスティングや自動化よりも重要</li>
+        </ul>
+      </li>
+      <li>テスティング</li>
+      <li>自動化
+        <ul>
+          <li>デプロイなど単調な作業の自動化し、浮いた時間を設計や顧客との対話に使う</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>xUnit
+    <ul>
+      <li>xUnitの登場により、書き方・語彙・文法が言語の垣根を越えて共有され、キャズムを超えた。
+        <ul>
+          <li>テスト記述方法の共通化</li>
+          <li>テスト実行方法の共通化</li>
+        </ul>
+      </li>
+      <li>テストを書いた人でなくても同じようにテストを実行できるようになった
+        <ul>
+          <li>誰でも実行できるということは、コンピューターでも実行可能
+            <ul>
+              <li>テストの自働化へ（ファイルの保存時、VCSへのコミット時に自働テスト）</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>良いテスト
+    <ul>
+      <li>自動化されている</li>
+      <li>徹底している</li>
+      <li>何度でも実行可能</li>
+      <li>独立している</li>
+      <li>プロのコード
+        <ul>
+          <li>テストコードもプロダクトコードと同じ品質であることが求められる（リファクタリング、DRY原則の貫徹など）</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TDD三原則
+    <ul>
+      <li>単体テストコードを書く前に製品コードを書いてはいけない</li>
+      <li>適切に失敗する単体テストコードができるまで、次の単体テストコードを書いてはならない</li>
+      <li>単体テストコードに対応する以上に製品コードを書かない</li>
+    </ul>
+  </li>
+  <li>なぜTDDをするのか
+    <ul>
+      <li>自分が完璧ではないことがわかっているから
+        <ul>
+          <li>最初から思い通りにコードを書けるほどに私たちは賢くない</li>
+          <li>最初から思い通りに動作するほど対象は単純ではない</li>
+          <li>素早く対象に近づき、フィードバックを得て方向修正をしながら開発を行う必要がある</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>テストの目的は健康
+    <ul>
+      <li>変化に対応できるのは健康体のコードだけ</li>
+      <li>変化に対応できるのは健康体のチームだけ
+        <ul>
+          <li>毎日残業する、毎日レッドブル飲んだりしていてはダメ</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TDDの導入効果
+    <ul>
+      <li>MSやIBMでTDD導入後、欠陥の割合が4割から9割削減された。</li>
+      <li>コード実装時間は15%から35%増加した。
+        <ul>
+          <li>しかし結果的にはバグが激減するので開発工数自体は減る。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>TDDは才能ではなくスキル
+    <ul>
+      <li>練習すれば習得可能</li>
+      <li>量は質に転化する</li>
+      <li>写経しましょう！
+        <ul>
+          <li>PCにGitをインストールし、ページをキープできるブックスタンドを買って、ケント・ベック本をひたすら写経。ビルドを実行する度にコミットする。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-<p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
+<p>いっぱい本を紹介してもらったので今度給料出たら『レガシー・コード改善ガイド』と『テスト駆動開発入門』を買おうと思った。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<h3 id="tdd">TDDを導入するには</h3>
 
-<span class="nb">require</span> <span class="s2">&quot;rubygems&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;sqlite&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;active_record&quot;</span>
-
-<span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
-  <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;sqlite&quot;</span><span class="p">,</span>
-  <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;path/to/db&quot;</span>
-<span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Hoge</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-<span class="k">end</span>
-
-<span class="n">hoges</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span>
-<span class="n">hoges</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">hog</span><span class="o">|</span>
-  <span class="n">hog</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/hogehoge/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-  <span class="n">hoge</span><span class="o">.</span><span class="n">save</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
-<p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
-
-<p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">hoges</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">hog</span><span class="o">|</span>
-  <span class="k">if</span> <span class="n">hog</span><span class="o">.</span><span class="n">name</span> <span class="o">=~</span> <span class="sr">/hogehoge(.*)/</span>
-    <span class="n">hog</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="vg">$1</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
-<p>これで狙ったことができました。</p>
-
-<p>Rubyいいわー。ほんといいわー。</p>
+<p>いかにして会社の上司を説得するかが重要だ。TDDは一見するとコード実装時間が延びるので会社では嫌われそうだ。またペアプログラミングも二人で交代交代にコードを書くので見た目の作業効率が悪化する。またプログラムによるテストが何を意味するのか分かってもらうのも大変だろう。品質保証のためのテストとTDDにおけるテストは分けて考える必要があるだろう。しかしTDDによりテストフェーズにおける手戻りが激減し、人もコードも健康的な開発環境が手に入るのではないかと思う。</p>
 
 							
 				<div id="related-post">
@@ -111,9 +172,7 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
-				
-					<li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
+					<li><a href="http://tech.portalshit.net/TDD/">TDD</a></li>
 				
 				</ul>
 				

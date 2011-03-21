@@ -33,15 +33,18 @@
   			</div>
 			
 				<h2>Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</h2>
-				<p>tilyさんのgist<a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
+				<p>tilyさんのgist<a href="http://gist.github.com/427398" title="gist: 427398">gist: 427398</a>を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。</p>
 
 <p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
-<div class='highlight'><pre><code class='ruby'><span class='n'>new_tweets</span> <span class='o'>=</span> <span class='n'>neta_tweets</span> <span class='o'>-</span> <span class='n'>used_tweets</span>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">new_tweets</span> <span class="o">=</span> <span class="n">neta_tweets</span> <span class="o">-</span> <span class="n">used_tweets</span>
 </code></pre>
 </div>
+
 <p>とかしてみようとした。</p>
 
-<p><a href='http://gist.github.com/427398' title='gist: 427398'>gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
+<p><a href="http://gist.github.com/427398" title="gist: 427398">gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -76,6 +79,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

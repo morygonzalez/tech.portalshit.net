@@ -36,54 +36,100 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
+    <div class="articleinfo">Posted on 08 May 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+	</div>
+    <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
+
+<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
+
+<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+
+<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+
+<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
+
+    <a href="http://tech.portalshit.net/2010/05/08/to-what-extent-write-codes-in-mvc/#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></h2>
+    <div class="articleinfo">Posted on 07 May 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/git/">git</a>
+	</div>
+    <p>Gitでbranchの効率的な使い方みたいのがよくわからない。</p>
+
+<ul>
+  <li>
+    <p>実験的な機能をつけたい</p>
+  </li>
+  <li>
+    <p>ブランチを分ける（例えば開発用に alternate というブランチを作る）</p>
+  </li>
+  <li>
+    <p>開発する</p>
+  </li>
+  <li>
+    <p>開発完了後、 master にマージ</p>
+  </li>
+</ul>
+
+<p>みたいな感じかなと思ってた。</p>
+
+<p>しかし実際に運用してみると、実験的な機能の実装の他に、日常的にmasterでコードの改良みたいな作業があり、alternateで開発が完了した後にmasterにマージしたら多分コンフリクト起こりまくりになるような気がしてきた。</p>
+
+<p>それで日常メンテみたいな作業はmasterブランチで行い、それをalternateにマージするという手順をとってる。正しい開発方法かどうかはわからないけど、一応alternateブランチもmasterの最新の変更を追跡できる。んでalternateではしこしこ開発を続けて、開発完了時にmasterにマージしても多分派手なコンフリクトは起こらないんじゃないかと思ってますがどうなんでしょう。</p>
+
+    <a href="http://tech.portalshit.net/2010/05/07/git-branch-usage/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></h2>
     <div class="articleinfo">Posted on 07 May 2010 by morygonzalez |
 	
 		<a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
 	</div>
     <p>こういうコード書いてます。</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>function</span> <span class='nx'>getAttrName</span><span class='p'>(</span><span class='nx'>attrObj</span><span class='p'>)</span> <span class='p'>{</span>
-	<span class='kd'>var</span> <span class='nx'>attrName</span> <span class='o'>=</span> <span class='nx'>attrObj</span><span class='p'>.</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>;</span>
-<span class='c1'>//	items = document.getElementsByClassName(&#39;item&#39;);</span>
-	<span class='kd'>var</span> <span class='nx'>items</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li.item&#39;</span><span class='p'>);</span>
-	<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>).</span><span class='nx'>fadeOut</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
-	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>i</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>i</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>items</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>i</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
-	<span class='c1'>//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
-		<span class='kd'>var</span> <span class='nx'>keywordList</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;.keyword-list&#39;</span><span class='p'>,</span> <span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]);</span>
-		<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>j</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>j</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywordList</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>j</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
-			<span class='c1'>//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
-			<span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
-			<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>k</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>k</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>keywords</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>k</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
-				<span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span> <span class='p'>{</span>
-					<span class='nx'>$</span><span class='p'>(</span><span class='nx'>items</span><span class='p'>[</span><span class='nx'>i</span><span class='p'>]).</span><span class='nx'>fadeIn</span><span class='p'>(</span><span class='s1'>&#39;slow&#39;</span><span class='p'>);</span>
-				<span class='p'>}</span>
-			<span class='p'>}</span>
-		<span class='p'>}</span>
-	<span class='p'>}</span>
-	<span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>);</span>
-<span class='p'>}</span>
-<span class='kd'>function</span> <span class='nx'>getCurAttr</span><span class='p'>(</span><span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
-	<span class='kd'>var</span> <span class='nx'>curAttr</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s2'>&quot;#keySelector li a&quot;</span><span class='p'>);</span>
-	<span class='k'>for</span> <span class='p'>(</span><span class='kd'>var</span> <span class='nx'>l</span> <span class='o'>=</span> <span class='mi'>0</span><span class='p'>;</span> <span class='nx'>l</span> <span class='o'>&amp;</span><span class='nx'>lt</span><span class='p'>;</span> <span class='nx'>curAttr</span><span class='p'>.</span><span class='nx'>length</span><span class='p'>;</span> <span class='nx'>l</span><span class='o'>++</span><span class='p'>)</span> <span class='p'>{</span>
-		<span class='k'>if</span> <span class='p'>(</span><span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>]).</span><span class='nx'>text</span><span class='p'>()</span> <span class='o'>==</span> <span class='nx'>attrName</span><span class='p'>)</span> <span class='p'>{</span>
-			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>addClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
-		<span class='p'>}</span> <span class='k'>else</span> <span class='p'>{</span>
-			<span class='nx'>$</span><span class='p'>(</span><span class='nx'>curAttr</span><span class='p'>[</span><span class='nx'>l</span><span class='p'>].</span><span class='nx'>parentNode</span><span class='p'>).</span><span class='nx'>removeClass</span><span class='p'>(</span><span class='s1'>&#39;current-keyword&#39;</span><span class='p'>);</span>
-		<span class='p'>}</span>
-	<span class='p'>}</span>
-<span class='p'>}</span>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">getAttrName</span><span class="p">(</span><span class="nx">attrObj</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">attrObj</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+<span class="c1">//	items = document.getElementsByClassName(&#39;item&#39;);</span>
+	<span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li.item&#39;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
+		<span class="kd">var</span> <span class="nx">keywordList</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.keyword-list&#39;</span><span class="p">,</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywordList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
+			<span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+			<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywords</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">curAttr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#keySelector li a&quot;</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">l</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">curAttr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">l</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">]).</span><span class="nx">text</span><span class="p">()</span> <span class="o">==</span> <span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 </div>
+
 <p>やりたいことは以下のような感じ。</p>
 
 <ol>
-<li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
-
-<li>クリックされた文字列を <code>attrName</code> に格納</li>
-
-<li>すべての <code>item</code> をjQueryを使って非表示</li>
-
-<li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
+  <li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
+  <li>クリックされた文字列を <code>attrName</code> に格納</li>
+  <li>すべての <code>item</code> をjQueryを使って非表示</li>
+  <li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
 </ol>
 
 <p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
@@ -92,33 +138,46 @@
 
 <p>サーバーサイドで実装する方法もないではないけど、</p>
 
-<p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p>
+<ol>
+  <li>いじる部分が広範囲になりめんどい（新たなバグが発生するかも）</li>
+  <li>大した機能じゃないのに大手術したくない</li>
+  <li>ずっとPHPばっかり触ってるのはつまらん</li>
+</ol>
 
 <p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
 
-<h3 id='id2'>追記</h3>
+<h3 id="section">追記</h3>
 
-<p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
+<p>“Twitterでcxxさんに教えてもらった”:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
 
 <p>そういうわけで</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
 </code></pre>
 </div>
+
 <p>を</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>keywords</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;li a&#39;</span><span class='p'>,</span> <span class='nx'>keywordList</span><span class='p'>[</span><span class='nx'>j</span><span class='p'>]);</span>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li a&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
 </code></pre>
 </div>
+
 <p>とし、</p>
-<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>textContent</span><span class='p'>)</span>
+
+<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span>
 </code></pre>
 </div>
+
 <p>を</p>
-<div class='highlight'><pre><code class='javascript'><span class='k'>if</span> <span class='p'>(</span><span class='nx'>attrName</span> <span class='o'>==</span> <span class='nx'>keywords</span><span class='p'>[</span><span class='nx'>k</span><span class='p'>].</span><span class='nx'>firstChild</span><span class='p'>.</span><span class='nx'>data</span><span class='p'>)</span>
+
+<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
 </code></pre>
 </div>
+
 <p>にしてみたところ、ばっちりIEで動くようになった。</p>
 
 <p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
+
     <a href="http://tech.portalshit.net/2010/05/07/fuck-ie/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></h2>
@@ -136,9 +195,10 @@
 
 <p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
 
-<p><a href='http://wiki.dreamhost.com/Pecl_APC'>Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
+<p><a href="http://wiki.dreamhost.com/Pecl_APC">Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
 
 <p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>
+
     <a href="http://tech.portalshit.net/2010/05/03/portalshit-cached/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></h2>
@@ -146,40 +206,13 @@
 	
 		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
 	</div>
-    <p><a href='http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable'>CakePHP 1.3のStableがリリース</a> された。 <a href='http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3'>JavascriptヘルパーとかAjaxヘルパーが非推奨になってる</a> 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 <code>$html-&gt;js(&#39;&#39;)</code> みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。</p>
+    <p><a href="http://bakery.cakephp.org/articles/view/announcing-cakephp-1-3-0-stable">CakePHP 1.3のStableがリリース</a> された。 <a href="http://book.cakephp.org/view/1561/Migrating-from-CakePHP-1-2-to-1-3">JavascriptヘルパーとかAjaxヘルパーが非推奨になってる</a> 。かわりにHtmlヘルパーのjsメソッドを使うらしい。 <code>$html-&gt;js('')</code> みたいな感じかな。で、Ajax系の処理はjQueryがデフォルトのライブラリになったらしい。Rails 3.0もprotorype.jsに別れを告げたらしいし、自分がJavaScriptのライブラリで遊び始めた頃はjQueryが全盛だったのでいまからprototype.jsの使い方勉強するのかったるかったし、jQuery簡単だしこの進化は大歓迎です。</p>
 
 <p>JavascriptヘルパーとAjaxヘルパーが非推奨になった件については、わざわざ別のヘルパーにせんでもいいよなー、という印象は確かに持ってた。Htmlをいじるメソッドは一つのヘルパークラスにまとめてしまった方がすっきりする。1.2.xのときはAjaxヘルパーが使いづらすぎて結局jQueryでAjaxすることもあったし、あまり存在意義を見いだせなかったので良かったんじゃないでしょうか。</p>
 
 <p>でも既存のプロジェクトの1.3への移行はめんどくさそうなのでたぶんやんない気がする。新しくCakePHPでなんか作るときは使ってみようと思います。</p>
+
     <a href="http://tech.portalshit.net/2010/05/01/cakephp13/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/04/22/google-analytics-plugin">Google Analytics Pluginが動かない</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/misc/">misc</a>
-	</div>
-    <p>MephistoでGoogle Analytics使おうと思ってググったら <a href='http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics'>Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p>
-
-<p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p>
-
-<h3 id='id1'>追記</h3>
-
-<p>一晩寝て起きたら動いてた。</p>
-    <a href="http://tech.portalshit.net/2010/04/22/google-analytics-plugin/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	</div>
-    <p>CakePHPには <a href='http://github.com/davidpersson/media'>Media Plugin</a> というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。</p>
-
-<p>しかしこのMedia Plugin、設置が少々面倒だ。情報も英語のものも含めて少ない。僕は二つのプロジェクトでこのMedia Pluginを使ったけど、とても設置に苦労した。はまるポイントはいくつかあるんだけど、今日はDBについて書いておこうと思う。</p>
-
-<p>Media Pluginは <code>attachments</code> というテーブルをつくり、ここにファイルのメタデータを格納していく。これはアプリケーションのルート（ <code>APP</code> ディレクトリ）で <code>cake media init</code> というコマンドをTerminalで打ってやると（ただし <code>/cake/console</code> にパスを通しておく必要あり）、Bakeのときのような画面が出てきて初期設定をやってくれる（ <code>app/config/database.php</code> の情報にあわせてテーブルも作ってくれる）。しかしCakePHPのデフォルトDBがMySQLであるためMedia PluginもMySQLを想定しているのか、 <code>app/plugins/media/config/sql/media.sql</code> のSQL文を単純に実行してしまうと不具合が生じる。実は僕はここで結構はまってた。僕は全部のプロジェクトでSQLiteを使っているので、単純にこのSQLを実行すると、 <code>attachments.id</code> のデータ型が <code>INT(10)</code> とかになってしまい、エラーに遭遇し続けることになってしまった。SQLiteの場合、idカラムのデータ型は <code>INTEGER</code> でなければならないのだ。</p>
-
-<p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>
-    <a href="http://tech.portalshit.net/2010/04/22/cakephp-mediaplugin/#disqus_thread">Comments</a>
 
 				</div>
 				
@@ -206,6 +239,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

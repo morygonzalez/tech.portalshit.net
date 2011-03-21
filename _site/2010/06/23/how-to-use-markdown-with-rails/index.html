@@ -35,25 +35,30 @@
 				<h2>RailsアプリケーションでMarkdownを使う</h2>
 				<p>RailsアプリケーションでMarkdownを使いたと思った。（Markdown大好きっ子なので）</p>
 
-<p>調べてみたところ、 <a href='http://deveiate.org/projects/BlueCloth' title='BlueCloth'>BlueCloth</a> というライブラリを使うといいらしい。</p>
+<p>調べてみたところ、 <a href="http://deveiate.org/projects/BlueCloth" title="BlueCloth">BlueCloth</a> というライブラリを使うといいらしい。</p>
 
 <p>これはRailsのプラグインではないのでgemでインストール。</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> sudo gem install bluecloth
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> sudo gem install bluecloth
 </code></pre>
 </div>
+
 <p>その後viewで</p>
 
-<p><div class='highlight'><pre><code class='rhtml'><span class='cp'>&lt;%=</span> <span class='n'>markdwon</span><span class='p'>(</span><span class='vi'>@item</span><span class='o'>.</span><span class='n'>text</span><span class='p'>)</span> <span class='cp'>%&gt;</span>
+<div class="highlight"><pre><code class="rhtml"><span class="cp">&lt;%=</span> <span class="n">markdwon</span><span class="p">(</span><span class="vi">@item</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="cp">%&gt;</span>
 </code></pre>
-</div></p>
+</div>
 
 <p>とか書けばいい。</p>
 
 <p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
-<div class='highlight'><pre><code class='ruby'><span class='n'>config</span><span class='o'>.</span><span class='n'>gem</span> <span class='s2'>&quot;bluecloth&quot;</span>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">config</span><span class="o">.</span><span class="n">gem</span> <span class="s2">&quot;bluecloth&quot;</span>
 </code></pre>
 </div>
+
 <p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -88,6 +93,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

@@ -36,6 +36,24 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
+
+    <a href="http://tech.portalshit.net/2010/06/03/hard-to-learn-rails/#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/misc/">misc</a>
+	</div>
+    <p>なんか <a href="http://mephistoblog.com/">Mephistoの公式サイト</a> 死んでるし、<a href="http://jekyllrb.com/">jekyll</a> に変えようかなと思ってるんだけど、 <a href="http://wiki.github.com/mojombo/jekyll/blog-migrations">移行ガイド</a> の通りにやってもうまくいかない。</p>
+
+    <a href="http://tech.portalshit.net/2010/06/03/feel-like-migrating-from-mephisto/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
     <div class="articleinfo">Posted on 18 May 2010 by morygonzalez |
 	
@@ -43,53 +61,56 @@
 	
 		<a href="http://tech.portalshit.net/Twitter/">Twitter</a>
 	</div>
-    <p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
-<span class='c1'># coding: utf-8</span>
+    <p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
 
-<span class='nb'>require</span> <span class='s1'>&#39;net/http&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;uri&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;json&#39;</span>
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<span class="c1"># coding: utf-8</span>
 
-<span class='no'>USERNAME</span> <span class='o'>=</span> <span class='s1'>&#39;morygonzalez&#39;</span>
-<span class='no'>PASSWORD</span> <span class='o'>=</span> <span class='s1'>&#39;***&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;uri&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
 
-<span class='n'>uri</span> <span class='o'>=</span> <span class='no'>URI</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='s1'>&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class='p'>)</span>
-<span class='k'>begin</span>
-  <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>.</span><span class='n'>start</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>uri</span><span class='o'>.</span><span class='n'>port</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>http</span><span class='o'>|</span>
-    <span class='n'>request</span> <span class='o'>=</span> <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>::</span><span class='no'>Get</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>request_uri</span><span class='p'>)</span>
-    <span class='n'>request</span><span class='o'>.</span><span class='n'>basic_auth</span><span class='p'>(</span><span class='no'>USERNAME</span><span class='p'>,</span> <span class='no'>PASSWORD</span><span class='p'>)</span>
-    <span class='n'>http</span><span class='o'>.</span><span class='n'>request</span><span class='p'>(</span><span class='n'>request</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>response</span><span class='o'>|</span>
-      <span class='k'>raise</span> <span class='s1'>&#39;Response is not chunked&#39;</span> <span class='k'>unless</span> <span class='n'>response</span><span class='o'>.</span><span class='n'>chunked?</span>
-      <span class='n'>response</span><span class='o'>.</span><span class='n'>read_body</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>chunk</span><span class='o'>|</span>
-        <span class='c1'>#空行は無視</span>
-        <span class='n'>status</span> <span class='o'>=</span> <span class='no'>JSON</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='n'>chunk</span><span class='p'>)</span> <span class='k'>rescue</span> <span class='k'>next</span>
-        <span class='c1'>#eventを含まないものは無視</span>
-        <span class='k'>next</span> <span class='k'>unless</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span>
-        <span class='n'>source</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;source&#39;</span><span class='o'>]</span>
-        <span class='k'>if</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
-          <span class='n'>target_obj</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
-          <span class='n'>target_user</span> <span class='o'>=</span> <span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;user&#39;</span><span class='o'>]</span>
-          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target_user</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;text&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
-        <span class='k'>elsif</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
-          <span class='n'>target</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
-          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
-        <span class='k'>end</span>
-      <span class='k'>end</span>
-    <span class='k'>end</span>
-  <span class='k'>end</span>
+<span class="no">USERNAME</span> <span class="o">=</span> <span class="s1">&#39;morygonzalez&#39;</span>
+<span class="no">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;***&#39;</span>
 
-<span class='k'>rescue</span> <span class='no'>Timeout</span><span class='o'>::</span><span class='no'>Error</span> <span class='o'>=&gt;</span> <span class='n'>ex</span>
-  <span class='nb'>p</span> <span class='s2'>&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class="p">)</span>
+<span class="k">begin</span>
+  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">request_uri</span><span class="p">)</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">basic_auth</span><span class="p">(</span><span class="no">USERNAME</span><span class="p">,</span> <span class="no">PASSWORD</span><span class="p">)</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+      <span class="k">raise</span> <span class="s1">&#39;Response is not chunked&#39;</span> <span class="k">unless</span> <span class="n">response</span><span class="o">.</span><span class="n">chunked?</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">read_body</span> <span class="k">do</span> <span class="o">|</span><span class="n">chunk</span><span class="o">|</span>
+        <span class="c1">#空行は無視</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="k">rescue</span> <span class="k">next</span>
+        <span class="c1">#eventを含まないものは無視</span>
+        <span class="k">next</span> <span class="k">unless</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;source&#39;</span><span class="o">]</span>
+        <span class="k">if</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
+          <span class="n">target_obj</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
+          <span class="n">target_user</span> <span class="o">=</span> <span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;user&#39;</span><span class="o">]</span>
+          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target_user</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;text&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elsif</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
+          <span class="n">target</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
+          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">rescue</span> <span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span> <span class="o">=&gt;</span> <span class="n">ex</span>
+  <span class="nb">p</span> <span class="s2">&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
   
-  <span class='k'>retry</span>
-<span class='k'>end</span>
+  <span class="k">retry</span>
+<span class="k">end</span>
 </code></pre>
 </div>
+
 <p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
 
 <p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
+
     <a href="http://tech.portalshit.net/2010/05/18/happy-netstalking-with-ruby/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
@@ -100,12 +121,14 @@
     <p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
 
 <blockquote>
-<p>To restart your rails app do a &#8220;ps x&#8221; to get the pid of your dispatch.fcgi process(let&#8217;s say it&#8217;s 1234) then do a &#8220;kill 1234&#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. <cite><a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'>How do I restart rails app? - DreamHost Forum</a></cite></p>
+  <p>To restart your rails app do a “ps x” to get the pid of your dispatch.fcgi process(let’s say it’s 1234) then do a “kill 1234”. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
+<cite><a href="http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm">How do I restart rails app? - DreamHost Forum</a></cite></p>
 </blockquote>
 
 <p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
 
 <p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>
+
     <a href="http://tech.portalshit.net/2010/05/11/rails-app-on-dreamhost/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
@@ -118,70 +141,33 @@
     <p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
 
 <p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
-<div class='highlight'><pre><code class='ruby'>    <span class='n'>respond_to</span> <span class='k'>do</span> <span class='o'>|</span><span class='nb'>format</span><span class='o'>|</span>
-        <span class='nb'>format</span><span class='o'>.</span><span class='n'>html</span> <span class='c1'># index.html.erb</span>
-        <span class='nb'>format</span><span class='o'>.</span><span class='n'>xml</span>  <span class='p'>{</span> <span class='n'>render</span> <span class='ss'>:xml</span> <span class='o'>=&gt;</span> <span class='vi'>@products</span> <span class='p'>}</span>
-    <span class='k'>end</span>
+
+<div class="highlight"><pre><code class="ruby">    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># index.html.erb</span>
+        <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@products</span> <span class="p">}</span>
+    <span class="k">end</span>
 </code></pre>
 </div>
+
 <p><code>config/routes.rb</code> に</p>
-<div class='highlight'><pre><code class='ruby'>    <span class='n'>map</span><span class='o'>.</span><span class='n'>connect</span> <span class='s1'>&#39;:controller/:action/:id.:format&#39;</span>
+
+<div class="highlight"><pre><code class="ruby">    <span class="n">map</span><span class="o">.</span><span class="n">connect</span> <span class="s1">&#39;:controller/:action/:id.:format&#39;</span>
 </code></pre>
 </div>
+
 <p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
 
 <p>CakePHPで同じことをやるためには以下の手順が必要。</p>
 
-<p><a href='http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper'>Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
+<p><a href="http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper">Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
 
 <p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
 
 <p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
 
 <p>僕はファッションの観点からRailsを選びたい。</p>
+
     <a href="http://tech.portalshit.net/2010/05/11/cakephp-rss-helper-sucks/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
-    <div class="articleinfo">Posted on 08 May 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	</div>
-    <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
-
-<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
-
-<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
-
-<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
-
-<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
-    <a href="http://tech.portalshit.net/2010/05/08/to-what-extent-write-codes-in-mvc/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></h2>
-    <div class="articleinfo">Posted on 07 May 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/git/">git</a>
-	</div>
-    <p>Gitでbranchの効率的な使い方みたいのがよくわからない。</p>
-
-<p>* 実験的な機能をつけたい</p>
-
-<ul>
-<li>ブランチを分ける（例えば開発用に alternate というブランチを作る）</li>
-</ul>
-
-<p>* 開発する</p>
-
-<ul>
-<li>開発完了後、 master にマージ</li>
-</ul>
-
-<p>みたいな感じかなと思ってた。</p>
-
-<p>しかし実際に運用してみると、実験的な機能の実装の他に、日常的にmasterでコードの改良みたいな作業があり、alternateで開発が完了した後にmasterにマージしたら多分コンフリクト起こりまくりになるような気がしてきた。</p>
-
-<p>それで日常メンテみたいな作業はmasterブランチで行い、それをalternateにマージするという手順をとってる。正しい開発方法かどうかはわからないけど、一応alternateブランチもmasterの最新の変更を追跡できる。んでalternateではしこしこ開発を続けて、開発完了時にmasterにマージしても多分派手なコンフリクトは起こらないんじゃないかと思ってますがどうなんでしょう。</p>
-    <a href="http://tech.portalshit.net/2010/05/07/git-branch-usage/#disqus_thread">Comments</a>
 
 				</div>
 				
@@ -208,6 +194,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

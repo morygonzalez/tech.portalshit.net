@@ -36,12 +36,14 @@
 				<p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
 
 <blockquote>
-<p>To restart your rails app do a &#8220;ps x&#8221; to get the pid of your dispatch.fcgi process(let&#8217;s say it&#8217;s 1234) then do a &#8220;kill 1234&#8221;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. <cite><a href='http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm'>How do I restart rails app? - DreamHost Forum</a></cite></p>
+  <p>To restart your rails app do a “ps x” to get the pid of your dispatch.fcgi process(let’s say it’s 1234) then do a “kill 1234”. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
+<cite><a href="http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm">How do I restart rails app? - DreamHost Forum</a></cite></p>
 </blockquote>
 
 <p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
 
 <p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -74,6 +76,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

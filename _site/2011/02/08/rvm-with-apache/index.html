@@ -34,26 +34,33 @@
 			
 				<h2>RVMで入れたRubyをApacheとかから使いたい</h2>
 				<p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
 
-<span class='nb'>puts</span> <span class='no'>RUBY_DESCRIPTION</span>
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">puts</span> <span class="no">RUBY_DESCRIPTION</span>
 </code></pre>
 </div>
+
 <p>なファイル（hoge.rb）があったとします。これを</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> ruby hoge.rb
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hoge.rb
 </code></pre>
 </div>
+
 <p>とシェルから呼び出したときにはちゃんと</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> ruby 1.9.2p136 <span class='o'>(</span>2010-12-25 revision 30365<span class='o'>)</span> <span class='o'>[</span>x86_64-darwin10.6.0<span class='o'>]</span>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby 1.9.2p136 <span class="o">(</span>2010-12-25 revision 30365<span class="o">)</span> <span class="o">[</span>x86_64-darwin10.6.0<span class="o">]</span>
 </code></pre>
 </div>
+
 <p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
 
 <p>これ、もう半年くらい解決方法探してる気がする。</p>
 
 <p>TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに <code>~/.rvm/bin/ruby-1.9.2-p136</code> とか書くんじゃろか。</p>
 
-<p>cxxさんに質問したら <a href='http://rvm.beginrescueend.com/deployment/system-wide/'>RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
+<p>cxxさんに質問したら <a href="http://rvm.beginrescueend.com/deployment/system-wide/">RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -86,6 +93,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				

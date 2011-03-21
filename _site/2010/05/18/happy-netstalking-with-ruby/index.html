@@ -33,53 +33,56 @@
   			</div>
 			
 				<h2>たのしいネットストーキング with Ruby</h2>
-				<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &#8220;Twitter Streaming APIをRubyで試してみる - しばそんノート&#8221;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'>#!/usr/bin/env ruby</span>
-<span class='c1'># coding: utf-8</span>
+				<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
 
-<span class='nb'>require</span> <span class='s1'>&#39;net/http&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;uri&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;rubygems&#39;</span>
-<span class='nb'>require</span> <span class='s1'>&#39;json&#39;</span>
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<span class="c1"># coding: utf-8</span>
 
-<span class='no'>USERNAME</span> <span class='o'>=</span> <span class='s1'>&#39;morygonzalez&#39;</span>
-<span class='no'>PASSWORD</span> <span class='o'>=</span> <span class='s1'>&#39;***&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;uri&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
 
-<span class='n'>uri</span> <span class='o'>=</span> <span class='no'>URI</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='s1'>&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class='p'>)</span>
-<span class='k'>begin</span>
-  <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>.</span><span class='n'>start</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>uri</span><span class='o'>.</span><span class='n'>port</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>http</span><span class='o'>|</span>
-    <span class='n'>request</span> <span class='o'>=</span> <span class='no'>Net</span><span class='o'>::</span><span class='no'>HTTP</span><span class='o'>::</span><span class='no'>Get</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='n'>uri</span><span class='o'>.</span><span class='n'>request_uri</span><span class='p'>)</span>
-    <span class='n'>request</span><span class='o'>.</span><span class='n'>basic_auth</span><span class='p'>(</span><span class='no'>USERNAME</span><span class='p'>,</span> <span class='no'>PASSWORD</span><span class='p'>)</span>
-    <span class='n'>http</span><span class='o'>.</span><span class='n'>request</span><span class='p'>(</span><span class='n'>request</span><span class='p'>)</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>response</span><span class='o'>|</span>
-      <span class='k'>raise</span> <span class='s1'>&#39;Response is not chunked&#39;</span> <span class='k'>unless</span> <span class='n'>response</span><span class='o'>.</span><span class='n'>chunked?</span>
-      <span class='n'>response</span><span class='o'>.</span><span class='n'>read_body</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>chunk</span><span class='o'>|</span>
-        <span class='c1'>#空行は無視</span>
-        <span class='n'>status</span> <span class='o'>=</span> <span class='no'>JSON</span><span class='o'>.</span><span class='n'>parse</span><span class='p'>(</span><span class='n'>chunk</span><span class='p'>)</span> <span class='k'>rescue</span> <span class='k'>next</span>
-        <span class='c1'>#eventを含まないものは無視</span>
-        <span class='k'>next</span> <span class='k'>unless</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span>
-        <span class='n'>source</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;source&#39;</span><span class='o'>]</span>
-        <span class='k'>if</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
-          <span class='n'>target_obj</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target_object&#39;</span><span class='o'>]</span>
-          <span class='n'>target_user</span> <span class='o'>=</span> <span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;user&#39;</span><span class='o'>]</span>
-          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target_user</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>target_obj</span><span class='o'>[</span><span class='s1'>&#39;text&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
-        <span class='k'>elsif</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
-          <span class='n'>target</span> <span class='o'>=</span> <span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;target&#39;</span><span class='o'>]</span>
-          <span class='nb'>puts</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>status</span><span class='o'>[</span><span class='s1'>&#39;event&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>: </span><span class='si'>#{</span><span class='n'>source</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'> -&amp;gt; </span><span class='si'>#{</span><span class='n'>target</span><span class='o'>[</span><span class='s1'>&#39;screen_name&#39;</span><span class='o'>]</span><span class='si'>}</span><span class='s2'>&quot;</span>
-        <span class='k'>end</span>
-      <span class='k'>end</span>
-    <span class='k'>end</span>
-  <span class='k'>end</span>
+<span class="no">USERNAME</span> <span class="o">=</span> <span class="s1">&#39;morygonzalez&#39;</span>
+<span class="no">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;***&#39;</span>
 
-<span class='k'>rescue</span> <span class='no'>Timeout</span><span class='o'>::</span><span class='no'>Error</span> <span class='o'>=&gt;</span> <span class='n'>ex</span>
-  <span class='nb'>p</span> <span class='s2'>&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class="p">)</span>
+<span class="k">begin</span>
+  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">request_uri</span><span class="p">)</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">basic_auth</span><span class="p">(</span><span class="no">USERNAME</span><span class="p">,</span> <span class="no">PASSWORD</span><span class="p">)</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+      <span class="k">raise</span> <span class="s1">&#39;Response is not chunked&#39;</span> <span class="k">unless</span> <span class="n">response</span><span class="o">.</span><span class="n">chunked?</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">read_body</span> <span class="k">do</span> <span class="o">|</span><span class="n">chunk</span><span class="o">|</span>
+        <span class="c1">#空行は無視</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="k">rescue</span> <span class="k">next</span>
+        <span class="c1">#eventを含まないものは無視</span>
+        <span class="k">next</span> <span class="k">unless</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;source&#39;</span><span class="o">]</span>
+        <span class="k">if</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
+          <span class="n">target_obj</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
+          <span class="n">target_user</span> <span class="o">=</span> <span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;user&#39;</span><span class="o">]</span>
+          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target_user</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;text&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elsif</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
+          <span class="n">target</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
+          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">rescue</span> <span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span> <span class="o">=&gt;</span> <span class="n">ex</span>
+  <span class="nb">p</span> <span class="s2">&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
   
-  <span class='k'>retry</span>
-<span class='k'>end</span>
+  <span class="k">retry</span>
+<span class="k">end</span>
 </code></pre>
 </div>
+
 <p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
 
 <p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
+
 							
 				<div id="related-post">
 					<ul>
@@ -114,6 +117,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD BootCamp福岡に行った</a></li>
+				
+					<li><a href="/2011/03/21/i-am-impotent-vimmer">TDD BootCamp福岡でペアプロをしたら全然Vim使えなくて恥ずかしかったのでご報告いたします</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
