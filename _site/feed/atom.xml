@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-03-22T00:59:24+09:00</updated>
+  <updated>2011-03-22T08:56:32+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -20,11 +20,11 @@
 
 &lt;h3 id=&quot;section&quot;&gt;参加しようと思ったわけ&lt;/h3&gt;
 
-&lt;p&gt;勤めている会社にはテストがない。いや、テストはある。テストコードがない。エクセルにテスト項目をたくさん書き出していって手動でテストする。人力で三人くらいが夜なべしてテストする（だいたいスケジュールには遅延が発生する）。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発し、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。ときにはテストケースを変更することすらある。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない（福岡に来てからのこのブログの更新状況を見ればおわかりいただけるかと）。この状況をなんとかしたいと思っていて、藁をもすがる思いでTDD Boot Campに参加した。&lt;/p&gt;
+&lt;p&gt;勤めている会社にはテストがない。いや、テストはある。エクセルにテスト項目をたくさん書き出していって手動テストだ。テストコードがない。人力で三人くらいが夜なべしてテストする（だいたいスケジュールには遅延が発生する）。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発して、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない（福岡に来てからのこのブログの更新状況を見ればおわかりいただけるかと）。この状況をなんとかしたいと思っていて、藁をもすがる思いでTDD Boot Campに参加した。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;感想&lt;/h3&gt;
 
-&lt;p&gt;『プログラマが知るべき97のこと』の監修やTDDで有名な &lt;a href=&quot;http://twitter.com/t_wada&quot;&gt;@t_wada&lt;/a&gt; さんのプレゼンテーションは鮮やかで、すごく印象に残った。&lt;/p&gt;
+&lt;p&gt;一日目は『プログラマが知るべき97のこと』の監修やTDDで有名な &lt;a href=&quot;http://twitter.com/t_wada&quot;&gt;@t_wada&lt;/a&gt; さんのレクチャーで、TDDとは何かが説明された。以下印象に残った点。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;良いテスト
@@ -93,7 +93,7 @@
 
 &lt;p&gt;テストのみならず、自動化やバージョンコントロールの重要性が説かれた。&lt;/p&gt;
 
-&lt;p&gt;@t_wada さんの話のほかにも &lt;a href=&quot;http://twitter.com/bleis&quot;&gt;@bleis&lt;/a&gt; さんによるGitの効果的な利用方法やJenkinsを利用した継続的インテグレーションの実践例、 &lt;a href=&quot;http://twitter.com/akineko&quot;&gt;@akineko&lt;/a&gt; さんによるOMakeを利用した自動ビルド、自動テスト、自動コミットの話など。&lt;/p&gt;
+&lt;p&gt;二日目には &lt;a href=&quot;http://twitter.com/bleis&quot;&gt;@bleis&lt;/a&gt; さんによるGitの効果的な利用方法やJenkinsを利用した継続的インテグレーションの実践例、 &lt;a href=&quot;http://twitter.com/akineko&quot;&gt;@akineko&lt;/a&gt; さんによるOMakeを利用した自動ビルド、自動テスト、自動コミットの話など。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;ペアプログラミングを体験した&lt;/h3&gt;
 
