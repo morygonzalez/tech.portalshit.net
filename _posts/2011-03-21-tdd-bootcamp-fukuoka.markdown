@@ -61,10 +61,8 @@ WEB + DB PressなどのRSpec特集を写経したことはあったけど、時�
 
 以下、初日に行ったFizzBuzz問題と主に二日目に取り組んだTwitterのタイムラインをカテゴリ分けするという課題の成果物。
 
-<script src="https://gist.github.com/879647.js?file=fizzbuzz.rb"></script>
-<script src="https://gist.github.com/879647.js?file=fizzbuzz_spec.rb"></script>
-<script src="https://gist.github.com/878159.js?file=tweet_categorizer.rb"></script>
-<script src="https://gist.github.com/878159.js?file=tweet_categorizer_spec.rb"></script>
+[TDD Boot Camp 福岡 — Gist](https://gist.github.com/879647)
+[TDDBC でペアプロした結果です — Gist](https://gist.github.com/878159)
 
 ### TDDをいかにして根付かせるか
 

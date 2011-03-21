@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-03-22T00:49:46+09:00</updated>
+  <updated>2011-03-22T00:59:24+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -107,13 +107,8 @@
 
 &lt;p&gt;以下、初日に行ったFizzBuzz問題と主に二日目に取り組んだTwitterのタイムラインをカテゴリ分けするという課題の成果物。&lt;/p&gt;
 
-&lt;script src=&quot;https://gist.github.com/879647.js?file=fizzbuzz.rb&quot;&gt;&lt;/script&gt;
-
-&lt;script src=&quot;https://gist.github.com/879647.js?file=fizzbuzz_spec.rb&quot;&gt;&lt;/script&gt;
-
-&lt;script src=&quot;https://gist.github.com/878159.js?file=tweet_categorizer.rb&quot;&gt;&lt;/script&gt;
-
-&lt;script src=&quot;https://gist.github.com/878159.js?file=tweet_categorizer_spec.rb&quot;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/879647&quot;&gt;TDD Boot Camp 福岡 — Gist&lt;/a&gt;
+&lt;a href=&quot;https://gist.github.com/878159&quot;&gt;TDDBC でペアプロした結果です — Gist&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;tdd&quot;&gt;TDDをいかにして根付かせるか&lt;/h3&gt;
 
