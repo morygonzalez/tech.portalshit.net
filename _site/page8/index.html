@@ -36,6 +36,30 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/03/rails-has-subdirectory-in-controller">Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！  <code>app/controllers/admin/book_controller.rb</code> ということができるらしい！ んで、そのときのクラス宣言は</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Admin</span><span class="o">::</span><span class="no">BookController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+</code></pre>
+</div>
+
+<p>となるらしい！ 変態だ！！ ぜったい変態だ！！！</p>
+
+    <a href="http://tech.portalshit.net/2010/06/03/rails-has-subdirectory-in-controller/#disqus_thread">Comments</a>
+
+    <h2><a href="/2010/06/03/hard-to-learn-rails">Railsむずい</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	</div>
+    <p>CakePHPはなんも考えなくてもテキトーにやってたらサイトできてたんだけど、Railsはそんな風にはやらしてもらえない。Railsのサイト作んの自体の効率性が悪い訳ではもちろんないんだけど、レールに乗るためにはそれなりに知っとかなきゃいけないことが多い感じ。『Railsによるアジャイル〜』はいま14章まで読んだ。14章はテストの章だったんだけど、初めてテストに触れた感じ。CakePHP 1.2の公式ガイドにもテストについての章はあったけど、後ろの方でおまけみたいな感じだったから飛ばしちゃってた。たまたま先月の頭に買ってた『WEB + DB Press 56』がRubyでのテストを紹介してて、そこを読みながら14章のコードを写経していったけど、わりと早い段階でテストの重要性が説いてあって、アジャイル本はしっかりしてるわと思った。</p>
+
+    <a href="http://tech.portalshit.net/2010/06/03/hard-to-learn-rails/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
     <div class="articleinfo">Posted on 03 Jun 2010 by morygonzalez |
 	
@@ -122,61 +146,6 @@
 
     <a href="http://tech.portalshit.net/2010/05/11/rails-app-on-dreamhost/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
-    <div class="articleinfo">Posted on 11 May 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
-	</div>
-    <p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
-
-<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
-
-<div class="highlight"><pre><code class="ruby">    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># index.html.erb</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@products</span> <span class="p">}</span>
-    <span class="k">end</span>
-</code></pre>
-</div>
-
-<p><code>config/routes.rb</code> に</p>
-
-<div class="highlight"><pre><code class="ruby">    <span class="n">map</span><span class="o">.</span><span class="n">connect</span> <span class="s1">&#39;:controller/:action/:id.:format&#39;</span>
-</code></pre>
-</div>
-
-<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
-
-<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
-
-<p><a href="http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper">Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
-
-<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
-
-<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
-
-<p>僕はファッションの観点からRailsを選びたい。</p>
-
-    <a href="http://tech.portalshit.net/2010/05/11/cakephp-rss-helper-sucks/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
-    <div class="articleinfo">Posted on 08 May 2010 by morygonzalez |
-	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	</div>
-    <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
-
-<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
-
-<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
-
-<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
-
-<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
-
-    <a href="http://tech.portalshit.net/2010/05/08/to-what-extent-write-codes-in-mvc/#disqus_thread">Comments</a>
-
 				</div>
 				
 				<div class="autopagerize_insert_before"></div>
@@ -202,6 +171,10 @@
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
+				
+					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
 				

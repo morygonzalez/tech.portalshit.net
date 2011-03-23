@@ -26,6 +26,66 @@
   			
   			<div class="autopagerize_page_element">
 				  
+<h2 id="tdd-boot-camp2-mdash-20110324i-am-an-impotent-programmer"><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 — ペアプログラミングで気づいたこと</a></h2>
+<div class="articleinfo">
+Posted on 24 Mar 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/勉強会/">勉強会</a>
+	
+</div>
+<h3 id="vimmability">Vimmabilityのなさ</h3>
+
+<p>TDD Boot Camp福岡で生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。</p>
+
+<p>とりあえず今回、ペアを組んだ <a href="http://twitter.com/mallowlabs">@mallowlabs</a> さんに <code>cw</code> とか <code>&lt;数字&gt;y</code> とかを教えてもらった。あと</p>
+
+<blockquote>
+  <p>Vimでバックスペース使ったら負けだから</p>
+</blockquote>
+
+<p>と言われてしまったのでバックスペースと矢印キーをなるべく使わずにプログラム書きたいと思います。でもTextMateとかCodaとか便利だからついつい使ってしまうんよね…。</p>
+
+<h3 id="section">プログラムが全然書けない</h3>
+
+<p>思ってたよりもプログラムができないことに気がついた。お題を与えられて、制限時間があるなかでコードを書いていかなければならない。しかもペアプログラミングなので一人でちんたら時間をかけて書くわけにもいかない。そしてやっぱ人に見られてると緊張する。Rubyの基本的なメソッドとかが分かってなくて教えてもらいながら書いてたけど、わからないと緊張してしまって頭が真っ白になって何も書けなくなる。いつもリファレンス本を片手にコードを書き捨てていたので、よくないなぁと思った。</p>
+
+<p>というか、そもそも自分は仕事であまりコードを書いてないのだ。TDD Boot Campに来てる人たちはみんな公私ともにばりばりコードを書いててとても楽しそうだった。なんだかとても羨ましかった。</p>
+
+<p>いろいろ考えないとなー、と思わせられた勉強会だった。</p>
+
+<h2 id="ubuntu20110324dont-uninstall-current-shell-without-chsh"><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></h2>
+<div class="articleinfo">
+Posted on 24 Mar 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ubuntu/">Ubuntu</a>
+	
+		<a href="http://tech.portalshit.net/zsh/">zsh</a>
+	
+</div>
+<p>この前、さくらVPSに入れているUbuntuのzshで <code>ls</code> とか <code>cd</code> とか打ったとき、変なエラーメッセージが出るようになった。原因不明。しょうがないのでzshをインストールしなおそうと、<code>chsh</code> してbashとかに切り替えずに <code>sudo apt-get remove zsh</code> してしまった。そこで混乱してしまって <code>Ctrl + D</code> しちゃったもんだからSSH閉じてしまって、なんとUbuntuにログインできなくなってしまった。</p>
+
+<p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
+
+<p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
+
+<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span><span class="nb">exec</span> /bin/zsh
+<span class="k">fi</span>
+</code></pre>
+</div>
+
+<p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
+
+<p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
+
+<p>しかしこれには結構重い副作用があるみたい。</p>
+
+<p><a href="http://d.hatena.ne.jp/tyru/20100922/exec_bin_zsh_considered_harmful">.bash_profileに「exec /bin/zsh」と書くのはやめたほうがいい - Humanity</a></p>
+
+<p>一理ある。</p>
+
+<p>というわけでUbuntuやrootでsshできない環境ででzshを使う場合は、何らかのトラブルでzshが起動しない、シェルにログインできなくなることを想定し、保険として普段はまったく使わない非常用のアカウントを作っておくと良いと思った。もちろんsudoersに指定しておかないと意味ないけどね。</p>
+
 <h2 id="tdd-boot-camp20110321tdd-bootcamp-fukuoka"><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></h2>
 <div class="articleinfo">
 Posted on 21 Mar 2011 by morygonzalez |
@@ -1665,6 +1725,10 @@ Posted on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
+				
+					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
 				

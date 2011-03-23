@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Vimで編集を終了した後、元のコンソールの状態を復元したい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,27 +25,31 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/07/07/cakephp1.3-migration-tips" title="CakePHP 1.2から1.3への移行の個人的メモ">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh" title="Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/07/09/cant-live-up-with-oauth" title="OAuthがwakaranai">次の記事</a></span>
-  				
   			</div>
 			
-				<h2>Vimで編集を終了した後、元のコンソールの状態を復元したい</h2>
-				<p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
+				<h2>TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</h2>
+				<h3 id="vimmability">Vimmabilityのなさ</h3>
 
-<p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
+<p>TDD Boot Camp福岡で生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。</p>
 
-<p>情報元は <a href="http://d.hatena.ne.jp/lurker/20061118/1163810847" title="フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳">フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
+<p>とりあえず今回、ペアを組んだ <a href="http://twitter.com/mallowlabs">@mallowlabs</a> さんに <code>cw</code> とか <code>&lt;数字&gt;y</code> とかを教えてもらった。あと</p>
 
-<p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
+<blockquote>
+  <p>Vimでバックスペース使ったら負けだから</p>
+</blockquote>
 
-<p>しかし自分はこのサーバーでroot権限を持ってない。なので <code>cp /etc/termcap ~/.termcap</code> したあと <code>chmod 644 ~/.termcap</code> して <code>vim ~/.termcap</code> し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。</p>
+<p>と言われてしまったのでバックスペースと矢印キーをなるべく使わずにプログラム書きたいと思います。でもTextMateとかCodaとか便利だからついつい使ってしまうんよね…。</p>
 
-<p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
+<h3 id="section">プログラムが全然書けない</h3>
 
-<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
+<p>思ってたよりもプログラムができないことに気がついた。お題を与えられて、制限時間があるなかでコードを書いていかなければならない。しかもペアプログラミングなので一人でちんたら時間をかけて書くわけにもいかない。そしてやっぱ人に見られてると緊張する。Rubyの基本的なメソッドとかが分かってなくて教えてもらいながら書いてたけど、わからないと緊張してしまって頭が真っ白になって何も書けなくなる。いつもリファレンス本を片手にコードを書き捨てていたので、よくないなぁと思った。</p>
+
+<p>というか、そもそも自分は仕事であまりコードを書いてないのだ。TDD Boot Campに来てる人たちはみんな公私ともにばりばりコードを書いててとても楽しそうだった。なんだかとても羨ましかった。</p>
+
+<p>いろいろ考えないとなー、と思わせられた勉強会だった。</p>
 
 							
 				<div id="related-post">
@@ -73,7 +77,7 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/Unix/">Unix</a></li>
+					<li><a href="http://tech.portalshit.net/勉強会/">勉強会</a></li>
 				
 				</ul>
 				

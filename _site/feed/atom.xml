@@ -4,12 +4,70 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-03-22T08:56:32+09:00</updated>
+  <updated>2011-03-24T02:06:57+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</title>
+    <link href="/2011/03/24/i-am-an-impotent-programmer" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/03/24/i-am-an-impotent-programmer</id>
+    <content type="html">&lt;h3 id=&quot;vimmability&quot;&gt;Vimmabilityのなさ&lt;/h3&gt;
+
+&lt;p&gt;TDD Boot Camp福岡で生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。&lt;/p&gt;
+
+&lt;p&gt;とりあえず今回、ペアを組んだ &lt;a href=&quot;http://twitter.com/mallowlabs&quot;&gt;@mallowlabs&lt;/a&gt; さんに &lt;code&gt;cw&lt;/code&gt; とか &lt;code&gt;&amp;lt;数字&amp;gt;y&lt;/code&gt; とかを教えてもらった。あと&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Vimでバックスペース使ったら負けだから&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;と言われてしまったのでバックスペースと矢印キーをなるべく使わずにプログラム書きたいと思います。でもTextMateとかCodaとか便利だからついつい使ってしまうんよね…。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;プログラムが全然書けない&lt;/h3&gt;
+
+&lt;p&gt;思ってたよりもプログラムができないことに気がついた。お題を与えられて、制限時間があるなかでコードを書いていかなければならない。しかもペアプログラミングなので一人でちんたら時間をかけて書くわけにもいかない。そしてやっぱ人に見られてると緊張する。Rubyの基本的なメソッドとかが分かってなくて教えてもらいながら書いてたけど、わからないと緊張してしまって頭が真っ白になって何も書けなくなる。いつもリファレンス本を片手にコードを書き捨てていたので、よくないなぁと思った。&lt;/p&gt;
+
+&lt;p&gt;というか、そもそも自分は仕事であまりコードを書いてないのだ。TDD Boot Campに来てる人たちはみんな公私ともにばりばりコードを書いててとても楽しそうだった。なんだかとても羨ましかった。&lt;/p&gt;
+
+&lt;p&gt;いろいろ考えないとなー、と思わせられた勉強会だった。&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</title>
+    <link href="/2011/03/24/dont-uninstall-current-shell-without-chsh" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/03/24/dont-uninstall-current-shell-without-chsh</id>
+    <content type="html">&lt;p&gt;この前、さくらVPSに入れているUbuntuのzshで &lt;code&gt;ls&lt;/code&gt; とか &lt;code&gt;cd&lt;/code&gt; とか打ったとき、変なエラーメッセージが出るようになった。原因不明。しょうがないのでzshをインストールしなおそうと、&lt;code&gt;chsh&lt;/code&gt; してbashとかに切り替えずに &lt;code&gt;sudo apt-get remove zsh&lt;/code&gt; してしまった。そこで混乱してしまって &lt;code&gt;Ctrl + D&lt;/code&gt; しちゃったもんだからSSH閉じてしまって、なんとUbuntuにログインできなくなってしまった。&lt;/p&gt;
+
+&lt;p&gt;Ubuntuは &lt;code&gt;root&lt;/code&gt; というアカウントがなくてなんでも &lt;code&gt;sudo&lt;/code&gt; するか、 &lt;code&gt;sudo su&lt;/code&gt; で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。&lt;/p&gt;
+
+&lt;p&gt;ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。&lt;code&gt;.bashrc&lt;/code&gt; に次のように書くそうだ。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -f /bin/zsh &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; /bin/zsh
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://labs.unoh.net/2010/05/zsh.html&quot;&gt;ウノウラボ by Zynga Japan: zshはじめました。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;しかしこれには結構重い副作用があるみたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://d.hatena.ne.jp/tyru/20100922/exec_bin_zsh_considered_harmful&quot;&gt;.bash_profileに「exec /bin/zsh」と書くのはやめたほうがいい - Humanity&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一理ある。&lt;/p&gt;
+
+&lt;p&gt;というわけでUbuntuやrootでsshできない環境ででzshを使う場合は、何らかのトラブルでzshが起動しない、シェルにログインできなくなることを想定し、保険として普段はまったく使わない非常用のアカウントを作っておくと良いと思った。もちろんsudoersに指定しておかないと意味ないけどね。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>TDD Boot Camp福岡に参加した</title>

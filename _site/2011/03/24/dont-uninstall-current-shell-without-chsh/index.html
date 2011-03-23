@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Vimで編集を終了した後、元のコンソールの状態を復元したい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
+<title>Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい |  tech.portalshit.net -  CakePHP, Rails, JavaScript</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,27 +25,37 @@
 			<div id="content">
   			<div class="paginator">
   				
-  			    <span class="previous"><a href="/2010/07/07/cakephp1.3-migration-tips" title="CakePHP 1.2から1.3への移行の個人的メモ">前の記事</a></a></span>
+  			    <span class="previous"><a href="/2011/03/21/tdd-bootcamp-fukuoka" title="TDD Boot Camp福岡に参加した">前の記事</a></a></span>
   			  
   			  
-  					<span class="next"><a href="/2010/07/09/cant-live-up-with-oauth" title="OAuthがwakaranai">次の記事</a></span>
+  					<span class="next"><a href="/2011/03/24/i-am-an-impotent-programmer" title="TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと">次の記事</a></span>
   				
   			</div>
 			
-				<h2>Vimで編集を終了した後、元のコンソールの状態を復元したい</h2>
-				<p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
+				<h2>Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</h2>
+				<p>この前、さくらVPSに入れているUbuntuのzshで <code>ls</code> とか <code>cd</code> とか打ったとき、変なエラーメッセージが出るようになった。原因不明。しょうがないのでzshをインストールしなおそうと、<code>chsh</code> してbashとかに切り替えずに <code>sudo apt-get remove zsh</code> してしまった。そこで混乱してしまって <code>Ctrl + D</code> しちゃったもんだからSSH閉じてしまって、なんとUbuntuにログインできなくなってしまった。</p>
 
-<p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
+<p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
 
-<p>情報元は <a href="http://d.hatena.ne.jp/lurker/20061118/1163810847" title="フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳">フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
+<p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
 
-<p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
+<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span><span class="nb">exec</span> /bin/zsh
+<span class="k">fi</span>
+</code></pre>
+</div>
 
-<p>しかし自分はこのサーバーでroot権限を持ってない。なので <code>cp /etc/termcap ~/.termcap</code> したあと <code>chmod 644 ~/.termcap</code> して <code>vim ~/.termcap</code> し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。</p>
+<p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
-<p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
+<p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
 
-<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
+<p>しかしこれには結構重い副作用があるみたい。</p>
+
+<p><a href="http://d.hatena.ne.jp/tyru/20100922/exec_bin_zsh_considered_harmful">.bash_profileに「exec /bin/zsh」と書くのはやめたほうがいい - Humanity</a></p>
+
+<p>一理ある。</p>
+
+<p>というわけでUbuntuやrootでsshできない環境ででzshを使う場合は、何らかのトラブルでzshが起動しない、シェルにログインできなくなることを想定し、保険として普段はまったく使わない非常用のアカウントを作っておくと良いと思った。もちろんsudoersに指定しておかないと意味ないけどね。</p>
 
 							
 				<div id="related-post">
@@ -73,7 +83,9 @@
 				<h3>Categories</h3>
 				<ul>
 				
-					<li><a href="http://tech.portalshit.net/Unix/">Unix</a></li>
+					<li><a href="http://tech.portalshit.net/Ubuntu/">Ubuntu</a></li>
+				
+					<li><a href="http://tech.portalshit.net/zsh/">zsh</a></li>
 				
 				</ul>
 				
