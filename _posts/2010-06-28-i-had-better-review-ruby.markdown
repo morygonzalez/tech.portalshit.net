@@ -5,7 +5,7 @@ category: Ruby
 layout: post
 ---
 
-一個前の記事（[Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript](http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/ "Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript")）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。
+一個前の記事（[Rubyがエレガントだって言われるのがわかってきたような気がする \| tech.portalshit.net - CakePHP, Rails, JavaScript](http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/ "Rubyがエレガントだって言われるのがわかってきたような気がする \| tech.portalshit.net - CakePHP, Rails, JavaScript")）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。
 
 そういうわけで正しくは、
 

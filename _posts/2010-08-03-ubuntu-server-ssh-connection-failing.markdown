@@ -48,4 +48,4 @@ Permission denied (publickey).
 
 前述の `PasswordAuthentication` を `on` にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。
 
-ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら "Disabling protocol version 1. Could not load host key" というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（[ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！](http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html "ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！")）という情報もあるけど面倒くさいのでまだ試していません。
+ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら "Disabling protocol version 1. Could not load host key" というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（[ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！](http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html "ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！")）という情報もあるけど面倒くさいのでまだ試していません。

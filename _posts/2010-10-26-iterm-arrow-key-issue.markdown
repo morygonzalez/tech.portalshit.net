@@ -28,7 +28,7 @@ esac
 export TERM=dtterm
 {% endhighlight %}
 
-ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： [Vimで編集を終了した後、元のコンソールの状態を復元したい](http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/ "Vimで編集を終了した後、元のコンソールの状態を復元したい | tech.portalshit.net - CakePHP, Rails, JavaScript")）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。
+ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： [Vimで編集を終了した後、元のコンソールの状態を復元したい](http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/ "Vimで編集を終了した後、元のコンソールの状態を復元したい \| tech.portalshit.net - CakePHP, Rails, JavaScript")）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。
 
 `.termcap` に何か書くことも考えたけど、 `.termcap` で条件分岐する書き方が分からなかったのでさらにググってみた。すると外人が「iTermの設定で何とかできる」みたいなことを書いてるのを発見した。
 

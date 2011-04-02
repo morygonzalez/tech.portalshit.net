@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-03-24T02:06:57+09:00</updated>
+  <updated>2011-04-02T18:39:41+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -322,14 +322,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： [Vimで編集を終了した後、元のコンソールの状態を復元したい](http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/ “Vimで編集を終了した後、元のコンソールの状態を復元したい&lt;/td&gt;
-      &lt;td&gt;tech.portalshit.net - CakePHP, Rails, JavaScript”)）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： &lt;a href=&quot;http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/&quot; title=&quot;Vimで編集を終了した後、元のコンソールの状態を復元したい \| tech.portalshit.net - CakePHP, Rails, JavaScript&quot;&gt;Vimで編集を終了した後、元のコンソールの状態を復元したい&lt;/a&gt;）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;.termcap&lt;/code&gt; に何か書くことも考えたけど、 &lt;code&gt;.termcap&lt;/code&gt; で条件分岐する書き方が分からなかったのでさらにググってみた。すると外人が「iTermの設定で何とかできる」みたいなことを書いてるのを発見した。&lt;/p&gt;
 
@@ -339,7 +332,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;p&gt;で、iTermを開いてみたところ、iTerm 1の頃から引き継いでいるBookmarkのDefaultの設定がよくなかったみたい。具体的には矢印キーそれぞれに &lt;code&gt;^[[A&lt;/code&gt; とか &lt;code&gt;^[[B&lt;/code&gt; みたいなキーが割り振られていて、このせいで矢印キーが使えなくなっていたわけだ。&lt;/p&gt;
 
-&lt;p&gt;Load Presetから “Use xterm Defaults” を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。&lt;/p&gt;
+&lt;p&gt;Load Presetから &amp;ldquo;Use xterm Defaults&amp;rdquo; を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。&lt;/p&gt;
 </content>
   </entry>
   
@@ -385,11 +378,11 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;p&gt;とりあえず本体を &lt;code&gt;git clone http://github.com/cakephp/cakephp.git&lt;/code&gt; し、Media Pluginを &lt;code&gt;git clone http://github.com/davidpersson/media.git&lt;/code&gt; してみた。&lt;/p&gt;
 
-&lt;p&gt;Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の &lt;code&gt;docs&lt;/code&gt; ディレクトリにドキュメントが格納されていたのを発見したので（&lt;a href=&quot;http://github.com/davidpersson/media/tree/1.3/docs/&quot; title=&quot;docs at 1.3 from davidpersson's media - GitHub&quot;&gt;docs at 1.3 from davidpersson’s media - GitHub&lt;/a&gt;）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。&lt;/p&gt;
+&lt;p&gt;Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の &lt;code&gt;docs&lt;/code&gt; ディレクトリにドキュメントが格納されていたのを発見したので（&lt;a href=&quot;http://github.com/davidpersson/media/tree/1.3/docs/&quot; title=&quot;docs at 1.3 from davidpersson's media - GitHub&quot;&gt;docs at 1.3 from davidpersson&amp;rsquo;s media - GitHub&lt;/a&gt;）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。&lt;/p&gt;
 
 &lt;p&gt;まず第一に、クラス名が変わってる。&lt;code&gt;Media.Medium&lt;/code&gt; だったのが &lt;code&gt;Media.Media&lt;/code&gt; になってる。Viewファイル内での変数も &lt;code&gt;$medium&lt;/code&gt; ではなく、 &lt;code&gt;$media&lt;/code&gt; になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。&lt;/p&gt;
 
-&lt;p&gt;さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（&lt;a href=&quot;http://github.com/davidpersson/mm&quot; title=&quot;davidpersson's mm at master - GitHub&quot;&gt;davidpersson’s mm at master - GitHub&lt;/a&gt;）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。&lt;/p&gt;
+&lt;p&gt;さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（&lt;a href=&quot;http://github.com/davidpersson/mm&quot; title=&quot;davidpersson's mm at master - GitHub&quot;&gt;davidpersson&amp;rsquo;s mm at master - GitHub&lt;/a&gt;）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。&lt;/p&gt;
 
 &lt;p&gt;Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。&lt;/p&gt;
 
@@ -404,7 +397,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
     <id>http://tech.portalshit.net//2010/09/15/textmate-with-rvm-ruby</id>
     <content type="html">&lt;p&gt;いやまぁテキストエディターにはいろいろあるわけでして、皆さんEmacsとかVimで日夜しこしこコードを書いておられると思うんですけど、僕はGUIしか使えない情報弱者なので主にTextMateを使ってます。&lt;/p&gt;
 
-&lt;p&gt;TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、&lt;kbd&gt;⌘&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; でさくっと実行結果を確認できます。いちいちTerminal開いて&lt;/p&gt;
+&lt;p&gt;TextMateで便利なのが &amp;ldquo;Run&amp;rdquo; っていう機能です。Rubyのコードを書いていて、&lt;kbd&gt;&amp;#8984;&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; でさくっと実行結果を確認できます。いちいちTerminal開いて&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt; ruby hogehoge.rb
 &lt;/code&gt;&lt;/pre&gt;
@@ -414,7 +407,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;p&gt;で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに &lt;code&gt;gem update&lt;/code&gt; でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。&lt;/p&gt;
 
-&lt;p&gt;上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、&lt;kbd&gt;⌘&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（&lt;a href=&quot;http://rvm.beginrescueend.com/integration/textmate/&quot; title=&quot;RVM: Ruby Version Manager - Textmate Integration with RVM&quot;&gt;RVM: Ruby Version Manager - Textmate Integration with RVM&lt;/a&gt;）、結局この通りにやってもうまくいかず。&lt;/p&gt;
+&lt;p&gt;上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、&lt;kbd&gt;&amp;#8984;&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（&lt;a href=&quot;http://rvm.beginrescueend.com/integration/textmate/&quot; title=&quot;RVM: Ruby Version Manager - Textmate Integration with RVM&quot;&gt;RVM: Ruby Version Manager - Textmate Integration with RVM&lt;/a&gt;）、結局この通りにやってもうまくいかず。&lt;/p&gt;
 
 &lt;p&gt;しかし先ほどなにげなく&lt;/p&gt;
 
@@ -514,7 +507,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;p&gt;そもそもなんでみんな移行するのか？ なんかMacPortsはバッドノウハウの塊らしい。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://twitter.com/hitode909/status/18526396749&quot; title=&quot;Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...&quot;&gt;Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 …&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://twitter.com/hitode909/status/18526396749&quot; title=&quot;Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...&quot;&gt;Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 &amp;hellip;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは &lt;code&gt;.bash_profile&lt;/code&gt; とか &lt;code&gt;.zshrc&lt;/code&gt; とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に&lt;/p&gt;
 
@@ -552,7 +545,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;p&gt;と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 &lt;code&gt;/usr/local/Library/Formula/&lt;/code&gt; に &lt;code&gt;vim.rb&lt;/code&gt; を作ってコピペした。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://github.com/adamv/homebrew/blob/duplicates/Library/Formula/vim.rb&quot; title=&quot;Library/Formula/vim.rb at duplicates from adamv's homebrew - GitHub&quot;&gt;Library/Formula/vim.rb at duplicates from adamv’s homebrew - GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://github.com/adamv/homebrew/blob/duplicates/Library/Formula/vim.rb&quot; title=&quot;Library/Formula/vim.rb at duplicates from adamv's homebrew - GitHub&quot;&gt;Library/Formula/vim.rb at duplicates from adamv&amp;rsquo;s homebrew - GitHub&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;そんで今度は意気揚々と&lt;/p&gt;
 
@@ -603,7 +596,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;h4 id=&quot;section-1&quot;&gt;やったこと&lt;/h4&gt;
 
-&lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。&lt;/p&gt;
+&lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの &amp;ldquo;hogehoge&amp;rdquo; という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
 
@@ -764,15 +757,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;p&gt;前述の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら “Disabling protocol version 1. Could not load host key” というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（[ぷらぷらブログ&lt;/td&gt;
-      &lt;td&gt;OpenSSH を導入。接続に四苦八苦！](http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html “ぷらぷらブログ&lt;/td&gt;
-      &lt;td&gt;OpenSSH を導入。接続に四苦八苦！”)）という情報もあるけど面倒くさいのでまだ試していません。&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &amp;ldquo;Disabling protocol version 1. Could not load host key&amp;rdquo; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（&lt;a href=&quot;http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html&quot; title=&quot;ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！&quot;&gt;ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！&lt;/a&gt;）という情報もあるけど面倒くさいのでまだ試していません。&lt;/p&gt;
 </content>
   </entry>
   
@@ -994,15 +979,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
     <link href="/2010/06/28/i-had-better-review-ruby" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/06/28/i-had-better-review-ruby</id>
-    <content type="html">&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;一個前の記事（[Rubyがエレガントだって言われるのがわかってきたような気がする&lt;/td&gt;
-      &lt;td&gt;tech.portalshit.net - CakePHP, Rails, JavaScript](http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/ “Rubyがエレガントだって言われるのがわかってきたような気がする&lt;/td&gt;
-      &lt;td&gt;tech.portalshit.net - CakePHP, Rails, JavaScript”)）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+    <content type="html">&lt;p&gt;一個前の記事（&lt;a href=&quot;http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/&quot; title=&quot;Rubyがエレガントだって言われるのがわかってきたような気がする \| tech.portalshit.net - CakePHP, Rails, JavaScript&quot;&gt;Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript&lt;/a&gt;）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。&lt;/p&gt;
 
 &lt;p&gt;そういうわけで正しくは、&lt;/p&gt;
 
@@ -1164,7 +1141,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
     <link href="/2010/06/22/installed-rubygems-on-xrea" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/06/22/installed-rubygems-on-xrea</id>
-    <content type="html">&lt;p&gt;XREAでRailsを使おうと思っていろいろ調べてみた。Railsは &lt;code&gt;rake rails:freeze:gems&lt;/code&gt; してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても ‘rubygemsをrequireできねーぞゴラ！’ みたいなエラーが出る。&lt;/p&gt;
+    <content type="html">&lt;p&gt;XREAでRailsを使おうと思っていろいろ調べてみた。Railsは &lt;code&gt;rake rails:freeze:gems&lt;/code&gt; してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &amp;lsquo;rubygemsをrequireできねーぞゴラ！&amp;rsquo; みたいなエラーが出る。&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;.profile&lt;/code&gt; で記述した &lt;code&gt;GEM_HOME&lt;/code&gt; や &lt;code&gt;RUBY_LIB&lt;/code&gt; のパスは間違ってないと思うんだけど、何回やっても &lt;code&gt;$HOME/lib/&lt;/code&gt; 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で &lt;code&gt;guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb&lt;/code&gt; を &lt;code&gt;$HOME/lib/ruby/site_ruby/1.8&lt;/code&gt; に移動させた。その後 &lt;code&gt;source ~/.profile&lt;/code&gt; して適当な場所で &lt;code&gt;gem -v&lt;/code&gt; してみたところ、ちゃんと &lt;code&gt;1.3.5&lt;/code&gt; と表示された。&lt;/p&gt;
 
@@ -1202,14 +1179,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;h3 id=&quot;ruby&quot;&gt;Rubyが入ってるサーバーはいらない&lt;/h3&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は[DISQUS](http://disqus.com/overview/ “DISQUS&lt;/td&gt;
-      &lt;td&gt;Overview”)とかに外注すればOK。&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は &lt;a href=&quot;http://disqus.com/overview/&quot; title=&quot;DISQUS \| Overview&quot;&gt;DISQUS&lt;/a&gt; とかに外注すればOK。&lt;/p&gt;
 
 &lt;p&gt;ちょっと話題がずれるけど、DISQUSって便利そうですよね。他人のブログにコメント書いたあとってそのコントロール権みたいのはブログの持ち主に移行するけど、DISQUSみたいなサービスを利用すればコメントを書いた本人が過去の自分のコメントをトラックしやすくなる。ブログ主にしたってスパム対策とかもやりやすくなる。自前で自分のブログにコメント欄を持つって時代は終わったのかもね。いまはTwitterとかもあるし。&lt;/p&gt;
 
@@ -1225,7 +1195,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;h3 id=&quot;jekyll&quot;&gt;全般的なJekyllの使用感&lt;/h3&gt;
 
-&lt;p&gt;DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 &lt;code&gt;jekyll&lt;/code&gt; コマンドを実行するだけでhtmlファイルが &lt;code&gt;_site&lt;/code&gt; ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（&lt;a href=&quot;http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy&quot; title=&quot;tasks/deploy at master from henrik's henrik.nyh.se - GitHub&quot;&gt;tasks/deploy at master from henrik’s henrik.nyh.se - GitHub&lt;/a&gt;）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。&lt;/p&gt;
+&lt;p&gt;DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 &lt;code&gt;jekyll&lt;/code&gt; コマンドを実行するだけでhtmlファイルが &lt;code&gt;_site&lt;/code&gt; ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（&lt;a href=&quot;http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy&quot; title=&quot;tasks/deploy at master from henrik's henrik.nyh.se - GitHub&quot;&gt;tasks/deploy at master from henrik&amp;rsquo;s henrik.nyh.se - GitHub&lt;/a&gt;）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。&lt;/p&gt;
 
 &lt;p&gt;Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。&lt;/p&gt;
 </content>
@@ -1307,7 +1277,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
     <link href="/2010/05/18/happy-netstalking-with-ruby" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/05/18/happy-netstalking-with-ruby</id>
-    <content type="html">&lt;p&gt;この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜&lt;del&gt;ネットストーキング&lt;/del&gt;プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。&lt;/p&gt;
+    <content type="html">&lt;p&gt;この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜&lt;del&gt;ネットストーキング&lt;/del&gt;プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &amp;ldquo;Twitter Streaming APIをRubyで試してみる - しばそんノート&amp;rdquo;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;# coding: utf-8&lt;/span&gt;
@@ -1367,7 +1337,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
     <content type="html">&lt;p&gt;レンタルサーバーみたいな共有サーバーとか &lt;code&gt;sudo&lt;/code&gt; 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;To restart your rails app do a “ps x” to get the pid of your dispatch.fcgi process(let’s say it’s 1234) then do a “kill 1234”. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
+  &lt;p&gt;To restart your rails app do a &amp;ldquo;ps x&amp;rdquo; to get the pid of your dispatch.fcgi process(let&amp;rsquo;s say it&amp;rsquo;s 1234) then do a &amp;ldquo;kill 1234&amp;rdquo;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
 &lt;cite&gt;&lt;a href=&quot;http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm&quot;&gt;How do I restart rails app? - DreamHost Forum&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1525,7 +1495,7 @@ iTerm*&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;追記&lt;/h3&gt;
 
-&lt;p&gt;“Twitterでcxxさんに教えてもらった”:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Twitterでcxxさんに教えてもらった&amp;rdquo;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。&lt;/p&gt;
 
 &lt;p&gt;そういうわけで&lt;/p&gt;
 
