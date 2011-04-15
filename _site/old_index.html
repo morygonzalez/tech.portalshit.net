@@ -25,7 +25,22 @@
   			
   			<div class="autopagerize_page_element">
 				  
-<h2 id="tdd-boot-camp2-mdash-20110324i-am-an-impotent-programmer"><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></h2>
+<h2 id="ruby-rm-dir"><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></h2>
+<div class="articleinfo">
+Posted on 16 Apr 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/ruby/">ruby</a>
+	
+</div>
+<p>確認ダイアログを出しながらディレクトリやファイルを削除するスクリプトを書いた。大したコード書いてないし逆引きRubyに載ってたコードをまるパクリしてるところもあるけど便利だと思う。</p>
+
+<script src="https://gist.github.com/921460.js?file=cleanup.rb"></script>
+
+<p>そのディレクトリにあるファイル/ディレクトリ一覧を取得した後、「このファイル/ディレクトリは作られてから何日経っています。削除しますか？ (y/n)」というダイアログ（英語）を表示する。<code>y</code> が入力されると削除を行う。地味に使える。</p>
+
+<p>RubyのFileUtilsはすごく便利だと思う。シェルスクリプトでしこしこ書くのがアホらしくなる。RubyがPerlなみにあらゆるuni*x系のサーバーに入るようになったらさぞかし便利だろうと思う。</p>
+
+<h2 id="tdd-boot-camp2-mdash-20110324i-am-an-impotent-programmer"><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 — ペアプログラミングで気づいたこと</a></h2>
 <div class="articleinfo">
 Posted on 24 Mar 2011 by morygonzalez |
 	
@@ -352,7 +367,7 @@ iTerm*<span class="o">)</span>
 
 <p>で、iTermを開いてみたところ、iTerm 1の頃から引き継いでいるBookmarkのDefaultの設定がよくなかったみたい。具体的には矢印キーそれぞれに <code>^[[A</code> とか <code>^[[B</code> みたいなキーが割り振られていて、このせいで矢印キーが使えなくなっていたわけだ。</p>
 
-<p>Load Presetから &ldquo;Use xterm Defaults&rdquo; を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。</p>
+<p>Load Presetから “Use xterm Defaults” を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。</p>
 
 <h2 id="ruby-19rails-3rspec-220101020ruby19-rails3-rspec-2"><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></h2>
 <div class="articleinfo">
@@ -400,11 +415,11 @@ Posted on 12 Oct 2010 by morygonzalez |
 
 <p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p>
 
-<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href="http://github.com/davidpersson/media/tree/1.3/docs/" title="docs at 1.3 from davidpersson's media - GitHub">docs at 1.3 from davidpersson&rsquo;s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。</p>
+<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href="http://github.com/davidpersson/media/tree/1.3/docs/" title="docs at 1.3 from davidpersson's media - GitHub">docs at 1.3 from davidpersson’s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。</p>
 
 <p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p>
 
-<p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href="http://github.com/davidpersson/mm" title="davidpersson's mm at master - GitHub">davidpersson&rsquo;s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
+<p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href="http://github.com/davidpersson/mm" title="davidpersson's mm at master - GitHub">davidpersson’s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
 
 <p>Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。</p>
 
@@ -419,7 +434,7 @@ Posted on 15 Sep 2010 by morygonzalez |
 </div>
 <p>いやまぁテキストエディターにはいろいろあるわけでして、皆さんEmacsとかVimで日夜しこしこコードを書いておられると思うんですけど、僕はGUIしか使えない情報弱者なので主にTextMateを使ってます。</p>
 
-<p>TextMateで便利なのが &ldquo;Run&rdquo; っていう機能です。Rubyのコードを書いていて、<kbd>&#8984;</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
+<p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
 
 <div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hogehoge.rb
 </code></pre>
@@ -429,7 +444,7 @@ Posted on 15 Sep 2010 by morygonzalez |
 
 <p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
 
-<p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>&#8984;</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
+<p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>⌘</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
 
 <p>しかし先ほどなにげなく</p>
 
@@ -529,7 +544,7 @@ Posted on 31 Aug 2010 by morygonzalez |
 
 <p>そもそもなんでみんな移行するのか？ なんかMacPortsはバッドノウハウの塊らしい。</p>
 
-<p><a href="http://twitter.com/hitode909/status/18526396749" title="Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...">Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 &hellip;</a></p>
+<p><a href="http://twitter.com/hitode909/status/18526396749" title="Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 ...">Twitter / シャブ山シャブ彦: MacPortsはバッドノウハウの集合だったから，他 …</a></p>
 
 <p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
 
@@ -567,7 +582,7 @@ Posted on 31 Aug 2010 by morygonzalez |
 
 <p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
 
-<p><a href="http://github.com/adamv/homebrew/blob/duplicates/Library/Formula/vim.rb" title="Library/Formula/vim.rb at duplicates from adamv's homebrew - GitHub">Library/Formula/vim.rb at duplicates from adamv&rsquo;s homebrew - GitHub</a></p>
+<p><a href="http://github.com/adamv/homebrew/blob/duplicates/Library/Formula/vim.rb" title="Library/Formula/vim.rb at duplicates from adamv's homebrew - GitHub">Library/Formula/vim.rb at duplicates from adamv’s homebrew - GitHub</a></p>
 
 <p>そんで今度は意気揚々と</p>
 
@@ -620,7 +635,7 @@ Posted on 25 Aug 2010 by morygonzalez |
 
 <h4 id="section-1">やったこと</h4>
 
-<p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの &ldquo;hogehoge&rdquo; という部分なのが邪魔なので削りたかった。</p>
+<p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
 
@@ -733,7 +748,7 @@ Posted on 12 Aug 2010 by morygonzalez |
 </div>
 <p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>
 
-<h2 id="ubuntu-serverssh-permission-denied-publickey-20100803ubuntu-server-ssh-connection-failing"><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして &ldquo;Permission denied (publickey).&rdquo; が出る</a></h2>
+<h2 id="ubuntu-serverssh-permission-denied-publickey-20100803ubuntu-server-ssh-connection-failing"><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして “Permission denied (publickey).” が出る</a></h2>
 <div class="articleinfo">
 Posted on 03 Aug 2010 by morygonzalez |
 	
@@ -783,7 +798,7 @@ Posted on 03 Aug 2010 by morygonzalez |
 
 <p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p>
 
-<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら &ldquo;Disabling protocol version 1. Could not load host key&rdquo; というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href="http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html" title="ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！">ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
+<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら “Disabling protocol version 1. Could not load host key” というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href="http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html" title="ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！">ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
 
 <h2 id="rssrubyrssparserparsehpricot20100727masuda-san"><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></h2>
 <div class="articleinfo">
@@ -1183,7 +1198,7 @@ Posted on 22 Jun 2010 by morygonzalez |
 		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
 	
 </div>
-<p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても &lsquo;rubygemsをrequireできねーぞゴラ！&rsquo; みたいなエラーが出る。</p>
+<p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても ‘rubygemsをrequireできねーぞゴラ！’ みたいなエラーが出る。</p>
 
 <p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
 
@@ -1237,7 +1252,7 @@ Posted on 14 Jun 2010 by morygonzalez |
 
 <h3 id="jekyll">全般的なJekyllの使用感</h3>
 
-<p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href="http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy" title="tasks/deploy at master from henrik's henrik.nyh.se - GitHub">tasks/deploy at master from henrik&rsquo;s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
+<p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href="http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy" title="tasks/deploy at master from henrik's henrik.nyh.se - GitHub">tasks/deploy at master from henrik’s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
 
 <p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>
 
@@ -1323,7 +1338,7 @@ Posted on 18 May 2010 by morygonzalez |
 		<a href="http://tech.portalshit.net/Twitter/">Twitter</a>
 	
 </div>
-<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと &ldquo;Twitter Streaming APIをRubyで試してみる - しばそんノート&rdquo;:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
+<p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
 <span class="c1"># coding: utf-8</span>
@@ -1383,7 +1398,7 @@ Posted on 11 May 2010 by morygonzalez |
 <p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
 
 <blockquote>
-  <p>To restart your rails app do a &ldquo;ps x&rdquo; to get the pid of your dispatch.fcgi process(let&rsquo;s say it&rsquo;s 1234) then do a &ldquo;kill 1234&rdquo;. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
+  <p>To restart your rails app do a “ps x” to get the pid of your dispatch.fcgi process(let’s say it’s 1234) then do a “kill 1234”. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
 <cite><a href="http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm">How do I restart rails app? - DreamHost Forum</a></cite></p>
 </blockquote>
 
@@ -1543,7 +1558,7 @@ Posted on 07 May 2010 by morygonzalez |
 
 <h3 id="section">追記</h3>
 
-<p>&ldquo;Twitterでcxxさんに教えてもらった&rdquo;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
+<p>“Twitterでcxxさんに教えてもらった”:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
 
 <p>そういうわけで</p>
 
@@ -1694,6 +1709,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
 				

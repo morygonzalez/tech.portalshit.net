@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>Active Recordが難しすぎてしょんべんちびりそう |  tech.portalshit.net</title>
+    <title>確認ダイアログを出しながら削除するスクリプト |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/1.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,15 +19,19 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/06/28/i-had-better-review-ruby" title="インスタンス変数">前の記事</a></a></span>
+          <span class="previous"><a href="/2011/03/24/i-am-an-impotent-programmer" title="TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと">前の記事</a></a></span>
         
-        
-        <span class="next"><a href="/2010/07/02/import-initial-data-with-yaml" title="YAMLで初期データをRailsアプリケーションのDBにぶっ込む">次の記事</a></span>
         
       </div>
 
-      <h2>Active Recordが難しすぎてしょんべんちびりそう</h2>
-      <p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
+      <h2>確認ダイアログを出しながら削除するスクリプト</h2>
+      <p>確認ダイアログを出しながらディレクトリやファイルを削除するスクリプトを書いた。大したコード書いてないし逆引きRubyに載ってたコードをまるパクリしてるところもあるけど便利だと思う。</p>
+
+<script src="https://gist.github.com/921460.js?file=cleanup.rb"></script>
+
+<p>そのディレクトリにあるファイル/ディレクトリ一覧を取得した後、「このファイル/ディレクトリは作られてから何日経っています。削除しますか？ (y/n)」というダイアログ（英語）を表示する。<code>y</code> が入力されると削除を行う。地味に使える。</p>
+
+<p>RubyのFileUtilsはすごく便利だと思う。シェルスクリプトでしこしこ書くのがアホらしくなる。RubyがPerlなみにあらゆるuni*x系のサーバーに入るようになったらさぞかし便利だろうと思う。</p>
 
 
       <div id="related-post">
@@ -55,7 +59,7 @@
         <h3>Categories</h3>
         <ul>
           
-          <li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
+          <li><a href="http://tech.portalshit.net/ruby/">ruby</a></li>
           
         </ul>
 
