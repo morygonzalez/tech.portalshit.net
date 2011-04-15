@@ -1,0 +1,74 @@
+<p>一個前の記事（<a href='http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/' title='Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript'>Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
+
+<p>そういうわけで正しくは、</p>
+<div>
+  <pre>
+    <code class='ruby'>class Hoge
+  def initialize
+    @a = &quot;&quot;
+  end
+
+  def hoge
+    @a = &quot;hogehoge&quot;
+  end
+end
+
+fuga = Hoge.new
+puts fuga.hoge</code>
+  </pre>
+</div>
+<p>と書くそうです。</p>
+
+<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
+<div>
+  <pre>
+    <code class='ruby'>class Hoge
+  def initialize
+    a = &quot;&quot;
+  end
+
+  def hoge
+    a = &quot;hogehoge&quot;
+  end
+end
+
+fuga = Hoge.new
+puts fuga.hoge</code>
+  </pre>
+</div>
+<p>でも同じ結果を出力しますね。</p>
+
+<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
+
+<blockquote>
+<p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
+</blockquote>
+
+<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
+<div>
+  <pre>
+    <code class='ruby'>class Hoge
+  def initialize(b=&quot;&quot;)
+    @a = b
+  end
+
+  def hoge
+    print @a, &quot;\n&quot;
+  end
+end
+
+fuga = Hoge.new(&quot;Fuga&quot;)
+piyo = Hoge.new(&quot;Piyo&quot;)
+
+fuga.hoge
+piyo.hoge</code>
+  </pre>
+</div>
+<p>で、これを実行すると</p>
+<div>
+  <pre>
+    <code class='console'>Fuga
+Piyo</code>
+  </pre>
+</div>
+<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>

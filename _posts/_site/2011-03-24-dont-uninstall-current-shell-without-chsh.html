@@ -1,0 +1,23 @@
+<p>この前、さくらVPSに入れているUbuntuのzshで <code>ls</code> とか <code>cd</code> とか打ったとき、変なエラーメッセージが出るようになった。原因不明。しょうがないのでzshをインストールしなおそうと、<code>chsh</code> してbashとかに切り替えずに <code>sudo apt-get remove zsh</code> してしまった。そこで混乱してしまって <code>Ctrl + D</code> しちゃったもんだからSSH閉じてしまって、なんとUbuntuにログインできなくなってしまった。</p>
+
+<p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
+
+<p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
+<div>
+  <pre>
+    <code class='sh'>if [ -f /bin/zsh ]; then
+  exec /bin/zsh
+fi</code>
+  </pre>
+</div>
+<p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
+
+<p><a href='http://labs.unoh.net/2010/05/zsh.html'>ウノウラボ by Zynga Japan: zshはじめました。</a></p>
+
+<p>しかしこれには結構重い副作用があるみたい。</p>
+
+<p><a href='http://d.hatena.ne.jp/tyru/20100922/exec_bin_zsh_considered_harmful'>.bash_profileに「exec /bin/zsh」と書くのはやめたほうがいい - Humanity</a></p>
+
+<p>一理ある。</p>
+
+<p>というわけでUbuntuやrootでsshできない環境ででzshを使う場合は、何らかのトラブルでzshが起動しない、シェルにログインできなくなることを想定し、保険として普段はまったく使わない非常用のアカウントを作っておくと良いと思った。もちろんsudoersに指定しておかないと意味ないけどね。</p>

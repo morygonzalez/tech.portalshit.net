@@ -1,0 +1,42 @@
+<p>みなさん、クリッカブルマップしてますか？ あんなくそみたいなもの使って地図をつくるなんて発狂しそうなこと、ここを読みそうな人はやってないと思いますが、僕の職場のお客さんとか上司は「Google Mapsには心がこもってない」とか言うので、クソみたいイラストをクリッカブルマップにして地図を作ってるんですよ。まじでかわいそうな僕ちゃん。</p>
+
+<p>ご存じない方のためにクリッカブルマップの作り方を説明しておくと、まず画像を作り、それをHTMLに貼り付け、HTMLオーサリングツール（うちの職場ではDreamWeaver）のGUIエディタでちまちま画像上のクリッカブルにしたい位置を選択するという、血尿が出そうなくらい面倒くさい作業を強いられます。</p>
+
+<p>最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。</p>
+
+<p>コードはこんな感じ。</p>
+<div>
+  <pre>
+    <code class='html'>&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+      function getPosition(){
+        var x, y;
+        var image = document.getElementById('image');
+        image.onclick = function(e) {
+          x = e.layerX;
+          y = e.layerY;
+          document.getElementById(&quot;pointX&quot;).value = x;
+          document.getElementById(&quot;pointY&quot;).value = y;
+        }
+      }
+
+      window.onload = getPosition;
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;img src=&quot;path/to/image&quot; id=&quot;image&quot; style=&quot;position: absolute; top: auto; left: auto; width: 500px; height: 332px&quot; /&gt;
+    &lt;/div&gt;
+    &lt;form action=&quot;/&quot; method=&quot;post&quot;&gt;
+      &lt;input type=&quot;text&quot; id=&quot;pointX&quot; name=&quot;pointX&quot; value=&quot;&quot; /&gt;
+      &lt;input type=&quot;text&quot; id=&quot;pointY&quot; name=&quot;pointY&quot; value=&quot;&quot; /&gt;
+      &lt;input type=&quot;submit&quot; value=&quot;発射！&quot; &gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+  </pre>
+</div>
+<p>Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。</p>
+
+<p><a href='http://d.hatena.ne.jp/sandai/20091105/p1' title='座標取得するプロパティのそれぞれの違い - 三等兵'>座標取得するプロパティのそれぞれの違い - 三等兵</a></p>

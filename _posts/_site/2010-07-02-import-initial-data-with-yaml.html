@@ -1,0 +1,42 @@
+<p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
+
+<p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
+<div>
+  <pre>
+    <code class='yaml'>hoge: #アイテムの名前
+  id: 1
+  name: &quot;hoge&quot;
+  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
+
+fuga:
+  id: 2
+  name: &quot;fuga&quot;
+  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code>
+  </pre>
+</div>
+<p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
+<div>
+  <pre>
+    <code class='yaml'>hoge:
+  id: 1
+  name: &quot;hoge&quot;
+  address: &quot;ホゲ県ホゲ村ホゲホゲ&quot;
+
+  id: 2
+  name: &quot;fuga&quot;
+  address: &quot;ホゲ県ホゲ村フガフガ&quot;</code>
+  </pre>
+</div>
+<p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
+
+<p>結局、拾ってきた コードを参考にして</p>
+<div>
+  <pre>
+    <code class='ruby'>require 'yaml'
+require 'pp'
+
+data = YAML.load_file('hoge.yml')
+pp data</code>
+  </pre>
+</div>
+<p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>

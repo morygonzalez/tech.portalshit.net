@@ -1,0 +1,88 @@
+<p>こういうコード書いてます。</p>
+<div>
+  <pre>
+    <code class='javascript'>function getAttrName(attrObj) {
+	var attrName = attrObj.firstChild.data;
+//	items = document.getElementsByClassName('item');
+	var items = $('li.item');
+	$(items).fadeOut('slow');
+	for (var i = 0; i &amp;lt; items.length; i++) {
+	//	var keywordList = items[i].getElementsByClassName('keyword-list');
+		var keywordList = $('.keyword-list', items[i]);
+		for (var j = 0; j &amp;lt; keywordList.length; j++) {
+			//var keywords = keywordList[j].getElementsByTagName('li');
+			var keywords = $('li', keywordList[j]);
+			for (var k = 0; k &amp;lt; keywords.length; k++) {
+				if (attrName == keywords[k].textContent) {
+					$(items[i]).fadeIn('slow');
+				}
+			}
+		}
+	}
+	getCurAttr(attrName);
+}
+function getCurAttr(attrName) {
+	var curAttr = $(&quot;#keySelector li a&quot;);
+	for (var l = 0; l &amp;lt; curAttr.length; l++) {
+		if ($(curAttr[l]).text() == attrName) {
+			$(curAttr[l].parentNode).addClass('current-keyword');
+		} else {
+			$(curAttr[l].parentNode).removeClass('current-keyword');
+		}
+	}
+}</code>
+  </pre>
+</div>
+<p>やりたいことは以下のような感じ。</p>
+
+<ol>
+<li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
+
+<li>クリックされた文字列を <code>attrName</code> に格納</li>
+
+<li>すべての <code>item</code> をjQueryを使って非表示</li>
+
+<li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
+</ol>
+
+<p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
+
+<p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p>
+
+<p>サーバーサイドで実装する方法もないではないけど、</p>
+
+<p>1. いじる部分が広範囲になりめんどい（新たなバグが発生するかも） 2. 大した機能じゃないのに大手術したくない 3. ずっとPHPばっかり触ってるのはつまらん</p>
+
+<p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
+
+<h3 id='id2'>追記</h3>
+
+<p>&#8220;Twitterでcxxさんに教えてもらった&#8221;:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
+
+<p>そういうわけで</p>
+<div>
+  <pre>
+    <code class='javascript'>var keywords = $('li', keywordList[j]);</code>
+  </pre>
+</div>
+<p>を</p>
+<div>
+  <pre>
+    <code class='javascript'>var keywords = $('li a', keywordList[j]);</code>
+  </pre>
+</div>
+<p>とし、</p>
+<div>
+  <pre>
+    <code class='javascript'>if (attrName == keywords[k].textContent)</code>
+  </pre>
+</div>
+<p>を</p>
+<div>
+  <pre>
+    <code class='javascript'>if (attrName == keywords[k].firstChild.data)</code>
+  </pre>
+</div>
+<p>にしてみたところ、ばっちりIEで動くようになった。</p>
+
+<p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>

@@ -1,0 +1,27 @@
+<p>昨日の続きのようなもの。LokkaをUbuntu上で動かそうといろいろやってます。passenger入れて、 <code>passenger-install-nginx-module</code> を実行しようとしたらエラーが出た。お前はrootじゃないからnginxインストールできひんわ、みたいなメッセージが出る。sudoったりrootになってインストールしようとすると今度はpassengerなんていうgemはないわ、って怒られる。sudoしたときには.rvm内のgemパッケージではなくシステムのgemパッケージを見ようとするっぽい。またrootになるとRVMではなくシステムのRubyが実行されるので同じくpassengerなんてgemないわ、って怒られる。システムのRubyは1.8.7だし、なるべくなら使いたくない。RVMのRubyを使ってpassenger + nginxな環境作れないのかよ、とググってたら以下のような記事を発見した。</p>
+
+<p><a href='http://www.blog.bridgeutopiaweb.com/post/install-rvm-passenger-nginx-and-rails-3-on-ubuntu-lucid-lynx/'>Install RVM, Passenger, Nginx and Rails 3 on Ubuntu Lucid Lynx</a></p>
+
+<p>なんと、RVMには <code>rvmsudo</code> というコマンドがあるらしい！ 試しに</p>
+<div>
+  <pre>
+    <code class='console'>$ rvmsudo passenger-install-nginx-module</code>
+  </pre>
+</div>
+<p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
+<div>
+  <pre>
+    <code class='nginx'>passenger_root /home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2;
+      passenger_ruby /usr/bin/ruby1.8;</code>
+  </pre>
+</div>
+<p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
+<div>
+  <pre>
+    <code class='nginx'>passenger_root /home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2;
+      passenger_ruby /home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby;</code>
+  </pre>
+</div>
+<p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
+
+<p>それにしてもRVMは、本当にきもいと思う。<a href='http://d.hatena.ne.jp/rochefort/20100907/p1' title='rvmのirbで日本語入力できない - うんたらかんたら日記'>readlineとかまで.rvm内にインストールできる</a>できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。</p>

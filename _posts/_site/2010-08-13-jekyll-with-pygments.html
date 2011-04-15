@@ -1,0 +1,51 @@
+<p>外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは <code>jekyll --pygments</code> しろや、みたいなことが書いてあるんだけど（<a href='http://wiki.github.com/mojombo/jekyll/liquid-extensions' title='Liquid Extensions - jekyll - GitHub'>Liquid Extensions - jekyll - GitHub</a>）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。</p>
+
+<p>しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで</p>
+<div>
+  <pre>
+    <code class='console'>$ port search pygments</code>
+  </pre>
+</div>
+<p>してみたところ、MacPortsでは三つヒットした。</p>
+<div>
+  <pre>
+    <code class='console'>py-pygments @1.0 (python, devel)
+      Python syntax highlighter
+  
+  py25-pygments @1.0 (python, devel)
+      Python syntax highlighter
+  
+  py26-pygments @1.3.1 (python, devel)
+      Python syntax highlighter
+  
+  Found 3 ports.</code>
+  </pre>
+</div>
+<p>しかしSnow LeopardにはPython 2.6.1が入ってるので、</p>
+<div>
+  <pre>
+    <code class='console'>$ easy_install Pygments</code>
+  </pre>
+</div>
+<p>でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから <code>py26-pygments</code> を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 <code>/opt/local/bin/</code> に <code>python-2.6.5</code> が入ったが、長々と時間がかかった。<sup><a href='#footnote-34-1'>※1</a></sup></p>
+
+<p>インストール完了後、これでシャレオツシンタックスハイライティングできるようになったと思い、意気揚々と</p>
+<div>
+  <pre>
+    <code class='console'>$ jekyll --pygments</code>
+  </pre>
+</div>
+<p>してみたのだが、一向にハイライトされない。なんか「pygmentizeとか見つからないし」みたいなエラーが出る。なんでじゃ〜とイライラしながら公式Wikiを読んでると、次のような記述があった。</p>
+
+<blockquote>
+<p>the pygmentize binary must be in your path</p>
+</blockquote>
+
+<p>そうなのよ。 <code>pygmentize-1.3.1</code> っていうバイナリファイルはあってパスは通ってるんだけど、 <code>pygmentize</code> そのものがないのよ。そういうわけで</p>
+<div>
+  <pre>
+    <code class='console'>$ sudo ln -s /opt/local/bin/pygmentize-1.3.1 /opt/local/bin/pygmentize</code>
+  </pre>
+</div>
+<p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href='http://github.com/mojombo/tpw/tree/master/css/syntax.css' title='syntax.css'>Github互換のもの</a>を拾ってきて入れといた。</p>
+<hr /><p id='footnote-34-1'>※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>
