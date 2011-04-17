@@ -25,6 +25,79 @@
   			
   			<div class="autopagerize_page_element">
 				  
+<h2 id="jekyll20110417related-post-in-jekyll"><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></h2>
+<div class="articleinfo">
+Posted on 17 Apr 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Jekyll/">Jekyll</a>
+	
+</div>
+<h3 id="section">関連記事表示</h3>
+
+<p>Jekyllで関連記事を表示するようにした。jekyllを実行するときに <code>jekyll --lsi</code> とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に <code>gem install gsl</code> しただけでは以下のようなエラーが出る。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">Fetching: narray-0.5.9.9.gem (100%)</span>
+<span class="go">Building native extensions.  This could take a while...</span>
+<span class="go">Fetching: gsl-1.14.7.gem (100%)</span>
+<span class="go">Building native extensions.  This could take a while...</span>
+<span class="go">ERROR:  Error installing gsl:</span>
+<span class="go">        ERROR: Failed to build gem native extension.</span>
+<span class="go">        /Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby extconf.rb</span>
+<span class="go">checking gsl version... *** extconf.rb failed ***</span>
+<span class="go">Could not create Makefile due to some reason, probably lack of</span>
+<span class="go">necessary libraries and/or headers.  Check the mkmf.log file for more</span>
+<span class="go">details.  You may need configuration options.</span>
+
+<span class="go">Provided configuration options:</span>
+<span class="go">        --with-opt-dir</span>
+<span class="go">        --without-opt-dir</span>
+<span class="go">        --with-opt-include</span>
+<span class="go">        --without-opt-include=${opt-dir}/include</span>
+<span class="go">        --with-opt-lib</span>
+<span class="go">        --without-opt-lib=${opt-dir}/lib</span>
+<span class="go">        --with-make-prog</span>
+<span class="go">        --without-make-prog</span>
+<span class="go">        --srcdir=.</span>
+<span class="go">        --curdir</span>
+<span class="go">        --ruby=/Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby</span>
+<span class="go">extconf.rb:237:in `rescue in &lt;main&gt;&#39;: Check GSL&gt;=0.9.4 is installed, and the command &quot;gsl-config&quot; is in search path. (RuntimeError)</span>
+<span class="go">        from extconf.rb:138:in `&lt;main&gt;&#39;</span>
+</code></pre>
+</div>
+
+<p>GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install gsl
+</code></pre>
+</div>
+
+<p>そんでもう一回 <code>gem install gsl</code> するとうまく入った。 <code>_config.yaml</code> に <code>lsi: true</code> という記述を追記して jekyll を実行すると関連記事が表示されるようになった。</p>
+
+<h3 id="section-1">最近の記事表示</h3>
+
+<p>ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。</p>
+
+<div class="highlight"><pre><code class="diff">8c72..2c84ea5 100644
+<span class="gd">--- a/_layouts/post.html</span>
+<span class="gi">+++ b/_layouts/post.html</span>
+7 +69,7 @@
+ 
+         &lt;h3&gt;Latest Posts&lt;/h3&gt;
+         &lt;ul&gt;
+<span class="gd">-          {`% for post in site.posts `%}</span>
+<span class="gi">+          {`% for post in site.posts limit:10 `%}</span>
+           &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+           {`% endfor `%}
+         &lt;/ul&gt;
+</code></pre>
+</div>
+
+<p>(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)</p>
+
+<p>Liquidでは配列に対して <code>{&amp;#37; for post in site.posts limit:10 &amp;#37;}</code> という書き方をすることでループ処理の回数をできるみたい。</p>
+
+<p>全体的に見やすくなりすっきりした。</p>
+
 <h2 id="ruby-rm-dir"><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></h2>
 <div class="articleinfo">
 Posted on 16 Apr 2011 by morygonzalez |
@@ -1710,6 +1783,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
+				
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
@@ -1727,8 +1802,6 @@ Posted on 22 Apr 2010 by morygonzalez |
 					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
-				
-					<li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
 				
 				</ul>
 			</div>

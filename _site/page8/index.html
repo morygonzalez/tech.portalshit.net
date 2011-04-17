@@ -35,6 +35,15 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
+    <div class="articleinfo">Posted on 04 Jun 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>
+
+    <a href="http://tech.portalshit.net/2010/06/04/i-like-ruby/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
     <div class="articleinfo">Posted on 03 Jun 2010 by 森井ゴンザレス |
 	
@@ -99,65 +108,6 @@
 
     <a href="http://tech.portalshit.net/2010/06/03/feel-like-migrating-from-mephisto/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
-    <div class="articleinfo">Posted on 18 May 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	
-		<a href="http://tech.portalshit.net/Twitter/">Twitter</a>
-	</div>
-    <p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-<span class="c1"># coding: utf-8</span>
-
-<span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;uri&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
-
-<span class="no">USERNAME</span> <span class="o">=</span> <span class="s1">&#39;morygonzalez&#39;</span>
-<span class="no">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;***&#39;</span>
-
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class="p">)</span>
-<span class="k">begin</span>
-  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
-    <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">request_uri</span><span class="p">)</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">basic_auth</span><span class="p">(</span><span class="no">USERNAME</span><span class="p">,</span> <span class="no">PASSWORD</span><span class="p">)</span>
-    <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
-      <span class="k">raise</span> <span class="s1">&#39;Response is not chunked&#39;</span> <span class="k">unless</span> <span class="n">response</span><span class="o">.</span><span class="n">chunked?</span>
-      <span class="n">response</span><span class="o">.</span><span class="n">read_body</span> <span class="k">do</span> <span class="o">|</span><span class="n">chunk</span><span class="o">|</span>
-        <span class="c1">#空行は無視</span>
-        <span class="n">status</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="k">rescue</span> <span class="k">next</span>
-        <span class="c1">#eventを含まないものは無視</span>
-        <span class="k">next</span> <span class="k">unless</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span>
-        <span class="n">source</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;source&#39;</span><span class="o">]</span>
-        <span class="k">if</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
-          <span class="n">target_obj</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
-          <span class="n">target_user</span> <span class="o">=</span> <span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;user&#39;</span><span class="o">]</span>
-          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target_user</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;text&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">elsif</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
-          <span class="n">target</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
-          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">end</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-<span class="k">rescue</span> <span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span> <span class="o">=&gt;</span> <span class="n">ex</span>
-  <span class="nb">p</span> <span class="s2">&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
-  
-  <span class="k">retry</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
-<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
-
-<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
-
-    <a href="http://tech.portalshit.net/2010/05/18/happy-netstalking-with-ruby/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -185,6 +135,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
+				
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
@@ -202,8 +154,6 @@
 					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
-				
-					<li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
 				
 				</ul>
 			</div>

@@ -65,8 +65,6 @@ td {
 }
 
 #content ul li {
-	border-bottom:1px solid #eee;
-	padding:10px;
 	color:#444;
 }
 
@@ -76,8 +74,6 @@ td {
 	border:3px solid #eee;
 	margin:10px;
 }
-
-
 
 #sidebar ul {
 	list-style:none;
@@ -115,7 +111,8 @@ td {
 #sidebar ul li {
 	background:#fafafa;
 	margin:1px 0 0 0;
-	padding:0px;
+	border-bottom:1px solid #eee;
+	padding: 0;
 	/* height: 30px; */
 }
 

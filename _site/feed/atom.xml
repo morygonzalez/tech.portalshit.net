@@ -4,12 +4,85 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-17T16:57:37+09:00</updated>
+  <updated>2011-04-17T20:10:08+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Jekyllで関連ポストを表示する</title>
+    <link href="/2011/04/17/related-post-in-jekyll" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/04/17/related-post-in-jekyll</id>
+    <content type="html">&lt;h3 id=&quot;section&quot;&gt;関連記事表示&lt;/h3&gt;
+
+&lt;p&gt;Jekyllで関連記事を表示するようにした。jekyllを実行するときに &lt;code&gt;jekyll --lsi&lt;/code&gt; とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に &lt;code&gt;gem install gsl&lt;/code&gt; しただけでは以下のようなエラーが出る。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;Fetching: narray-0.5.9.9.gem (100%)&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Building native extensions.  This could take a while...&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Fetching: gsl-1.14.7.gem (100%)&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Building native extensions.  This could take a while...&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;ERROR:  Error installing gsl:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        ERROR: Failed to build gem native extension.&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        /Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby extconf.rb&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;checking gsl version... *** extconf.rb failed ***&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Could not create Makefile due to some reason, probably lack of&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;necessary libraries and/or headers.  Check the mkmf.log file for more&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;details.  You may need configuration options.&lt;/span&gt;
+
+&lt;span class=&quot;go&quot;&gt;Provided configuration options:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --with-opt-dir&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --without-opt-dir&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --with-opt-include&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --without-opt-include=${opt-dir}/include&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --with-opt-lib&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --without-opt-lib=${opt-dir}/lib&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --with-make-prog&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --without-make-prog&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --srcdir=.&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --curdir&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        --ruby=/Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;extconf.rb:237:in `rescue in &amp;lt;main&amp;gt;&amp;#39;: Check GSL&amp;gt;=0.9.4 is installed, and the command &amp;quot;gsl-config&amp;quot; is in search path. (RuntimeError)&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        from extconf.rb:138:in `&amp;lt;main&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt; brew install gsl
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;そんでもう一回 &lt;code&gt;gem install gsl&lt;/code&gt; するとうまく入った。 &lt;code&gt;_config.yaml&lt;/code&gt; に &lt;code&gt;lsi: true&lt;/code&gt; という記述を追記して jekyll を実行すると関連記事が表示されるようになった。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;最近の記事表示&lt;/h3&gt;
+
+&lt;p&gt;ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;diff&quot;&gt;8c72..2c84ea5 100644
+&lt;span class=&quot;gd&quot;&gt;--- a/_layouts/post.html&lt;/span&gt;
+&lt;span class=&quot;gi&quot;&gt;+++ b/_layouts/post.html&lt;/span&gt;
+7 +69,7 @@
+ 
+         &amp;lt;h3&amp;gt;Latest Posts&amp;lt;/h3&amp;gt;
+         &amp;lt;ul&amp;gt;
+&lt;span class=&quot;gd&quot;&gt;-          {`% for post in site.posts `%}&lt;/span&gt;
+&lt;span class=&quot;gi&quot;&gt;+          {`% for post in site.posts limit:10 `%}&lt;/span&gt;
+           &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+           {`% endfor `%}
+         &amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)&lt;/p&gt;
+
+&lt;p&gt;Liquidでは配列に対して &lt;code&gt;{&amp;amp;#37; for post in site.posts limit:10 &amp;amp;#37;}&lt;/code&gt; という書き方をすることでループ処理の回数をできるみたい。&lt;/p&gt;
+
+&lt;p&gt;全体的に見やすくなりすっきりした。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>確認ダイアログを出しながら削除するスクリプト</title>

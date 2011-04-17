@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>tech.portalshit.net |  tech.portalshit.net</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" />
+<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+<body>
+		<div id="header">
+				<h1><a href="/">tech.portalshit.net</a></h1>
+				<ul id="nav">
+					<li><a href="/">Home</a></li>
+				</ul>
+		</div>
+		<div id="container">
+			
+			<div id="content">
+  			<div class="paginator">
+  				
+  				  <span class="previous">
+  				  
+    				  <a href="../page10/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
+  				
+  				
+  			</div>
+  			
+  			<div class="autopagerize_page_element">
+				  
+    <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
+    <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/misc/">misc</a>
+	</div>
+    <p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p>
+
+<p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">    $ git clone git://github.com/emk/mephisto.git</span>
+</code></pre>
+</div>
+
+<p>してgithubからプロジェクトをclone。</p>
+
+<p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">    $ rake gems:install</span>
+</code></pre>
+</div>
+
+<p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">    $ gem install nokogiri \</span>
+<span class="go">    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
+<span class="go">    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
+</code></pre>
+</div>
+
+<p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">    $ rake db:bootstrap RAILS_ENV=production</span>
+</code></pre>
+</div>
+
+<p>ですべてのインストール作業完了。いまこうして動いております。</p>
+
+<p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
+
+    <a href="http://tech.portalshit.net/2010/04/22/blogging-with-mephisto/#disqus_thread">Comments</a>
+
+
+				</div>
+				
+				<div class="autopagerize_insert_before"></div>
+  			
+  			<div class="paginator">
+  				
+  				  <span class="previous">
+  				  
+    				  <a href="../page10/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
+  				
+  				
+  			</div>
+		  </div>
+		  
+			<div id="sidebar">
+				<h3>Categories</h3>
+				
+				<h3>Latest Posts</h3>
+				<ul>
+				
+					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
+				
+					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
+				
+					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
+				
+					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
+				
+					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
+				
+					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
+				
+					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
+				
+					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
+				
+					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
+				
+					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
+				
+				</ul>
+			</div>
+		
+		</div>
+		<div id="footer">
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+
+<!-- Please leave this line intact -->
+<p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />
+
+Theme by <a href="http://www.stuartloxton.com">Stuart Loxton</a><br />
+
+Driven with <a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>
+<!-- you can delete below here --></p>
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1110156-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+var disqus_shortname = 'techportalshit';
+(function () {
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'http://disqus.com/forums/techportalshit/count.js';
+  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+</body>
