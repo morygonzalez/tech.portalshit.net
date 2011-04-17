@@ -5,7 +5,7 @@ layout: default
 
 {% for post in paginator.posts %}
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="articleinfo">Posted on {{ post.date | date_to_string }} by morygonzalez |
+    <div class="articleinfo">Posted on {{ post.date | date_to_string }} by 森井ゴンザレス |
 	{% for category in post.categories %}
 		<a href="http://tech.portalshit.net/{{ category }}/">{{ category }}</a>
 	{% endfor %}</div>
