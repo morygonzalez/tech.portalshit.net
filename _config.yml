@@ -3,3 +3,4 @@ permalink: /:year/:month/:day/:title
 exclude: task
 pygments: true
 markdown: kramdown
+lsi: true

@@ -19,23 +19,27 @@
       <div id="content">
         <div class="paginator">
           {% if page.previous.url %}
-          <span class="previous"><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">前の記事</a></a></span>
+          <span class="previous"><a href="{{ page.previous.url }}" title="{{ page.previous.title }}">Previous Post</a></a></span>
         {% endif %}
         {% if page.next.url %}
-        <span class="next"><a href="{{ page.next.url }}" title="{{ page.next.title }}">次の記事</a></span>
+        <span class="next"><a href="{{ page.next.url }}" title="{{ page.next.title }}">Next Post</a></span>
         {% endif %}
       </div>
 
       <h2>{{ page.title }}</h2>
       <div class="articleinfo">
-      posted on {{ page.date | date_to_string }} by 森井ゴンザレス
-    </div>
+        Posted on {{ page.date | date_to_string }} by 森井ゴンザレス |
+        {% for category in page.categories %}
+          <a href="http://tech.portalshit.net/{{ category }}/">{{ category }}</a>
+        {% endfor %}
+      </div>
       {{ content }}
 
       <div id="related-post">
+        <h3>Related Posts</h3>
         <ul>
-          {% for relate in page.related_posts %}
-          <li>{{ relate }}</li>
+          {% for relate in site.related_posts limit:5 %}
+          <li><a href="{{ relate.url }}">{{ relate.title }}</a></li>
           {% endfor %}
         </ul>
       </div>

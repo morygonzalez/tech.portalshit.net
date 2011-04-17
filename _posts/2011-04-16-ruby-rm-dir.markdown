@@ -1,7 +1,7 @@
 ---
 id: 50
 title: 確認ダイアログを出しながら削除するスクリプト
-category:  ruby
+category: Ruby
 layout: post
 ---
 

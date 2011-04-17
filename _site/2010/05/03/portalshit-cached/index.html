@@ -19,17 +19,20 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/05/01/cakephp13" title="CakePHP 1.3">前の記事</a></a></span>
+          <span class="previous"><a href="/2010/05/01/cakephp13" title="CakePHP 1.3">Previous Post</a></a></span>
         
         
-        <span class="next"><a href="/2010/05/07/fuck-ie" title="IE6, 7, 8でJavaScriptがうまく動いてくれない">次の記事</a></span>
+        <span class="next"><a href="/2010/05/07/fuck-ie" title="IE6, 7, 8でJavaScriptがうまく動いてくれない">Next Post</a></span>
         
       </div>
 
       <h2>ポータルシットにキャッシュを効かせた</h2>
       <div class="articleinfo">
-      posted on 03 May 2010 by 森井ゴンザレス
-    </div>
+        Posted on 03 May 2010 by 森井ゴンザレス |
+        
+          <a href="http://tech.portalshit.net/PHP/">PHP</a>
+        
+      </div>
       <p>ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。</p>
 
 <p>おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ <code>p_page_analyze</code> ）をDROPするとまた速さが回復するので時々空にしていた。</p>
@@ -46,7 +49,18 @@
 
 
       <div id="related-post">
+        <h3>Related Posts</h3>
         <ul>
+          
+          <li><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></li>
+          
+          <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
+          
+          <li><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></li>
+          
+          <li><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></li>
+          
+          <li><a href="/2010/04/22/google-analytics-plugin">Google Analytics Pluginが動かない</a></li>
           
         </ul>
       </div>

@@ -19,17 +19,20 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2011/02/08/rvm-with-apache" title="RVMで入れたRubyをApacheとかから使いたい">前の記事</a></a></span>
+          <span class="previous"><a href="/2011/02/08/rvm-with-apache" title="RVMで入れたRubyをApacheとかから使いたい">Previous Post</a></a></span>
         
         
-        <span class="next"><a href="/2011/03/21/tdd-bootcamp-fukuoka" title="TDD Boot Camp福岡に参加した">次の記事</a></span>
+        <span class="next"><a href="/2011/03/21/tdd-bootcamp-fukuoka" title="TDD Boot Camp福岡に参加した">Next Post</a></span>
         
       </div>
 
       <h2>RVMきもい</h2>
       <div class="articleinfo">
-      posted on 09 Feb 2011 by 森井ゴンザレス
-    </div>
+        Posted on 09 Feb 2011 by 森井ゴンザレス |
+        
+          <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+        
+      </div>
       <p>昨日の続きのようなもの。LokkaをUbuntu上で動かそうといろいろやってます。passenger入れて、 <code>passenger-install-nginx-module</code> を実行しようとしたらエラーが出た。お前はrootじゃないからnginxインストールできひんわ、みたいなメッセージが出る。sudoったりrootになってインストールしようとすると今度はpassengerなんていうgemはないわ、って怒られる。sudoしたときには.rvm内のgemパッケージではなくシステムのgemパッケージを見ようとするっぽい。またrootになるとRVMではなくシステムのRubyが実行されるので同じくpassengerなんてgemないわ、って怒られる。システムのRubyは1.8.7だし、なるべくなら使いたくない。RVMのRubyを使ってpassenger + nginxな環境作れないのかよ、とググってたら以下のような記事を発見した。</p>
 
 <p><a href="http://www.blog.bridgeutopiaweb.com/post/install-rvm-passenger-nginx-and-rails-3-on-ubuntu-lucid-lynx/">Install RVM, Passenger, Nginx and Rails 3 on Ubuntu Lucid Lynx</a></p>
@@ -60,7 +63,18 @@
 
 
       <div id="related-post">
+        <h3>Related Posts</h3>
         <ul>
+          
+          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
+          
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
+          
+          <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
+          
+          <li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
+          
+          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
         </ul>
       </div>

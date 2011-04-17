@@ -19,17 +19,20 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/06/15/im-fed-up-with-cakephp" title="CakePHPはSchemaとかがしょぼいしうんざりする">前の記事</a></a></span>
+          <span class="previous"><a href="/2010/06/15/im-fed-up-with-cakephp" title="CakePHPはSchemaとかがしょぼいしうんざりする">Previous Post</a></a></span>
         
         
-        <span class="next"><a href="/2010/06/23/how-to-use-markdown-with-rails" title="RailsアプリケーションでMarkdownを使う">次の記事</a></span>
+        <span class="next"><a href="/2010/06/23/how-to-use-markdown-with-rails" title="RailsアプリケーションでMarkdownを使う">Next Post</a></span>
         
       </div>
 
       <h2>XREAにRubyGemsをインストール</h2>
       <div class="articleinfo">
-      posted on 22 Jun 2010 by 森井ゴンザレス
-    </div>
+        Posted on 22 Jun 2010 by 森井ゴンザレス |
+        
+          <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+        
+      </div>
       <p>XREAでRailsを使おうと思っていろいろ調べてみた。Railsは <code>rake rails:freeze:gems</code> してアップロードすればオッケーらしいんだけど、RubyGemsはインストールしないといけないみたい。ところがネットに乗ってる情報を参考にインストールしてみたけど全然うまくいかなかった。指示通りにやってるんだけどパスが通らないのか、インストールしても ‘rubygemsをrequireできねーぞゴラ！’ みたいなエラーが出る。</p>
 
 <p><code>.profile</code> で記述した <code>GEM_HOME</code> や <code>RUBY_LIB</code> のパスは間違ってないと思うんだけど、何回やっても <code>$HOME/lib/</code> 直下にRubyGems系のファイルが展開されてしまう。これがエラーの原因っぽい。しょうがないので力業で <code>guantlet_rubygems.rb, rbconfig/ rubygems/ rubygems.rb, ubygems.rb</code> を <code>$HOME/lib/ruby/site_ruby/1.8</code> に移動させた。その後 <code>source ~/.profile</code> して適当な場所で <code>gem -v</code> してみたところ、ちゃんと <code>1.3.5</code> と表示された。</p>
@@ -40,7 +43,18 @@
 
 
       <div id="related-post">
+        <h3>Related Posts</h3>
         <ul>
+          
+          <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
+          
+          <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
+          
+          <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
+          
+          <li><a href="/2010/07/15/get-stuck-with-oauth">oauth-pluginではまった</a></li>
+          
+          <li><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></li>
           
         </ul>
       </div>
