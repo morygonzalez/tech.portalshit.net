@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-17T20:10:08+09:00</updated>
+  <updated>2011-04-21T09:01:48+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -78,7 +78,7 @@
 
 &lt;p&gt;(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)&lt;/p&gt;
 
-&lt;p&gt;Liquidでは配列に対して &lt;code&gt;{&amp;amp;#37; for post in site.posts limit:10 &amp;amp;#37;}&lt;/code&gt; という書き方をすることでループ処理の回数をできるみたい。&lt;/p&gt;
+&lt;p&gt;Liquidでは配列に対して &lt;code&gt;{&amp;#37; for post in site.posts limit:10 &amp;#37;}&lt;/code&gt; という書き方をすることでループ処理の回数をコントロールできるみたい。&lt;/p&gt;
 
 &lt;p&gt;全体的に見やすくなりすっきりした。&lt;/p&gt;
 </content>
