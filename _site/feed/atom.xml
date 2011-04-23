@@ -4,12 +4,23 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-21T09:01:48+09:00</updated>
+  <updated>2011-04-23T18:13:56+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>MacVimでコピペできないんですけど…</title>
+    <link href="/2011/04/23/macvim-kopipe-dekinai" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/04/23/macvim-kopipe-dekinai</id>
+    <content type="html">&lt;h3 id=&quot;macvim&quot;&gt;MacVimでコピペできないのって仕様？&lt;/h3&gt;
+
+&lt;p&gt;MacVimに他のアプリケーションでコピーしたものを貼り付けられないのって仕様？ いろいろ調べてみたけどストライクな解決方法はないみたい。結局CLIのVim使ってる。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Jekyllで関連ポストを表示する</title>

@@ -35,6 +35,33 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></h2>
+    <div class="articleinfo">Posted on 31 Aug 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>RubyKaigi 2010に行ったのでその感想を軽く。</p>
+
+<h4 id="section">自分のスペック</h4>
+
+<p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p>
+
+<h4 id="section-1">感想</h4>
+
+<p>永和システムマネジメント<del>永和システム</del>さんの「<a href="http://rubykaigi.org/2010/ja/events/23" title="日本Ruby会議2010, 8月27日〜29日">Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p>
+
+<p>MongoDBについてのプログラム（<a href="http://rubykaigi.org/2010/ja/events/73" title="Practical Ruby Projects with MongoDB">Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p>
+
+<p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p>
+
+<p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p>
+
+<h4 id="section-2">2010年9月26日修正</h4>
+
+<p>すみません、永和システムマネジメントさんのことを「永和システムさん」と書いてました。はてブのコメント欄で角谷さんに指摘されてた！</p>
+
+    <a href="http://tech.portalshit.net/2010/08/31/rubykaigi2010/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></h2>
     <div class="articleinfo">Posted on 31 Aug 2010 by 森井ゴンザレス |
 	
@@ -252,58 +279,6 @@
 
     <a href="http://tech.portalshit.net/2010/08/12/fed-up-with-authlogic-oauth/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
-    <div class="articleinfo">Posted on 03 Aug 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/Ubuntu/">Ubuntu</a>
-	</div>
-    <p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p>
-
-<p>まずSSHのおさらいを。クライアント側で</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> mkdir -p .ssh
-<span class="gp">$</span> ssh-keygen -t rsa （以下略）
-</code></pre>
-</div>
-
-<p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
-</code></pre>
-</div>
-
-<p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
-
-<p>いっぺんクライアント側で <code>id_rsa.pub</code> を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？</p>
-
-<p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">Permission denied (publickey).</span>
-</code></pre>
-</div>
-
-<p>というエラーが頻繁にお出になるのですよ。</p>
-
-<p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> sudo /etc/init.d/ssh restart
-</code></pre>
-</div>
-
-<p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">Permission denied (publickey).</span>
-</code></pre>
-</div>
-
-<p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
-
-<p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p>
-
-<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら “Disabling protocol version 1. Could not load host key” というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href="http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html" title="ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！">ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
-
-    <a href="http://tech.portalshit.net/2010/08/03/ubuntu-server-ssh-connection-failing/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -331,6 +306,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
+				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
 				
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
@@ -348,8 +325,6 @@
 					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
 				
 					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
-				
-					<li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
 				
 				</ul>
 			</div>
