@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-23T18:21:11+09:00</updated>
+  <updated>2011-04-23T18:25:12+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -20,11 +20,11 @@
 
 &lt;p&gt;MacVimに他のアプリケーションでコピーしたものを貼り付けられないのって仕様？ いろいろ調べてみたけどストライクな解決方法はないみたい。結局CLIのVim使ってる。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://d.hatena.ne.jp/sea_mountain/20110421/1303362772&quot; title=&quot;【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに&quot;&gt;【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://twitter.com/#!/nekoya/status/2647362030&quot; title=&quot;Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー ...&quot;&gt;Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー …&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://twitter.com/#!/marutanm/statuses/51557561425592320&quot; title=&quot;Twitter / @marutanm Air: MacVimでpasteboardからペーストできな ...&quot;&gt;Twitter / @marutanm Air: MacVimでpasteboardからペーストできな …&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://d.hatena.ne.jp/sea_mountain/20110421/1303362772&quot; title=&quot;【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに&quot;&gt;【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://twitter.com/#!/nekoya/status/2647362030&quot; title=&quot;Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー ...&quot;&gt;Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー …&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://twitter.com/#!/marutanm/statuses/51557561425592320&quot; title=&quot;Twitter / @marutanm Air: MacVimでpasteboardからペーストできな ...&quot;&gt;Twitter / @marutanm Air: MacVimでpasteboardからペーストできな …&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
   </entry>
   
