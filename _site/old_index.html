@@ -25,6 +25,29 @@
   			
   			<div class="autopagerize_page_element">
 				  
+<h2 id="macvim20110424macvim-de-kopipe-dekita"><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></h2>
+<div class="articleinfo">
+Posted on 24 Apr 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Vim/">Vim</a>
+	
+</div>
+<p>MacVimでコピペできなくて（MacVim内のヤンクじゃなくて、他のアプリケーションでコピーしたもののペースト）困ってたんだけど（<a href="http://tech.portalshit.net/2011/04/23/macvim-kopipe-dekinai/" title="MacVimでコピペできないんですけど… \| tech.portalshit.net">MacVimでコピペできないんですけど… | tech.portalshit.net</a>）、できるようになりました。原因は mvim っていう、コマンドラインからMacVimを起動するためのシェルスクリプトだった。MacVim kaoriyaのWikiで紹介されてるやつ。</p>
+
+<ul>
+  <li><a href="https://github.com/splhack/macvim/blob/master/src/MacVim/mvim" title="src/MacVim/mvim at master from splhack/macvim - GitHub">src/MacVim/mvim at master from splhack/macvim - GitHub</a></li>
+</ul>
+
+<p>こいつ経由でMacVimを起動したときはどうも他のアプリケーションからのコピペがうまくいかないみたい。</p>
+
+<p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">alias </span><span class="nv">gvim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &quot;$@&quot;&#39;</span>
+</code></pre>
+</div>
+
+<p>同じ問題でお困りの方はお試しあれ。</p>
+
 <h2 id="datamapperauto-increment20110424datamapper-sqlite3-auto-increment-reset"><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></h2>
 <div class="articleinfo">
 Posted on 24 Apr 2011 by morygonzalez |
@@ -1842,6 +1865,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
+				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
 				
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
@@ -1859,8 +1884,6 @@ Posted on 22 Apr 2010 by morygonzalez |
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
-				
-					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
 				
 				</ul>
 			</div>

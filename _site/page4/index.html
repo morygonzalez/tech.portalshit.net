@@ -35,6 +35,35 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></h2>
+    <div class="articleinfo">Posted on 15 Sep 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>いやまぁテキストエディターにはいろいろあるわけでして、皆さんEmacsとかVimで日夜しこしこコードを書いておられると思うんですけど、僕はGUIしか使えない情報弱者なので主にTextMateを使ってます。</p>
+
+<p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hogehoge.rb
+</code></pre>
+</div>
+
+<p>とか面倒くさいことをやらずにすみます。</p>
+
+<p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
+
+<p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>⌘</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
+
+<p>しかし先ほどなにげなく</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvm 1.9.2 --default
+</code></pre>
+</div>
+
+<p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
+
+    <a href="http://tech.portalshit.net/2010/09/15/textmate-with-rvm-ruby/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/09/02/clickable-map-coordinates-with-javascript">JavaScriptでClickable Mapの座標を取得する</a></h2>
     <div class="articleinfo">Posted on 02 Sep 2010 by 森井ゴンザレス |
 	
@@ -256,68 +285,6 @@
 
     <a href="http://tech.portalshit.net/2010/08/25/naughty-boy-am-i/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></h2>
-    <div class="articleinfo">Posted on 13 Aug 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/Jekyll/">Jekyll</a>
-	</div>
-    <p>外タレのJekyllブログを見てると、シャレオツな感じでコードがシンタックスハイライトされてる。どうもPygmentsというやつを使うらしい。公式Wikiでも触れられていて、コードをハイライトさせたいときは <code>jekyll --pygments</code> しろや、みたいなことが書いてあるんだけど（<a href="http://wiki.github.com/mojombo/jekyll/liquid-extensions" title="Liquid Extensions - jekyll - GitHub">Liquid Extensions - jekyll - GitHub</a>）、そういうオプションつけてもコードは全然色つきにならず、「サギやんけ」とか思ってた。</p>
-
-<p>しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  $ port search pygments</span>
-</code></pre>
-</div>
-
-<p>してみたところ、MacPortsでは三つヒットした。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  py-pygments @1.0 (python, devel)</span>
-<span class="go">      Python syntax highlighter</span>
-<span class="go">  </span>
-<span class="go">  py25-pygments @1.0 (python, devel)</span>
-<span class="go">      Python syntax highlighter</span>
-<span class="go">  </span>
-<span class="go">  py26-pygments @1.3.1 (python, devel)</span>
-<span class="go">      Python syntax highlighter</span>
-<span class="go">  </span>
-<span class="go">  Found 3 ports.</span>
-</code></pre>
-</div>
-
-<p>しかしSnow LeopardにはPython 2.6.1が入ってるので、</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  $ easy_install Pygments</span>
-</code></pre>
-</div>
-
-<p>でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから <code>py26-pygments</code> を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 <code>/opt/local/bin/</code> に <code>python-2.6.5</code> が入ったが、長々と時間がかかった。<sup><a href="#footnote-34-1">※1</a></sup></p>
-
-<p>インストール完了後、これでシャレオツシンタックスハイライティングできるようになったと思い、意気揚々と</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  $ jekyll --pygments</span>
-</code></pre>
-</div>
-
-<p>してみたのだが、一向にハイライトされない。なんか「pygmentizeとか見つからないし」みたいなエラーが出る。なんでじゃ〜とイライラしながら公式Wikiを読んでると、次のような記述があった。</p>
-
-<blockquote>
-  <p>the pygmentize binary must be in your path</p>
-</blockquote>
-
-<p>そうなのよ。 <code>pygmentize-1.3.1</code> っていうバイナリファイルはあってパスは通ってるんだけど、 <code>pygmentize</code> そのものがないのよ。そういうわけで</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  $ sudo ln -s /opt/local/bin/pygmentize-1.3.1 /opt/local/bin/pygmentize</span>
-</code></pre>
-</div>
-
-<p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href="http://github.com/mojombo/tpw/tree/master/css/syntax.css" title="syntax.css">Github互換のもの</a>を拾ってきて入れといた。</p>
-
-<hr />
-
-<p id="footnote-34-1">※1 この記事を書いている自宅のMacBook Proには `sudo easy_install Pygments` で入れてみたが、一瞬でインストール完了した。またシンボリックリンクを貼る手間とか必要なく、インストールしただけでパスも通ってた。そういうわけなのでMacPorts経由のインストールはオヌヌメしませんです。よい子のみなさんは `easy_install` しちゃいましょう。</p>
-
-    <a href="http://tech.portalshit.net/2010/08/13/jekyll-with-pygments/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -345,6 +312,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
+				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
 				
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
@@ -362,8 +331,6 @@
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
-				
-					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
 				
 				</ul>
 			</div>

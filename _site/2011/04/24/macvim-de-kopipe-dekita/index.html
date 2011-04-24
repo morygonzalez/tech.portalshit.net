@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>DataMapperでAUTO INCREMENT値をリセットする |  tech.portalshit.net</title>
+    <title>MacVimでコピペできたんですけど… |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,69 +19,48 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2011/04/23/macvim-kopipe-dekinai" title="MacVimでコピペできないんですけど…">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset" title="DataMapperでAUTO INCREMENT値をリセットする">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2011/04/24/macvim-de-kopipe-dekita" title="MacVimでコピペできたんですけど…">Next Post</a></span>
         
       </div>
 
-      <h2>DataMapperでAUTO INCREMENT値をリセットする</h2>
+      <h2>MacVimでコピペできたんですけど…</h2>
       <div class="articleinfo">
         Posted on 24 Apr 2011 by 森井ゴンザレス |
         
-          <a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+          <a href="http://tech.portalshit.net/Vim/">Vim</a>
         
       </div>
-      <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
+      <p>MacVimでコピペできなくて（MacVim内のヤンクじゃなくて、他のアプリケーションでコピーしたもののペースト）困ってたんだけど（<a href="http://tech.portalshit.net/2011/04/23/macvim-kopipe-dekinai/" title="MacVimでコピペできないんですけど… \| tech.portalshit.net">MacVimでコピペできないんですけど… | tech.portalshit.net</a>）、できるようになりました。原因は mvim っていう、コマンドラインからMacVimを起動するためのシェルスクリプトだった。MacVim kaoriyaのWikiで紹介されてるやつ。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
-  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-<span class="k">end</span>
+<ul>
+  <li><a href="https://github.com/splhack/macvim/blob/master/src/MacVim/mvim" title="src/MacVim/mvim at master from splhack/macvim - GitHub">src/MacVim/mvim at master from splhack/macvim - GitHub</a></li>
+</ul>
+
+<p>こいつ経由でMacVimを起動したときはどうも他のアプリケーションからのコピペがうまくいかないみたい。</p>
+
+<p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">alias </span><span class="nv">gvim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &quot;$@&quot;&#39;</span>
 </code></pre>
 </div>
 
-<p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
-
-<p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
-
-<ul>
-  <li><a href="http://blog.s21g.com/articles/1408" title="DataMapperでSQLを直接実行する - Hello, world! - s21g">DataMapperでSQLを直接実行する - Hello, world! - s21g</a></li>
-</ul>
-
-<p>ちなみにRDBMSに採用してるのはSQLite3。SQLiteでは <code>UPDTE sqlite_sequence SET seq=0 WHERE name='テーブル名';</code> みたいなコードで <code>AUTO INCREMENT</code> 値を任意の値に設定できるみたい。</p>
-
-<ul>
-  <li><a href="http://beyond.cocolog-nifty.com/akutoku/2008/04/auto_increment1_a1f6.html" title="[悪徳商法？支店]: auto_incrementの値を1に戻す方法">[悪徳商法？支店]: auto_incrementの値を1に戻す方法</a></li>
-</ul>
-
-<p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
-
-<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
-  <span class="k">end</span> 
-</code></pre>
-</div>
-
-<p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
+<p>同じ問題でお困りの方はお試しあれ。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
+          <li><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></li>
+          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
-          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
+          <li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
           
-          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
-          <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
-          
-          <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
+          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
         </ul>
       </div>
@@ -105,7 +84,7 @@
         <h3>Categories</h3>
         <ul>
           
-          <li><a href="http://tech.portalshit.net/Ruby/">Ruby</a></li>
+          <li><a href="http://tech.portalshit.net/Vim/">Vim</a></li>
           
         </ul>
 

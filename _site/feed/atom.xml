@@ -4,12 +4,35 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-24T17:54:31+09:00</updated>
+  <updated>2011-04-24T18:11:15+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>MacVimでコピペできたんですけど…</title>
+    <link href="/2011/04/24/macvim-de-kopipe-dekita" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/04/24/macvim-de-kopipe-dekita</id>
+    <content type="html">&lt;p&gt;MacVimでコピペできなくて（MacVim内のヤンクじゃなくて、他のアプリケーションでコピーしたもののペースト）困ってたんだけど（&lt;a href=&quot;http://tech.portalshit.net/2011/04/23/macvim-kopipe-dekinai/&quot; title=&quot;MacVimでコピペできないんですけど… \| tech.portalshit.net&quot;&gt;MacVimでコピペできないんですけど… | tech.portalshit.net&lt;/a&gt;）、できるようになりました。原因は mvim っていう、コマンドラインからMacVimを起動するためのシェルスクリプトだった。MacVim kaoriyaのWikiで紹介されてるやつ。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/splhack/macvim/blob/master/src/MacVim/mvim&quot; title=&quot;src/MacVim/mvim at master from splhack/macvim - GitHub&quot;&gt;src/MacVim/mvim at master from splhack/macvim - GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こいつ経由でMacVimを起動したときはどうも他のアプリケーションからのコピペがうまくいかないみたい。&lt;/p&gt;
+
+&lt;p&gt;同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを &lt;code&gt;.zshrc&lt;/code&gt; に書いたところうまくコピペが機能した。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;gvim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &amp;quot;$@&amp;quot;&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;同じ問題でお困りの方はお試しあれ。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>DataMapperでAUTO INCREMENT値をリセットする</title>
