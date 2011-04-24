@@ -4,12 +4,54 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-23T18:25:12+09:00</updated>
+  <updated>2011-04-24T17:51:37+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>DataMapperでAUTO INCREMENT値をリセットする</title>
+    <link href="/2011/04/24/datamapper-sqlite3-auto-increment-reset" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/04/24/datamapper-sqlite3-auto-increment-reset</id>
+    <content type="html">&lt;p&gt;ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 &lt;code&gt;after(:all)&lt;/code&gt; フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;Category&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;しかしこれでは &lt;code&gt;AUTO INCREMENT&lt;/code&gt; の値がリセットされず、テストを繰り返す度に &lt;code&gt;AUTO INCREMENT&lt;/code&gt; の値が増えていってうざかった。&lt;/p&gt;
+
+&lt;p&gt;DataMapperの機能で &lt;code&gt;AUTO INCREMENT&lt;/code&gt; 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.s21g.com/articles/1408&quot; title=&quot;DataMapperでSQLを直接実行する - Hello, world! - s21g&quot;&gt;DataMapperでSQLを直接実行する - Hello, world! - s21g&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ちなみにRDBMSに採用してるのはSQLite3。SQLiteでは &lt;code&gt;UPDTE sqlite_sequence SET seq=0 WHERE name='テーブル名';&lt;/code&gt; みたいなコードで &lt;code&gt;AUTO INCREMENT&lt;/code&gt; 値を任意の値に設定できるみたい。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://beyond.cocolog-nifty.com/akutoku/2008/04/auto_increment1_a1f6.html&quot; title=&quot;[悪徳商法？支店]: auto_incrementの値を1に戻す方法&quot;&gt;[悪徳商法？支店]: auto_incrementの値を1に戻す方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最終的な &lt;code&gt;after(:all)&lt;/code&gt; フックはこんな感じ。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Category&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;update sqlite_sequence set seq=0 where name=&amp;quot;entries&amp;quot;;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;テスト実行後にはすべてのデータがデータベースから削除されて、&lt;code&gt;AUTO INCREMENT&lt;/code&gt; の値もリセットされる。1人畜無害なテストコード。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>MacVimでコピペできないんですけど…</title>

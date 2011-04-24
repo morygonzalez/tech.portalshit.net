@@ -35,6 +35,17 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/08/12/fed-up-with-authlogic-oauth">AuthlogicとAuthlogic-OAuthで詰まってる</a></h2>
+    <div class="articleinfo">Posted on 12 Aug 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+	
+		<a href="http://tech.portalshit.net/OAuth/">OAuth</a>
+	</div>
+    <p>AuthlogicとAuthlogic-OAuthでキメてやろうと思ってたのに全然うまくいかないし。Authlogic-OAuth、去年から全然更新されてないじゃん。Railsは便利なプラグインいっぱいあるけど、メンテが止まってることも多い。プラグインに頼りまくってサイト作ってると死ぬこともあるなーと思った。やりたいことは自分でもやれるようにしとく必要あるし、自分の手に余ることはやろうとしない方がいいと思った。できるところからコツコツと、と37シグナルズの本にも書いてあるし。</p>
+
+    <a href="http://tech.portalshit.net/2010/08/12/fed-up-with-authlogic-oauth/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
     <div class="articleinfo">Posted on 03 Aug 2010 by 森井ゴンザレス |
 	
@@ -142,46 +153,6 @@
 
     <a href="http://tech.portalshit.net/2010/07/15/get-stuck-with-oauth/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></h2>
-    <div class="articleinfo">Posted on 14 Jul 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/jekyll/">jekyll</a>
-	
-		<a href="http://tech.portalshit.net/git/">git</a>
-	</div>
-    <p>やってみた。以下を参考にした。</p>
-
-<p><a href="http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/">Deploying a jekyll generated site</a></p>
-
-<p>これもうむかし.macとかについてたiBlogとかわらんわ。GUIのクライアントはないけど、VimとかCodaとか好きなエディタ（TextMateで日本語がネイティブに扱えたらなー）で記事書いて、gitで <code>git push</code> するだけ。</p>
-
-<p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p>
-
-<p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
-
-<div class="highlight"><pre><code class="bash">    <span class="c">#! /bin/sh</span>
-    <span class="nb">unset </span>GIT_DIR <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="nv">$HOME</span>/tech.portalshit.net/ <span class="o">&amp;&amp;</span> git pull
-</code></pre>
-</div>
-
-<p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
-
-<h3 id="section">まとめ</h3>
-
-<p>まとめると、</p>
-
-<ol>
-<li>記事を作成するローカルリポジトリ</li>
-<li>ローカルリポジトリをpushするリモートリポジトリ</li>
-<li>リモートリポジトリをcloneする公開用リポジトリ</li>
-</ol>
-
-<p>の三つが必要なことを忘れないようにしてくだしあ。</p>
-
-<p>これであなたもハイド博士だ！</p>
-
-    <a href="http://tech.portalshit.net/2010/07/14/deploy-with-git-hook/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -209,6 +180,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
+				
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
@@ -226,8 +199,6 @@
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				
 					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
-				
-					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 				</ul>
 			</div>

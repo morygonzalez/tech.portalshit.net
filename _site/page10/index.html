@@ -35,6 +35,23 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
+    <div class="articleinfo">Posted on 08 May 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+	</div>
+    <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
+
+<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
+
+<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+
+<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+
+<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
+
+    <a href="http://tech.portalshit.net/2010/05/08/to-what-extent-write-codes-in-mvc/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></h2>
     <div class="articleinfo">Posted on 07 May 2010 by 森井ゴンザレス |
 	
@@ -196,21 +213,6 @@
 
     <a href="http://tech.portalshit.net/2010/05/01/cakephp13/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/04/22/google-analytics-plugin">Google Analytics Pluginが動かない</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/misc/">misc</a>
-	</div>
-    <p>MephistoでGoogle Analytics使おうと思ってググったら <a href="http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics">Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p>
-
-<p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p>
-
-<h3 id="section">追記</h3>
-
-<p>一晩寝て起きたら動いてた。</p>
-
-    <a href="http://tech.portalshit.net/2010/04/22/google-analytics-plugin/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -238,6 +240,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
+				
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
@@ -255,8 +259,6 @@
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				
 					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
-				
-					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 				</ul>
 			</div>

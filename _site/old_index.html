@@ -25,6 +25,48 @@
   			
   			<div class="autopagerize_page_element">
 				  
+<h2 id="datamapperauto-increment20110424datamapper-sqlite3-auto-increment-reset"><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></h2>
+<div class="articleinfo">
+Posted on 24 Apr 2011 by morygonzalez |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	
+</div>
+<p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
+
+<p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
+
+<ul>
+  <li><a href="http://blog.s21g.com/articles/1408" title="DataMapperでSQLを直接実行する - Hello, world! - s21g">DataMapperでSQLを直接実行する - Hello, world! - s21g</a></li>
+</ul>
+
+<p>ちなみにRDBMSに採用してるのはSQLite3。SQLiteでは <code>UPDTE sqlite_sequence SET seq=0 WHERE name='テーブル名';</code> みたいなコードで <code>AUTO INCREMENT</code> 値を任意の値に設定できるみたい。</p>
+
+<ul>
+  <li><a href="http://beyond.cocolog-nifty.com/akutoku/2008/04/auto_increment1_a1f6.html" title="[悪徳商法？支店]: auto_incrementの値を1に戻す方法">[悪徳商法？支店]: auto_incrementの値を1に戻す方法</a></li>
+</ul>
+
+<p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
+
+<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
+  <span class="k">end</span> 
+</code></pre>
+</div>
+
+<p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。1人畜無害なテストコード。</p>
+
 <h2 id="macvim20110423macvim-kopipe-dekinai"><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></h2>
 <div class="articleinfo">
 Posted on 23 Apr 2011 by morygonzalez |
@@ -1800,6 +1842,8 @@ Posted on 22 Apr 2010 by morygonzalez |
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
+				
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
@@ -1817,8 +1861,6 @@ Posted on 22 Apr 2010 by morygonzalez |
 					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				
 					<li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
-				
-					<li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
 				
 				</ul>
 			</div>
