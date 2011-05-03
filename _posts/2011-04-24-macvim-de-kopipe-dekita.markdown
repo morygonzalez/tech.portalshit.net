@@ -1,7 +1,7 @@
 ---
 id: 54
-title: MacVimでコピペできたんですけど…
-category: Vim
+title: macvimでコピペできたんですけど…
+category: vim
 layout: post
 ---
 
@@ -18,3 +18,7 @@ alias gvim='env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app "$@"'
 {% endhighlight %}
 
 同じ問題でお困りの方はお試しあれ。
+
+### 追記
+
+なんか違うっぽい。alias経由で呼び出してもダメなときはダメだもん。いったい何なんすかね。

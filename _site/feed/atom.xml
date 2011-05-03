@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-04-24T18:11:15+09:00</updated>
+  <updated>2011-05-04T02:19:36+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -12,7 +12,26 @@
   
   
   <entry>
-    <title>MacVimでコピペできたんですけど…</title>
+    <title>Titaium Mobileでなんか作りたい</title>
+    <link href="/2011/05/03/titanium-era-has-come" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/05/03/titanium-era-has-come</id>
+    <content type="html">&lt;p&gt;二月末に行ったスマートフォン開発環境セミナー(仮)でmasuidriveさんのTitanium Mobileについての発表を見てすっかり感化された。これからはJavaScriptで空を飛べる時代が来ると思った。&lt;/p&gt;
+
+&lt;p&gt;ドイツの会社がやってるToDo管理のサービスに&lt;a href=&quot;http://www.6wunderkinder.com/wunderlist/&quot; title=&quot;Task Management At Its Best With Wunderlist \| 6Wunderkinder&quot;&gt;Wunderlist&lt;/a&gt;ってのがあって、これは結構かっちょいUIのiPhone/Mac/PC/Webアプリを出してたりする。なんでそんなにマルチプラットフォーム対応できんの？ と思ってたらどうもTitanium MobileとTitanium Desktopを使ってるみたい。だから簡単にマルチプラットフォーム対応できてるわけ。他にもThe Hit Listが一向にiPhoneアプリを出さないのでそれに業を煮やした&lt;a href=&quot;http://rawberg.com/&quot; title=&quot;JavaScript Programmer &amp;amp; Bootstrap Entrepreneur \| David Feinberg&quot;&gt;Senchaの社員&lt;/a&gt;が作ったHub ListっていうアプリもJavaScriptでデスクトップアプリを書いててマルチプラットフォーム対応してる。&lt;/p&gt;
+
+&lt;p&gt;しかし、なんかTitanium使って僕みたいなスキルしょぼい人がアプリ作るときじゃくせい（なぜか変換できない）を突かれて困ったことになる懸念もあるみたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://d.hatena.ne.jp/tokuhirom/20110418/1303150743&quot;&gt;Titanium Desktop 雑感。 - TokuLog 改メ tokuhirom’s blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;とはいえ、最近プログラム書き始めたばっかでObjective-CとかJavaとか分かんない自分には、JavaScriptでiPhone/Androidはもちろんのこと、MacやWindows、はてはLinux向けのデスクトップアプリケーションが作れてしまうのTitanium MobileとTitanium Desktopにはとてつもない魅力を感じる。&lt;/p&gt;
+
+&lt;p&gt;連休期間中にしょぼいのでいいからなんか一個作りたい。&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>macvimでコピペできたんですけど…</title>
     <link href="/2011/04/24/macvim-de-kopipe-dekita" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/04/24/macvim-de-kopipe-dekita</id>
@@ -31,6 +50,10 @@
 &lt;/div&gt;
 
 &lt;p&gt;同じ問題でお困りの方はお試しあれ。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;追記&lt;/h3&gt;
+
+&lt;p&gt;なんか違うっぽい。alias経由で呼び出してもダメなときはダメだもん。いったい何なんすかね。&lt;/p&gt;
 </content>
   </entry>
   

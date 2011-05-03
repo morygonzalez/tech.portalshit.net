@@ -35,6 +35,41 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></h2>
+    <div class="articleinfo">Posted on 08 Feb 2011 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	</div>
+    <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">puts</span> <span class="no">RUBY_DESCRIPTION</span>
+</code></pre>
+</div>
+
+<p>なファイル（hoge.rb）があったとします。これを</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hoge.rb
+</code></pre>
+</div>
+
+<p>とシェルから呼び出したときにはちゃんと</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby 1.9.2p136 <span class="o">(</span>2010-12-25 revision 30365<span class="o">)</span> <span class="o">[</span>x86_64-darwin10.6.0<span class="o">]</span>
+</code></pre>
+</div>
+
+<p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
+
+<p>これ、もう半年くらい解決方法探してる気がする。</p>
+
+<p>TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに <code>~/.rvm/bin/ruby-1.9.2-p136</code> とか書くんじゃろか。</p>
+
+<p>cxxさんに質問したら <a href="http://rvm.beginrescueend.com/deployment/system-wide/">RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
+
+    <a href="http://tech.portalshit.net/2011/02/08/rvm-with-apache/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></h2>
     <div class="articleinfo">Posted on 02 Jan 2011 by 森井ゴンザレス |
 	
@@ -164,27 +199,6 @@ iTerm*<span class="o">)</span>
 
     <a href="http://tech.portalshit.net/2010/10/20/ruby1.9-rails3-rspec-2/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/10/12/media-plugin-1.3-not-work">CakePHPのMedia Plugin 1.3が動かない</a></h2>
-    <div class="articleinfo">Posted on 12 Oct 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-	</div>
-    <p>動かしてるサイトのCakePHPのバージョンを最新版の1.3.4に上げようと思って、Media PluginもCakePHP 1.3対応バージョンの1.3alphaにアップデートしようとした。</p>
-
-<p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p>
-
-<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href="http://github.com/davidpersson/media/tree/1.3/docs/" title="docs at 1.3 from davidpersson's media - GitHub">docs at 1.3 from davidpersson’s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。</p>
-
-<p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p>
-
-<p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href="http://github.com/davidpersson/mm" title="davidpersson's mm at master - GitHub">davidpersson’s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
-
-<p>Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。</p>
-
-<p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
-
-    <a href="http://tech.portalshit.net/2010/10/12/media-plugin-1.3-not-work/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -212,7 +226,9 @@ iTerm*<span class="o">)</span>
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
+					<li><a href="/2011/05/03/titanium-era-has-come">Titaium Mobileでなんか作りたい</a></li>
+				
+					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">macvimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
 				
@@ -229,8 +245,6 @@ iTerm*<span class="o">)</span>
 					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
 				
 					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
-				
-					<li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
 				
 				</ul>
 			</div>
