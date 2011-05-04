@@ -1,6 +1,6 @@
 ---
 id: 54
-title: macvimでコピペできたんですけど…
+title: MacVimでコピペできたんですけど…
 category: vim
 layout: post
 ---

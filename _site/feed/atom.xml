@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-05-04T09:10:09+09:00</updated>
+  <updated>2011-05-04T09:17:31+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -31,7 +31,7 @@
   </entry>
   
   <entry>
-    <title>macvimでコピペできたんですけど…</title>
+    <title>MacVimでコピペできたんですけど…</title>
     <link href="/2011/04/24/macvim-de-kopipe-dekita" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/04/24/macvim-de-kopipe-dekita</id>
