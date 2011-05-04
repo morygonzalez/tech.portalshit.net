@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-05-04T02:19:36+09:00</updated>
+  <updated>2011-05-04T09:10:09+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -20,7 +20,7 @@
 
 &lt;p&gt;ドイツの会社がやってるToDo管理のサービスに&lt;a href=&quot;http://www.6wunderkinder.com/wunderlist/&quot; title=&quot;Task Management At Its Best With Wunderlist \| 6Wunderkinder&quot;&gt;Wunderlist&lt;/a&gt;ってのがあって、これは結構かっちょいUIのiPhone/Mac/PC/Webアプリを出してたりする。なんでそんなにマルチプラットフォーム対応できんの？ と思ってたらどうもTitanium MobileとTitanium Desktopを使ってるみたい。だから簡単にマルチプラットフォーム対応できてるわけ。他にもThe Hit Listが一向にiPhoneアプリを出さないのでそれに業を煮やした&lt;a href=&quot;http://rawberg.com/&quot; title=&quot;JavaScript Programmer &amp;amp; Bootstrap Entrepreneur \| David Feinberg&quot;&gt;Senchaの社員&lt;/a&gt;が作ったHub ListっていうアプリもJavaScriptでデスクトップアプリを書いててマルチプラットフォーム対応してる。&lt;/p&gt;
 
-&lt;p&gt;しかし、なんかTitanium使って僕みたいなスキルしょぼい人がアプリ作るときじゃくせい（なぜか変換できない）を突かれて困ったことになる懸念もあるみたい。&lt;/p&gt;
+&lt;p&gt;しかし、なんかTitanium Desktop使って僕みたいなスキルしょぼい人がアプリ作るときじゃくせい（なぜか変換できない）を突かれて困ったことになる懸念もあるみたい。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://d.hatena.ne.jp/tokuhirom/20110418/1303150743&quot;&gt;Titanium Desktop 雑感。 - TokuLog 改メ tokuhirom’s blog&lt;/a&gt;&lt;/p&gt;
 
