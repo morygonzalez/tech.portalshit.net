@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-05-10T01:59:16+09:00</updated>
+  <updated>2011-05-10T08:34:27+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -27,18 +27,6 @@
 &lt;p&gt;とはいえ、最近プログラム書き始めたばっかでObjective-CとかJavaとか分かんない自分には、JavaScriptでiPhone/Androidはもちろんのこと、MacやWindows、はてはLinux向けのデスクトップアプリケーションが作れてしまうのTitanium MobileとTitanium Desktopにはとてつもない魅力を感じる。&lt;/p&gt;
 
 &lt;p&gt;連休期間中にしょぼいのでいいからなんか一個作りたい。&lt;/p&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>RSpecでinitializeメソッドをスキップしたい</title>
-    <link href="/2011/05/01/constructor-and-rspec" />
-    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
-    <id>http://tech.portalshit.net//2011/05/01/constructor-and-rspec</id>
-    <content type="html">&lt;p&gt;RSpecでテストコードを書いていて、initializeメソッドをテスト時にスキップしたいと思った。ググってたらこんなのを見つけた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5270819/how-to-test-a-method-call-in-a-constructor-with-rspec&quot; title=&quot;ruby - How to test a method call in a constructor with rspec - Stack Overflow&quot;&gt;ruby - How to test a method call in a constructor with rspec - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-
 </content>
   </entry>
   

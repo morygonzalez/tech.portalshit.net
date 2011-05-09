@@ -1,8 +1,9 @@
 ---
-id: 55
+id: 56
 title: RSpecでinitializeメソッドをスキップしたい
 category: RSpec
 layout: post
+published: false
 ---
 
 RSpecでテストコードを書いていて、initializeメソッドをテスト時にスキップしたいと思った。ググってたらこんなのを見つけた。
