@@ -1,6 +1,6 @@
 ---
 id: 55
-title: Titaium Mobileでなんか作りたい
+title: Titanium Mobileでなんか作りたい
 category: JavaScript
 layout: post
 ---

@@ -35,6 +35,65 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></h2>
+    <div class="articleinfo">Posted on 18 May 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+	
+		<a href="http://tech.portalshit.net/Twitter/">Twitter</a>
+	</div>
+    <p>この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜<del>ネットストーキング</del>プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<span class="c1"># coding: utf-8</span>
+
+<span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;uri&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+
+<span class="no">USERNAME</span> <span class="o">=</span> <span class="s1">&#39;morygonzalez&#39;</span>
+<span class="no">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;***&#39;</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://chirpstream.twitter.com/2b/user.json&#39;</span><span class="p">)</span>
+<span class="k">begin</span>
+  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">http</span><span class="o">|</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">uri</span><span class="o">.</span><span class="n">request_uri</span><span class="p">)</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">basic_auth</span><span class="p">(</span><span class="no">USERNAME</span><span class="p">,</span> <span class="no">PASSWORD</span><span class="p">)</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+      <span class="k">raise</span> <span class="s1">&#39;Response is not chunked&#39;</span> <span class="k">unless</span> <span class="n">response</span><span class="o">.</span><span class="n">chunked?</span>
+      <span class="n">response</span><span class="o">.</span><span class="n">read_body</span> <span class="k">do</span> <span class="o">|</span><span class="n">chunk</span><span class="o">|</span>
+        <span class="c1">#空行は無視</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="k">rescue</span> <span class="k">next</span>
+        <span class="c1">#eventを含まないものは無視</span>
+        <span class="k">next</span> <span class="k">unless</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;source&#39;</span><span class="o">]</span>
+        <span class="k">if</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
+          <span class="n">target_obj</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target_object&#39;</span><span class="o">]</span>
+          <span class="n">target_user</span> <span class="o">=</span> <span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;user&#39;</span><span class="o">]</span>
+          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target_user</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">target_obj</span><span class="o">[</span><span class="s1">&#39;text&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elsif</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
+          <span class="n">target</span> <span class="o">=</span> <span class="n">status</span><span class="o">[</span><span class="s1">&#39;target&#39;</span><span class="o">]</span>
+          <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">status</span><span class="o">[</span><span class="s1">&#39;event&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">source</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2"> -&amp;gt; </span><span class="si">#{</span><span class="n">target</span><span class="o">[</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">rescue</span> <span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span> <span class="o">=&gt;</span> <span class="n">ex</span>
+  <span class="nb">p</span> <span class="s2">&quot;&amp;lt;-----!!!! Timeout::Error!!!!-----&amp;gt;&quot;</span>
+  
+  <span class="k">retry</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。</p>
+
+<p>でもまぁ一歩前進したことは確か。Rubyがんばるぜ。</p>
+
+    <a href="http://tech.portalshit.net/2010/05/18/happy-netstalking-with-ruby/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
     <div class="articleinfo">Posted on 11 May 2010 by 森井ゴンザレス |
 	
@@ -138,103 +197,6 @@
 
     <a href="http://tech.portalshit.net/2010/05/07/git-branch-usage/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></h2>
-    <div class="articleinfo">Posted on 07 May 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
-	</div>
-    <p>こういうコード書いてます。</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">getAttrName</span><span class="p">(</span><span class="nx">attrObj</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">attrObj</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-<span class="c1">//	items = document.getElementsByClassName(&#39;item&#39;);</span>
-	<span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li.item&#39;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-	<span class="c1">//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
-		<span class="kd">var</span> <span class="nx">keywordList</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.keyword-list&#39;</span><span class="p">,</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywordList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-			<span class="c1">//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
-			<span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
-			<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywords</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-				<span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">curAttr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#keySelector li a&quot;</span><span class="p">);</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">l</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">curAttr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">l</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">]).</span><span class="nx">text</span><span class="p">()</span> <span class="o">==</span> <span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<p>やりたいことは以下のような感じ。</p>
-
-<ol>
-  <li>onclickで <code>attrObj</code> が <code>getAttrName</code> に渡される</li>
-  <li>クリックされた文字列を <code>attrName</code> に格納</li>
-  <li>すべての <code>item</code> をjQueryを使って非表示</li>
-  <li><code>item</code> の中の <code>ul.keyword-list li</code> 内のテキストに一致したらjQueryで表示</li>
-</ol>
-
-<p>Firefox/Safari/Operaでは問題なく動く。しかしIEが全滅。最初は <code>getElementByClassName</code> とか使ってるからかと思ってたけど、その辺のやつをコメントアウトしてjQueryセレクタを使ってオブジェクトを取得するようにしてもダメ。なんかループの処理とかが怪しいんじゃないかと思ってる。ループ処理もjQueryに書き換えようかな。</p>
-
-<p>ブラウザ間の挙動の違いを吸収してくれるライブラリはまじですごいしありがたいのですが、結局IEちゃんでは動かせない。歯がゆいな。</p>
-
-<p>サーバーサイドで実装する方法もないではないけど、</p>
-
-<ol>
-  <li>いじる部分が広範囲になりめんどい（新たなバグが発生するかも）</li>
-  <li>大した機能じゃないのに大手術したくない</li>
-  <li>ずっとPHPばっかり触ってるのはつまらん</li>
-</ol>
-
-<p>などという理由により期限ぎりぎりまでJavaScriptで粘ってみたいです。</p>
-
-<h3 id="section">追記</h3>
-
-<p>“Twitterでcxxさんに教えてもらった”:http://twitter.com/cxx/status/13545498622 んだけど、IEにはtextContetはないそうです。恥ずかしい。</p>
-
-<p>そういうわけで</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
-</code></pre>
-</div>
-
-<p>を</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li a&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
-</code></pre>
-</div>
-
-<p>とし、</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span>
-</code></pre>
-</div>
-
-<p>を</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
-</code></pre>
-</div>
-
-<p>にしてみたところ、ばっちりIEで動くようになった。</p>
-
-<p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
-
-    <a href="http://tech.portalshit.net/2010/05/07/fuck-ie/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -262,7 +224,9 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/05/03/titanium-era-has-come">Titaium Mobileでなんか作りたい</a></li>
+					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
+				
+					<li><a href="/2011/05/01/constructor-and-rspec">RSpecでinitializeメソッドをスキップしたい</a></li>
 				
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
@@ -279,8 +243,6 @@
 					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
-				
-					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 				</ul>
 			</div>

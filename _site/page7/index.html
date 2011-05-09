@@ -35,6 +35,27 @@
   			
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
+    <div class="articleinfo">Posted on 07 Jul 2010 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Unix/">Unix</a>
+	</div>
+    <p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
+
+<p>ちなみにVimには <code>restorescreen</code> とかいうオプションがあるらしく、必死で.vimrcにこの設定を書いてたけど、これはなんかWindowsのVim専用のオプションらしいのでマカーやUNIXユーザーの方はこれを設定しても無駄です。</p>
+
+<p>情報元は <a href="http://d.hatena.ne.jp/lurker/20061118/1163810847" title="フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳">フルスクリーンアプリを終了したときに元のコンソールの状態に復元する - 技術メモ帳</a> というページ。</p>
+
+<p>FreeBSDの場合、 <code>/etc/termcap</code> ってのの中にフルスクリーンアプリを終了したときにコンソールに戻るかどうかを設定する場所があって、こいつを変更すればよいらしい。</p>
+
+<p>しかし自分はこのサーバーでroot権限を持ってない。なので <code>cp /etc/termcap ~/.termcap</code> したあと <code>chmod 644 ~/.termcap</code> して <code>vim ~/.termcap</code> し、自分の使ってるターミナルの環境に合わせて設定を変更してやるとOK。</p>
+
+<p>僕の場合はMacの純正ターミナルを、シェルはzshで使っている。 <code>echo $TERM</code> してみると <code>xterm-color</code> と表示されるのでxterm-colorの設定が書いてあるところをいじった。</p>
+
+<p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
+
+    <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
     <div class="articleinfo">Posted on 07 Jul 2010 by 森井ゴンザレス |
 	
@@ -200,53 +221,6 @@
 
     <a href="http://tech.portalshit.net/2010/06/28/i-had-better-review-ruby/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
-    <div class="articleinfo">Posted on 25 Jun 2010 by 森井ゴンザレス |
-	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
-	</div>
-    <p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
-
-<p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
-
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="k">class</span> <span class="nc">Hoge</span> <span class="p">{</span>
-  <span class="k">var</span> <span class="nv">$a</span><span class="p">;</span> 
-  <span class="k">function</span> <span class="nf">hoge</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nv">$fuga</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Hoge</span><span class="p">();</span>
-<span class="k">echo</span> <span class="nv">$fuga</span><span class="o">-&gt;</span><span class="na">hoge</span><span class="p">();</span>
-<span class="cp">?&gt;</span><span class="x" />
-</code></pre>
-</div>
-
-<p>つぎにRubyで同じコードを書いてみる。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
-  <span class="vi">@a</span>  
-  <span class="k">def</span> <span class="nf">hoge</span>
-    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
-<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
-</code></pre>
-</div>
-
-<p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
-
-<p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
-
-<p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
-
-<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
-
-    <a href="http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/#disqus_thread">Comments</a>
-
 
 				</div>
 				
@@ -274,7 +248,9 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/05/03/titanium-era-has-come">Titaium Mobileでなんか作りたい</a></li>
+					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
+				
+					<li><a href="/2011/05/01/constructor-and-rspec">RSpecでinitializeメソッドをスキップしたい</a></li>
 				
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
@@ -291,8 +267,6 @@
 					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
-				
-					<li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
 				
 				</ul>
 			</div>
