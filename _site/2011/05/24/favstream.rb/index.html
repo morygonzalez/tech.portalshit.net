@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>CakePHP 1.2.xのRSSヘルパーはわかりにくい |  tech.portalshit.net</title>
+    <title>Userstreamで快適ネットストーキング生活 |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,65 +19,56 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/05/08/to-what-extent-write-codes-in-mvc" title="MVCのViewにどこまで書くか">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/05/03/titanium-era-has-come" title="Titanium Mobileでなんか作りたい">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2010/05/11/rails-app-on-dreamhost" title="DreamHostでRailsアプリケーションを再起動">Next Post</a></span>
         
       </div>
 
-      <h2>CakePHP 1.2.xのRSSヘルパーはわかりにくい</h2>
+      <h2>Userstreamで快適ネットストーキング生活</h2>
       <div class="articleinfo">
-        Posted on 11 May 2010 by 森井ゴンザレス |
-        
-          <a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
-        
-          <a href="http://tech.portalshit.net/Rails/">Rails</a>
+        Posted on 24 May 2011 by 森井ゴンザレス |
         
       </div>
-      <p>ちょっとCakePHPで作ってるサイトでRSSフィードを配信したいと思ったのでやってみたんだけど、思いの外面倒くさくてびっくりした。『RailsによるアジャイルWebアプリケーション開発』を読みながらRails 2.3.5でRSSフィード作るときは結構簡単だった気がするので、正直これはないわと思った。</p>
+      <p>Twitterで特定のユーザーのことばかりfavっていて不愉快という指摘を受けて頭に来たので、全自動で特定のユーザーを延々favし続けるスクリプトを書いた。</p>
 
-<p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
+<script src="https://gist.github.com/972943.js?file=favstream.rb"></script>
 
-<div class="highlight"><pre><code class="ruby">    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># index.html.erb</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@products</span> <span class="p">}</span>
-    <span class="k">end</span>
+<p>ヒトデ君が書いた <a href="https://github.com/hitode909/user-stream-receiver" title="hitode909/user-stream-receiver - GitHub">hitode909/user-stream-receiver - GitHub</a> と<a href="http://d.hatena.ne.jp/aquarla/20101020/1287540883" title="Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla">Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux | grep aquarla</a> を参考にさせてもらった。というかほとんどまるパクリ。</p>
+
+<p>Userstremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。</p>
+
+<p>しかしUserstreamはときどき調子が悪く、発言を拾い落とすこともある。そんなときは以下のコードを使う。</p>
+
+<script src="https://gist.github.com/972943.js?file=favoritter.rb"></script>
+
+<p>これでUserstream経由で取りこぼした発言もfavできる。</p>
+
+<p>それぞれ使い方はこんな感じ。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">  ruby favoritter.rb ストーキングしたい相手ユーザー名</span>
 </code></pre>
 </div>
 
-<p><code>config/routes.rb</code> に</p>
-
-<div class="highlight"><pre><code class="ruby">    <span class="n">map</span><span class="o">.</span><span class="n">connect</span> <span class="s1">&#39;:controller/:action/:id.:format&#39;</span>
+<div class="highlight"><pre><code class="console"><span class="go">  ruby favstream.rb ストーキングしたい相手のユーザー名</span>
 </code></pre>
 </div>
 
-<p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
-
-<p>CakePHPで同じことをやるためには以下の手順が必要。</p>
-
-<p><a href="http://book.cakephp.org/view/483/Creating-an-RSS-feed-with-the-RssHelper">Creating an RSS feed with the RssHelper :: RSS :: Core Helpers :: The Manual :: 1.2 Collection :: The Cookbook</a></p>
-
-<p>ちょっと面倒くさすぎてやる気にならなかった。どうせいま僕が作ってるサイトなんてRSSリーダー使うような人が見るサイトじゃないし、フィード配信機能の実装はそんなにプライオリティ高くないので他にやることがなくてどうしようもなく暇なときにでもやろう。</p>
-
-<p>Railsは最初のとっかかりのハードルは高いけど、使い方を覚えていったらやっぱりCakePHPとかよりも全然簡単かつ高速に開発できる気がする。レールに乗ってる感強い。このMephistoの設置もすごく楽だった。ただTerminalを使い慣れた人や、サーバーにSSHでアクセスできる環境じゃないとRailsアプリケーションを使うのは難しい。CakePHPは反面、全部FTPでアップロードすれば良いのでサーバーに標準的な構成でPHPがインストールされてりゃ環境構築でつまずくことはない。どっちをとるかって話ですよね。</p>
-
-<p>僕はファッションの観点からRailsを選びたい。</p>
+<p>この夏、気になる彼の発言をfavり倒しましょう。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
           <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
+          <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
-          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
-          
-          <li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
+          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
         </ul>
       </div>
@@ -100,10 +91,6 @@
       <div id="sidebar">
         <h3>Categories</h3>
         <ul>
-          
-          <li><a href="http://tech.portalshit.net/CakePHP/">CakePHP</a></li>
-          
-          <li><a href="http://tech.portalshit.net/Rails/">Rails</a></li>
           
         </ul>
 

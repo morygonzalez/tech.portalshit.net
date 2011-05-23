@@ -4,12 +4,45 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-05-10T08:34:27+09:00</updated>
+  <updated>2011-05-24T02:26:49+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Userstreamで快適ネットストーキング生活</title>
+    <link href="/2011/05/24/favstream.rb" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/05/24/favstream.rb</id>
+    <content type="html">&lt;p&gt;Twitterで特定のユーザーのことばかりfavっていて不愉快という指摘を受けて頭に来たので、全自動で特定のユーザーを延々favし続けるスクリプトを書いた。&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/972943.js?file=favstream.rb&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;ヒトデ君が書いた &lt;a href=&quot;https://github.com/hitode909/user-stream-receiver&quot; title=&quot;hitode909/user-stream-receiver - GitHub&quot;&gt;hitode909/user-stream-receiver - GitHub&lt;/a&gt; と&lt;a href=&quot;http://d.hatena.ne.jp/aquarla/20101020/1287540883&quot; title=&quot;Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla&quot;&gt;Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux | grep aquarla&lt;/a&gt; を参考にさせてもらった。というかほとんどまるパクリ。&lt;/p&gt;
+
+&lt;p&gt;Userstremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。&lt;/p&gt;
+
+&lt;p&gt;しかしUserstreamはときどき調子が悪く、発言を拾い落とすこともある。そんなときは以下のコードを使う。&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/972943.js?file=favoritter.rb&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;これでUserstream経由で取りこぼした発言もfavできる。&lt;/p&gt;
+
+&lt;p&gt;それぞれ使い方はこんな感じ。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;  ruby favoritter.rb ストーキングしたい相手ユーザー名&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;  ruby favstream.rb ストーキングしたい相手のユーザー名&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;この夏、気になる彼の発言をfavり倒しましょう。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Titanium Mobileでなんか作りたい</title>
