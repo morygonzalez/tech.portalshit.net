@@ -29,24 +29,24 @@
   			
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2011/05/24/favstream.rb">Userstreamで快適ネットストーキング生活</a></h2>
+    <h2><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></h2>
     <div class="articleinfo">Posted on 24 May 2011 by 森井ゴンザレス |
+	
+		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
 	</div>
     <p>Twitterで特定のユーザーのことばかりfavっていて不愉快という指摘を受けて頭に来たので、全自動で特定のユーザーを延々favし続けるスクリプトを書いた。</p>
 
 <script src="https://gist.github.com/972943.js?file=favstream.rb"></script>
 
-<p>ヒトデ君が書いた <a href="https://github.com/hitode909/user-stream-receiver" title="hitode909/user-stream-receiver - GitHub">hitode909/user-stream-receiver - GitHub</a> と<a href="http://d.hatena.ne.jp/aquarla/20101020/1287540883" title="Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla">Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux | grep aquarla</a> を参考にさせてもらった。というかほとんどまるパクリ。</p>
+<p>ヒトデ君が書いた <a href="https://github.com/hitode909/user-stream-receiver" title="hitode909/user-stream-receiver - GitHub">hitode909/user-stream-receiver - GitHub</a> と<a href="http://d.hatena.ne.jp/aquarla/20101020/1287540883" title="Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla">Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux | grep aquarla</a> を参考にさせてもらった。というかほとんどまるパクリ。またOAuthのところはtily氏の oauth-twitter-cli に全面的に依存している。</p>
 
-<p>Userstremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。</p>
+<p>User Stremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。</p>
 
-<p>しかしUserstreamはときどき調子が悪く、発言を拾い落とすこともある。そんなときは以下のコードを使う。</p>
+<p>しかしUser Streamはときどき調子が悪く、発言を拾い落とすこともある。そんなときは以下のコードを使う。</p>
 
 <script src="https://gist.github.com/972943.js?file=favoritter.rb"></script>
 
-<p>これでUserstream経由で取りこぼした発言もfavできる。</p>
-
-<p>それぞれ使い方はこんな感じ。</p>
+<p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
 
 <div class="highlight"><pre><code class="console"><span class="go">  ruby favoritter.rb ストーキングしたい相手ユーザー名</span>
 </code></pre>
@@ -56,7 +56,6 @@
 </code></pre>
 </div>
 
-<p>この夏、気になる彼の発言をfavり倒しましょう。</p>
 
     <a href="http://tech.portalshit.net/2011/05/24/favstream.rb/#disqus_thread">Comments</a>
 
@@ -186,7 +185,7 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/05/24/favstream.rb">Userstreamで快適ネットストーキング生活</a></li>
+					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
 				
 					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
 				
