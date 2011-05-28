@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-05-24T08:35:13+09:00</updated>
+  <updated>2011-05-28T17:26:49+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -16,7 +16,7 @@
     <link href="/2011/05/24/favstream.rb" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/05/24/favstream.rb</id>
-    <content type="html">&lt;p&gt;Twitterで特定のユーザーのことばかりfavっていて不愉快という指摘を受けて頭に来たので、全自動で特定のユーザーを延々favし続けるスクリプトを書いた。&lt;/p&gt;
+    <content type="html">&lt;p&gt;暇だったので自動で特定のユーザーを延々favし続けるスクリプトを書いた。&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/972943.js?file=favstream.rb&quot;&gt;&lt;/script&gt;
 
