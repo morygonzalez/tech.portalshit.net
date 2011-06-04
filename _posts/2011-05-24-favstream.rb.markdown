@@ -9,7 +9,7 @@ layout: post
 
 <script src="https://gist.github.com/972943.js?file=favstream.rb"></script>
 
-ヒトデ君が書いた [hitode909/user-stream-receiver - GitHub](https://github.com/hitode909/user-stream-receiver "hitode909/user-stream-receiver - GitHub") と[Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla](http://d.hatena.ne.jp/aquarla/20101020/1287540883 "Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla") を参考にさせてもらった。というかほとんどまるパクリ。またOAuthのところはtily氏の oauth-twitter-cli に全面的に依存している。
+ヒトデ君が書いた [hitode909/user-stream-receiver - GitHub](https://github.com/hitode909/user-stream-receiver "hitode909/user-stream-receiver - GitHub") と[Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla](http://d.hatena.ne.jp/aquarla/20101020/1287540883 "Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla") を参考にさせてもらった。というかほとんどまるパクリ。またOAuthのところはtily氏の [tily/ruby-oauth-cli-twitter - GitHub](https://github.com/tily/ruby-oauth-cli-twitter) に全面的に依存している。
 
 User Stremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。
 
