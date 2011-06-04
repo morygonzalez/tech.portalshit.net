@@ -20,7 +20,7 @@ User Stremを受診してるのでcronとかの設定なしでネットストー
 これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。
 
 {% highlight console %}
-  ruby favoritter.rb ストーキングしたい相手ユーザー名
+  ruby favoritter.rb ストーキングしたい相手のユーザー名
 {% endhighlight %}
 
 {% highlight console %}

@@ -46,7 +46,7 @@ Posted on 24 May 2011 by morygonzalez |
 
 <p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">  ruby favoritter.rb ストーキングしたい相手ユーザー名</span>
+<div class="highlight"><pre><code class="console"><span class="go">  ruby favoritter.rb ストーキングしたい相手のユーザー名</span>
 </code></pre>
 </div>
 
@@ -509,7 +509,7 @@ Posted on 02 Jan 2011 by morygonzalez |
 
 <p>ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に <code>function init()</code> みたいのを書き、その中から呼び出せばよい。そしてその <code>init()</code> を上記 <code>// 実行したい処理</code> 内にも書いてあげればオッケーだ（もちろん <code>window.onload</code> で呼び出す必要もある）。</p>
 
-<p>jQueryについては <code>live()</code> というメソッドがある。これは動的に生成された要素にもスクリプトに適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 <code>live()</code> というメソッドと一緒に、処理を一度しか実行しないというメソッド <code>one()</code> も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。</p>
+<p>jQueryについては <code>live()</code> というメソッドがある。これは動的に生成された要素にも処理を適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 <code>live()</code> というメソッドと一緒に、処理を一度しか実行しないというメソッド <code>one()</code> も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。</p>
 
 <p><a href="http://stackoverflow.com/questions/3796207/using-one-with-live-jquery">Using .one() with .live() jQuery - Stack Overflow</a></p>
 
