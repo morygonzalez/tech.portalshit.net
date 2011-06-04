@@ -5,7 +5,7 @@ category: Ruby
 layout: post
 ---
 
-Twitterで特定のユーザーのことばかりfavっていて不愉快という指摘を受けて頭に来たので、全自動で特定のユーザーを延々favし続けるスクリプトを書いた。
+暇だったので自動で特定のユーザーを延々favし続けるスクリプトを書いた。
 
 <script src="https://gist.github.com/972943.js?file=favstream.rb"></script>
 
