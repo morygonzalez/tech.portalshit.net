@@ -1,8 +1,8 @@
-<h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
+<h2><a href="/{{ page.url }}">{{ page.title }}</a></h2>
 <div class="articleinfo">
 posted on {{ page.date | date_to_string }} by 森井ゴンザレス |
   {% for category in page.categories %}
-    <a href="http://tech.portalshit.net/{{ category }}/">{{ category }}</a>
+    <a href="/{{ category }}/">{{ category }}</a>
   {% endfor %}
 </div>
 {{ page.content }}

@@ -16,7 +16,7 @@
 				</ul>
 		</div>
 		<div id="container">
-			
+
 			<div id="content">
   			<div class="paginator">
   				{% if paginator.previous_page %}
@@ -34,13 +34,13 @@
     		    </span>
     		  {% endif %}
   			</div>
-  			
+
   			<div class="autopagerize_page_element">
 				  {{ content }}
 				</div>
-				
+
 				<div class="autopagerize_insert_before"></div>
-  			
+
   			<div class="paginator">
   				{% if paginator.previous_page %}
   				  <span class="previous">
@@ -58,10 +58,14 @@
     		  {% endif %}
   			</div>
 		  </div>
-		  
+
 			<div id="sidebar">
-				<h3>Categories</h3>
-				{{ page.categories }}
+        <h3>Categories</h3>
+        <ul>
+        {% for category in site.iterable.categories %}
+          <li><a href="/categories/{{ category.name }}/">{{ category.name }}</a>
+        {% endfor %}
+        </ul>
 				<h3>Latest Posts</h3>
 				<ul>
 				{% for post in site.posts limit:10 %}
@@ -69,10 +73,10 @@
 				{% endfor %}
 				</ul>
 			</div>
-		
+
 		</div>
 		<div id="footer">
-<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>
 
 <!-- Please leave this line intact -->
 <p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />

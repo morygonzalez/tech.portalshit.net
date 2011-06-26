@@ -16,7 +16,7 @@
 				</ul>
 		</div>
 		<div id="container">
-			
+
 			<div id="content">
   			<div class="paginator">
   				
@@ -32,13 +32,13 @@
     		    </span>
     		  
   			</div>
-  			
+
   			<div class="autopagerize_page_element">
 				  
     <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
     <div class="articleinfo">Posted on 07 Jul 2010 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Unix/">Unix</a>
+		<a href="categories/Unix/">Unix</a>
 	</div>
     <p>FreeBSDでVimを起動しファイルを編集したあと、 <code>:q</code> でVimを終了させてるのに元のコンソールに戻らなくてなんか嫌だなーと思っていた。MacもUbuntuもDreamHostのDebianもVimを閉じると元に戻るのに、職場の本番環境のFreeBSDだけこれなの。ファイル編集前のコンソールの履歴とかを見たいこともあるので、Vimが終了したら元の画面に戻るようにしたいと随分長いこと思っていたんだけど、たったいまようやく出来たのでメモっときます。</p>
 
@@ -54,12 +54,12 @@
 
 <p>くわしくは上のリンク先を見てもらうといいんだけど、とにかく <code>te</code> ってのと <code>ti</code> ってのがあって、これをMacの場合は <code>te=\E7\E[?47h</code> 、 <code>ti=\E[2J\E[?47l\E</code> としてあげればいい。そんでシェルの設定ファイルに <code>export $TERMPATH=$HOME/.termcap</code> と書いてやり、一端ログアウトして再ログインするとめでたくVimを終了したときにコンソールが復元されるようになります。</p>
 
-    <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/#disqus_thread">Comments</a>
+    <a href="/2010/07/07/finish-editing-then-restore-console/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></h2>
     <div class="articleinfo">Posted on 07 Jul 2010 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/CakePHP/">CakePHP</a>
+		<a href="categories/CakePHP/">CakePHP</a>
 	</div>
     <p>CakePHPで動かしているサイトをCakePHP 1.2ベースからCakePHP 1.3ベースに変更作業中。その課程で気がついたことをメモしておきます。</p>
 
@@ -76,14 +76,14 @@
   <li><a href="http://book.cakephp.org/ja/view/1561/Migrating-from-CakePHP-1-2-to-1-3" title="1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook">1.2から1.3への移行ガイド :: 付録 :: マニュアル :: 1.3コレクション :: The Cookbook</a></li>
 </ul>
 
-    <a href="http://tech.portalshit.net/2010/07/07/cakephp1.3-migration-tips/#disqus_thread">Comments</a>
+    <a href="/2010/07/07/cakephp1.3-migration-tips/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></h2>
     <div class="articleinfo">Posted on 02 Jul 2010 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+		<a href="categories/Rails/">Rails</a>
 	
-		<a href="http://tech.portalshit.net/YAML/">YAML</a>
+		<a href="categories/YAML/">YAML</a>
 	</div>
     <p>初期データをマイグレーションでRailsアプリケーションにぶっ込んでみた。後からいちいち手入力するのめんどいし、マイグレーションでデータをロードしとけば、本番環境でうごかすときも <code>rake db:migrate</code> で初期データは入るはずだから楽ちんかなと思って。</p>
 
@@ -128,21 +128,21 @@
 
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 
-    <a href="http://tech.portalshit.net/2010/07/02/import-initial-data-with-yaml/#disqus_thread">Comments</a>
+    <a href="/2010/07/02/import-initial-data-with-yaml/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/07/02/active_record-is-so-sticky-for-me">Active Recordが難しすぎてしょんべんちびりそう</a></h2>
     <div class="articleinfo">Posted on 02 Jul 2010 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Rails/">Rails</a>
+		<a href="categories/Rails/">Rails</a>
 	</div>
     <p>『RailsによるアジャイルWebアプリケーション開発 第三版』をまだちまちま読んでる。いまActiveRecordのリレーションシップのところ。全然分からなくて全然進まない。もうRails 3.0が出そうだというのに。またろくすっぽ技術書を読まないうちに化石になっちゃいそうだよ。バカはつらいよ。</p>
 
-    <a href="http://tech.portalshit.net/2010/07/02/active_record-is-so-sticky-for-me/#disqus_thread">Comments</a>
+    <a href="/2010/07/02/active_record-is-so-sticky-for-me/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
     <div class="articleinfo">Posted on 28 Jun 2010 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+		<a href="categories/Ruby/">Ruby</a>
 	</div>
     <p>一個前の記事（<a href="http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/" title="Rubyがエレガントだって言われるのがわかってきたような気がする \| tech.portalshit.net - CakePHP, Rails, JavaScript">Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
 
@@ -219,13 +219,13 @@
 
 <p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
 
-    <a href="http://tech.portalshit.net/2010/06/28/i-had-better-review-ruby/#disqus_thread">Comments</a>
+    <a href="/2010/06/28/i-had-better-review-ruby/#disqus_thread">Comments</a>
 
 
 				</div>
-				
+
 				<div class="autopagerize_insert_before"></div>
-  			
+
   			<div class="paginator">
   				
   				  <span class="previous">
@@ -241,10 +241,56 @@
     		  
   			</div>
 		  </div>
-		  
+
 			<div id="sidebar">
-				<h3>Categories</h3>
-				
+        <h3>Categories</h3>
+        <ul>
+        
+          <li><a href="/categories/CakePHP/">CakePHP</a>
+        
+          <li><a href="/categories/JavaScript/">JavaScript</a>
+        
+          <li><a href="/categories/Jekyll/">Jekyll</a>
+        
+          <li><a href="/categories/Mac/">Mac</a>
+        
+          <li><a href="/categories/OAuth/">OAuth</a>
+        
+          <li><a href="/categories/PHP/">PHP</a>
+        
+          <li><a href="/categories/Rails/">Rails</a>
+        
+          <li><a href="/categories/Ruby/">Ruby</a>
+        
+          <li><a href="/categories/TDD/">TDD</a>
+        
+          <li><a href="/categories/Twitter/">Twitter</a>
+        
+          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+        
+          <li><a href="/categories/Unix/">Unix</a>
+        
+          <li><a href="/categories/Vim/">Vim</a>
+        
+          <li><a href="/categories/YAML/">YAML</a>
+        
+          <li><a href="/categories/bot/">bot</a>
+        
+          <li><a href="/categories/git/">git</a>
+        
+          <li><a href="/categories/jQuery/">jQuery</a>
+        
+          <li><a href="/categories/jekyll/">jekyll</a>
+        
+          <li><a href="/categories/misc/">misc</a>
+        
+          <li><a href="/categories/vim/">vim</a>
+        
+          <li><a href="/categories/zsh/">zsh</a>
+        
+          <li><a href="/categories/勉強会/">勉強会</a>
+        
+        </ul>
 				<h3>Latest Posts</h3>
 				<ul>
 				
@@ -270,10 +316,10 @@
 				
 				</ul>
 			</div>
-		
+
 		</div>
 		<div id="footer">
-<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>
 
 <!-- Please leave this line intact -->
 <p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />

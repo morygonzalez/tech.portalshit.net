@@ -16,7 +16,7 @@
 				</ul>
 		</div>
 		<div id="container">
-			
+
 			<div id="content">
   			<div class="paginator">
   				
@@ -32,13 +32,13 @@
     		    </span>
     		  
   			</div>
-  			
+
   			<div class="autopagerize_page_element">
 				  
     <h2><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></h2>
     <div class="articleinfo">Posted on 09 Feb 2011 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+		<a href="categories/Ruby/">Ruby</a>
 	</div>
     <p>昨日の続きのようなもの。LokkaをUbuntu上で動かそうといろいろやってます。passenger入れて、 <code>passenger-install-nginx-module</code> を実行しようとしたらエラーが出た。お前はrootじゃないからnginxインストールできひんわ、みたいなメッセージが出る。sudoったりrootになってインストールしようとすると今度はpassengerなんていうgemはないわ、って怒られる。sudoしたときには.rvm内のgemパッケージではなくシステムのgemパッケージを見ようとするっぽい。またrootになるとRVMではなくシステムのRubyが実行されるので同じくpassengerなんてgemないわ、って怒られる。システムのRubyは1.8.7だし、なるべくなら使いたくない。RVMのRubyを使ってpassenger + nginxな環境作れないのかよ、とググってたら以下のような記事を発見した。</p>
 
@@ -68,12 +68,12 @@
 
 <p>それにしてもRVMは、本当にきもいと思う。<a href="http://d.hatena.ne.jp/rochefort/20100907/p1" title="rvmのirbで日本語入力できない - うんたらかんたら日記">readlineとかまで.rvm内にインストールできる</a>できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。</p>
 
-    <a href="http://tech.portalshit.net/2011/02/09/rvm-is-kimoi/#disqus_thread">Comments</a>
+    <a href="/2011/02/09/rvm-is-kimoi/#disqus_thread">Comments</a>
 
     <h2><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></h2>
     <div class="articleinfo">Posted on 08 Feb 2011 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Ruby/">Ruby</a>
+		<a href="categories/Ruby/">Ruby</a>
 	</div>
     <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
 
@@ -103,14 +103,14 @@
 
 <p>cxxさんに質問したら <a href="http://rvm.beginrescueend.com/deployment/system-wide/">RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
 
-    <a href="http://tech.portalshit.net/2011/02/08/rvm-with-apache/#disqus_thread">Comments</a>
+    <a href="/2011/02/08/rvm-with-apache/#disqus_thread">Comments</a>
 
     <h2><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></h2>
     <div class="articleinfo">Posted on 02 Jan 2011 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/JavaScript/">JavaScript</a>
+		<a href="categories/JavaScript/">JavaScript</a>
 	
-		<a href="http://tech.portalshit.net/jQuery/">jQuery</a>
+		<a href="categories/jQuery/">jQuery</a>
 	</div>
     <p>あけましておめでとうございます。なんか2010年後半は転職とか引っ越しとかあってあまりここに記事を書けなかったのが残念です。Rubyとか全然さわってねーし、JavaScriptも忘却曲線の彼方。というわけで2011年一発目はJavaScriptについて。</p>
 
@@ -146,7 +146,7 @@
 
 <p><code>jQuery().data()</code> 、なかなか便利そうだ。</p>
 
-    <a href="http://tech.portalshit.net/2011/01/02/make-javascript-runnable-with-autopagerize/#disqus_thread">Comments</a>
+    <a href="/2011/01/02/make-javascript-runnable-with-autopagerize/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></h2>
     <div class="articleinfo">Posted on 11 Dec 2010 by 森井ゴンザレス |
@@ -155,14 +155,14 @@
 
 <p><a href="http://www.usp-lab.com/" title="Universal Shell Programing Laboratory">usp lab</a>のシェルスクリプトで業務用基幹システムを開発する話が面白かった。一般的なプログラミング言語は使わずに、シェルで生のLinuxを使って作業を行わせる。DBは使わずデータはTextで持つ。HTTP関連のあれこれもシェルスクリプトで行う。このためセキュリティのことは考えないといけないらしいんだけど（フロントエンドとバックエンドがシェルスクリプトでつながってるため）、大手のシステム会社が100人月とかみたいな見積を出す案件を10人月程度でやったそう。具体的には無印良品のシステムとか。遅めに会場に入ったので資料は売り切れで貰えず、細かい数字は自信がないんだけど、無印のやつは一年間に10億円かかってたシステム関連の費用が2億円程度に抑えられるようになったそう。mknodとかsedコマンドを駆使した並列処理のデモは本当に面白かった。へー、シェルスクリプトだけでこんなにできるんだー、っていう感じ。1億行のテキストデータ処理を53秒で終わらせたりとか。「Linuxはなるべく生で使いましょう」という言葉がとても深く印象に残っている。Railsみたいな便利なフレームワークを使った開発とはまったく異なるけど、UNIXの「小さいものは美しい」という理念のもと、とんでもなく効率的に開発を行っている様がとてつもなくクールだった。</p>
 
-    <a href="http://tech.portalshit.net/2010/12/11/open-source-conference/#disqus_thread">Comments</a>
+    <a href="/2010/12/11/open-source-conference/#disqus_thread">Comments</a>
 
     <h2><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></h2>
     <div class="articleinfo">Posted on 26 Oct 2010 by 森井ゴンザレス |
 	
-		<a href="http://tech.portalshit.net/Vim/">Vim</a>
+		<a href="categories/Mac/">Mac</a>
 	
-		<a href="http://tech.portalshit.net/Mac/">Mac</a>
+		<a href="categories/Vim/">Vim</a>
 	</div>
     <p>iTerm 2が素晴らしいということなのでiTermをぼちぼち使ってるんですけど、Vimを起動したときに矢印キーで移動できないことが分かった。「Vimで矢印キーでカーソル移動とか小学生かよ」みたいなご意見もあるでしょうけど、入力モードのときに移動したくなったら <code>j, k, h, l</code> じゃ移動できないでしょ？ そこで矢印キーですよ。</p>
 
@@ -197,13 +197,13 @@ iTerm*<span class="o">)</span>
 
 <p>Load Presetから “Use xterm Defaults” を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。</p>
 
-    <a href="http://tech.portalshit.net/2010/10/26/iterm-arrow-key-issue/#disqus_thread">Comments</a>
+    <a href="/2010/10/26/iterm-arrow-key-issue/#disqus_thread">Comments</a>
 
 
 				</div>
-				
+
 				<div class="autopagerize_insert_before"></div>
-  			
+
   			<div class="paginator">
   				
   				  <span class="previous">
@@ -219,10 +219,56 @@ iTerm*<span class="o">)</span>
     		  
   			</div>
 		  </div>
-		  
+
 			<div id="sidebar">
-				<h3>Categories</h3>
-				
+        <h3>Categories</h3>
+        <ul>
+        
+          <li><a href="/categories/CakePHP/">CakePHP</a>
+        
+          <li><a href="/categories/JavaScript/">JavaScript</a>
+        
+          <li><a href="/categories/Jekyll/">Jekyll</a>
+        
+          <li><a href="/categories/Mac/">Mac</a>
+        
+          <li><a href="/categories/OAuth/">OAuth</a>
+        
+          <li><a href="/categories/PHP/">PHP</a>
+        
+          <li><a href="/categories/Rails/">Rails</a>
+        
+          <li><a href="/categories/Ruby/">Ruby</a>
+        
+          <li><a href="/categories/TDD/">TDD</a>
+        
+          <li><a href="/categories/Twitter/">Twitter</a>
+        
+          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+        
+          <li><a href="/categories/Unix/">Unix</a>
+        
+          <li><a href="/categories/Vim/">Vim</a>
+        
+          <li><a href="/categories/YAML/">YAML</a>
+        
+          <li><a href="/categories/bot/">bot</a>
+        
+          <li><a href="/categories/git/">git</a>
+        
+          <li><a href="/categories/jQuery/">jQuery</a>
+        
+          <li><a href="/categories/jekyll/">jekyll</a>
+        
+          <li><a href="/categories/misc/">misc</a>
+        
+          <li><a href="/categories/vim/">vim</a>
+        
+          <li><a href="/categories/zsh/">zsh</a>
+        
+          <li><a href="/categories/勉強会/">勉強会</a>
+        
+        </ul>
 				<h3>Latest Posts</h3>
 				<ul>
 				
@@ -248,10 +294,10 @@ iTerm*<span class="o">)</span>
 				
 				</ul>
 			</div>
-		
+
 		</div>
 		<div id="footer">
-<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>		
+<p class="validate"><a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/">CSS</a><br /><a href="#content">Top</a></p>
 
 <!-- Please leave this line intact -->
 <p>Template design by <a href="http://www.sixshootermedia.com">Six Shooter Media</a>.<br />

@@ -7,8 +7,8 @@ layout: default
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <div class="articleinfo">Posted on {{ post.date | date_to_string }} by 森井ゴンザレス |
 	{% for category in post.categories %}
-		<a href="http://tech.portalshit.net/{{ category }}/">{{ category }}</a>
+		<a href="categories/{{ category }}/">{{ category }}</a>
 	{% endfor %}</div>
     {{ post.content }}
-    <a href="http://tech.portalshit.net{{ post.url }}/#disqus_thread">Comments</a>
+    <a href="{{ post.url }}/#disqus_thread">Comments</a>
 {% endfor %}
