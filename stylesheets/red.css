@@ -12,3 +12,12 @@ ul#nav {
 ul#nav li a:hover {
 	background:#DB3939;
 }
+ul#categories {
+  display: block;
+  margin-bottom: 20px;
+  height: 1%;
+  overflow: hidden;
+}
+ul#categories li {
+  float: left;
+}

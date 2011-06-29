@@ -30,7 +30,7 @@
       <div class="articleinfo">
         Posted on {{ page.date | date_to_string }} by 森井ゴンザレス |
         {% for category in page.categories %}
-          <a href="/{{ category }}/">{{ category }}</a>
+          <a href="/categories/{{ category }}/">{{ category }}</a>
         {% endfor %}
       </div>
       {{ content }}
@@ -61,7 +61,7 @@
 
       <div id="sidebar">
         <h3>Categories</h3>
-        <ul>
+        <ul id="categories">
           {% for category in page.categories %}
           <li><a href="/categories/{{ category }}/">{{ category }}</a></li>
           {% endfor %}

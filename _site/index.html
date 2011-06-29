@@ -29,6 +29,46 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></h2>
+    <div class="articleinfo">Posted on 29 Jun 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	
+		<a href="categories/jekyll/">jekyll</a>
+	</div>
+    <p>Jekyllを使いだしてから気がつくと一年経ってました。いろいろ便利に使えており気に入っております。</p>
+
+<p>PygmentでコードをシンタックスハイライトしたりLSIで関連記事表示したりと結構手を入れてはいたんだけど、いわゆる世間の一般のブログにあるようなカテゴリ一覧表示機能と、カテゴリごとの記事アーカイブ機能がなくて、それを若干不便に思っておりました。</p>
+
+<p>しかしググったら、プログラマー向けなブログツールなだけあっていろんな方法が出てきた。以下そのまとめ。</p>
+
+<h3 id="section">カテゴリ一覧</h3>
+
+<p>JekyllのLiquid (テンプレート言語) には \ みたいタグがあるんだけど、こいつが意図したとおりに動かない。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+<span class="p">\</span>
+  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">\</span><span class="o">&lt;</span><span class="sr">/li&gt;</span>
+<span class="sr">\</span>
+<span class="sr">&lt;/u</span><span class="n">l</span><span class="o">&gt;</span>
+</code></pre>
+</div>
+
+<p>普通のRubyの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取り出す方法を探してたんだけど</p>
+
+<h3 id="section-1">カテゴリごとの記事一覧</h3>
+
+<p>カテゴリごとの記事一覧を表示する方法だけど、こういうのを発見した。</p>
+
+<p><a href="http://recursive-design.com/projects/jekyll-plugins/" title="Jekyll Plugins - Recursive Design">Jekyll Plugins - Recursive Design</a></p>
+
+<p>ここの <code>generate_categories.rb</code> を使えばカテゴリ内の記事一覧を作成できる。こんな感じ。</p>
+
+<p><a href="http://tech.portalshit.net/categories/Ruby/" title="Category: Ruby \| tech.portalshit.net">Category: Ruby | tech.portalshit.net</a></p>
+
+
+    <a href="/2011/06/29/added-category-archives/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></h2>
     <div class="articleinfo">Posted on 24 May 2011 by 森井ゴンザレス |
 	
@@ -147,23 +187,6 @@
 
     <a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></h2>
-    <div class="articleinfo">Posted on 23 Apr 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Vim/">Vim</a>
-	</div>
-    <h3 id="macvim">MacVimでコピペできないのって仕様？</h3>
-
-<p>MacVimに他のアプリケーションでコピーしたものを貼り付けられないのって仕様？ いろいろ調べてみたけどストライクな解決方法はないみたい。結局CLIのVim使ってる。</p>
-
-<ul>
-  <li><a href="http://d.hatena.ne.jp/sea_mountain/20110421/1303362772" title="【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに">【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに</a></li>
-  <li><a href="http://twitter.com/#!/nekoya/status/2647362030" title="Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー ...">Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー …</a></li>
-  <li><a href="http://twitter.com/#!/marutanm/statuses/51557561425592320" title="Twitter / @marutanm Air: MacVimでpasteboardからペーストできな ...">Twitter / @marutanm Air: MacVimでpasteboardからペーストできな …</a></li>
-</ul>
-
-    <a href="/2011/04/23/macvim-kopipe-dekinai/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -181,7 +204,7 @@
 
 			<div id="sidebar">
         <h3>Categories</h3>
-        <ul>
+        <ul id="categories">
         
           <li><a href="/categories/CakePHP/">CakePHP</a>
         
@@ -231,6 +254,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
+				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
 				
 					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
@@ -248,8 +273,6 @@
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
 				
 					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
-				
-					<li><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></li>
 				
 				</ul>
 			</div>

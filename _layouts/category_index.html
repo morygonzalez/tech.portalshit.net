@@ -1,9 +1,9 @@
 ---
+title: tech.portalshit.net {{ page.category }}
 layout: default
 ---
 
 {% for post in site.categories[page.category] %}
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <div class="articleinfo">{{ post.date | date_to_string }}
-      {{ post.categories | category_links }}</div>
+    <div class="articleinfo">Posted on {{ post.date | date_to_string }} by 森井ゴンザレス | {{ post.categories | category_links }}</div>
 {% endfor %}

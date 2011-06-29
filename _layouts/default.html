@@ -61,7 +61,7 @@
 
 			<div id="sidebar">
         <h3>Categories</h3>
-        <ul>
+        <ul id="categories">
         {% for category in site.iterable.categories %}
           <li><a href="/categories/{{ category.name }}/">{{ category.name }}</a>
         {% endfor %}

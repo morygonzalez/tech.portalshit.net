@@ -4,12 +4,50 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-06-27T08:46:25+09:00</updated>
+  <updated>2011-06-29T15:23:44+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>Jekyllにカテゴリ一覧を追加した</title>
+    <link href="/2011/06/29/added-category-archives" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/06/29/added-category-archives</id>
+    <content type="html">&lt;p&gt;Jekyllを使いだしてから気がつくと一年経ってました。いろいろ便利に使えており気に入っております。&lt;/p&gt;
+
+&lt;p&gt;PygmentでコードをシンタックスハイライトしたりLSIで関連記事表示したりと結構手を入れてはいたんだけど、いわゆる世間の一般のブログにあるようなカテゴリ一覧表示機能と、カテゴリごとの記事アーカイブ機能がなくて、それを若干不便に思っておりました。&lt;/p&gt;
+
+&lt;p&gt;しかしググったら、プログラマー向けなブログツールなだけあっていろんな方法が出てきた。以下そのまとめ。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;カテゴリ一覧&lt;/h3&gt;
+
+&lt;p&gt;JekyllのLiquid (テンプレート言語) には \ みたいタグがあるんだけど、こいつが意図したとおりに動かない。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;&amp;lt;/u&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;普通のRubyの感覚からすると &lt;code&gt;site.categories&lt;/code&gt; ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。↑みたいな感じのコード書くと何も表示されない。 &lt;code&gt;site.categoires&lt;/code&gt; はHashで、&lt;code&gt;{ &quot;カテゴリ名&quot; =&amp;gt; カテゴリ内の記事一覧 }&lt;/code&gt; みたいな構造になってる。LiquidでHashのキーを取り出す方法を探してたんだけど&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;カテゴリごとの記事一覧&lt;/h3&gt;
+
+&lt;p&gt;カテゴリごとの記事一覧を表示する方法だけど、こういうのを発見した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://recursive-design.com/projects/jekyll-plugins/&quot; title=&quot;Jekyll Plugins - Recursive Design&quot;&gt;Jekyll Plugins - Recursive Design&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ここの &lt;code&gt;generate_categories.rb&lt;/code&gt; を使えばカテゴリ内の記事一覧を作成できる。こんな感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://tech.portalshit.net/categories/Ruby/&quot; title=&quot;Category: Ruby \| tech.portalshit.net&quot;&gt;Category: Ruby | tech.portalshit.net&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
   
   <entry>
     <title>User Streamで快適ネットストーキング生活</title>
