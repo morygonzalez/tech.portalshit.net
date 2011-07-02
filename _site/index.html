@@ -29,12 +29,35 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></h2>
+    <div class="articleinfo">Posted on 02 Jul 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Jekyll/">Jekyll</a>
+	
+		<a href="categories/Liquid/">Liquid</a>
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>JekyllはLiquidというRubyのテンプレートエンジンを採用してるんですが、Liquid内でLiquidの文法をエスケープする方法が分からず大変苦しんでおりました。Jekyllの公式のDocument呼んでもXML出力時とかCGI出力時にコンテンツをエスケープする方法は書いてあるのに、Liquidテンプレート自体をエスケープする方法が書いてなく、大変不満でした。しかしその方法が分かったのでお知らせいたします。元ネタはスタックオーバーフロー。</p>
+
+<p><a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags" title="web development - How to escape liquid template tags? - Stack Overflow">web development - How to escape liquid template tags? - Stack Overflow</a></p>
+
+<p>例えば <code>{% this }</code> と表示させたかったらこうやります。</p>
+
+<pre>&#123;&#123; "&#123;% this " %}&#125;&#125;&#125;</pre>
+
+<p>ちょっとトリッキーですね。</p>
+
+<p>Pygmentsと組み合わせて使うことも可能ですが、いちいち <code>{% highlight }</code> のなかでコメントアウト処理をしてあげないといけないません。面倒くさいですね。</p>
+
+    <a href="/2011/07/02/escape-in-liquid/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></h2>
     <div class="articleinfo">Posted on 29 Jun 2011 by 森井ゴンザレス |
 	
-		<a href="categories/Ruby/">Ruby</a>
+		<a href="categories/Jekyll/">Jekyll</a>
 	
-		<a href="categories/jekyll/">jekyll</a>
+		<a href="categories/Ruby/">Ruby</a>
 	</div>
     <p>Jekyllを使いだしてから気がつくと一年経ってました。いろいろ便利に使えており気に入っております。</p>
 
@@ -160,48 +183,6 @@
 
     <a href="/2011/04/24/macvim-de-kopipe-dekita/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></h2>
-    <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
-  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
-<p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
-
-<p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
-
-<ul>
-  <li><a href="http://blog.s21g.com/articles/1408" title="DataMapperでSQLを直接実行する - Hello, world! - s21g">DataMapperでSQLを直接実行する - Hello, world! - s21g</a></li>
-</ul>
-
-<p>ちなみにRDBMSに採用してるのはSQLite3。SQLiteでは <code>UPDTE sqlite_sequence SET seq=0 WHERE name='テーブル名';</code> みたいなコードで <code>AUTO INCREMENT</code> 値を任意の値に設定できるみたい。</p>
-
-<ul>
-  <li><a href="http://beyond.cocolog-nifty.com/akutoku/2008/04/auto_increment1_a1f6.html" title="[悪徳商法？支店]: auto_incrementの値を1に戻す方法">[悪徳商法？支店]: auto_incrementの値を1に戻す方法</a></li>
-</ul>
-
-<p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
-
-<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
-  <span class="k">end</span> 
-</code></pre>
-</div>
-
-<p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
-
-    <a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -226,6 +207,8 @@
           <li><a href="/categories/JavaScript/">JavaScript</a>
         
           <li><a href="/categories/Jekyll/">Jekyll</a>
+        
+          <li><a href="/categories/Liquid/">Liquid</a>
         
           <li><a href="/categories/Mac/">Mac</a>
         
@@ -269,6 +252,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></li>
+				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
@@ -286,8 +271,6 @@
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
-				
-					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 				</ul>
 			</div>

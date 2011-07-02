@@ -35,6 +35,48 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></h2>
+    <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
+
+<p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
+
+<ul>
+  <li><a href="http://blog.s21g.com/articles/1408" title="DataMapperでSQLを直接実行する - Hello, world! - s21g">DataMapperでSQLを直接実行する - Hello, world! - s21g</a></li>
+</ul>
+
+<p>ちなみにRDBMSに採用してるのはSQLite3。SQLiteでは <code>UPDTE sqlite_sequence SET seq=0 WHERE name='テーブル名';</code> みたいなコードで <code>AUTO INCREMENT</code> 値を任意の値に設定できるみたい。</p>
+
+<ul>
+  <li><a href="http://beyond.cocolog-nifty.com/akutoku/2008/04/auto_increment1_a1f6.html" title="[悪徳商法？支店]: auto_incrementの値を1に戻す方法">[悪徳商法？支店]: auto_incrementの値を1に戻す方法</a></li>
+</ul>
+
+<p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
+
+<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
+  <span class="k">end</span> 
+</code></pre>
+</div>
+
+<p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
+
+    <a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></h2>
     <div class="articleinfo">Posted on 23 Apr 2011 by 森井ゴンザレス |
 	
@@ -167,39 +209,6 @@
 
     <a href="/2011/03/24/i-am-an-impotent-programmer/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></h2>
-    <div class="articleinfo">Posted on 24 Mar 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ubuntu/">Ubuntu</a>
-	
-		<a href="categories/zsh/">zsh</a>
-	</div>
-    <p>この前、さくらVPSに入れているUbuntuのzshで <code>ls</code> とか <code>cd</code> とか打ったとき、変なエラーメッセージが出るようになった。原因不明。しょうがないのでzshをインストールしなおそうと、<code>chsh</code> してbashとかに切り替えずに <code>sudo apt-get remove zsh</code> してしまった。そこで混乱してしまって <code>Ctrl + D</code> しちゃったもんだからSSH閉じてしまって、なんとUbuntuにログインできなくなってしまった。</p>
-
-<p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
-
-<p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
-
-<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
-<span class="k">  </span><span class="nb">exec</span> /bin/zsh
-<span class="k">fi</span>
-</code></pre>
-</div>
-
-<p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
-
-<p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
-
-<p>しかしこれには結構重い副作用があるみたい。</p>
-
-<p><a href="http://d.hatena.ne.jp/tyru/20100922/exec_bin_zsh_considered_harmful">.bash_profileに「exec /bin/zsh」と書くのはやめたほうがいい - Humanity</a></p>
-
-<p>一理ある。</p>
-
-<p>というわけでUbuntuやrootでsshできない環境ででzshを使う場合は、何らかのトラブルでzshが起動しない、シェルにログインできなくなることを想定し、保険として普段はまったく使わない非常用のアカウントを作っておくと良いと思った。もちろんsudoersに指定しておかないと意味ないけどね。</p>
-
-    <a href="/2011/03/24/dont-uninstall-current-shell-without-chsh/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -230,6 +239,8 @@
           <li><a href="/categories/JavaScript/">JavaScript</a>
         
           <li><a href="/categories/Jekyll/">Jekyll</a>
+        
+          <li><a href="/categories/Liquid/">Liquid</a>
         
           <li><a href="/categories/Mac/">Mac</a>
         
@@ -273,6 +284,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></li>
+				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
@@ -290,8 +303,6 @@
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
-				
-					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 				</ul>
 			</div>

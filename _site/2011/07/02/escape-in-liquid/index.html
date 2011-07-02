@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>確認ダイアログを出しながら削除するスクリプト |  tech.portalshit.net</title>
+    <title>LiquidでLiquidテンプレートをエスケープする |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,42 +19,48 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2011/03/24/i-am-an-impotent-programmer" title="TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/06/29/added-category-archives" title="Jekyllにカテゴリ一覧を追加した">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2011/04/17/related-post-in-jekyll" title="Jekyllで関連ポストを表示する">Next Post</a></span>
         
       </div>
 
-      <h2>確認ダイアログを出しながら削除するスクリプト</h2>
+      <h2>LiquidでLiquidテンプレートをエスケープする</h2>
       <div class="articleinfo">
-        Posted on 16 Apr 2011 by 森井ゴンザレス |
+        Posted on 02 Jul 2011 by 森井ゴンザレス |
+        
+          <a href="/categories/Jekyll/">Jekyll</a>
+        
+          <a href="/categories/Liquid/">Liquid</a>
         
           <a href="/categories/Ruby/">Ruby</a>
         
       </div>
-      <p>確認ダイアログを出しながらディレクトリやファイルを削除するスクリプトを書いた。大したコード書いてないし逆引きRubyに載ってたコードをまるパクリしてるところもあるけど便利だと思う。</p>
+      <p>JekyllはLiquidというRubyのテンプレートエンジンを採用してるんですが、Liquid内でLiquidの文法をエスケープする方法が分からず大変苦しんでおりました。Jekyllの公式のDocument呼んでもXML出力時とかCGI出力時にコンテンツをエスケープする方法は書いてあるのに、Liquidテンプレート自体をエスケープする方法が書いてなく、大変不満でした。しかしその方法が分かったのでお知らせいたします。元ネタはスタックオーバーフロー。</p>
 
-<script src="https://gist.github.com/921460.js?file=cleanup.rb"></script>
+<p><a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags" title="web development - How to escape liquid template tags? - Stack Overflow">web development - How to escape liquid template tags? - Stack Overflow</a></p>
 
-<p>そのディレクトリにあるファイル/ディレクトリ一覧を取得した後、「このファイル/ディレクトリは作られてから何日経っています。削除しますか？ (y/n)」というダイアログ（英語）を表示する。<code>y</code> が入力されると削除を行う。地味に使える。</p>
+<p>例えば <code>{% this }</code> と表示させたかったらこうやります。</p>
 
-<p>RubyのFileUtilsはすごく便利だと思う。シェルスクリプトでしこしこ書くのがアホらしくなる。RubyがPerlなみにあらゆるuni*x系のサーバーに入るようになったらさぞかし便利だろうと思う。</p>
+<pre>&#123;&#123; "&#123;% this " %}&#125;&#125;&#125;</pre>
+
+<p>ちょっとトリッキーですね。</p>
+
+<p>Pygmentsと組み合わせて使うことも可能ですが、いちいち <code>{% highlight }</code> のなかでコメントアウト処理をしてあげないといけないません。面倒くさいですね。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
+          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
-          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
+          <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
           
-          <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
-          <li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
+          <li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
           
-          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
+          <li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
           
         </ul>
       </div>
@@ -77,6 +83,10 @@
       <div id="sidebar">
         <h3>Categories</h3>
         <ul id="categories">
+          
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
+          
+          <li><a href="/categories/Liquid/">Liquid</a></li>
           
           <li><a href="/categories/Ruby/">Ruby</a></li>
           

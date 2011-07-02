@@ -35,6 +35,15 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></h2>
+    <div class="articleinfo">Posted on 11 Dec 2010 by 森井ゴンザレス |
+	</div>
+    <p>福岡工業大学で行われた、オープンソースカンファレンス福岡2010に行った。</p>
+
+<p><a href="http://www.usp-lab.com/" title="Universal Shell Programing Laboratory">usp lab</a>のシェルスクリプトで業務用基幹システムを開発する話が面白かった。一般的なプログラミング言語は使わずに、シェルで生のLinuxを使って作業を行わせる。DBは使わずデータはTextで持つ。HTTP関連のあれこれもシェルスクリプトで行う。このためセキュリティのことは考えないといけないらしいんだけど（フロントエンドとバックエンドがシェルスクリプトでつながってるため）、大手のシステム会社が100人月とかみたいな見積を出す案件を10人月程度でやったそう。具体的には無印良品のシステムとか。遅めに会場に入ったので資料は売り切れで貰えず、細かい数字は自信がないんだけど、無印のやつは一年間に10億円かかってたシステム関連の費用が2億円程度に抑えられるようになったそう。mknodとかsedコマンドを駆使した並列処理のデモは本当に面白かった。へー、シェルスクリプトだけでこんなにできるんだー、っていう感じ。1億行のテキストデータ処理を53秒で終わらせたりとか。「Linuxはなるべく生で使いましょう」という言葉がとても深く印象に残っている。Railsみたいな便利なフレームワークを使った開発とはまったく異なるけど、UNIXの「小さいものは美しい」という理念のもと、とんでもなく効率的に開発を行っている様がとてつもなくクールだった。</p>
+
+    <a href="/2010/12/11/open-source-conference/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></h2>
     <div class="articleinfo">Posted on 26 Oct 2010 by 森井ゴンザレス |
 	
@@ -162,56 +171,6 @@ iTerm*<span class="o">)</span>
 
     <a href="/2010/09/15/textmate-with-rvm-ruby/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/09/02/clickable-map-coordinates-with-javascript">JavaScriptでClickable Mapの座標を取得する</a></h2>
-    <div class="articleinfo">Posted on 02 Sep 2010 by 森井ゴンザレス |
-	
-		<a href="categories/JavaScript/">JavaScript</a>
-	</div>
-    <p>みなさん、クリッカブルマップしてますか？ あんなくそみたいなもの使って地図をつくるなんて発狂しそうなこと、ここを読みそうな人はやってないと思いますが、僕の職場のお客さんとか上司は「Google Mapsには心がこもってない」とか言うので、クソみたいイラストをクリッカブルマップにして地図を作ってるんですよ。まじでかわいそうな僕ちゃん。</p>
-
-<p>ご存じない方のためにクリッカブルマップの作り方を説明しておくと、まず画像を作り、それをHTMLに貼り付け、HTMLオーサリングツール（うちの職場ではDreamWeaver）のGUIエディタでちまちま画像上のクリッカブルにしたい位置を選択するという、血尿が出そうなくらい面倒くさい作業を強いられます。</p>
-
-<p>最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。</p>
-
-<p>コードはこんな感じ。</p>
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
-      <span class="kd">function</span> <span class="nx">getPosition</span><span class="p">(){</span>
-        <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">);</span>
-        <span class="nx">image</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">layerX</span><span class="p">;</span>
-          <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">layerY</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;pointX&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;pointY&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-
-      <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">getPosition</span><span class="p">;</span>
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div&gt;</span>
-      <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;path/to/image&quot;</span> <span class="na">id=</span><span class="s">&quot;image&quot;</span> <span class="na">style=</span><span class="s">&quot;position: absolute; top: auto; left: auto; width: 500px; height: 332px&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;pointX&quot;</span> <span class="na">name=</span><span class="s">&quot;pointX&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;pointY&quot;</span> <span class="na">name=</span><span class="s">&quot;pointY&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;発射！&quot;</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;/form&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
-
-<p>Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。</p>
-
-<p><a href="http://d.hatena.ne.jp/sandai/20091105/p1" title="座標取得するプロパティのそれぞれの違い - 三等兵">座標取得するプロパティのそれぞれの違い - 三等兵</a></p>
-
-    <a href="/2010/09/02/clickable-map-coordinates-with-javascript/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -242,6 +201,8 @@ iTerm*<span class="o">)</span>
           <li><a href="/categories/JavaScript/">JavaScript</a>
         
           <li><a href="/categories/Jekyll/">Jekyll</a>
+        
+          <li><a href="/categories/Liquid/">Liquid</a>
         
           <li><a href="/categories/Mac/">Mac</a>
         
@@ -285,6 +246,8 @@ iTerm*<span class="o">)</span>
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></li>
+				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
@@ -302,8 +265,6 @@ iTerm*<span class="o">)</span>
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
-				
-					<li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
 				
 				</ul>
 			</div>
