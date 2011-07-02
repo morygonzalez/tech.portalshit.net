@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-06-29T15:23:44+09:00</updated>
+  <updated>2011-07-02T10:56:19+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -20,21 +20,35 @@
 
 &lt;p&gt;PygmentでコードをシンタックスハイライトしたりLSIで関連記事表示したりと結構手を入れてはいたんだけど、いわゆる世間の一般のブログにあるようなカテゴリ一覧表示機能と、カテゴリごとの記事アーカイブ機能がなくて、それを若干不便に思っておりました。&lt;/p&gt;
 
-&lt;p&gt;しかしググったら、プログラマー向けなブログツールなだけあっていろんな方法が出てきた。以下そのまとめ。&lt;/p&gt;
+&lt;p&gt;ググってみたところ、プログラマー向けなブログツールなだけあっていろんな方法が出てきました。以下そのまとめ。&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;カテゴリ一覧&lt;/h3&gt;
 
-&lt;p&gt;JekyllのLiquid (テンプレート言語) には \ みたいタグがあるんだけど、こいつが意図したとおりに動かない。&lt;/p&gt;
+&lt;p&gt;JekyllのLiquid (テンプレート言語) には &lt;code&gt;{{ sites.categories }}&lt;/code&gt; みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると &lt;code&gt;site.categories&lt;/code&gt; ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/li&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sr&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;sr&quot;&gt;&amp;lt;/u&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; {{ for category in sites.categories }}
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;{{ category.name }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; {{ endfor }}
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;普通のRubyの感覚からすると &lt;code&gt;site.categories&lt;/code&gt; ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。↑みたいな感じのコード書くと何も表示されない。 &lt;code&gt;site.categoires&lt;/code&gt; はHashで、&lt;code&gt;{ &quot;カテゴリ名&quot; =&amp;gt; カテゴリ内の記事一覧 }&lt;/code&gt; みたいな構造になってる。LiquidでHashのキーを取り出す方法を探してたんだけど&lt;/p&gt;
+&lt;p&gt;↑みたいな感じのコード書くと何も表示されない。 &lt;code&gt;site.categoires&lt;/code&gt; はHashで、&lt;code&gt;{ &quot;カテゴリ名&quot; =&amp;gt; カテゴリ内の記事一覧 }&lt;/code&gt; みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_category_iterator/tag_category_iterator.rb&quot; title=&quot;tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub&quot;&gt;tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;↑のファイルを &lt;code&gt;JEKYLL_ROOT/_plugins&lt;/code&gt; にコピーする。（&lt;code&gt;_plugins&lt;/code&gt; というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; {{ for category in sites.iterable.categories }}
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;   &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;{{ category.name }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; {{ endfor }}
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;カテゴリごとの記事一覧&lt;/h3&gt;
 
@@ -46,6 +60,7 @@
 
 &lt;p&gt;&lt;a href=&quot;http://tech.portalshit.net/categories/Ruby/&quot; title=&quot;Category: Ruby \| tech.portalshit.net&quot;&gt;Category: Ruby | tech.portalshit.net&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;これもさっきのと同じように、&lt;code&gt;JEKYLL_ROOT/_plugins&lt;/code&gt; にファイルをコピーする。そんでLiquidテンプレートを書き換えるんだけど詳細はプラグイン内の記事をご確認くだしあ。&lt;/p&gt;
 </content>
   </entry>
   
