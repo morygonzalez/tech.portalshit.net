@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>CakePHPはSchemaとかがしょぼいしうんざりする |  tech.portalshit.net</title>
+    <title>RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,40 +19,82 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/06/14/migrated-to-jekyll" title="Jekyllに変えた">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/07/02/escape-in-liquid" title="Liquidの中でLiquidをエスケープする">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2010/06/22/installed-rubygems-on-xrea" title="XREAにRubyGemsをインストール">Next Post</a></span>
         
       </div>
 
-      <h2>CakePHPはSchemaとかがしょぼいしうんざりする</h2>
+      <h2>RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</h2>
       <div class="articleinfo">
-        Posted on 15 Jun 2010 by 森井ゴンザレス |
+        Posted on 29 Jul 2011 by 森井ゴンザレス |
         
-          <a href="/categories/CakePHP/">CakePHP</a>
+          <a href="/categories/Ruby/">Ruby</a>
+        
+          <a href="/categories/rvm/">rvm</a>
         
       </div>
-      <p>CakePHPで作ってたプロジェクトのDBのフィールド名にスペルミスを発見したので（ <code>longitude</code> を <code>longtitude</code> としていた）、それを修正するためにDBの構造をいじった。このとき、Cakeは普通にやってたらSchemaとかの概念に触れる機会がないことに気がついて急に怖くなった（ここんとこRailsばっかり触っていたので）。いや、CakePHPにもSchemaの概念はあるんだけど、普通にサイト作るだけだったら世話になる機会がない。というか俺がCakeの底本にしてた公式ガイドにSchemaの項目がない！</p>
+      <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
-<p>これじゃあgitとかでバージョン管理しててもDBの論理構造が置いてけぼりになって、分散管理とかできないじゃん。SQLite使ってたらバイナリファイルをgitでtrackすればまぁ分散開発でけそうだけど、MySQLとかだったら死ぬよね。</p>
+<div class="highlight"><pre><code class="console"><span class="go">rvm install 1.9.2 --with-readline-dir=/usr/local #homebrewで入れたreadlineのパスを指定</span>
+<span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
+</code></pre>
+</div>
 
-<p>確かにCakePHPでサイト作るのは楽だったし早かった。ほぼ何もできない状態の自分が数ヶ月でCMS作れたのはCakePHPのおかげなんだけど、CakePHPは何でもテケトーな感じがする。対してRailsは厳格だ。楽するためのフレームワークというより、よりStrictにサイトを構築するためのフレームワークという感じがする。だから慣れるまでは時間がかかる面があるのは否めないんだけど、SchemaにしろTestにしろ、Railsやってて勉強になることはたくさんあります。はやく皆と同じようにrailsの手術を受けたい。</p>
+<p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
+<span class="go">Are you sure you wish to MOVE gems from ruby-1.9.2-p180 to ruby-1.9.2-p290?</span>
+<span class="go">This will overwrite existing gems in ruby-1.9.2-p290 and remove them from ruby-1.9.2-p180 (Y/n): Y</span>
+<span class="go">Moving gemsets...</span>
+<span class="go">Moving ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
+<span class="go">Making gemset ruby-1.9.2-p290 pristine.</span>
+<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
+<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
+<span class="go">Moving ruby-1.9.2-p180@global to ruby-1.9.2-p290@global</span>
+<span class="go">Making gemset ruby-1.9.2-p290@global pristine.</span>
+<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
+<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
+<span class="go">Do you wish to move over aliases? (Y/n): Y</span>
+<span class="go">Do you wish to move over wrappers? (Y/n): Y</span>
+<span class="go">Do you also wish to completely remove ruby-1.9.2-p180 (inc. archive)? (Y/n): Y</span>
+<span class="go">Successfully migrated ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
+</code></pre>
+</div>
+
+<p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">zsh: /usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake: bad interpreter: /usr/local/rvm/rubies/ruby-1.9.2-p180/bin/ruby: no such file or directory</span>
+<span class="go">rake aborted!</span>
+<span class="go">No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)</span>
+<span class="go">/usr/local/rvm/gems/ruby-1.9.2-p290/gems/rake-0.8.7/lib/rake.rb:2377:in `raw_load_rakefile&#39;</span>
+<span class="go">(See full trace by running task with --trace)</span>
+</code></pre>
+</div>
+
+<p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
+
+<p>正しい対処方法かどうかは自信がないが、Rubyでサクサクッとshebangを書き換えるやつを書いた。以下みたいなやつ。</p>
+
+<script src="https://gist.github.com/1092544.js?file=fix_shebang.rb"></script>
+
+<p>こいつを実行してやるとshebangが正しく書き換わったexecutableなgemができる。万が一のためにbackupファイルを作るのでこれをzshで <code>rm *_backup</code> とかしてやるといいと思います。</p>
+
+<p>と思ったけど、結局↑のRubyの入れ方はまずいみたいで、jekyllとかCライブラリに依存する系のgemが動かなくなってしまったので <code>rvm implode</code> してRVMをまるっと入れ替えた（20回くらいRubyをインストールしなおした）。次の記事にでも書きます…。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></li>
+          <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
-          <li><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></li>
+          <li><a href="/2011/06/29/added-category-archives">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
-          <li><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></li>
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
-          <li><a href="/2010/07/26/trial-with-tokyo-tyrant">Tokyo Tyrantでvalueに配列を保存したらダメなのかしら</a></li>
+          <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
           
-          <li><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></li>
+          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
         </ul>
       </div>
@@ -76,7 +118,9 @@
         <h3>Categories</h3>
         <ul id="categories">
           
-          <li><a href="/categories/CakePHP/">CakePHP</a></li>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
+          
+          <li><a href="/categories/rvm/">rvm</a></li>
           
         </ul>
 

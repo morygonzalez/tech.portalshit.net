@@ -29,7 +29,64 @@
 
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></h2>
+    <h2><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></h2>
+    <div class="articleinfo">Posted on 29 Jul 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	
+		<a href="categories/rvm/">rvm</a>
+	</div>
+    <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">rvm install 1.9.2 --with-readline-dir=/usr/local #homebrewで入れたreadlineのパスを指定</span>
+<span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
+</code></pre>
+</div>
+
+<p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
+<span class="go">Are you sure you wish to MOVE gems from ruby-1.9.2-p180 to ruby-1.9.2-p290?</span>
+<span class="go">This will overwrite existing gems in ruby-1.9.2-p290 and remove them from ruby-1.9.2-p180 (Y/n): Y</span>
+<span class="go">Moving gemsets...</span>
+<span class="go">Moving ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
+<span class="go">Making gemset ruby-1.9.2-p290 pristine.</span>
+<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
+<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
+<span class="go">Moving ruby-1.9.2-p180@global to ruby-1.9.2-p290@global</span>
+<span class="go">Making gemset ruby-1.9.2-p290@global pristine.</span>
+<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
+<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
+<span class="go">Do you wish to move over aliases? (Y/n): Y</span>
+<span class="go">Do you wish to move over wrappers? (Y/n): Y</span>
+<span class="go">Do you also wish to completely remove ruby-1.9.2-p180 (inc. archive)? (Y/n): Y</span>
+<span class="go">Successfully migrated ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
+</code></pre>
+</div>
+
+<p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">zsh: /usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake: bad interpreter: /usr/local/rvm/rubies/ruby-1.9.2-p180/bin/ruby: no such file or directory</span>
+<span class="go">rake aborted!</span>
+<span class="go">No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)</span>
+<span class="go">/usr/local/rvm/gems/ruby-1.9.2-p290/gems/rake-0.8.7/lib/rake.rb:2377:in `raw_load_rakefile&#39;</span>
+<span class="go">(See full trace by running task with --trace)</span>
+</code></pre>
+</div>
+
+<p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
+
+<p>正しい対処方法かどうかは自信がないが、Rubyでサクサクッとshebangを書き換えるやつを書いた。以下みたいなやつ。</p>
+
+<script src="https://gist.github.com/1092544.js?file=fix_shebang.rb"></script>
+
+<p>こいつを実行してやるとshebangが正しく書き換わったexecutableなgemができる。万が一のためにbackupファイルを作るのでこれをzshで <code>rm *_backup</code> とかしてやるといいと思います。</p>
+
+<p>と思ったけど、結局↑のRubyの入れ方はまずいみたいで、jekyllとかCライブラリに依存する系のgemが動かなくなってしまったので <code>rvm implode</code> してRVMをまるっと入れ替えた（20回くらいRubyをインストールしなおした）。次の記事にでも書きます…。</p>
+
+    <a href="/2011/07/29/rvm-bad-interpreter-error/#disqus_thread">Comments</a>
+
+    <h2><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></h2>
     <div class="articleinfo">Posted on 02 Jul 2011 by 森井ゴンザレス |
 	
 		<a href="categories/Jekyll/">Jekyll</a>
@@ -156,33 +213,6 @@
 
     <a href="/2011/05/03/titanium-era-has-come/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></h2>
-    <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス |
-	
-		<a href="categories/vim/">vim</a>
-	</div>
-    <p>MacVimでコピペできなくて（MacVim内のヤンクじゃなくて、他のアプリケーションでコピーしたもののペースト）困ってたんだけど（<a href="http://tech.portalshit.net/2011/04/23/macvim-kopipe-dekinai/" title="MacVimでコピペできないんですけど… \| tech.portalshit.net">MacVimでコピペできないんですけど… | tech.portalshit.net</a>）、できるようになりました。原因は mvim っていう、コマンドラインからMacVimを起動するためのシェルスクリプトだった。MacVim kaoriyaのWikiで紹介されてるやつ。</p>
-
-<ul>
-  <li><a href="https://github.com/splhack/macvim/blob/master/src/MacVim/mvim" title="src/MacVim/mvim at master from splhack/macvim - GitHub">src/MacVim/mvim at master from splhack/macvim - GitHub</a></li>
-</ul>
-
-<p>こいつ経由でMacVimを起動したときはどうも他のアプリケーションからのコピペがうまくいかないみたい。</p>
-
-<p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
-
-<div class="highlight"><pre><code class="bash"><span class="nb">alias </span><span class="nv">gvim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &quot;$@&quot;&#39;</span>
-</code></pre>
-</div>
-
-<p>同じ問題でお困りの方はお試しあれ。</p>
-
-<h3 id="section">追記</h3>
-
-<p>なんか違うっぽい。alias経由で呼び出してもダメなときはダメだもん。いったい何なんすかね。</p>
-
-    <a href="/2011/04/24/macvim-de-kopipe-dekita/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -242,6 +272,8 @@
         
           <li><a href="/categories/misc/">misc</a>
         
+          <li><a href="/categories/rvm/">rvm</a>
+        
           <li><a href="/categories/vim/">vim</a>
         
           <li><a href="/categories/zsh/">zsh</a>
@@ -252,7 +284,9 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></li>
+					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
+				
+					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
 				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
@@ -269,8 +303,6 @@
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
 				
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
-				
-					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
 				
 				</ul>
 			</div>

@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-07-02T12:48:35+09:00</updated>
+  <updated>2011-07-29T01:45:37+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -12,7 +12,62 @@
   
   
   <entry>
-    <title>LiquidでLiquidテンプレートをエスケープする</title>
+    <title>RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</title>
+    <link href="/2011/07/29/rvm-bad-interpreter-error" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/07/29/rvm-bad-interpreter-error</id>
+    <content type="html">&lt;p&gt;Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;rvm install 1.9.2 --with-readline-dir=/usr/local #homebrewで入れたreadlineのパスを指定&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;migrate&lt;/code&gt; を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Are you sure you wish to MOVE gems from ruby-1.9.2-p180 to ruby-1.9.2-p290?&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;This will overwrite existing gems in ruby-1.9.2-p290 and remove them from ruby-1.9.2-p180 (Y/n): Y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Moving gemsets...&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Moving ruby-1.9.2-p180 to ruby-1.9.2-p290&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Making gemset ruby-1.9.2-p290 pristine.&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;ERROR: Error running &amp;#39;rvm gemset pristine&amp;#39; under ,&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;please read /usr/local/rvm/log//gemset.pristine.log&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Moving ruby-1.9.2-p180@global to ruby-1.9.2-p290@global&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Making gemset ruby-1.9.2-p290@global pristine.&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;ERROR: Error running &amp;#39;rvm gemset pristine&amp;#39; under ,&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;please read /usr/local/rvm/log//gemset.pristine.log&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Do you wish to move over aliases? (Y/n): Y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Do you wish to move over wrappers? (Y/n): Y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Do you also wish to completely remove ruby-1.9.2-p180 (inc. archive)? (Y/n): Y&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Successfully migrated ruby-1.9.2-p180 to ruby-1.9.2-p290&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;zsh: /usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake: bad interpreter: /usr/local/rvm/rubies/ruby-1.9.2-p180/bin/ruby: no such file or directory&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;rake aborted!&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/usr/local/rvm/gems/ruby-1.9.2-p290/gems/rake-0.8.7/lib/rake.rb:2377:in `raw_load_rakefile&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;(See full trace by running task with --trace)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。&lt;/p&gt;
+
+&lt;p&gt;正しい対処方法かどうかは自信がないが、Rubyでサクサクッとshebangを書き換えるやつを書いた。以下みたいなやつ。&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/1092544.js?file=fix_shebang.rb&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;こいつを実行してやるとshebangが正しく書き換わったexecutableなgemができる。万が一のためにbackupファイルを作るのでこれをzshで &lt;code&gt;rm *_backup&lt;/code&gt; とかしてやるといいと思います。&lt;/p&gt;
+
+&lt;p&gt;と思ったけど、結局↑のRubyの入れ方はまずいみたいで、jekyllとかCライブラリに依存する系のgemが動かなくなってしまったので &lt;code&gt;rvm implode&lt;/code&gt; してRVMをまるっと入れ替えた（20回くらいRubyをインストールしなおした）。次の記事にでも書きます…。&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Liquidの中でLiquidをエスケープする</title>
     <link href="/2011/07/02/escape-in-liquid" />
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/07/02/escape-in-liquid</id>

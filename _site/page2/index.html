@@ -35,6 +35,33 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></h2>
+    <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス |
+	
+		<a href="categories/vim/">vim</a>
+	</div>
+    <p>MacVimでコピペできなくて（MacVim内のヤンクじゃなくて、他のアプリケーションでコピーしたもののペースト）困ってたんだけど（<a href="http://tech.portalshit.net/2011/04/23/macvim-kopipe-dekinai/" title="MacVimでコピペできないんですけど… \| tech.portalshit.net">MacVimでコピペできないんですけど… | tech.portalshit.net</a>）、できるようになりました。原因は mvim っていう、コマンドラインからMacVimを起動するためのシェルスクリプトだった。MacVim kaoriyaのWikiで紹介されてるやつ。</p>
+
+<ul>
+  <li><a href="https://github.com/splhack/macvim/blob/master/src/MacVim/mvim" title="src/MacVim/mvim at master from splhack/macvim - GitHub">src/MacVim/mvim at master from splhack/macvim - GitHub</a></li>
+</ul>
+
+<p>こいつ経由でMacVimを起動したときはどうも他のアプリケーションからのコピペがうまくいかないみたい。</p>
+
+<p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">alias </span><span class="nv">gvim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &quot;$@&quot;&#39;</span>
+</code></pre>
+</div>
+
+<p>同じ問題でお困りの方はお試しあれ。</p>
+
+<h3 id="section">追記</h3>
+
+<p>なんか違うっぽい。alias経由で呼び出してもダメなときはダメだもん。いったい何なんすかね。</p>
+
+    <a href="/2011/04/24/macvim-de-kopipe-dekita/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></h2>
     <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス |
 	
@@ -182,33 +209,6 @@
 
     <a href="/2011/04/16/ruby-rm-dir/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></h2>
-    <div class="articleinfo">Posted on 24 Mar 2011 by 森井ゴンザレス |
-	
-		<a href="categories/勉強会/">勉強会</a>
-	</div>
-    <h3 id="vimmability">Vimmabilityのなさ</h3>
-
-<p>TDD Boot Camp福岡で生まれて初めてペアプログラミングを経験した。自分のVimmabilityが思いの外低く焦った。書くの超とろいし、Rubyも全然分かってないしペア組んでもらった人に迷惑かけまくりな感じ。会社では誰もVimとか使ってなくてみんなEclipseとか秀丸使ってるし、周りにVimmerがいないので自分がどんなにしょぼいVim使いなのか気づいてなかった。</p>
-
-<p>とりあえず今回、ペアを組んだ <a href="http://twitter.com/mallowlabs">@mallowlabs</a> さんに <code>cw</code> とか <code>&lt;数字&gt;y</code> とかを教えてもらった。あと</p>
-
-<blockquote>
-  <p>Vimでバックスペース使ったら負けだから</p>
-</blockquote>
-
-<p>と言われてしまったのでバックスペースと矢印キーをなるべく使わずにプログラム書きたいと思います。でもTextMateとかCodaとか便利だからついつい使ってしまうんよね…。</p>
-
-<h3 id="section">プログラムが全然書けない</h3>
-
-<p>思ってたよりもプログラムができないことに気がついた。お題を与えられて、制限時間があるなかでコードを書いていかなければならない。しかもペアプログラミングなので一人でちんたら時間をかけて書くわけにもいかない。そしてやっぱ人に見られてると緊張する。Rubyの基本的なメソッドとかが分かってなくて教えてもらいながら書いてたけど、わからないと緊張してしまって頭が真っ白になって何も書けなくなる。いつもリファレンス本を片手にコードを書き捨てていたので、よくないなぁと思った。</p>
-
-<p>というか、そもそも自分は仕事であまりコードを書いてないのだ。TDD Boot Campに来てる人たちはみんな公私ともにばりばりコードを書いててとても楽しそうだった。なんだかとても羨ましかった。</p>
-
-<p>いろいろ考えないとなー、と思わせられた勉強会だった。</p>
-
-    <a href="/2011/03/24/i-am-an-impotent-programmer/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -274,6 +274,8 @@
         
           <li><a href="/categories/misc/">misc</a>
         
+          <li><a href="/categories/rvm/">rvm</a>
+        
           <li><a href="/categories/vim/">vim</a>
         
           <li><a href="/categories/zsh/">zsh</a>
@@ -284,7 +286,9 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
-					<li><a href="/2011/07/02/escape-in-liquid">LiquidでLiquidテンプレートをエスケープする</a></li>
+					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
+				
+					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
 				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
@@ -301,8 +305,6 @@
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
 				
 					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
-				
-					<li><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></li>
 				
 				</ul>
 			</div>
