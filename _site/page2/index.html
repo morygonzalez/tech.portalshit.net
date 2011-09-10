@@ -35,6 +35,25 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></h2>
+    <div class="articleinfo">Posted on 03 May 2011 by 森井ゴンザレス |
+	
+		<a href="categories/JavaScript/">JavaScript</a>
+	</div>
+    <p>二月末に行ったスマートフォン開発環境セミナー(仮)でmasuidriveさんのTitanium Mobileについての発表を見てすっかり感化された。これからはJavaScriptで空を飛べる時代が来ると思った。</p>
+
+<p>ドイツの会社がやってるToDo管理のサービスに<a href="http://www.6wunderkinder.com/wunderlist/" title="Task Management At Its Best With Wunderlist \| 6Wunderkinder">Wunderlist</a>ってのがあって、これは結構かっちょいUIのiPhone/Mac/PC/Webアプリを出してたりする。なんでそんなにマルチプラットフォーム対応できんの？ と思ってたらどうもTitanium MobileとTitanium Desktopを使ってるみたい。だから簡単にマルチプラットフォーム対応できてるわけ。他にもThe Hit Listが一向にiPhoneアプリを出さないのでそれに業を煮やした<a href="http://rawberg.com/" title="JavaScript Programmer &amp; Bootstrap Entrepreneur \| David Feinberg">Senchaの社員</a>が作ったHub ListっていうアプリもJavaScriptでデスクトップアプリを書いててマルチプラットフォーム対応してる。</p>
+
+<p>しかし、なんかTitanium Desktop使って僕みたいなスキルしょぼい人がアプリ作るときじゃくせい（なぜか変換できない）を突かれて困ったことになる懸念もあるみたい。</p>
+
+<p><a href="http://d.hatena.ne.jp/tokuhirom/20110418/1303150743">Titanium Desktop 雑感。 - TokuLog 改メ tokuhirom’s blog</a></p>
+
+<p>とはいえ、最近プログラム書き始めたばっかでObjective-CとかJavaとか分かんない自分には、JavaScriptでiPhone/Androidはもちろんのこと、MacやWindows、はてはLinux向けのデスクトップアプリケーションが作れてしまうのTitanium MobileとTitanium Desktopにはとてつもない魅力を感じる。</p>
+
+<p>連休期間中にしょぼいのでいいからなんか一個作りたい。</p>
+
+    <a href="/2011/05/03/titanium-era-has-come/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></h2>
     <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス |
 	
@@ -49,10 +68,6 @@
 <p>こいつ経由でMacVimを起動したときはどうも他のアプリケーションからのコピペがうまくいかないみたい。</p>
 
 <p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
-
-<div class="highlight"><pre><code class="bash"><span class="nb">alias </span><span class="nv">gvim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &quot;$@&quot;&#39;</span>
-</code></pre>
-</div>
 
 <p>同じ問題でお困りの方はお試しあれ。</p>
 
@@ -69,13 +84,6 @@
 	</div>
     <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
-  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
 <p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
@@ -91,14 +99,6 @@
 </ul>
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
-
-<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
-    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
-    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
-  <span class="k">end</span> 
-</code></pre>
-</div>
 
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 
@@ -130,61 +130,13 @@
 
 <p>Jekyllで関連記事を表示するようにした。jekyllを実行するときに <code>jekyll --lsi</code> とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に <code>gem install gsl</code> しただけでは以下のようなエラーが出る。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">Fetching: narray-0.5.9.9.gem (100%)</span>
-<span class="go">Building native extensions.  This could take a while...</span>
-<span class="go">Fetching: gsl-1.14.7.gem (100%)</span>
-<span class="go">Building native extensions.  This could take a while...</span>
-<span class="go">ERROR:  Error installing gsl:</span>
-<span class="go">        ERROR: Failed to build gem native extension.</span>
-<span class="go">        /Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby extconf.rb</span>
-<span class="go">checking gsl version... *** extconf.rb failed ***</span>
-<span class="go">Could not create Makefile due to some reason, probably lack of</span>
-<span class="go">necessary libraries and/or headers.  Check the mkmf.log file for more</span>
-<span class="go">details.  You may need configuration options.</span>
-
-<span class="go">Provided configuration options:</span>
-<span class="go">        --with-opt-dir</span>
-<span class="go">        --without-opt-dir</span>
-<span class="go">        --with-opt-include</span>
-<span class="go">        --without-opt-include=${opt-dir}/include</span>
-<span class="go">        --with-opt-lib</span>
-<span class="go">        --without-opt-lib=${opt-dir}/lib</span>
-<span class="go">        --with-make-prog</span>
-<span class="go">        --without-make-prog</span>
-<span class="go">        --srcdir=.</span>
-<span class="go">        --curdir</span>
-<span class="go">        --ruby=/Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby</span>
-<span class="go">extconf.rb:237:in `rescue in &lt;main&gt;&#39;: Check GSL&gt;=0.9.4 is installed, and the command &quot;gsl-config&quot; is in search path. (RuntimeError)</span>
-<span class="go">        from extconf.rb:138:in `&lt;main&gt;&#39;</span>
-</code></pre>
-</div>
-
 <p>GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install gsl
-</code></pre>
-</div>
 
 <p>そんでもう一回 <code>gem install gsl</code> するとうまく入った。 <code>_config.yaml</code> に <code>lsi: true</code> という記述を追記して jekyll を実行すると関連記事が表示されるようになった。</p>
 
 <h3 id="section-1">最近の記事表示</h3>
 
 <p>ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。</p>
-
-<div class="highlight"><pre><code class="diff">8c72..2c84ea5 100644
-<span class="gd">--- a/_layouts/post.html</span>
-<span class="gi">+++ b/_layouts/post.html</span>
-7 +69,7 @@
- 
-         &lt;h3&gt;Latest Posts&lt;/h3&gt;
-         &lt;ul&gt;
-<span class="gd">-          {`% for post in site.posts `%}</span>
-<span class="gi">+          {`% for post in site.posts limit:10 `%}</span>
-           &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
-           {`% endfor `%}
-         &lt;/ul&gt;
-</code></pre>
-</div>
 
 <p>(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)</p>
 
@@ -193,21 +145,6 @@
 <p>全体的に見やすくなりすっきりした。</p>
 
     <a href="/2011/04/17/related-post-in-jekyll/#disqus_thread">Comments</a>
-
-    <h2><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></h2>
-    <div class="articleinfo">Posted on 16 Apr 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>確認ダイアログを出しながらディレクトリやファイルを削除するスクリプトを書いた。大したコード書いてないし逆引きRubyに載ってたコードをまるパクリしてるところもあるけど便利だと思う。</p>
-
-<script src="https://gist.github.com/921460.js?file=cleanup.rb"></script>
-
-<p>そのディレクトリにあるファイル/ディレクトリ一覧を取得した後、「このファイル/ディレクトリは作られてから何日経っています。削除しますか？ (y/n)」というダイアログ（英語）を表示する。<code>y</code> が入力されると削除を行う。地味に使える。</p>
-
-<p>RubyのFileUtilsはすごく便利だと思う。シェルスクリプトでしこしこ書くのがアホらしくなる。RubyがPerlなみにあらゆるuni*x系のサーバーに入るようになったらさぞかし便利だろうと思う。</p>
-
-    <a href="/2011/04/16/ruby-rm-dir/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -286,6 +223,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -303,8 +242,6 @@
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-				
-					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 				</ul>
 			</div>

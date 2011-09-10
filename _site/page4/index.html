@@ -35,6 +35,27 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></h2>
+    <div class="articleinfo">Posted on 08 Feb 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
+
+<p>なファイル（hoge.rb）があったとします。これを</p>
+
+<p>とシェルから呼び出したときにはちゃんと</p>
+
+<p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
+
+<p>これ、もう半年くらい解決方法探してる気がする。</p>
+
+<p>TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに <code>~/.rvm/bin/ruby-1.9.2-p136</code> とか書くんじゃろか。</p>
+
+<p>cxxさんに質問したら <a href="http://rvm.beginrescueend.com/deployment/system-wide/">RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
+
+    <a href="/2011/02/08/rvm-with-apache/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></h2>
     <div class="articleinfo">Posted on 02 Jan 2011 by 森井ゴンザレス |
 	
@@ -50,29 +71,11 @@
 
 <p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">AutoPagerize</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">window</span><span class="p">.</span><span class="nx">AutoPagerize</span><span class="p">.</span><span class="nx">addFilter</span><span class="p">(</span><span class="nx">fucintion</span><span class="p">(){</span>
-    <span class="c1">// 実行したい処理</span>
-  <span class="p">});</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
 <p>ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に <code>function init()</code> みたいのを書き、その中から呼び出せばよい。そしてその <code>init()</code> を上記 <code>// 実行したい処理</code> 内にも書いてあげればオッケーだ（もちろん <code>window.onload</code> で呼び出す必要もある）。</p>
 
 <p>jQueryについては <code>live()</code> というメソッドがある。これは動的に生成された要素にも処理を適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 <code>live()</code> というメソッドと一緒に、処理を一度しか実行しないというメソッド <code>one()</code> も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。</p>
 
 <p><a href="http://stackoverflow.com/questions/3796207/using-one-with-live-jquery">Using .one() with .live() jQuery - Stack Overflow</a></p>
-
-<div class="highlight"><pre><code class="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;処理を適用したい要素&#39;</span><span class="p">).</span><span class="nx">live</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;oneclicked&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="c1">//Your code</span>
-  <span class="p">}</span>
-  <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;oneclicked&#39;</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre>
-</div>
 
 <p><code>jQuery().data()</code> 、なかなか便利そうだ。</p>
 
@@ -102,18 +105,7 @@
 
 <p>これを参考にとりあえず以下のように <code>.zshrc</code> に書いた。</p>
 
-<div class="highlight"><pre><code class="bash"><span class="k">case</span> <span class="s2">&quot;${TERM_PROGRAM}&quot;</span> in
-iTerm*<span class="o">)</span>
-  <span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>dtterm
-<span class="k">esac</span>
-</code></pre>
-</div>
-
 <p>しかし、これはちょっと自分的にはいただけなかった。</p>
-
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>dtterm
-</code></pre>
-</div>
 
 <p>ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/" title="Vimで編集を終了した後、元のコンソールの状態を復元したい \| tech.portalshit.net - CakePHP, Rails, JavaScript">Vimで編集を終了した後、元のコンソールの状態を復元したい</a>）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。</p>
 
@@ -140,50 +132,17 @@ iTerm*<span class="o">)</span>
 
 <p>そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> spec -c spec/*
-</code></pre>
-</div>
-
 <p>とかやってもエラーが出る。 <code>which spec</code> すると <code>/usr/bin/spec</code> と出ちゃう。どうやら <code>spec</code> で発動されるのはRSpec 1.3のものみたい。</p>
 
 <p>RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> rspec -c spec/*
-</code></pre>
-</div>
 
 <p>これできちんとテストコードが実行された。かと思いきやFailureが。</p>
 
 <p>Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1"># -*- coding: utf-8 -*-</span>
-</code></pre>
-</div>
-
 <p>と書いてテキストエンコーディングを明示してあげないといけない。</p>
 
     <a href="/2010/10/20/ruby1.9-rails3-rspec-2/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/10/12/media-plugin-1.3-not-work">CakePHPのMedia Plugin 1.3が動かない</a></h2>
-    <div class="articleinfo">Posted on 12 Oct 2010 by 森井ゴンザレス |
-	
-		<a href="categories/CakePHP/">CakePHP</a>
-	</div>
-    <p>動かしてるサイトのCakePHPのバージョンを最新版の1.3.4に上げようと思って、Media PluginもCakePHP 1.3対応バージョンの1.3alphaにアップデートしようとした。</p>
-
-<p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p>
-
-<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href="http://github.com/davidpersson/media/tree/1.3/docs/" title="docs at 1.3 from davidpersson's media - GitHub">docs at 1.3 from davidpersson’s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。</p>
-
-<p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p>
-
-<p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href="http://github.com/davidpersson/mm" title="davidpersson's mm at master - GitHub">davidpersson’s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
-
-<p>Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。</p>
-
-<p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
-
-    <a href="/2010/10/12/media-plugin-1.3-not-work/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -262,6 +221,8 @@ iTerm*<span class="o">)</span>
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -279,8 +240,6 @@ iTerm*<span class="o">)</span>
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-				
-					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 				</ul>
 			</div>

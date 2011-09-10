@@ -49,39 +49,9 @@
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-
-<span class="nb">require</span> <span class="s2">&quot;rubygems&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;sqlite&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;active_record&quot;</span>
-
-<span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
-  <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;sqlite&quot;</span><span class="p">,</span>
-  <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;path/to/db&quot;</span>
-<span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Hoge</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-<span class="k">end</span>
-
-<span class="n">hoges</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span>
-<span class="n">hoges</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">hog</span><span class="o">|</span>
-  <span class="n">hog</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/hogehoge/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-  <span class="n">hoge</span><span class="o">.</span><span class="n">save</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
 <p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
 
 <p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">hoges</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">hog</span><span class="o">|</span>
-  <span class="k">if</span> <span class="n">hog</span><span class="o">.</span><span class="n">name</span> <span class="o">=~</span> <span class="sr">/hogehoge(.*)/</span>
-    <span class="n">hog</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="vg">$1</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-</div>
 
 <p>これで狙ったことができました。</p>
 
@@ -133,6 +103,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -150,8 +122,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>

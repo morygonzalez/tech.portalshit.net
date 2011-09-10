@@ -35,31 +35,13 @@
 
 <p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">    $ git clone git://github.com/emk/mephisto.git</span>
-</code></pre>
-</div>
-
 <p>してgithubからプロジェクトをclone。</p>
 
 <p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">    $ rake gems:install</span>
-</code></pre>
-</div>
-
 <p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">    $ gem install nokogiri \</span>
-<span class="go">    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
-<span class="go">    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
-</code></pre>
-</div>
-
 <p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">    $ rake db:bootstrap RAILS_ENV=production</span>
-</code></pre>
-</div>
 
 <p>ですべてのインストール作業完了。いまこうして動いております。</p>
 
@@ -72,9 +54,9 @@
           
           <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
           
-          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
-          
           <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
+          
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
@@ -109,6 +91,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -126,8 +110,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>

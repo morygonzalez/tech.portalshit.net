@@ -35,6 +35,24 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
+    <div class="articleinfo">Posted on 11 May 2010 by 森井ゴンザレス |
+	
+		<a href="categories/Rails/">Rails</a>
+	</div>
+    <p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
+
+<blockquote>
+  <p>To restart your rails app do a “ps x” to get the pid of your dispatch.fcgi process(let’s say it’s 1234) then do a “kill 1234”. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
+<cite><a href="http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm">How do I restart rails app? - DreamHost Forum</a></cite></p>
+</blockquote>
+
+<p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
+
+<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>
+
+    <a href="/2010/05/11/rails-app-on-dreamhost/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></h2>
     <div class="articleinfo">Posted on 11 May 2010 by 森井ゴンザレス |
 	
@@ -46,18 +64,7 @@
 
 <p>『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、</p>
 
-<div class="highlight"><pre><code class="ruby">    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># index.html.erb</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&gt;</span> <span class="vi">@products</span> <span class="p">}</span>
-    <span class="k">end</span>
-</code></pre>
-</div>
-
 <p><code>config/routes.rb</code> に</p>
-
-<div class="highlight"><pre><code class="ruby">    <span class="n">map</span><span class="o">.</span><span class="n">connect</span> <span class="s1">&#39;:controller/:action/:id.:format&#39;</span>
-</code></pre>
-</div>
 
 <p>と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。</p>
 
@@ -127,39 +134,6 @@
 	</div>
     <p>こういうコード書いてます。</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">getAttrName</span><span class="p">(</span><span class="nx">attrObj</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">attrObj</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-<span class="c1">//	items = document.getElementsByClassName(&#39;item&#39;);</span>
-	<span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li.item&#39;</span><span class="p">);</span>
-	<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-	<span class="c1">//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
-		<span class="kd">var</span> <span class="nx">keywordList</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.keyword-list&#39;</span><span class="p">,</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywordList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-			<span class="c1">//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
-			<span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
-			<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywords</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-				<span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span> <span class="p">{</span>
-					<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">curAttr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#keySelector li a&quot;</span><span class="p">);</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">l</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">curAttr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">l</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">]).</span><span class="nx">text</span><span class="p">()</span> <span class="o">==</span> <span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
 <p>やりたいことは以下のような感じ。</p>
 
 <ol>
@@ -189,54 +163,17 @@
 
 <p>そういうわけで</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
-</code></pre>
-</div>
-
 <p>を</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li a&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
-</code></pre>
-</div>
 
 <p>とし、</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span>
-</code></pre>
-</div>
-
 <p>を</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
-</code></pre>
-</div>
 
 <p>にしてみたところ、ばっちりIEで動くようになった。</p>
 
 <p>cxxさんありがとうございます。今度焼き肉デートしましょう。</p>
 
     <a href="/2010/05/07/fuck-ie/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></h2>
-    <div class="articleinfo">Posted on 03 May 2010 by 森井ゴンザレス |
-	
-		<a href="categories/PHP/">PHP</a>
-	</div>
-    <p>ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。</p>
-
-<p>おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ <code>p_page_analyze</code> ）をDROPするとまた速さが回復するので時々空にしていた。</p>
-
-<p>しかしよくよくアクセス解析プラグインのコードを覗いてみると、ヴュー部分で使っていないSQLクエリが発行されており、このせいでクエリの回数が必要な回数の何倍にもなっていた。ポータルシットのアクセスなんて大したことないんだから、DBのサイズがちょっとでかくなっただけでこんなに遅くなるはずがないのだ。</p>
-
-<p>そういうわけで不必要なクエリのトリガーになるコードをコメントアウトしてみた。すると1秒台だった表示速度は0.2秒から0.5秒程度に収まるようになった。しかしそれでもなんか遅く感じる。</p>
-
-<p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
-
-<p><a href="http://wiki.dreamhost.com/Pecl_APC">Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
-
-<p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>
-
-    <a href="/2010/05/03/portalshit-cached/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -315,6 +252,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -332,8 +271,6 @@
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-				
-					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 				</ul>
 			</div>

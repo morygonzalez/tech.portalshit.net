@@ -47,10 +47,6 @@
 
 <p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p>
 
-<div class="highlight"><pre><code class="php"><span class="x">$use = array(&quot;Hoge&quot;);</span>
-</code></pre>
-</div>
-
 <p>とかしなきゃいけなかった。</p>
 
 <p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p>
@@ -70,7 +66,7 @@
           
           <li><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></li>
           
-          <li><a href="/2010/05/11/cakephp-rss-helper-sucks">CakePHP 1.2.xのRSSヘルパーはわかりにくい</a></li>
+          <li><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></li>
           
         </ul>
       </div>
@@ -103,6 +99,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -120,8 +118,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>

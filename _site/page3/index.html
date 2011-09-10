@@ -35,6 +35,21 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></h2>
+    <div class="articleinfo">Posted on 16 Apr 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>確認ダイアログを出しながらディレクトリやファイルを削除するスクリプトを書いた。大したコード書いてないし逆引きRubyに載ってたコードをまるパクリしてるところもあるけど便利だと思う。</p>
+
+<script src="https://gist.github.com/921460.js?file=cleanup.rb"></script>
+
+<p>そのディレクトリにあるファイル/ディレクトリ一覧を取得した後、「このファイル/ディレクトリは作られてから何日経っています。削除しますか？ (y/n)」というダイアログ（英語）を表示する。<code>y</code> が入力されると削除を行う。地味に使える。</p>
+
+<p>RubyのFileUtilsはすごく便利だと思う。シェルスクリプトでしこしこ書くのがアホらしくなる。RubyがPerlなみにあらゆるuni*x系のサーバーに入るようになったらさぞかし便利だろうと思う。</p>
+
+    <a href="/2011/04/16/ruby-rm-dir/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></h2>
     <div class="articleinfo">Posted on 24 Mar 2011 by 森井ゴンザレス |
 	
@@ -74,12 +89,6 @@
 <p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
 
 <p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
-
-<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
-<span class="k">  </span><span class="nb">exec</span> /bin/zsh
-<span class="k">fi</span>
-</code></pre>
-</div>
 
 <p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
@@ -211,64 +220,15 @@
 
 <p>なんと、RVMには <code>rvmsudo</code> というコマンドがあるらしい！ 試しに</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvmsudo passenger-install-nginx-module
-</code></pre>
-</div>
-
 <p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
 
-<div class="highlight"><pre><code class="nginx">      <span class="k">passenger_root</span> <span class="s">/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class="p">;</span>
-      <span class="k">passenger_ruby</span> <span class="s">/usr/bin/ruby1.8</span><span class="p">;</span>
-</code></pre>
-</div>
-
 <p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
-
-<div class="highlight"><pre><code class="nginx">      <span class="k">passenger_root</span> <span class="s">/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class="p">;</span>
-      <span class="k">passenger_ruby</span> <span class="s">/home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby</span><span class="p">;</span>
-</code></pre>
-</div>
 
 <p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
 
 <p>それにしてもRVMは、本当にきもいと思う。<a href="http://d.hatena.ne.jp/rochefort/20100907/p1" title="rvmのirbで日本語入力できない - うんたらかんたら日記">readlineとかまで.rvm内にインストールできる</a>できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。</p>
 
     <a href="/2011/02/09/rvm-is-kimoi/#disqus_thread">Comments</a>
-
-    <h2><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></h2>
-    <div class="articleinfo">Posted on 08 Feb 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-
-<span class="nb">puts</span> <span class="no">RUBY_DESCRIPTION</span>
-</code></pre>
-</div>
-
-<p>なファイル（hoge.rb）があったとします。これを</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hoge.rb
-</code></pre>
-</div>
-
-<p>とシェルから呼び出したときにはちゃんと</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby 1.9.2p136 <span class="o">(</span>2010-12-25 revision 30365<span class="o">)</span> <span class="o">[</span>x86_64-darwin10.6.0<span class="o">]</span>
-</code></pre>
-</div>
-
-<p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
-
-<p>これ、もう半年くらい解決方法探してる気がする。</p>
-
-<p>TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに <code>~/.rvm/bin/ruby-1.9.2-p136</code> とか書くんじゃろか。</p>
-
-<p>cxxさんに質問したら <a href="http://rvm.beginrescueend.com/deployment/system-wide/">RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
-
-    <a href="/2011/02/08/rvm-with-apache/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -347,6 +307,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -364,8 +326,6 @@
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-				
-					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 				</ul>
 			</div>

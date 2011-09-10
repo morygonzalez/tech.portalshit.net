@@ -41,12 +41,6 @@
 
 <p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
 
-<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
-<span class="k">  </span><span class="nb">exec</span> /bin/zsh
-<span class="k">fi</span>
-</code></pre>
-</div>
-
 <p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
 <p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
@@ -105,6 +99,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -122,8 +118,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>

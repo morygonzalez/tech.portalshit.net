@@ -39,10 +39,6 @@
 
 <p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">new_tweets</span> <span class="o">=</span> <span class="n">neta_tweets</span> <span class="o">-</span> <span class="n">used_tweets</span>
-</code></pre>
-</div>
-
 <p>とかしてみようとした。</p>
 
 <p><a href="http://gist.github.com/427398" title="gist: 427398">gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
@@ -60,7 +56,7 @@
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
-          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
+          <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
           
         </ul>
       </div>
@@ -93,6 +89,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -110,8 +108,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>

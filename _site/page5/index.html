@@ -35,6 +35,27 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/10/12/media-plugin-1.3-not-work">CakePHPのMedia Plugin 1.3が動かない</a></h2>
+    <div class="articleinfo">Posted on 12 Oct 2010 by 森井ゴンザレス |
+	
+		<a href="categories/CakePHP/">CakePHP</a>
+	</div>
+    <p>動かしてるサイトのCakePHPのバージョンを最新版の1.3.4に上げようと思って、Media PluginもCakePHP 1.3対応バージョンの1.3alphaにアップデートしようとした。</p>
+
+<p>とりあえず本体を <code>git clone http://github.com/cakephp/cakephp.git</code> し、Media Pluginを <code>git clone http://github.com/davidpersson/media.git</code> してみた。</p>
+
+<p>Media Plugin 1.3での設定方法とか調べてみようと思って、GitHub上のWikiのページを探すんだけど見つからない。なんと、作者サマはVer 1.3からWikiを消しちゃったみたい！ そんまま動かしてみたところではMedia Plugin動いてないみたい。Mediumヘルパーがないというエラーが出る。プロジェクトの中の <code>docs</code> ディレクトリにドキュメントが格納されていたのを発見したので（<a href="http://github.com/davidpersson/media/tree/1.3/docs/" title="docs at 1.3 from davidpersson's media - GitHub">docs at 1.3 from davidpersson’s media - GitHub</a>）そこを参考にしながらMedia Plugin 0.6から1.3へのMigration作業をやったんだけど、とうとうできなかった。</p>
+
+<p>まず第一に、クラス名が変わってる。<code>Media.Medium</code> だったのが <code>Media.Media</code> になってる。Viewファイル内での変数も <code>$medium</code> ではなく、 <code>$media</code> になってる。そしてメソッドとかもHTML5対応とかで結構変わってるみたい。</p>
+
+<p>さらに、media processing 関連のクラスが分割されて別のライブラリとしてMedia Pluginの中に含まれてる（<a href="http://github.com/davidpersson/mm" title="davidpersson's mm at master - GitHub">davidpersson’s mm at master - GitHub</a>）。これが結構わかりにくい。なんかImagick必要ぽくて、本番環境じゃインストール権限ないので使えないし、結局ここで諦めてしまった。</p>
+
+<p>Media PluginはVer 0.6のWikiがあった頃もなんかドキュメンが見づらかったし、1.3になってドキュメントはただのテキストファイルになり、しかもメソッドについての解説がないので結局本体のコードを読むしかない。</p>
+
+<p>RubyのライブラリはたいていRdocとかついててドキュメントが充実してるので、あれに慣れるとドキュメントがわかりにくいライブラリやプラグインは億劫に感じてしまう。</p>
+
+    <a href="/2010/10/12/media-plugin-1.3-not-work/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></h2>
     <div class="articleinfo">Posted on 15 Sep 2010 by 森井ゴンザレス |
 	
@@ -44,10 +65,6 @@
 
 <p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hogehoge.rb
-</code></pre>
-</div>
-
 <p>とか面倒くさいことをやらずにすみます。</p>
 
 <p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
@@ -55,10 +72,6 @@
 <p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>⌘</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
 
 <p>しかし先ほどなにげなく</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvm 1.9.2 --default
-</code></pre>
-</div>
 
 <p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
 
@@ -76,37 +89,6 @@
 <p>最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。</p>
 
 <p>コードはこんな感じ。</p>
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
-      <span class="kd">function</span> <span class="nx">getPosition</span><span class="p">(){</span>
-        <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">);</span>
-        <span class="nx">image</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">layerX</span><span class="p">;</span>
-          <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">layerY</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;pointX&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
-          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;pointY&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-
-      <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">getPosition</span><span class="p">;</span>
-    <span class="nt">&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div&gt;</span>
-      <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;path/to/image&quot;</span> <span class="na">id=</span><span class="s">&quot;image&quot;</span> <span class="na">style=</span><span class="s">&quot;position: absolute; top: auto; left: auto; width: 500px; height: 332px&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;pointX&quot;</span> <span class="na">name=</span><span class="s">&quot;pointX&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;pointY&quot;</span> <span class="na">name=</span><span class="s">&quot;pointY&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;発射！&quot;</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;/form&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
 
 <p>Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。</p>
 
@@ -156,15 +138,7 @@
 
 <p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
 
-<div class="highlight"><pre><code class="perl"><span class="c1">#!/usr/bin/perl</span>
-</code></pre>
-</div>
-
 <p>とか </p>
-
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-</code></pre>
-</div>
 
 <p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
 
@@ -178,15 +152,7 @@
 
 <p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
-</code></pre>
-</div>
-
 <p>してみた。しかしながら</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">Error: No available formula for vim</span>
-</code></pre>
-</div>
 
 <p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
 
@@ -194,15 +160,7 @@
 
 <p>そんで今度は意気揚々と</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
-</code></pre>
-</div>
-
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">ld: warning: in /Library/Frameworks//Python.framework/Python, missing required architecture x86\_64 in file</span>
-</code></pre>
-</div>
 
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
@@ -214,76 +172,11 @@
 
 <p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">+ruby</span>
-</code></pre>
-</div>
-
 <p>となった。</p>
 
 <p>まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマーの仲間入りをしようと思います。</p>
 
     <a href="/2010/08/31/macports-is-deprecated/#disqus_thread">Comments</a>
-
-    <h2><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></h2>
-    <div class="articleinfo">Posted on 25 Aug 2010 by 森井ゴンザレス |
-	
-		<a href="categories/Rails/">Rails</a>
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>80個近くある静的HTMLファイルをシステム化する必要が生じたので、HTMLをHpricotでスクレイピングしたあと、抽出したデータをSQLiteにぶっ込んだ。しかしSQLiteにぶっ込んだあとでデータの一部をいじりたくなった。そこでRailsのActiveRecordを単体で使ってみた。</p>
-
-<h3 id="activerecord">なんでわざわざActiveRecordを使うのか</h3>
-
-<p>いやそりゃもちろんSQL書くのが怖いからですよ。というのは半分冗談なんですけど、CakePHPはSQLite 2にしか対応しておらず、SQLite 2は何かと制限が多い。replace関数が使えんとか。temp tableとか作るのかったるいし、フレームワークばっかり使っててSQLはあんまりよく分からないのでActiveRecordを使った次第です。</p>
-
-<h3 id="section">作業詳細</h3>
-
-<p>このシステム化するプロジェクト自体はCakePHPで動いており、DBはSQLite2。デフォの状態だとRailsは <code>sqlite3-ruby</code> しかインストールしないので、ActiveRecordからSQLite2なDBを操作することができず若干まいっちんぐだったんだけどなんとかでけた。ちなみにやったのはCRUDのReadとUpdateね。</p>
-
-<h4 id="section-1">やったこと</h4>
-
-<p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-
-<span class="nb">require</span> <span class="s2">&quot;rubygems&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;sqlite&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;active_record&quot;</span>
-
-<span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
-  <span class="ss">:adapter</span> <span class="o">=&gt;</span> <span class="s2">&quot;sqlite&quot;</span><span class="p">,</span>
-  <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;path/to/db&quot;</span>
-<span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Hoge</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-<span class="k">end</span>
-
-<span class="n">hoges</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span>
-<span class="n">hoges</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">hog</span><span class="o">|</span>
-  <span class="n">hog</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/hogehoge/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-  <span class="n">hoge</span><span class="o">.</span><span class="n">save</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
-<p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
-
-<p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">hoges</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">hog</span><span class="o">|</span>
-  <span class="k">if</span> <span class="n">hog</span><span class="o">.</span><span class="n">name</span> <span class="o">=~</span> <span class="sr">/hogehoge(.*)/</span>
-    <span class="n">hog</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="vg">$1</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-</div>
-
-<p>これで狙ったことができました。</p>
-
-<p>Rubyいいわー。ほんといいわー。</p>
-
-    <a href="/2010/08/25/naughty-boy-am-i/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -362,6 +255,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -379,8 +274,6 @@
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-				
-					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 				</ul>
 			</div>

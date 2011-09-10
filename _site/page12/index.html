@@ -31,6 +31,27 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/03/portalshit-cached">ポータルシットにキャッシュを効かせた</a></h2>
+    <div class="articleinfo">Posted on 03 May 2010 by 森井ゴンザレス |
+	
+		<a href="categories/PHP/">PHP</a>
+	</div>
+    <p>ポータルシットがクソ重くて、なんか対策ないかなーとか仕事をさぼりながらときどき調べてた。</p>
+
+<p>おおよその原因は掴んでいた。それはアクセス解析プラグイン。MySQLのデータ容量がでかくなるとページの表示が遅くなる。アクセス解析プラグインを無効にした状態でページの表示速度はだいたい0.05秒くらいなんだけど、アクセス解析プラグインを有効にすると表示速度は1秒台とかまで悪化する。アクセス解析に使うテーブル（ <code>p_page_analyze</code> ）をDROPするとまた速さが回復するので時々空にしていた。</p>
+
+<p>しかしよくよくアクセス解析プラグインのコードを覗いてみると、ヴュー部分で使っていないSQLクエリが発行されており、このせいでクエリの回数が必要な回数の何倍にもなっていた。ポータルシットのアクセスなんて大したことないんだから、DBのサイズがちょっとでかくなっただけでこんなに遅くなるはずがないのだ。</p>
+
+<p>そういうわけで不必要なクエリのトリガーになるコードをコメントアウトしてみた。すると1秒台だった表示速度は0.2秒から0.5秒程度に収まるようになった。しかしそれでもなんか遅く感じる。</p>
+
+<p>それでキャッシュを効かせることにしてみた。使ったのはPecl APC。DreamHostはなんでもやらせてくれるのでほんと助かる。</p>
+
+<p><a href="http://wiki.dreamhost.com/Pecl_APC">Pecl APC - DreamHost</a> を見ながらシェルスクリプトをコピペして走らせ、php.iniにAPCの設定を書き加えて終了。僕はPHPのバージョンを5.3.1に上げているのでコピペしたシェルスクリプトのまんまではきちんと入らなかった。最新版のAPC（APC-3.1.3p1）にバージョン情報を書き換えてインストールしたところうまくいった。またDreamHost Wikiではキャッシュファイルのパスが <code>/home/username/tmp/apc.*XXXXXX*</code> だったり <code>/home/username/tmp/apc.*XXXXX*</code> だったりばらついてるけど、Xの数は6個じゃないと500エラーが出るのでご注意を。</p>
+
+<p>キャッシュを効かせて見た結果、フッターのPage Generationはあまり変化がないが、体感速度は十分に速くなった。</p>
+
+    <a href="/2010/05/03/portalshit-cached/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/01/cakephp13">CakePHP 1.3</a></h2>
     <div class="articleinfo">Posted on 01 May 2010 by 森井ゴンザレス |
 	
@@ -83,31 +104,13 @@
 
 <p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">    $ git clone git://github.com/emk/mephisto.git</span>
-</code></pre>
-</div>
-
 <p>してgithubからプロジェクトをclone。</p>
 
 <p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">    $ rake gems:install</span>
-</code></pre>
-</div>
-
 <p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">    $ gem install nokogiri \</span>
-<span class="go">    --with-xslt-include=/home/morygonzalez/php5/include/ \</span>
-<span class="go">    --with-xslt-lib=/home/morygonzalez/php5/lib/</span>
-</code></pre>
-</div>
-
 <p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">    $ rake db:bootstrap RAILS_ENV=production</span>
-</code></pre>
-</div>
 
 <p>ですべてのインストール作業完了。いまこうして動いております。</p>
 
@@ -188,6 +191,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -205,8 +210,6 @@
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-				
-					<li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
 				
 				</ul>
 			</div>

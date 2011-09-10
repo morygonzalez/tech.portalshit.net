@@ -37,10 +37,6 @@
 
 <p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hogehoge.rb
-</code></pre>
-</div>
-
 <p>とか面倒くさいことをやらずにすみます。</p>
 
 <p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
@@ -48,10 +44,6 @@
 <p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>⌘</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
 
 <p>しかし先ほどなにげなく</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvm 1.9.2 --default
-</code></pre>
-</div>
 
 <p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
 
@@ -64,11 +56,11 @@
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
-          <li><a href="/2011/06/29/added-category-archives">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
-          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
+          
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
         </ul>
       </div>
@@ -99,6 +91,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -116,8 +110,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>

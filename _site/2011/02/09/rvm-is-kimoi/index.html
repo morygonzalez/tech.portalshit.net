@@ -39,23 +39,9 @@
 
 <p>なんと、RVMには <code>rvmsudo</code> というコマンドがあるらしい！ 試しに</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvmsudo passenger-install-nginx-module
-</code></pre>
-</div>
-
 <p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
 
-<div class="highlight"><pre><code class="nginx">      <span class="k">passenger_root</span> <span class="s">/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class="p">;</span>
-      <span class="k">passenger_ruby</span> <span class="s">/usr/bin/ruby1.8</span><span class="p">;</span>
-</code></pre>
-</div>
-
 <p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
-
-<div class="highlight"><pre><code class="nginx">      <span class="k">passenger_root</span> <span class="s">/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class="p">;</span>
-      <span class="k">passenger_ruby</span> <span class="s">/home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby</span><span class="p">;</span>
-</code></pre>
-</div>
 
 <p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
 
@@ -72,9 +58,9 @@
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
-          <li><a href="/2011/06/29/added-category-archives">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
-          
           <li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
+          
+          <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
           
         </ul>
       </div>
@@ -105,6 +91,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
+          
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
@@ -122,8 +110,6 @@
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
           <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
-          
-          <li><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></li>
           
         </ul>
       </div>
