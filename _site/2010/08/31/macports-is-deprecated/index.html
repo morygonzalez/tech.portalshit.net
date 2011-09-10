@@ -43,7 +43,15 @@
 
 <p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
 
+<div class="highlight"><pre><code class="perl"><span class="c1">#!/usr/bin/perl</span>
+</code></pre>
+</div>
+
 <p>とか </p>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+</code></pre>
+</div>
 
 <p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
 
@@ -57,7 +65,15 @@
 
 <p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
+</code></pre>
+</div>
+
 <p>してみた。しかしながら</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">Error: No available formula for vim</span>
+</code></pre>
+</div>
 
 <p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
 
@@ -65,7 +81,15 @@
 
 <p>そんで今度は意気揚々と</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
+</code></pre>
+</div>
+
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">ld: warning: in /Library/Frameworks//Python.framework/Python, missing required architecture x86\_64 in file</span>
+</code></pre>
+</div>
 
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
@@ -77,6 +101,10 @@
 
 <p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p>
 
+<div class="highlight"><pre><code class="console"><span class="go">+ruby</span>
+</code></pre>
+</div>
+
 <p>となった。</p>
 
 <p>まだApacheとかRubyGemsとかはMacPorts版を使っているけど、割と早い段階でHomebrewに移行して、シャレオツプログラマーの仲間入りをしようと思います。</p>
@@ -86,8 +114,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
-          
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
@@ -95,6 +121,8 @@
           <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          
+          <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
           
         </ul>
       </div>

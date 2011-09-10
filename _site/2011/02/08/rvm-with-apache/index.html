@@ -35,9 +35,23 @@
       </div>
       <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
 
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">puts</span> <span class="no">RUBY_DESCRIPTION</span>
+</code></pre>
+</div>
+
 <p>なファイル（hoge.rb）があったとします。これを</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hoge.rb
+</code></pre>
+</div>
+
 <p>とシェルから呼び出したときにはちゃんと</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby 1.9.2p136 <span class="o">(</span>2010-12-25 revision 30365<span class="o">)</span> <span class="o">[</span>x86_64-darwin10.6.0<span class="o">]</span>
+</code></pre>
+</div>
 
 <p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
 
@@ -52,8 +66,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
-          
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
           <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
@@ -61,6 +73,8 @@
           <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
           
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          
+          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
         </ul>
       </div>

@@ -45,11 +45,27 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
+<div class="highlight"><pre><code class="html"><span class="lineno">1</span> <span class="nt">&lt;ul&gt;</span>
+<span class="lineno">2</span> {{ for category in sites.categories }}
+<span class="lineno">3</span>   <span class="nt">&lt;li&gt;</span>{{ category.name }}<span class="nt">&lt;/li&gt;</span>
+<span class="lineno">4</span> {{ endfor }}
+<span class="lineno">5</span> <span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+</div>
+
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
 <p><a href="https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_category_iterator/tag_category_iterator.rb" title="tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub">tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub</a></p>
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
+
+<div class="highlight"><pre><code class="html"><span class="lineno">1</span> <span class="nt">&lt;ul&gt;</span>
+<span class="lineno">2</span> {{ for category in sites.iterable.categories }}
+<span class="lineno">3</span>   <span class="nt">&lt;li&gt;</span>{{ category.name }}<span class="nt">&lt;/li&gt;</span>
+<span class="lineno">4</span> {{ endfor }}
+<span class="lineno">5</span> <span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+</div>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 
@@ -70,8 +86,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
-          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
@@ -79,6 +93,8 @@
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
+          
+          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
         </ul>
       </div>

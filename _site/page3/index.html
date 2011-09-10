@@ -90,6 +90,12 @@
 
 <p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
 
+<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span><span class="nb">exec</span> /bin/zsh
+<span class="k">fi</span>
+</code></pre>
+</div>
+
 <p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
 <p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
@@ -220,9 +226,23 @@
 
 <p>なんと、RVMには <code>rvmsudo</code> というコマンドがあるらしい！ 試しに</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvmsudo passenger-install-nginx-module
+</code></pre>
+</div>
+
 <p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
 
+<div class="highlight"><pre><code class="nginx">      <span class="k">passenger_root</span> <span class="s">/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class="p">;</span>
+      <span class="k">passenger_ruby</span> <span class="s">/usr/bin/ruby1.8</span><span class="p">;</span>
+</code></pre>
+</div>
+
 <p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
+
+<div class="highlight"><pre><code class="nginx">      <span class="k">passenger_root</span> <span class="s">/home/morygonzalez/.rvm/gems/ruby-1.9.2-p136/gems/passenger-3.0.2</span><span class="p">;</span>
+      <span class="k">passenger_ruby</span> <span class="s">/home/morygonzalez/.rvm/wrappers/ruby-1.9.2-p136/ruby</span><span class="p">;</span>
+</code></pre>
+</div>
 
 <p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
 

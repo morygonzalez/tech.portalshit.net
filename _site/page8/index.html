@@ -68,11 +68,42 @@
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
 
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">hoge</span><span class="p-Indicator">:</span> <span class="c1">#アイテムの名前</span>
+  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;hoge&quot;</span>
+  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
+
+<span class="l-Scalar-Plain">fuga</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;fuga&quot;</span>
+  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div>
+
 <p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">hoge</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;hoge&quot;</span>
+  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
+
+  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;fuga&quot;</span>
+  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村フガフガ&quot;</span>
+</code></pre>
+</div>
 
 <p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
 
 <p>結局、拾ってきた	コードを参考にして</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;yaml&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;pp&#39;</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;hoge.yml&#39;</span><span class="p">)</span>
+<span class="n">pp</span> <span class="n">data</span>
+</code></pre>
+</div>
 
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 
@@ -96,9 +127,39 @@
 
 <p>そういうわけで正しくは、</p>
 
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">hoge</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
+</code></pre>
+</div>
+
 <p>と書くそうです。</p>
 
 <p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">hoge</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
+</code></pre>
+</div>
 
 <p>でも同じ結果を出力しますね。</p>
 
@@ -110,7 +171,30 @@
 
 <p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
 
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="n">b</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">hoge</span>
+    <span class="nb">print</span> <span class="vi">@a</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Fuga&quot;</span><span class="p">)</span>
+<span class="n">piyo</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Piyo&quot;</span><span class="p">)</span>
+
+<span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
+<span class="n">piyo</span><span class="o">.</span><span class="n">hoge</span>
+</code></pre>
+</div>
+
 <p>で、これを実行すると</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">Fuga</span>
+<span class="go">Piyo</span>
+</code></pre>
+</div>
 
 <p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
 
@@ -125,7 +209,33 @@
 
 <p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
 
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Hoge</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">$a</span><span class="p">;</span> 
+  <span class="k">function</span> <span class="nf">hoge</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$fuga</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Hoge</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$fuga</span><span class="o">-&gt;</span><span class="na">hoge</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="x" />
+</code></pre>
+</div>
+
 <p>つぎにRubyで同じコードを書いてみる。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
+  <span class="vi">@a</span>  
+  <span class="k">def</span> <span class="nf">hoge</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
+</code></pre>
+</div>
 
 <p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
 

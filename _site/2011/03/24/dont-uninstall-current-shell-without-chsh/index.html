@@ -41,6 +41,12 @@
 
 <p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
 
+<div class="highlight"><pre><code class="sh"><span class="k">if</span> <span class="o">[</span> -f /bin/zsh <span class="o">]</span>; <span class="k">then</span>
+<span class="k">  </span><span class="nb">exec</span> /bin/zsh
+<span class="k">fi</span>
+</code></pre>
+</div>
+
 <p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
 <p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
@@ -58,8 +64,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/03/24/dont-uninstall-current-shell-without-chsh">Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</a></li>
-          
           <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
@@ -67,6 +71,8 @@
           <li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
+          
+          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
           
         </ul>
       </div>

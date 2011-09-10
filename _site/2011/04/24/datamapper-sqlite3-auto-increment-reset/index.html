@@ -35,6 +35,13 @@
       </div>
       <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
 
+<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
 <p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
@@ -51,14 +58,20 @@
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
 
+<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
+  <span class="k">end</span> 
+</code></pre>
+</div>
+
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
-          
-          <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
           
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
@@ -67,6 +80,8 @@
           <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
           <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
+          
+          <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
           
         </ul>
       </div>

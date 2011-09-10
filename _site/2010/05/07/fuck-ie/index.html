@@ -35,6 +35,39 @@
       </div>
       <p>こういうコード書いてます。</p>
 
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">getAttrName</span><span class="p">(</span><span class="nx">attrObj</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">attrObj</span><span class="p">.</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+<span class="c1">//	items = document.getElementsByClassName(&#39;item&#39;);</span>
+	<span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li.item&#39;</span><span class="p">);</span>
+	<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">//	var keywordList = items[i].getElementsByClassName(&#39;keyword-list&#39;);</span>
+		<span class="kd">var</span> <span class="nx">keywordList</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.keyword-list&#39;</span><span class="p">,</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywordList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">//var keywords = keywordList[j].getElementsByTagName(&#39;li&#39;);</span>
+			<span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+			<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">keywords</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">$</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">getCurAttr</span><span class="p">(</span><span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">curAttr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#keySelector li a&quot;</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">l</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">curAttr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">l</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">]).</span><span class="nx">text</span><span class="p">()</span> <span class="o">==</span> <span class="nx">attrName</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">$</span><span class="p">(</span><span class="nx">curAttr</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">parentNode</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;current-keyword&#39;</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
 <p>やりたいことは以下のような感じ。</p>
 
 <ol>
@@ -64,11 +97,27 @@
 
 <p>そういうわけで</p>
 
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+</code></pre>
+</div>
+
 <p>を</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;li a&#39;</span><span class="p">,</span> <span class="nx">keywordList</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+</code></pre>
+</div>
 
 <p>とし、</p>
 
+<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">textContent</span><span class="p">)</span>
+</code></pre>
+</div>
+
 <p>を</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">attrName</span> <span class="o">==</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+</code></pre>
+</div>
 
 <p>にしてみたところ、ばっちりIEで動くようになった。</p>
 
@@ -79,8 +128,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></li>
-          
           <li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
           
           <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
@@ -88,6 +135,8 @@
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
+          
+          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
           
         </ul>
       </div>

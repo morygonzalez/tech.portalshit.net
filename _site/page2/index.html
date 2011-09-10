@@ -69,6 +69,10 @@
 
 <p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
 
+<div class="highlight"><pre><code class="bash"><span class="nb">alias </span><span class="nv">gvim</span><span class="o">=</span><span class="s1">&#39;env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app &quot;$@&quot;&#39;</span>
+</code></pre>
+</div>
+
 <p>同じ問題でお困りの方はお試しあれ。</p>
 
 <h3 id="section">追記</h3>
@@ -83,6 +87,13 @@
 		<a href="categories/Ruby/">Ruby</a>
 	</div>
     <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+  <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+<span class="k">end</span>
+</code></pre>
+</div>
 
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
@@ -99,6 +110,14 @@
 </ul>
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
+
+<div class="highlight"><pre><code class="ruby">  <span class="n">after</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">Category</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">destroy</span>
+    <span class="no">Entry</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;update sqlite_sequence set seq=0 where name=&quot;entries&quot;;&#39;</span><span class="p">)</span>
+  <span class="k">end</span> 
+</code></pre>
+</div>
 
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 
@@ -130,13 +149,61 @@
 
 <p>Jekyllで関連記事を表示するようにした。jekyllを実行するときに <code>jekyll --lsi</code> とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に <code>gem install gsl</code> しただけでは以下のようなエラーが出る。</p>
 
+<div class="highlight"><pre><code class="console"><span class="go">Fetching: narray-0.5.9.9.gem (100%)</span>
+<span class="go">Building native extensions.  This could take a while...</span>
+<span class="go">Fetching: gsl-1.14.7.gem (100%)</span>
+<span class="go">Building native extensions.  This could take a while...</span>
+<span class="go">ERROR:  Error installing gsl:</span>
+<span class="go">        ERROR: Failed to build gem native extension.</span>
+<span class="go">        /Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby extconf.rb</span>
+<span class="go">checking gsl version... *** extconf.rb failed ***</span>
+<span class="go">Could not create Makefile due to some reason, probably lack of</span>
+<span class="go">necessary libraries and/or headers.  Check the mkmf.log file for more</span>
+<span class="go">details.  You may need configuration options.</span>
+
+<span class="go">Provided configuration options:</span>
+<span class="go">        --with-opt-dir</span>
+<span class="go">        --without-opt-dir</span>
+<span class="go">        --with-opt-include</span>
+<span class="go">        --without-opt-include=${opt-dir}/include</span>
+<span class="go">        --with-opt-lib</span>
+<span class="go">        --without-opt-lib=${opt-dir}/lib</span>
+<span class="go">        --with-make-prog</span>
+<span class="go">        --without-make-prog</span>
+<span class="go">        --srcdir=.</span>
+<span class="go">        --curdir</span>
+<span class="go">        --ruby=/Users/morygonzalez/.rvm/rubies/ruby-1.9.2-p136/bin/ruby</span>
+<span class="go">extconf.rb:237:in `rescue in &lt;main&gt;&#39;: Check GSL&gt;=0.9.4 is installed, and the command &quot;gsl-config&quot; is in search path. (RuntimeError)</span>
+<span class="go">        from extconf.rb:138:in `&lt;main&gt;&#39;</span>
+</code></pre>
+</div>
+
 <p>GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install gsl
+</code></pre>
+</div>
 
 <p>そんでもう一回 <code>gem install gsl</code> するとうまく入った。 <code>_config.yaml</code> に <code>lsi: true</code> という記述を追記して jekyll を実行すると関連記事が表示されるようになった。</p>
 
 <h3 id="section-1">最近の記事表示</h3>
 
 <p>ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。</p>
+
+<div class="highlight"><pre><code class="diff">8c72..2c84ea5 100644
+<span class="gd">--- a/_layouts/post.html</span>
+<span class="gi">+++ b/_layouts/post.html</span>
+7 +69,7 @@
+ 
+         &lt;h3&gt;Latest Posts&lt;/h3&gt;
+         &lt;ul&gt;
+<span class="gd">-          {`% for post in site.posts `%}</span>
+<span class="gi">+          {`% for post in site.posts limit:10 `%}</span>
+           &lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+           {`% endfor `%}
+         &lt;/ul&gt;
+</code></pre>
+</div>
 
 <p>(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)</p>
 

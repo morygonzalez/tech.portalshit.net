@@ -48,11 +48,23 @@
 
 <p>これはRailsのプラグインではないのでgemでインストール。</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> sudo gem install bluecloth
+</code></pre>
+</div>
+
 <p>その後viewで</p>
+
+<div class="highlight"><pre><code class="rhtml"><span class="cp">&lt;%=</span> <span class="n">markdwon</span><span class="p">(</span><span class="vi">@item</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="cp">%&gt;</span>
+</code></pre>
+</div>
 
 <p>とか書けばいい。</p>
 
 <p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">config</span><span class="o">.</span><span class="n">gem</span> <span class="s2">&quot;bluecloth&quot;</span>
+</code></pre>
+</div>
 
 <p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
 

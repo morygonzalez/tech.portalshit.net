@@ -65,6 +65,10 @@
 
 <p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hogehoge.rb
+</code></pre>
+</div>
+
 <p>とか面倒くさいことをやらずにすみます。</p>
 
 <p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
@@ -72,6 +76,10 @@
 <p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>⌘</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
 
 <p>しかし先ほどなにげなく</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> rvm 1.9.2 --default
+</code></pre>
+</div>
 
 <p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
 
@@ -89,6 +97,37 @@
 <p>最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。</p>
 
 <p>コードはこんな感じ。</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">function</span> <span class="nx">getPosition</span><span class="p">(){</span>
+        <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">);</span>
+        <span class="nx">image</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">layerX</span><span class="p">;</span>
+          <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">layerY</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;pointX&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;pointY&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">getPosition</span><span class="p">;</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;path/to/image&quot;</span> <span class="na">id=</span><span class="s">&quot;image&quot;</span> <span class="na">style=</span><span class="s">&quot;position: absolute; top: auto; left: auto; width: 500px; height: 332px&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;/&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;pointX&quot;</span> <span class="na">name=</span><span class="s">&quot;pointX&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;pointY&quot;</span> <span class="na">name=</span><span class="s">&quot;pointY&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;発射！&quot;</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
 
 <p>Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。</p>
 
@@ -138,7 +177,15 @@
 
 <p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
 
+<div class="highlight"><pre><code class="perl"><span class="c1">#!/usr/bin/perl</span>
+</code></pre>
+</div>
+
 <p>とか </p>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+</code></pre>
+</div>
 
 <p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
 
@@ -152,7 +199,15 @@
 
 <p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
+</code></pre>
+</div>
+
 <p>してみた。しかしながら</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">Error: No available formula for vim</span>
+</code></pre>
+</div>
 
 <p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
 
@@ -160,7 +215,15 @@
 
 <p>そんで今度は意気揚々と</p>
 
+<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
+</code></pre>
+</div>
+
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">ld: warning: in /Library/Frameworks//Python.framework/Python, missing required architecture x86\_64 in file</span>
+</code></pre>
+</div>
 
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
@@ -171,6 +234,10 @@
 <p><a href="http://www.python.org/download/releases/" title="Releases">Releases</a></p>
 
 <p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">+ruby</span>
+</code></pre>
+</div>
 
 <p>となった。</p>
 
