@@ -43,15 +43,11 @@
 
 <p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
 
-<div class="highlight"><pre><code class="perl"><span class="c1">#!/usr/bin/perl</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n#!/usr/bin/perl\n”:String</p>
 
 <p>とか </p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n#!/usr/bin/env ruby\n”:String</p>
 
 <p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
 
@@ -65,15 +61,11 @@
 
 <p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n$ brew install vim\n”:String</p>
 
 <p>してみた。しかしながら</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">Error: No available formula for vim</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\nError: No available formula for vim\n”:String</p>
 
 <p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
 
@@ -81,15 +73,11 @@
 
 <p>そんで今度は意気揚々と</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> brew install vim
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n$ brew install vim\n”:String</p>
 
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">ld: warning: in /Library/Frameworks//Python.framework/Python, missing required architecture x86\_64 in file</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b977a670 /></p>
 
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
@@ -101,9 +89,7 @@
 
 <p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">+ruby</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n+ruby\n”:String</p>
 
 <p>となった。</p>
 
@@ -153,6 +139,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
+          
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
@@ -170,8 +158,6 @@
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
           
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
-          
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
         </ul>
       </div>

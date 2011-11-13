@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい |  tech.portalshit.net</title>
+    <title>Herokuを使うのをやめた |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,56 +19,38 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2011/03/21/tdd-bootcamp-fukuoka" title="TDD Boot Camp福岡に参加した">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/09/11/amazon-target-killer" title="Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2011/03/24/i-am-an-impotent-programmer" title="TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと">Next Post</a></span>
         
       </div>
 
-      <h2>Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい</h2>
+      <h2>Herokuを使うのをやめた</h2>
       <div class="articleinfo">
-        Posted on 24 Mar 2011 by 森井ゴンザレス |
+        Posted on 31 Oct 2011 by 森井ゴンザレス |
         
-          <a href="/categories/Ubuntu/">Ubuntu</a>
-        
-          <a href="/categories/zsh/">zsh</a>
+          <a href="/categories/Ruby/">Ruby</a>
         
       </div>
-      <p>この前、さくらVPSに入れているUbuntuのzshで <code>ls</code> とか <code>cd</code> とか打ったとき、変なエラーメッセージが出るようになった。原因不明。しょうがないのでzshをインストールしなおそうと、<code>chsh</code> してbashとかに切り替えずに <code>sudo apt-get remove zsh</code> してしまった。そこで混乱してしまって <code>Ctrl + D</code> しちゃったもんだからSSH閉じてしまって、なんとUbuntuにログインできなくなってしまった。</p>
+      <p>LokkaをCMSに採用している <a href="http://www.portalshit.net">ポータルシット</a> はHerokuで動かしてたんだけど、Lokkaをカスタマイズして使っているためか、デプロイしてもApplication Errorばかり出るようになってしまった。ローカルのMacではうまくいくのに。一週間くらい直そうと努力してみたけど直りそうにないのでHerokuでの運用を諦めてさくらVPS上のUbuntuで運用することにした。すこぶる快適。</p>
 
-<p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
+<p>Herokuは確かに便利なんだけど、Herokuの中でどういう風にアプリケーションが動いているのかを把握しづらい。ファイルシステムに直接アクセスできないので、ログを見るにも <code>heroku logs</code> とかやんないといけない。</p>
 
-<p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
-
-<p>Liquid error: undefined method `join’ for “\nif [ -f /bin/zsh ]; then\n  exec /bin/zsh\nfi\n”:String</p>
-
-<p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
-
-<p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>
-
-<p>しかしこれには結構重い副作用があるみたい。</p>
-
-<p><a href="http://d.hatena.ne.jp/tyru/20100922/exec_bin_zsh_considered_harmful">.bash_profileに「exec /bin/zsh」と書くのはやめたほうがいい - Humanity</a></p>
-
-<p>一理ある。</p>
-
-<p>というわけでUbuntuやrootでsshできない環境ででzshを使う場合は、何らかのトラブルでzshが起動しない、シェルにログインできなくなることを想定し、保険として普段はまったく使わない非常用のアカウントを作っておくと良いと思った。もちろんsudoersに指定しておかないと意味ないけどね。</p>
+<p>その点、自分で環境をいじれるサーバーだったらウェブアプリケーションのログはおろかシステムログまで見られるし、無理にHerokuで運用してHerokuで運用するために時間を割くのは馬鹿らしいような気がする。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
+          <li><a href="/2010/09/02/clickable-map-coordinates-with-javascript">JavaScriptでClickable Mapの座標を取得する</a></li>
           
-          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
+          <li><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></li>
           
-          <li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
+          <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
           
-          <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
+          <li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
           
-          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
+          <li><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></li>
           
         </ul>
       </div>
@@ -92,9 +74,7 @@
         <h3>Categories</h3>
         <ul id="categories">
           
-          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
-          
-          <li><a href="/categories/zsh/">zsh</a></li>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
           
         </ul>
 

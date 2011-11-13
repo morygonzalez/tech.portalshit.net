@@ -39,42 +39,17 @@
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">hoge</span><span class="p-Indicator">:</span> <span class="c1">#アイテムの名前</span>
-  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;hoge&quot;</span>
-  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
-
-<span class="l-Scalar-Plain">fuga</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;fuga&quot;</span>
-  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村フガフガ&quot;</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b96c8420 /></p>
 
 <p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">hoge</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;hoge&quot;</span>
-  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村ホゲホゲ&quot;</span>
-
-  <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2</span>
-  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="s">&quot;fuga&quot;</span>
-  <span class="l-Scalar-Plain">address</span><span class="p-Indicator">:</span> <span class="s">&quot;ホゲ県ホゲ村フガフガ&quot;</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b96c7b88 /></p>
 
 <p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
 
 <p>結局、拾ってきた	コードを参考にして</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;yaml&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;pp&#39;</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;hoge.yml&#39;</span><span class="p">)</span>
-<span class="n">pp</span> <span class="n">data</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b96c74a8 /></p>
 
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 
@@ -124,6 +99,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
+          
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
@@ -141,8 +118,6 @@
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
           
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
-          
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
         </ul>
       </div>

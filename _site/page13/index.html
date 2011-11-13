@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Category: rvm |  tech.portalshit.net</title>
+<title>tech.portalshit.net |  tech.portalshit.net</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -20,13 +20,47 @@
 			<div id="content">
   			<div class="paginator">
   				
+  				  <span class="previous">
+  				  
+    				  <a href="../page12/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
+  				
   				
   			</div>
 
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></h2>
-    <div class="articleinfo">Posted on 29 Jul 2011 by 森井ゴンザレス | <a href="/categories/Ruby/">Ruby</a> and <a href="/categories/rvm/">rvm</a></div>
+    <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
+    <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
+	
+		<a href="categories/misc/">misc</a>
+	</div>
+    <p>なんかTwitterで「最近のポータルシット変わったよね…」とかいう意見を目にするようになったので、パソコンネタだけ隔離して別にブログを始めることにした。使っているCMSはMephisto。Railsの勉強になるかと思って。早速DreamhostへMephistoをインストールしていて躓いてしまったのでちょこっとメモ。</p>
+
+<p>とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、</p>
+
+<p>Liquid error: undefined method `join’ for “\n    $ git clone git://github.com/emk/mephisto.git\n”:String</p>
+
+<p>してgithubからプロジェクトをclone。</p>
+
+<p>Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで</p>
+
+<p>Liquid error: undefined method `join’ for “\n    $ rake gems:install\n”:String</p>
+
+<p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b94cc928 /></p>
+
+<p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
+
+<p>Liquid error: undefined method `join’ for “\n    $ rake db:bootstrap RAILS_ENV=production\n”:String</p>
+
+<p>ですべてのインストール作業完了。いまこうして動いております。</p>
+
+<p>今後はここにCakePHPやRails、JavaScript関連のことを書いていこうと思います。できれば一日一ポスト、その日に学んだことを書いていきたいです。</p>
+
+    <a href="/2010/04/22/blogging-with-mephisto/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -34,6 +68,12 @@
 				<div class="autopagerize_insert_before"></div>
 
   			<div class="paginator">
+  				
+  				  <span class="previous">
+  				  
+    				  <a href="../page12/" rel="prev">Previous Page</a>
+  				  
+  				  </span>
   				
   				
   			</div>

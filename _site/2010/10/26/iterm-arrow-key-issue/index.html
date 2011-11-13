@@ -43,18 +43,11 @@
 
 <p>これを参考にとりあえず以下のように <code>.zshrc</code> に書いた。</p>
 
-<div class="highlight"><pre><code class="bash"><span class="k">case</span> <span class="s2">&quot;${TERM_PROGRAM}&quot;</span> in
-iTerm*<span class="o">)</span>
-  <span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>dtterm
-<span class="k">esac</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b942e7a0 /></p>
 
 <p>しかし、これはちょっと自分的にはいただけなかった。</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>dtterm
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\nexport TERM=dtterm\n”:String</p>
 
 <p>ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/" title="Vimで編集を終了した後、元のコンソールの状態を復元したい \| tech.portalshit.net - CakePHP, Rails, JavaScript">Vimで編集を終了した後、元のコンソールの状態を復元したい</a>）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。</p>
 
@@ -114,6 +107,8 @@ iTerm*<span class="o">)</span>
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
+          
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
@@ -131,8 +126,6 @@ iTerm*<span class="o">)</span>
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
           
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
-          
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
         </ul>
       </div>

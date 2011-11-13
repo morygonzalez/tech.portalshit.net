@@ -37,39 +37,13 @@
 
 <p>そういうわけで正しくは、</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">hoge</span>
-    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
-<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b4bb0 /></p>
 
 <p>と書くそうです。</p>
 
 <p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">hoge</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
-<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b4408 /></p>
 
 <p>でも同じ結果を出力しますね。</p>
 
@@ -81,30 +55,11 @@
 
 <p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="vi">@a</span> <span class="o">=</span> <span class="n">b</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">hoge</span>
-    <span class="nb">print</span> <span class="vi">@a</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Fuga&quot;</span><span class="p">)</span>
-<span class="n">piyo</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Piyo&quot;</span><span class="p">)</span>
-
-<span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
-<span class="n">piyo</span><span class="o">.</span><span class="n">hoge</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b3d50 /></p>
 
 <p>で、これを実行すると</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">Fuga</span>
-<span class="go">Piyo</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\nFuga\nPiyo\n”:String</p>
 
 <p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
 
@@ -152,6 +107,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
+          
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
@@ -169,8 +126,6 @@
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
           
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
-          
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
         </ul>
       </div>

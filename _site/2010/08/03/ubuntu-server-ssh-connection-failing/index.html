@@ -37,16 +37,11 @@
 
 <p>まずSSHのおさらいを。クライアント側で</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> mkdir -p .ssh
-<span class="gp">$</span> ssh-keygen -t rsa （以下略）
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n$ mkdir -p .ssh\n$ ssh-keygen -t rsa （以下略）\n”:String</p>
 
 <p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> scp id_rsa.pub username@hoge.com:.ssh/authorized_keys
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys\n”:String</p>
 
 <p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
 
@@ -54,23 +49,17 @@
 
 <p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">Permission denied (publickey).</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\nPermission denied (publickey).\n”:String</p>
 
 <p>というエラーが頻繁にお出になるのですよ。</p>
 
 <p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
 
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> sudo /etc/init.d/ssh restart
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\n$ sudo /etc/init.d/ssh restart\n”:String</p>
 
 <p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">Permission denied (publickey).</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for “\nPermission denied (publickey).\n”:String</p>
 
 <p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
 
@@ -122,6 +111,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
+          
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
           
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
@@ -139,8 +130,6 @@
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
           
           <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
-          
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
         </ul>
       </div>

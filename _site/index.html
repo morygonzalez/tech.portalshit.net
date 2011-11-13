@@ -29,6 +29,19 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></h2>
+    <div class="articleinfo">Posted on 31 Oct 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>LokkaをCMSに採用している <a href="http://www.portalshit.net">ポータルシット</a> はHerokuで動かしてたんだけど、Lokkaをカスタマイズして使っているためか、デプロイしてもApplication Errorばかり出るようになってしまった。ローカルのMacではうまくいくのに。一週間くらい直そうと努力してみたけど直りそうにないのでHerokuでの運用を諦めてさくらVPS上のUbuntuで運用することにした。すこぶる快適。</p>
+
+<p>Herokuは確かに便利なんだけど、Herokuの中でどういう風にアプリケーションが動いているのかを把握しづらい。ファイルシステムに直接アクセスできないので、ログを見るにも <code>heroku logs</code> とかやんないといけない。</p>
+
+<p>その点、自分で環境をいじれるサーバーだったらウェブアプリケーションのログはおろかシステムログまで見られるし、無理にHerokuで運用してHerokuで運用するために時間を割くのは馬鹿らしいような気がする。</p>
+
+    <a href="/2011/10/31/stopped-using-heroku/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></h2>
     <div class="articleinfo">Posted on 11 Sep 2011 by 森井ゴンザレス |
 	
@@ -53,41 +66,15 @@
 	</div>
     <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">rvm install 1.9.2 --with-readline-dir=/usr/local #homebrewで入れたreadlineのパスを指定</span>
-<span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b98a0b30 /></p>
 
 <p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
-<span class="go">Are you sure you wish to MOVE gems from ruby-1.9.2-p180 to ruby-1.9.2-p290?</span>
-<span class="go">This will overwrite existing gems in ruby-1.9.2-p290 and remove them from ruby-1.9.2-p180 (Y/n): Y</span>
-<span class="go">Moving gemsets...</span>
-<span class="go">Moving ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
-<span class="go">Making gemset ruby-1.9.2-p290 pristine.</span>
-<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
-<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
-<span class="go">Moving ruby-1.9.2-p180@global to ruby-1.9.2-p290@global</span>
-<span class="go">Making gemset ruby-1.9.2-p290@global pristine.</span>
-<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
-<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
-<span class="go">Do you wish to move over aliases? (Y/n): Y</span>
-<span class="go">Do you wish to move over wrappers? (Y/n): Y</span>
-<span class="go">Do you also wish to completely remove ruby-1.9.2-p180 (inc. archive)? (Y/n): Y</span>
-<span class="go">Successfully migrated ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b989f2f8 /></p>
 
 <p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">zsh: /usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake: bad interpreter: /usr/local/rvm/rubies/ruby-1.9.2-p180/bin/ruby: no such file or directory</span>
-<span class="go">rake aborted!</span>
-<span class="go">No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)</span>
-<span class="go">/usr/local/rvm/gems/ruby-1.9.2-p290/gems/rake-0.8.7/lib/rake.rb:2377:in `raw_load_rakefile&#39;</span>
-<span class="go">(See full trace by running task with --trace)</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b988ef48 /></p>
 
 <p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
 
@@ -141,13 +128,7 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
-<div class="highlight"><pre><code class="html"><span class="lineno">1</span> <span class="nt">&lt;ul&gt;</span>
-<span class="lineno">2</span> {{ for category in sites.categories }}
-<span class="lineno">3</span>   <span class="nt">&lt;li&gt;</span>{{ category.name }}<span class="nt">&lt;/li&gt;</span>
-<span class="lineno">4</span> {{ endfor }}
-<span class="lineno">5</span> <span class="nt">&lt;/ul&gt;</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b9774f18 /></p>
 
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
@@ -155,13 +136,7 @@
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
 
-<div class="highlight"><pre><code class="html"><span class="lineno">1</span> <span class="nt">&lt;ul&gt;</span>
-<span class="lineno">2</span> {{ for category in sites.iterable.categories }}
-<span class="lineno">3</span>   <span class="nt">&lt;li&gt;</span>{{ category.name }}<span class="nt">&lt;/li&gt;</span>
-<span class="lineno">4</span> {{ endfor }}
-<span class="lineno">5</span> <span class="nt">&lt;/ul&gt;</span>
-</code></pre>
-</div>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff6b9774680 /></p>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 
@@ -178,36 +153,6 @@
 <p>これもさっきのと同じように、<code>JEKYLL_ROOT/_plugins</code> にファイルをコピーする。そんでLiquidテンプレートを書き換えるんだけど詳細はプラグイン内の記事をご確認くだしあ。</p>
 
     <a href="/2011/06/29/added-category-archives/#disqus_thread">Comments</a>
-
-    <h2><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></h2>
-    <div class="articleinfo">Posted on 24 May 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>暇だったので自動で特定のユーザーを延々favし続けるスクリプトを書いた。</p>
-
-<script src="https://gist.github.com/972943.js?file=favstream.rb"></script>
-
-<p>ヒトデ君が書いた <a href="https://github.com/hitode909/user-stream-receiver" title="hitode909/user-stream-receiver - GitHub">hitode909/user-stream-receiver - GitHub</a> と<a href="http://d.hatena.ne.jp/aquarla/20101020/1287540883" title="Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla">Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux | grep aquarla</a> を参考にさせてもらった。というかほとんどまるパクリ。またOAuthのところはtily氏の <a href="https://github.com/tily/ruby-oauth-cli-twitter">tily/ruby-oauth-cli-twitter - GitHub</a> に全面的に依存している。</p>
-
-<p>User Stremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。</p>
-
-<p>しかしUser Streamはときどき調子が悪く、発言を拾い落とすこともある。そんなときは以下のコードを使う。</p>
-
-<script src="https://gist.github.com/972943.js?file=favoritter.rb"></script>
-
-<p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  ruby favoritter.rb ストーキングしたい相手のユーザー名</span>
-</code></pre>
-</div>
-
-<div class="highlight"><pre><code class="console"><span class="go">  ruby favstream.rb ストーキングしたい相手のユーザー名</span>
-</code></pre>
-</div>
-
-
-    <a href="/2011/05/24/favstream.rb/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -280,6 +225,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
+				
 					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
 				
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
@@ -297,8 +244,6 @@
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
 				
 					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
-				
-					<li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
 				
 				</ul>
 			</div>
