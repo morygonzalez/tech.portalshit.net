@@ -31,6 +31,21 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></h2>
+    <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
+	
+		<a href="categories/CakePHP/">CakePHP</a>
+	</div>
+    <p>CakePHPには <a href="http://github.com/davidpersson/media">Media Plugin</a> というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。</p>
+
+<p>しかしこのMedia Plugin、設置が少々面倒だ。情報も英語のものも含めて少ない。僕は二つのプロジェクトでこのMedia Pluginを使ったけど、とても設置に苦労した。はまるポイントはいくつかあるんだけど、今日はDBについて書いておこうと思う。</p>
+
+<p>Media Pluginは <code>attachments</code> というテーブルをつくり、ここにファイルのメタデータを格納していく。これはアプリケーションのルート（ <code>APP</code> ディレクトリ）で <code>cake media init</code> というコマンドをTerminalで打ってやると（ただし <code>/cake/console</code> にパスを通しておく必要あり）、Bakeのときのような画面が出てきて初期設定をやってくれる（ <code>app/config/database.php</code> の情報にあわせてテーブルも作ってくれる）。しかしCakePHPのデフォルトDBがMySQLであるためMedia PluginもMySQLを想定しているのか、 <code>app/plugins/media/config/sql/media.sql</code> のSQL文を単純に実行してしまうと不具合が生じる。実は僕はここで結構はまってた。僕は全部のプロジェクトでSQLiteを使っているので、単純にこのSQLを実行すると、 <code>attachments.id</code> のデータ型が <code>INT(10)</code> とかになってしまい、エラーに遭遇し続けることになってしまった。SQLiteの場合、idカラムのデータ型は <code>INTEGER</code> でなければならないのだ。</p>
+
+<p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>
+
+    <a href="/2010/04/22/cakephp-mediaplugin/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
     <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
 	
@@ -50,7 +65,7 @@
 
 <p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b94cc928 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8bb18b0 /></p>
 
 <p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
 
@@ -64,8 +79,6 @@
 
 
 				</div>
-
-				<div class="autopagerize_insert_before"></div>
 
   			<div class="paginator">
   				
@@ -83,57 +96,59 @@
         <h3>Categories</h3>
         <ul id="categories">
         
-          <li><a href="/categories/CakePHP/">CakePHP</a>
+          <li><a href="/categories/CakePHP/">CakePHP</a></li>
         
-          <li><a href="/categories/JavaScript/">JavaScript</a>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
         
-          <li><a href="/categories/Jekyll/">Jekyll</a>
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
         
-          <li><a href="/categories/Liquid/">Liquid</a>
+          <li><a href="/categories/Liquid/">Liquid</a></li>
         
-          <li><a href="/categories/Mac/">Mac</a>
+          <li><a href="/categories/Mac/">Mac</a></li>
         
-          <li><a href="/categories/OAuth/">OAuth</a>
+          <li><a href="/categories/OAuth/">OAuth</a></li>
         
-          <li><a href="/categories/PHP/">PHP</a>
+          <li><a href="/categories/PHP/">PHP</a></li>
         
-          <li><a href="/categories/Rails/">Rails</a>
+          <li><a href="/categories/Rails/">Rails</a></li>
         
-          <li><a href="/categories/Ruby/">Ruby</a>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
         
-          <li><a href="/categories/TDD/">TDD</a>
+          <li><a href="/categories/TDD/">TDD</a></li>
         
-          <li><a href="/categories/Twitter/">Twitter</a>
+          <li><a href="/categories/Twitter/">Twitter</a></li>
         
-          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
         
-          <li><a href="/categories/Unix/">Unix</a>
+          <li><a href="/categories/Unix/">Unix</a></li>
         
-          <li><a href="/categories/Vim/">Vim</a>
+          <li><a href="/categories/Vim/">Vim</a></li>
         
-          <li><a href="/categories/YAML/">YAML</a>
+          <li><a href="/categories/YAML/">YAML</a></li>
         
-          <li><a href="/categories/bot/">bot</a>
+          <li><a href="/categories/bot/">bot</a></li>
         
-          <li><a href="/categories/git/">git</a>
+          <li><a href="/categories/git/">git</a></li>
         
-          <li><a href="/categories/jQuery/">jQuery</a>
+          <li><a href="/categories/jQuery/">jQuery</a></li>
         
-          <li><a href="/categories/jekyll/">jekyll</a>
+          <li><a href="/categories/jekyll/">jekyll</a></li>
         
-          <li><a href="/categories/misc/">misc</a>
+          <li><a href="/categories/misc/">misc</a></li>
         
-          <li><a href="/categories/rvm/">rvm</a>
+          <li><a href="/categories/rvm/">rvm</a></li>
         
-          <li><a href="/categories/vim/">vim</a>
+          <li><a href="/categories/vim/">vim</a></li>
         
-          <li><a href="/categories/zsh/">zsh</a>
+          <li><a href="/categories/zsh/">zsh</a></li>
         
-          <li><a href="/categories/勉強会/">勉強会</a>
+          <li><a href="/categories/勉強会/">勉強会</a></li>
         
         </ul>
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
@@ -152,8 +167,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>
@@ -190,3 +203,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>

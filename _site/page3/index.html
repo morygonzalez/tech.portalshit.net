@@ -35,6 +35,23 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></h2>
+    <div class="articleinfo">Posted on 23 Apr 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Vim/">Vim</a>
+	</div>
+    <h3 id="macvim">MacVimでコピペできないのって仕様？</h3>
+
+<p>MacVimに他のアプリケーションでコピーしたものを貼り付けられないのって仕様？ いろいろ調べてみたけどストライクな解決方法はないみたい。結局CLIのVim使ってる。</p>
+
+<ul>
+  <li><a href="http://d.hatena.ne.jp/sea_mountain/20110421/1303362772" title="【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに">【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに</a></li>
+  <li><a href="http://twitter.com/#!/nekoya/status/2647362030" title="Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー ...">Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー …</a></li>
+  <li><a href="http://twitter.com/#!/marutanm/statuses/51557561425592320" title="Twitter / @marutanm Air: MacVimでpasteboardからペーストできな ...">Twitter / @marutanm Air: MacVimでpasteboardからペーストできな …</a></li>
+</ul>
+
+    <a href="/2011/04/23/macvim-kopipe-dekinai/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></h2>
     <div class="articleinfo">Posted on 17 Apr 2011 by 森井ゴンザレス |
 	
@@ -44,7 +61,7 @@
 
 <p>Jekyllで関連記事を表示するようにした。jekyllを実行するときに <code>jekyll --lsi</code> とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に <code>gem install gsl</code> しただけでは以下のようなエラーが出る。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b94d7f58 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8b5fee8 /></p>
 
 <p>GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。</p>
 
@@ -56,7 +73,7 @@
 
 <p>ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b94d25f8 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8b5eef8 /></p>
 
 <p>(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)</p>
 
@@ -137,115 +154,8 @@
 
     <a href="/2011/03/24/dont-uninstall-current-shell-without-chsh/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/03/21/tdd-bootcamp-fukuoka">TDD Boot Camp福岡に参加した</a></h2>
-    <div class="articleinfo">Posted on 21 Mar 2011 by 森井ゴンザレス |
-	
-		<a href="categories/TDD/">TDD</a>
-	</div>
-    <p>昨日と一昨日の二日間、TDD Boot Camp 福岡に参加した。</p>
-
-<h3 id="section">参加しようと思ったわけ</h3>
-
-<p>勤めている会社にはテストがない。いや、テストはある。エクセルにテスト項目をたくさん書き出していって手動テストだ。テストコードがない。人力で三人くらいが夜なべしてテストする（だいたいスケジュールには遅延が発生する）。これはどうしたっておかしい。開発前に要件定義書、設計書を書いて開発して、開発が終わったらエクセルで長大なテストシートを作成し、手動テストを行う。そしてバグや思わぬ不具合が発見されるとプログラムに改修を加える。欠陥や不都合が発見される度に連動して設計書にも修正・変更が加えられ、Do Repeat Yourselfな感じになってる。毎日毎日ドキュメント作成などの開発以外のタスクに時間を割かれるので新しい技術に触れる機会がないし、遅くまで残って仕事してから帰宅するので趣味プログラミングで知見を広めることもできない（福岡に来てからのこのブログの更新状況を見ればおわかりいただけるかと）。この状況をなんとかしたいと思っていて、藁をもすがる思いでTDD Boot Campに参加した。</p>
-
-<h3 id="section-1">感想</h3>
-
-<p>一日目は『プログラマが知るべき97のこと』の監修やTDDで有名な <a href="http://twitter.com/t_wada">@t_wada</a> さんのレクチャーで、TDDとは何かが説明された。以下印象に残った点。</p>
-
-<ul>
-  <li>良いテスト
-    <ul>
-      <li>自動化されている</li>
-      <li>徹底している</li>
-      <li>何度でも実行可能</li>
-      <li>独立している</li>
-      <li>プロのコード
-        <ul>
-          <li>テストコードもプロダクトコードと同じ品質であることが求められる（リファクタリング、DRY原則の貫徹など）</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>TDD三原則
-    <ul>
-      <li>単体テストコードを書く前に製品コードを書いてはいけない</li>
-      <li>適切に失敗する単体テストコードができるまで、次の単体テストコードを書いてはならない</li>
-      <li>単体テストコードに対応する以上に製品コードを書かない</li>
-    </ul>
-  </li>
-  <li>なぜTDDするのか
-    <ul>
-      <li>自分が完璧ではないことがわかっているから
-        <ul>
-          <li>最初から思い通りにコードを書けるほどに私たちは賢くない</li>
-          <li>最初から思い通りに動作するほど対象は単純ではない</li>
-          <li>素早く対象に近づき、フィードバックを得て方向修正をしながら開発を行う必要がある</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>テストの目的は健康
-    <ul>
-      <li>変化に対応できるのは健康体のコードだけ</li>
-      <li>変化に対応できるのは健康体のチームだけ
-        <ul>
-          <li>毎日残業する、毎日レッドブル飲んだりしていてはダメ</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>TDDの導入効果
-    <ul>
-      <li>MSやIBMでTDD導入後、欠陥の割合が4割から9割削減された。</li>
-      <li>コード実装時間は15%から35%増加した。
-        <ul>
-          <li>しかし結果的にはバグが激減するので開発工数自体は減る。</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>TDDは才能ではなくスキル
-    <ul>
-      <li>練習すれば習得可能</li>
-      <li>量は質に転化する</li>
-      <li>写経しましょう！
-        <ul>
-          <li>PCにGitをインストールし、ページをキープできるブックスタンドを買って、ケント・ベック本をひたすら写経。ビルドを実行する度にコミットする。</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>テストのみならず、自動化やバージョンコントロールの重要性が説かれた。</p>
-
-<p>二日目には <a href="http://twitter.com/bleis">@bleis</a> さんによるGitの効果的な利用方法やJenkinsを利用した継続的インテグレーションの実践例、 <a href="http://twitter.com/akineko">@akineko</a> さんによるOMakeを利用した自動ビルド、自動テスト、自動コミットの話など。</p>
-
-<h3 id="section-2">ペアプログラミングを体験した</h3>
-
-<p>ペアプログラミングを生まれて体験した。 <a href="http://twitter.com/mallowlabs">@mallowlabs</a> さんとRubyでペアプログラミングをさせてもらった。講師陣が出題する課題を解いていくというもの。当然テスト駆動。テスティングフレームワークにはRSpecを利用した。</p>
-
-<p>WEB + DB PressなどのRSpec特集を写経したことはあったけど、時間制限がある中で、他の人とペアを組んでプログラムを書いていく作業はかなりエキサイティングだった。</p>
-
-<p>ただ自分のRubyスキルおよびVimのスキルが著しく劣っていたため、@mallowlabs さんの足を引っ張っていた感は否めない。正直申し訳なかったです。</p>
-
-<p>全般的に、自分の知識のなさ、スキルのなさが実感できた</p>
-
-<p>以下、初日に行ったFizzBuzz問題と主に二日目に取り組んだTwitterのタイムラインをカテゴリ分けするという課題の成果物。</p>
-
-<p><a href="https://gist.github.com/879647">TDD Boot Camp 福岡 — Gist</a>
-<a href="https://gist.github.com/878159">TDDBC でペアプロした結果です — Gist</a></p>
-
-<h3 id="tdd">TDDをいかにして根付かせるか</h3>
-
-<p>勉強会に参加していきなりコードが書けるようになるわけでは当然ないので、継続的な勉強が必要だと感じた。いっぱい本を紹介してもらったので積ん読本を何冊か片付けたら『レガシー・コード改善ガイド』と『テスト駆動開発入門』を買おうと思った。</p>
-
-    <a href="/2011/03/21/tdd-bootcamp-fukuoka/#disqus_thread">Comments</a>
-
 
 				</div>
-
-				<div class="autopagerize_insert_before"></div>
 
   			<div class="paginator">
   				
@@ -256,8 +166,7 @@
   				  </span>
   				
   				
-    				<span class="next">
-    				  <a href="../page4/" rel="next">Next Page</a>
+    				<span class="next"> <a href="../page4/" rel="next">Next Page</a>
     		    </span>
     		  
   			</div>
@@ -267,57 +176,59 @@
         <h3>Categories</h3>
         <ul id="categories">
         
-          <li><a href="/categories/CakePHP/">CakePHP</a>
+          <li><a href="/categories/CakePHP/">CakePHP</a></li>
         
-          <li><a href="/categories/JavaScript/">JavaScript</a>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
         
-          <li><a href="/categories/Jekyll/">Jekyll</a>
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
         
-          <li><a href="/categories/Liquid/">Liquid</a>
+          <li><a href="/categories/Liquid/">Liquid</a></li>
         
-          <li><a href="/categories/Mac/">Mac</a>
+          <li><a href="/categories/Mac/">Mac</a></li>
         
-          <li><a href="/categories/OAuth/">OAuth</a>
+          <li><a href="/categories/OAuth/">OAuth</a></li>
         
-          <li><a href="/categories/PHP/">PHP</a>
+          <li><a href="/categories/PHP/">PHP</a></li>
         
-          <li><a href="/categories/Rails/">Rails</a>
+          <li><a href="/categories/Rails/">Rails</a></li>
         
-          <li><a href="/categories/Ruby/">Ruby</a>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
         
-          <li><a href="/categories/TDD/">TDD</a>
+          <li><a href="/categories/TDD/">TDD</a></li>
         
-          <li><a href="/categories/Twitter/">Twitter</a>
+          <li><a href="/categories/Twitter/">Twitter</a></li>
         
-          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
         
-          <li><a href="/categories/Unix/">Unix</a>
+          <li><a href="/categories/Unix/">Unix</a></li>
         
-          <li><a href="/categories/Vim/">Vim</a>
+          <li><a href="/categories/Vim/">Vim</a></li>
         
-          <li><a href="/categories/YAML/">YAML</a>
+          <li><a href="/categories/YAML/">YAML</a></li>
         
-          <li><a href="/categories/bot/">bot</a>
+          <li><a href="/categories/bot/">bot</a></li>
         
-          <li><a href="/categories/git/">git</a>
+          <li><a href="/categories/git/">git</a></li>
         
-          <li><a href="/categories/jQuery/">jQuery</a>
+          <li><a href="/categories/jQuery/">jQuery</a></li>
         
-          <li><a href="/categories/jekyll/">jekyll</a>
+          <li><a href="/categories/jekyll/">jekyll</a></li>
         
-          <li><a href="/categories/misc/">misc</a>
+          <li><a href="/categories/misc/">misc</a></li>
         
-          <li><a href="/categories/rvm/">rvm</a>
+          <li><a href="/categories/rvm/">rvm</a></li>
         
-          <li><a href="/categories/vim/">vim</a>
+          <li><a href="/categories/vim/">vim</a></li>
         
-          <li><a href="/categories/zsh/">zsh</a>
+          <li><a href="/categories/zsh/">zsh</a></li>
         
-          <li><a href="/categories/勉強会/">勉強会</a>
+          <li><a href="/categories/勉強会/">勉強会</a></li>
         
         </ul>
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
@@ -336,8 +247,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>
@@ -374,3 +283,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>

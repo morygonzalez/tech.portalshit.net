@@ -45,7 +45,7 @@
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b9a204b0 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0fa810358 /></p>
 
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
@@ -109,6 +109,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
+          
           <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
           
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
@@ -126,8 +128,6 @@
           <li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
           
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-          
-          <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
         </ul>
       </div>

@@ -35,6 +35,34 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></h2>
+    <div class="articleinfo">Posted on 09 Jul 2010 by 森井ゴンザレス |
+	
+		<a href="categories/OAuth/">OAuth</a>
+	
+		<a href="categories/Rails/">Rails</a>
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
+
+<p><img src="http://tech.portalshit.net/images/27-oauth.png" alt="OAuthの利用イメージ" /></p>
+
+<p>疑問点がいくつかある。</p>
+
+<ul>
+  <li>
+    <p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
+  </li>
+  <li>
+    <p>Userモデルで <code>has_many :oauth_tokens</code> とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 <code>oauth_tokens</code> にそんな <code>user_id</code> の人いないし」みたいなエラーが出るような気がする。</p>
+  </li>
+</ul>
+
+<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
+
+    <a href="/2010/07/09/cant-live-up-with-oauth/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/07/07/finish-editing-then-restore-console">Vimで編集を終了した後、元のコンソールの状態を復元したい</a></h2>
     <div class="articleinfo">Posted on 07 Jul 2010 by 森井ゴンザレス |
 	
@@ -89,17 +117,17 @@
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b96c8420 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c23a00 /></p>
 
 <p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b96c7b88 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c23550 /></p>
 
 <p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
 
 <p>結局、拾ってきた	コードを参考にして</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b96c74a8 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c230a0 /></p>
 
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 
@@ -114,47 +142,8 @@
 
     <a href="/2010/07/02/active_record-is-so-sticky-for-me/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></h2>
-    <div class="articleinfo">Posted on 28 Jun 2010 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>一個前の記事（<a href="http://tech.portalshit.net/2010/06/25/i-realized-php-is-crap/" title="Rubyがエレガントだって言われるのがわかってきたような気がする \| tech.portalshit.net - CakePHP, Rails, JavaScript">Rubyがエレガントだって言われるのがわかってきたような気がする | tech.portalshit.net - CakePHP, Rails, JavaScript</a>）をcxxさんに添削してもらったところ、Rubyの方のコードには問題があったらしい。Rubyでは変数を宣言だけして終わりみたいな初期化をしちゃダメだそうで、必ず何かを代入しないといけないらしい。</p>
-
-<p>そういうわけで正しくは、</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b4bb0 /></p>
-
-<p>と書くそうです。</p>
-
-<p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b4408 /></p>
-
-<p>でも同じ結果を出力しますね。</p>
-
-<p>インスタンス変数と普通の変数の違いが分かってなかったので、たのしいRuby（第2版）を開いて復習してみたところ、以下のような記述があった。（たのしいRuby 第2版 pp.123-124）</p>
-
-<blockquote>
-  <p><code>@</code> で始まる変数は <em>インスタンス変数</em> といいます。ローカル変数とは違って、このメソッドを抜けてもその値は保存されますが、インスタンスごとに違う値を割り当てられる変数です。（たのしいRuby 第2版 pp.123-124）</p>
-</blockquote>
-
-<p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b3d50 /></p>
-
-<p>で、これを実行すると</p>
-
-<p>Liquid error: undefined method `join’ for “\nFuga\nPiyo\n”:String</p>
-
-<p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
-
-    <a href="/2010/06/28/i-had-better-review-ruby/#disqus_thread">Comments</a>
-
 
 				</div>
-
-				<div class="autopagerize_insert_before"></div>
 
   			<div class="paginator">
   				
@@ -165,8 +154,7 @@
   				  </span>
   				
   				
-    				<span class="next">
-    				  <a href="../page9/" rel="next">Next Page</a>
+    				<span class="next"> <a href="../page9/" rel="next">Next Page</a>
     		    </span>
     		  
   			</div>
@@ -176,57 +164,59 @@
         <h3>Categories</h3>
         <ul id="categories">
         
-          <li><a href="/categories/CakePHP/">CakePHP</a>
+          <li><a href="/categories/CakePHP/">CakePHP</a></li>
         
-          <li><a href="/categories/JavaScript/">JavaScript</a>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
         
-          <li><a href="/categories/Jekyll/">Jekyll</a>
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
         
-          <li><a href="/categories/Liquid/">Liquid</a>
+          <li><a href="/categories/Liquid/">Liquid</a></li>
         
-          <li><a href="/categories/Mac/">Mac</a>
+          <li><a href="/categories/Mac/">Mac</a></li>
         
-          <li><a href="/categories/OAuth/">OAuth</a>
+          <li><a href="/categories/OAuth/">OAuth</a></li>
         
-          <li><a href="/categories/PHP/">PHP</a>
+          <li><a href="/categories/PHP/">PHP</a></li>
         
-          <li><a href="/categories/Rails/">Rails</a>
+          <li><a href="/categories/Rails/">Rails</a></li>
         
-          <li><a href="/categories/Ruby/">Ruby</a>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
         
-          <li><a href="/categories/TDD/">TDD</a>
+          <li><a href="/categories/TDD/">TDD</a></li>
         
-          <li><a href="/categories/Twitter/">Twitter</a>
+          <li><a href="/categories/Twitter/">Twitter</a></li>
         
-          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
         
-          <li><a href="/categories/Unix/">Unix</a>
+          <li><a href="/categories/Unix/">Unix</a></li>
         
-          <li><a href="/categories/Vim/">Vim</a>
+          <li><a href="/categories/Vim/">Vim</a></li>
         
-          <li><a href="/categories/YAML/">YAML</a>
+          <li><a href="/categories/YAML/">YAML</a></li>
         
-          <li><a href="/categories/bot/">bot</a>
+          <li><a href="/categories/bot/">bot</a></li>
         
-          <li><a href="/categories/git/">git</a>
+          <li><a href="/categories/git/">git</a></li>
         
-          <li><a href="/categories/jQuery/">jQuery</a>
+          <li><a href="/categories/jQuery/">jQuery</a></li>
         
-          <li><a href="/categories/jekyll/">jekyll</a>
+          <li><a href="/categories/jekyll/">jekyll</a></li>
         
-          <li><a href="/categories/misc/">misc</a>
+          <li><a href="/categories/misc/">misc</a></li>
         
-          <li><a href="/categories/rvm/">rvm</a>
+          <li><a href="/categories/rvm/">rvm</a></li>
         
-          <li><a href="/categories/vim/">vim</a>
+          <li><a href="/categories/vim/">vim</a></li>
         
-          <li><a href="/categories/zsh/">zsh</a>
+          <li><a href="/categories/zsh/">zsh</a></li>
         
-          <li><a href="/categories/勉強会/">勉強会</a>
+          <li><a href="/categories/勉強会/">勉強会</a></li>
         
         </ul>
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
@@ -245,8 +235,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>
@@ -283,3 +271,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>
