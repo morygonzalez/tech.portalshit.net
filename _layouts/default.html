@@ -39,8 +39,6 @@
 				  {{ content }}
 				</div>
 
-				<div class="autopagerize_insert_before"></div>
-
   			<div class="paginator">
   				{% if paginator.previous_page %}
   				  <span class="previous">
@@ -52,8 +50,7 @@
   				  </span>
   				{% endif %}
   				{% if paginator.next_page %}
-    				<span class="next">
-    				  <a href="../page{{ paginator.next_page }}/" rel="next">Next Page</a>
+    				<span class="next"> <a href="../page{{ paginator.next_page }}/" rel="next">Next Page</a>
     		    </span>
     		  {% endif %}
   			</div>
@@ -63,7 +60,7 @@
         <h3>Categories</h3>
         <ul id="categories">
         {% for category in site.iterable.categories %}
-          <li><a href="/categories/{{ category.name }}/">{{ category.name }}</a>
+          <li><a href="/categories/{{ category.name }}/">{{ category.name }}</a></li>
         {% endfor %}
         </ul>
 				<h3>Latest Posts</h3>
@@ -106,3 +103,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>

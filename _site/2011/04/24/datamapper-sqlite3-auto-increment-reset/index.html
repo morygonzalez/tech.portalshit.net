@@ -35,7 +35,7 @@
       </div>
       <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95be4d0 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fedf46e5d18 /></p>
 
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
@@ -53,7 +53,7 @@
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95bdd28 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fedf46e5340 /></p>
 
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 
@@ -70,7 +70,7 @@
           
           <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
           
-          <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
+          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
         </ul>
       </div>
@@ -101,6 +101,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
+          
           <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
           
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
@@ -118,8 +120,6 @@
           <li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
           
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-          
-          <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
         </ul>
       </div>

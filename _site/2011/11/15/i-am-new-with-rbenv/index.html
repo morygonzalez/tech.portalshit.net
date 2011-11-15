@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>OAuthがwakaranai |  tech.portalshit.net</title>
+    <title>RVMをやめてrbenvにした |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,55 +19,54 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/07/07/finish-editing-then-restore-console" title="Vimで編集を終了した後、元のコンソールの状態を復元したい">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/10/31/stopped-using-heroku" title="Herokuを使うのをやめた">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2010/07/14/deploy-with-git-hook" title="Gitのhookを使ってDreamhost上のJekyllに記事を公開">Next Post</a></span>
         
       </div>
 
-      <h2>OAuthがwakaranai</h2>
+      <h2>RVMをやめてrbenvにした</h2>
       <div class="articleinfo">
-        Posted on 09 Jul 2010 by 森井ゴンザレス |
-        
-          <a href="/categories/OAuth/">OAuth</a>
-        
-          <a href="/categories/Rails/">Rails</a>
+        Posted on 15 Nov 2011 by 森井ゴンザレス |
         
           <a href="/categories/Ruby/">Ruby</a>
         
       </div>
-      <p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
+      <p>RVM、便利に使わせてもらっていたけど、Rubyの新しいのがリリースされるたびにいろいろアレだったので <a href="%link%" title="sstephenson/rbenv - GitHub">rbenv</a> を使ってみることにした。移行、しんどいかなと思ってたけど非常に簡単で大変よかった。</p>
 
-<p><img src="http://tech.portalshit.net/images/27-oauth.png" alt="OAuthの利用イメージ" /></p>
+<h3 id="rvm">RVMもキモさ</h3>
 
-<p>疑問点がいくつかある。</p>
+<p>RVMの悪いところはググればいろいろ出てくるけど、OSの <code>cd</code> やRubyの <code>gem</code> コマンドをシェルスクリプトで置き換えるとか、行儀が悪いところが問題らしい。個人的に気にくわなかったのがRVMがどんどんでかくなっていって、Rubyのビルドに必要なパッケージまで管理できるようになったところとか（.rvm以下に新しくシステムができるみたいな感じがキモかった）、パッケージインストール用のコマンドがhelpドキュメントでは <code>rvm package install</code> なのに <code>rvm pkg install</code> にいつの間にか変わっていて訳がわからないところとか、よくわからないシェルスクリプトがログイン時に実行されるところとか、 <code>rvmsudo</code> っていうコマンドのキモさとかいろいろ。</p>
 
-<ul>
-  <li>
-    <p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
-  </li>
-  <li>
-    <p>Userモデルで <code>has_many :oauth_tokens</code> とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 <code>oauth_tokens</code> にそんな <code>user_id</code> の人いないし」みたいなエラーが出るような気がする。</p>
-  </li>
-</ul>
+<h3 id="rbenv">rbenv</h3>
 
-<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
+<p>rbenvはRubyのバージョンを切り替えるためのツールなのでインストールはやってくれないけど、ruby-buildというツールを別に入れることで、 <code>rbenv install 1.9.2-p290</code> とかでRubyのインストールもこなしてくれるようになる。</p>
+
+<p>あまりRVMを使いこなしてたとはいえなかった自分にとってはrbenvくらいでちょうどいいような感じがする。gemsetとか使わんし。そんくらいだったBundler使うし。</p>
+
+<p>インストールは以下のページが参考になります。</p>
+
+<p><a href="%link%" title="rbenv + ruby-buildのインストール方法 - 223 Software">rbenv + ruby-buildのインストール方法 - 223 Software</a></p>
+
+<p>なおrbenvはRubyインストール時のconfigureオプションの指定方法が特殊です。直接は指定できないようなので以下のようにします。（homebrewでインストールしたreadlineとiconvのパスを指定する例）</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fedf47058c0 /></p>
+
+<p>デフォルトのオプションなしのRubyだとearthquake.gemが動かなかったりjekyllが使えなかったりするので僕は↑のオプションを追加しました。よろしかったらお試し下さい。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
+          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
-          <li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
+          <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
-          <li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
+          <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
-          <li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
+          <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
           
-          <li><a href="/2010/09/02/clickable-map-coordinates-with-javascript">JavaScriptでClickable Mapの座標を取得する</a></li>
+          <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
           
         </ul>
       </div>
@@ -90,10 +89,6 @@
       <div id="sidebar">
         <h3>Categories</h3>
         <ul id="categories">
-          
-          <li><a href="/categories/OAuth/">OAuth</a></li>
-          
-          <li><a href="/categories/Rails/">Rails</a></li>
           
           <li><a href="/categories/Ruby/">Ruby</a></li>
           

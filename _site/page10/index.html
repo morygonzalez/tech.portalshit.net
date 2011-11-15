@@ -35,6 +35,43 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></h2>
+    <div class="articleinfo">Posted on 14 Jun 2010 by 森井ゴンザレス |
+	
+		<a href="categories/misc/">misc</a>
+	</div>
+    <p>このブログのCMSをMephistoから<a href="http://github.com/mojombo/jekyll" title="mojombo's jekyll at master - GitHub">jekyll</a>に変えてみた。</p>
+
+<p>Mephistoは公式サイトつながらないし、Mephisto使ってた外国のGeek連中がここ一年くらいでこぞってJekyllに移行してるみたいなのでこのビッグウェーブに乗ってみた。</p>
+
+<h3 id="jekyll--cms">Jekyll = 静的CMS</h3>
+
+<p>しばらくJekyllの使い方が分からなくて格闘してたけど、やっと使い方が分かった。これは静的なCMSであって動的なCMSではない。Movable Typeに似てる。それをGeekなスタイルでやる感じ。</p>
+
+<h3 id="ruby">Rubyが入ってるサーバーはいらない</h3>
+
+<p>コメント機能とかはないのでサーバーでRubyが動く必要はナッシング。DBも使わないのでMySQLの設定とかSQL分との格闘も必要ナッシング。コメント欄が欲しい場合は <a href="http://disqus.com/overview/" title="DISQUS \| Overview">DISQUS</a> とかに外注すればOK。</p>
+
+<p>ちょっと話題がずれるけど、DISQUSって便利そうですよね。他人のブログにコメント書いたあとってそのコントロール権みたいのはブログの持ち主に移行するけど、DISQUSみたいなサービスを利用すればコメントを書いた本人が過去の自分のコメントをトラックしやすくなる。ブログ主にしたってスパム対策とかもやりやすくなる。自前で自分のブログにコメント欄を持つって時代は終わったのかもね。いまはTwitterとかもあるし。</p>
+
+<h3 id="mephisto">Mephistoからの移行について</h3>
+
+<p>Jekyllのgithubのwikiに移行方法が載っけてあるけど（<a href="http://wiki.github.com/mojombo/jekyll/blog-migrations" title="Blog Migrations - jekyll - GitHub">Blog Migrations - jekyll - GitHub</a>）、これわかりにくい。というかMephistoをMySQLで運用してないとスクリプトをそのまんまでは利用できない。結果から書くと僕はMephistoはSQLite3で運用してたので移行スクリプトを使えなかった。</p>
+
+<p>一応MephistoのDBをSQLite3からMySQLに変更してコンバートすることも試してみたけど、DreamHost上では <code>gem install mysqlplus</code> が <code>sudo</code> 権限がないために実行できず（なぜかユーザーディレクトリへのインストールもはねられる）、ローカルのMacBook上ではActiveRecordとかその辺でエラーが出て（MephistoはRails 2.2.2以下じゃないと動かないみたい）、Railsのバージョンを下げるとかも試してみたんだけどエラーが出続けるので諦めてしまった。</p>
+
+<p>そういうわけでして、記事数が16本と少なかったこともあり、ちまちま手書きでMephistoからJekyllに移行しました。</p>
+
+<p>コメント欄の設置（DISQUSを利用）とかフィードの生成とかカテゴリーの表示とかができてないけど、暇を見つけていじっていく予定です。</p>
+
+<h3 id="jekyll">全般的なJekyllの使用感</h3>
+
+<p>DBいらずだしシンプルでいいっすわ。XML-RPCとかAPIを使ってどうのこうのとかいった機能はないけど、テキストファイルをしこしこ書いて、 .markdown か .textile みたいな拡張子で保存して、 <code>jekyll</code> コマンドを実行するだけでhtmlファイルが <code>_site</code> ディレクトリに生成されて、これをアップロードするだけ。この手順を自動化するシェルスクリプト（<a href="http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy" title="tasks/deploy at master from henrik's henrik.nyh.se - GitHub">tasks/deploy at master from henrik’s henrik.nyh.se - GitHub</a>）も公開されているので、これを使えばectoとか使うのと変わらん感じでお手軽にブログ記事を投稿できます。</p>
+
+<p>Terminalからコマンドライン打つの好きな人とか、軽くてシンプルなブログを求めてる人にはうってつけだと思いますね。</p>
+
+    <a href="/2010/06/14/migrated-to-jekyll/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
     <div class="articleinfo">Posted on 04 Jun 2010 by 森井ゴンザレス |
 	
@@ -95,19 +132,8 @@
 
     <a href="/2010/06/03/hard-to-learn-rails/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/03/feel-like-migrating-from-mephisto">Mephistoから引っ越したい</a></h2>
-    <div class="articleinfo">Posted on 03 Jun 2010 by 森井ゴンザレス |
-	
-		<a href="categories/misc/">misc</a>
-	</div>
-    <p>なんか <a href="http://mephistoblog.com/">Mephistoの公式サイト</a> 死んでるし、<a href="http://jekyllrb.com/">jekyll</a> に変えようかなと思ってるんだけど、 <a href="http://wiki.github.com/mojombo/jekyll/blog-migrations">移行ガイド</a> の通りにやってもうまくいかない。</p>
-
-    <a href="/2010/06/03/feel-like-migrating-from-mephisto/#disqus_thread">Comments</a>
-
 
 				</div>
-
-				<div class="autopagerize_insert_before"></div>
 
   			<div class="paginator">
   				
@@ -118,8 +144,7 @@
   				  </span>
   				
   				
-    				<span class="next">
-    				  <a href="../page11/" rel="next">Next Page</a>
+    				<span class="next"> <a href="../page11/" rel="next">Next Page</a>
     		    </span>
     		  
   			</div>
@@ -129,57 +154,59 @@
         <h3>Categories</h3>
         <ul id="categories">
         
-          <li><a href="/categories/CakePHP/">CakePHP</a>
+          <li><a href="/categories/CakePHP/">CakePHP</a></li>
         
-          <li><a href="/categories/JavaScript/">JavaScript</a>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
         
-          <li><a href="/categories/Jekyll/">Jekyll</a>
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
         
-          <li><a href="/categories/Liquid/">Liquid</a>
+          <li><a href="/categories/Liquid/">Liquid</a></li>
         
-          <li><a href="/categories/Mac/">Mac</a>
+          <li><a href="/categories/Mac/">Mac</a></li>
         
-          <li><a href="/categories/OAuth/">OAuth</a>
+          <li><a href="/categories/OAuth/">OAuth</a></li>
         
-          <li><a href="/categories/PHP/">PHP</a>
+          <li><a href="/categories/PHP/">PHP</a></li>
         
-          <li><a href="/categories/Rails/">Rails</a>
+          <li><a href="/categories/Rails/">Rails</a></li>
         
-          <li><a href="/categories/Ruby/">Ruby</a>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
         
-          <li><a href="/categories/TDD/">TDD</a>
+          <li><a href="/categories/TDD/">TDD</a></li>
         
-          <li><a href="/categories/Twitter/">Twitter</a>
+          <li><a href="/categories/Twitter/">Twitter</a></li>
         
-          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
         
-          <li><a href="/categories/Unix/">Unix</a>
+          <li><a href="/categories/Unix/">Unix</a></li>
         
-          <li><a href="/categories/Vim/">Vim</a>
+          <li><a href="/categories/Vim/">Vim</a></li>
         
-          <li><a href="/categories/YAML/">YAML</a>
+          <li><a href="/categories/YAML/">YAML</a></li>
         
-          <li><a href="/categories/bot/">bot</a>
+          <li><a href="/categories/bot/">bot</a></li>
         
-          <li><a href="/categories/git/">git</a>
+          <li><a href="/categories/git/">git</a></li>
         
-          <li><a href="/categories/jQuery/">jQuery</a>
+          <li><a href="/categories/jQuery/">jQuery</a></li>
         
-          <li><a href="/categories/jekyll/">jekyll</a>
+          <li><a href="/categories/jekyll/">jekyll</a></li>
         
-          <li><a href="/categories/misc/">misc</a>
+          <li><a href="/categories/misc/">misc</a></li>
         
-          <li><a href="/categories/rvm/">rvm</a>
+          <li><a href="/categories/rvm/">rvm</a></li>
         
-          <li><a href="/categories/vim/">vim</a>
+          <li><a href="/categories/vim/">vim</a></li>
         
-          <li><a href="/categories/zsh/">zsh</a>
+          <li><a href="/categories/zsh/">zsh</a></li>
         
-          <li><a href="/categories/勉強会/">勉強会</a>
+          <li><a href="/categories/勉強会/">勉強会</a></li>
         
         </ul>
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
@@ -198,8 +225,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>
@@ -236,3 +261,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>
