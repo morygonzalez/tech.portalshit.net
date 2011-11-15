@@ -45,7 +45,7 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf146982c0 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89d3b1b8 /></p>
 
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
@@ -53,7 +53,7 @@
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14697870 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89d3a858 /></p>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 
@@ -74,8 +74,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
-          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
@@ -83,6 +81,8 @@
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
+          
+          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
         </ul>
       </div>

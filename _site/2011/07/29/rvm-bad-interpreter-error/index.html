@@ -37,15 +37,15 @@
       </div>
       <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14716f80 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfdfd8 /></p>
 
 <p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14716648 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfda38 /></p>
 
 <p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14715e28 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfd4c0 /></p>
 
 <p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
 
@@ -62,8 +62,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
-          
           <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
@@ -71,6 +69,8 @@
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
           <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
+          
+          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
         </ul>
       </div>

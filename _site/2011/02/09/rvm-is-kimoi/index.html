@@ -43,11 +43,11 @@
 
 <p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14698180 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89825f70 /></p>
 
 <p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf146979d8 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89823cc0 /></p>
 
 <p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
 
@@ -58,8 +58,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2011/02/09/rvm-is-kimoi">RVMきもい</a></li>
-          
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
@@ -67,6 +65,8 @@
           <li><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></li>
           
           <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
+          
+          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
         </ul>
       </div>

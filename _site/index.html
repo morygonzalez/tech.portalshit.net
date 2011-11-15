@@ -66,15 +66,15 @@
 	</div>
     <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14716f80 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfdfd8 /></p>
 
 <p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14716648 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfda38 /></p>
 
 <p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14715e28 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfd4c0 /></p>
 
 <p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
 
@@ -128,7 +128,7 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf146982c0 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89d3b1b8 /></p>
 
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
@@ -136,7 +136,7 @@
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14697870 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89d3a858 /></p>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 

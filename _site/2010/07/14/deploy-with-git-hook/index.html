@@ -45,7 +45,7 @@
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf14575f00 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89e37788 /></p>
 
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
@@ -68,8 +68,6 @@
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/07/14/deploy-with-git-hook">Gitのhookを使ってDreamhost上のJekyllに記事を公開</a></li>
-          
           <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
@@ -77,6 +75,8 @@
           <li><a href="/2010/10/12/media-plugin-1.3-not-work">CakePHPのMedia Plugin 1.3が動かない</a></li>
           
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          
+          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
           
         </ul>
       </div>

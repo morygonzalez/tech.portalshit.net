@@ -84,7 +84,7 @@
 
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf15957348 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89d269e8 /></p>
 
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
@@ -125,13 +125,13 @@
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf1465d058 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dffbf8 /></p>
 
 <p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
 
 <p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf1465c950 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dff5e0 /></p>
 
 <p>これで狙ったことができました。</p>
 
@@ -152,7 +152,7 @@
 
 <p>してみたところ、MacPortsでは三つヒットした。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf149fb8b8 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb8983ace0 /></p>
 
 <p>しかしSnow LeopardにはPython 2.6.1が入ってるので、</p>
 
@@ -172,7 +172,7 @@
 
 <p>そうなのよ。 <code>pygmentize-1.3.1</code> っていうバイナリファイルはあってパスは通ってるんだけど、 <code>pygmentize</code> そのものがないのよ。そういうわけで</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fbf149f94a0 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007fdb89837810 /></p>
 
 <p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href="http://github.com/mojombo/tpw/tree/master/css/syntax.css" title="syntax.css">Github互換のもの</a>を拾ってきて入れといた。</p>
 
