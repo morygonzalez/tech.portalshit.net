@@ -44,19 +44,13 @@
 
 <p>Jekyllで関連記事を表示するようにした。jekyllを実行するときに <code>jekyll --lsi</code> とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に <code>gem install gsl</code> しただけでは以下のようなエラーが出る。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b94d7f58 /></p>
-
 <p>GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。</p>
-
-<p>Liquid error: undefined method `join’ for “\n$ brew install gsl\n”:String</p>
 
 <p>そんでもう一回 <code>gem install gsl</code> するとうまく入った。 <code>_config.yaml</code> に <code>lsi: true</code> という記述を追記して jekyll を実行すると関連記事が表示されるようになった。</p>
 
 <h3 id="section-1">最近の記事表示</h3>
 
 <p>ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b94d25f8 /></p>
 
 <p>(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)</p>
 
@@ -120,8 +114,6 @@
 <p>Ubuntuは <code>root</code> というアカウントがなくてなんでも <code>sudo</code> するか、 <code>sudo su</code> で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。</p>
 
 <p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
-
-<p>Liquid error: undefined method `join’ for “\nif [ -f /bin/zsh ]; then\n  exec /bin/zsh\nfi\n”:String</p>
 
 <p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
@@ -245,8 +237,6 @@
 
 				</div>
 
-				<div class="autopagerize_insert_before"></div>
-
   			<div class="paginator">
   				
   				  <span class="previous">
@@ -256,8 +246,7 @@
   				  </span>
   				
   				
-    				<span class="next">
-    				  <a href="../page4/" rel="next">Next Page</a>
+    				<span class="next"> <a href="../page4/" rel="next">Next Page</a>
     		    </span>
     		  
   			</div>
@@ -267,53 +256,53 @@
         <h3>Categories</h3>
         <ul id="categories">
         
-          <li><a href="/categories/CakePHP/">CakePHP</a>
+          <li><a href="/categories/CakePHP/">CakePHP</a></li>
         
-          <li><a href="/categories/JavaScript/">JavaScript</a>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
         
-          <li><a href="/categories/Jekyll/">Jekyll</a>
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
         
-          <li><a href="/categories/Liquid/">Liquid</a>
+          <li><a href="/categories/Liquid/">Liquid</a></li>
         
-          <li><a href="/categories/Mac/">Mac</a>
+          <li><a href="/categories/Mac/">Mac</a></li>
         
-          <li><a href="/categories/OAuth/">OAuth</a>
+          <li><a href="/categories/OAuth/">OAuth</a></li>
         
-          <li><a href="/categories/PHP/">PHP</a>
+          <li><a href="/categories/PHP/">PHP</a></li>
         
-          <li><a href="/categories/Rails/">Rails</a>
+          <li><a href="/categories/Rails/">Rails</a></li>
         
-          <li><a href="/categories/Ruby/">Ruby</a>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
         
-          <li><a href="/categories/TDD/">TDD</a>
+          <li><a href="/categories/TDD/">TDD</a></li>
         
-          <li><a href="/categories/Twitter/">Twitter</a>
+          <li><a href="/categories/Twitter/">Twitter</a></li>
         
-          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
         
-          <li><a href="/categories/Unix/">Unix</a>
+          <li><a href="/categories/Unix/">Unix</a></li>
         
-          <li><a href="/categories/Vim/">Vim</a>
+          <li><a href="/categories/Vim/">Vim</a></li>
         
-          <li><a href="/categories/YAML/">YAML</a>
+          <li><a href="/categories/YAML/">YAML</a></li>
         
-          <li><a href="/categories/bot/">bot</a>
+          <li><a href="/categories/bot/">bot</a></li>
         
-          <li><a href="/categories/git/">git</a>
+          <li><a href="/categories/git/">git</a></li>
         
-          <li><a href="/categories/jQuery/">jQuery</a>
+          <li><a href="/categories/jQuery/">jQuery</a></li>
         
-          <li><a href="/categories/jekyll/">jekyll</a>
+          <li><a href="/categories/jekyll/">jekyll</a></li>
         
-          <li><a href="/categories/misc/">misc</a>
+          <li><a href="/categories/misc/">misc</a></li>
         
-          <li><a href="/categories/rvm/">rvm</a>
+          <li><a href="/categories/rvm/">rvm</a></li>
         
-          <li><a href="/categories/vim/">vim</a>
+          <li><a href="/categories/vim/">vim</a></li>
         
-          <li><a href="/categories/zsh/">zsh</a>
+          <li><a href="/categories/zsh/">zsh</a></li>
         
-          <li><a href="/categories/勉強会/">勉強会</a>
+          <li><a href="/categories/勉強会/">勉強会</a></li>
         
         </ul>
 				<h3>Latest Posts</h3>
@@ -374,3 +363,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>

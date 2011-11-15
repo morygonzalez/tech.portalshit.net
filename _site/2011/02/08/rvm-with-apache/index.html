@@ -35,15 +35,9 @@
       </div>
       <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
 
-<p>Liquid error: undefined method `join’ for “\n#!/usr/bin/env ruby\n\nputs RUBY_DESCRIPTION\n”:String</p>
-
 <p>なファイル（hoge.rb）があったとします。これを</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ ruby hoge.rb\n”:String</p>
-
 <p>とシェルから呼び出したときにはちゃんと</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b99ed858 /></p>
 
 <p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
 

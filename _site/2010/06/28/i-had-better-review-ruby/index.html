@@ -37,13 +37,9 @@
 
 <p>そういうわけで正しくは、</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b4bb0 /></p>
-
 <p>と書くそうです。</p>
 
 <p>ところでなんで自分は前回、 <code>@a</code> というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b4408 /></p>
 
 <p>でも同じ結果を出力しますね。</p>
 
@@ -55,11 +51,7 @@
 
 <p>なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b95b3d50 /></p>
-
 <p>で、これを実行すると</p>
-
-<p>Liquid error: undefined method `join’ for “\nFuga\nPiyo\n”:String</p>
 
 <p>と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。</p>
 

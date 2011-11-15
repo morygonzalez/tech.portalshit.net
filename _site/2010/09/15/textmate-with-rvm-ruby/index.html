@@ -37,8 +37,6 @@
 
 <p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ ruby hogehoge.rb\n”:String</p>
-
 <p>とか面倒くさいことをやらずにすみます。</p>
 
 <p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
@@ -46,8 +44,6 @@
 <p>上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、<kbd>⌘</kbd> + <kbd>R</kbd> で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（<a href="http://rvm.beginrescueend.com/integration/textmate/" title="RVM: Ruby Version Manager - Textmate Integration with RVM">RVM: Ruby Version Manager - Textmate Integration with RVM</a>）、結局この通りにやってもうまくいかず。</p>
 
 <p>しかし先ほどなにげなく</p>
-
-<p>Liquid error: undefined method `join’ for “\n$ rvm 1.9.2 –default\n”:String</p>
 
 <p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
 

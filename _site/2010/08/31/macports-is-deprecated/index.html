@@ -43,11 +43,7 @@
 
 <p>MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは <code>.bash_profile</code> とか <code>.zshrc</code> とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に</p>
 
-<p>Liquid error: undefined method `join’ for “\n#!/usr/bin/perl\n”:String</p>
-
 <p>とか </p>
-
-<p>Liquid error: undefined method `join’ for “\n#!/usr/bin/env ruby\n”:String</p>
 
 <p>とか書くのに使ってるバイナリ本体は <code>/opt/local/bin/</code> にあるとかは気持ち悪いっちゃ気持ち悪い。</p>
 
@@ -61,11 +57,7 @@
 
 <p>Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ brew install vim\n”:String</p>
-
 <p>してみた。しかしながら</p>
-
-<p>Liquid error: undefined method `join’ for “\nError: No available formula for vim\n”:String</p>
 
 <p>と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 <code>/usr/local/Library/Formula/</code> に <code>vim.rb</code> を作ってコピペした。</p>
 
@@ -73,11 +65,7 @@
 
 <p>そんで今度は意気揚々と</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ brew install vim\n”:String</p>
-
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b977a670 /></p>
 
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
@@ -88,8 +76,6 @@
 <p><a href="http://www.python.org/download/releases/" title="Releases">Releases</a></p>
 
 <p>その後、もう一度 <code>brew install vim</code> をしてみたところ、無事make完了。<code>vim --version |grep ruby</code> で</p>
-
-<p>Liquid error: undefined method `join’ for “\n+ruby\n”:String</p>
 
 <p>となった。</p>
 

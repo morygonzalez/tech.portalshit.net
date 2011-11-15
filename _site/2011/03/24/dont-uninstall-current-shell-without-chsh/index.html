@@ -41,8 +41,6 @@
 
 <p>ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。<code>.bashrc</code> に次のように書くそうだ。</p>
 
-<p>Liquid error: undefined method `join’ for “\nif [ -f /bin/zsh ]; then\n  exec /bin/zsh\nfi\n”:String</p>
-
 <p>これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。</p>
 
 <p><a href="http://labs.unoh.net/2010/05/zsh.html">ウノウラボ by Zynga Japan: zshはじめました。</a></p>

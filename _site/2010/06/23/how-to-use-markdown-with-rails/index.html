@@ -41,17 +41,11 @@
 
 <p>これはRailsのプラグインではないのでgemでインストール。</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ sudo gem install bluecloth\n”:String</p>
-
 <p>その後viewで</p>
-
-<p>Liquid error: undefined method `join’ for “\n&lt;%= markdwon(@item.text) %&gt;\n”:String</p>
 
 <p>とか書けばいい。</p>
 
 <p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
-
-<p>Liquid error: undefined method `join’ for “\nconfig.gem "bluecloth"\n”:String</p>
 
 <p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
 

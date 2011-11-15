@@ -39,19 +39,13 @@
 
 <p>そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ spec -c spec/*\n”:String</p>
-
 <p>とかやってもエラーが出る。 <code>which spec</code> すると <code>/usr/bin/spec</code> と出ちゃう。どうやら <code>spec</code> で発動されるのはRSpec 1.3のものみたい。</p>
 
 <p>RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ rspec -c spec/*\n”:String</p>
-
 <p>これできちんとテストコードが実行された。かと思いきやFailureが。</p>
 
 <p>Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に</p>
-
-<p>Liquid error: undefined method `join’ for “\n# -<em>- coding: utf-8 -</em>-\n”:String</p>
 
 <p>と書いてテキストエンコーディングを明示してあげないといけない。</p>
 

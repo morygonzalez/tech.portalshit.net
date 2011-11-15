@@ -44,11 +44,7 @@
 
 <p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b9834070 /></p>
-
 <p>つぎにRubyで同じコードを書いてみる。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff6b9832ba8 /></p>
 
 <p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
 
@@ -73,17 +69,11 @@
 
 <p>これはRailsのプラグインではないのでgemでインストール。</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ sudo gem install bluecloth\n”:String</p>
-
 <p>その後viewで</p>
-
-<p>Liquid error: undefined method `join’ for “\n&lt;%= markdwon(@item.text) %&gt;\n”:String</p>
 
 <p>とか書けばいい。</p>
 
 <p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
-
-<p>Liquid error: undefined method `join’ for “\nconfig.gem "bluecloth"\n”:String</p>
 
 <p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
 
@@ -157,8 +147,6 @@
 
 				</div>
 
-				<div class="autopagerize_insert_before"></div>
-
   			<div class="paginator">
   				
   				  <span class="previous">
@@ -168,8 +156,7 @@
   				  </span>
   				
   				
-    				<span class="next">
-    				  <a href="../page10/" rel="next">Next Page</a>
+    				<span class="next"> <a href="../page10/" rel="next">Next Page</a>
     		    </span>
     		  
   			</div>
@@ -179,53 +166,53 @@
         <h3>Categories</h3>
         <ul id="categories">
         
-          <li><a href="/categories/CakePHP/">CakePHP</a>
+          <li><a href="/categories/CakePHP/">CakePHP</a></li>
         
-          <li><a href="/categories/JavaScript/">JavaScript</a>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
         
-          <li><a href="/categories/Jekyll/">Jekyll</a>
+          <li><a href="/categories/Jekyll/">Jekyll</a></li>
         
-          <li><a href="/categories/Liquid/">Liquid</a>
+          <li><a href="/categories/Liquid/">Liquid</a></li>
         
-          <li><a href="/categories/Mac/">Mac</a>
+          <li><a href="/categories/Mac/">Mac</a></li>
         
-          <li><a href="/categories/OAuth/">OAuth</a>
+          <li><a href="/categories/OAuth/">OAuth</a></li>
         
-          <li><a href="/categories/PHP/">PHP</a>
+          <li><a href="/categories/PHP/">PHP</a></li>
         
-          <li><a href="/categories/Rails/">Rails</a>
+          <li><a href="/categories/Rails/">Rails</a></li>
         
-          <li><a href="/categories/Ruby/">Ruby</a>
+          <li><a href="/categories/Ruby/">Ruby</a></li>
         
-          <li><a href="/categories/TDD/">TDD</a>
+          <li><a href="/categories/TDD/">TDD</a></li>
         
-          <li><a href="/categories/Twitter/">Twitter</a>
+          <li><a href="/categories/Twitter/">Twitter</a></li>
         
-          <li><a href="/categories/Ubuntu/">Ubuntu</a>
+          <li><a href="/categories/Ubuntu/">Ubuntu</a></li>
         
-          <li><a href="/categories/Unix/">Unix</a>
+          <li><a href="/categories/Unix/">Unix</a></li>
         
-          <li><a href="/categories/Vim/">Vim</a>
+          <li><a href="/categories/Vim/">Vim</a></li>
         
-          <li><a href="/categories/YAML/">YAML</a>
+          <li><a href="/categories/YAML/">YAML</a></li>
         
-          <li><a href="/categories/bot/">bot</a>
+          <li><a href="/categories/bot/">bot</a></li>
         
-          <li><a href="/categories/git/">git</a>
+          <li><a href="/categories/git/">git</a></li>
         
-          <li><a href="/categories/jQuery/">jQuery</a>
+          <li><a href="/categories/jQuery/">jQuery</a></li>
         
-          <li><a href="/categories/jekyll/">jekyll</a>
+          <li><a href="/categories/jekyll/">jekyll</a></li>
         
-          <li><a href="/categories/misc/">misc</a>
+          <li><a href="/categories/misc/">misc</a></li>
         
-          <li><a href="/categories/rvm/">rvm</a>
+          <li><a href="/categories/rvm/">rvm</a></li>
         
-          <li><a href="/categories/vim/">vim</a>
+          <li><a href="/categories/vim/">vim</a></li>
         
-          <li><a href="/categories/zsh/">zsh</a>
+          <li><a href="/categories/zsh/">zsh</a></li>
         
-          <li><a href="/categories/勉強会/">勉強会</a>
+          <li><a href="/categories/勉強会/">勉強会</a></li>
         
         </ul>
 				<h3>Latest Posts</h3>
@@ -286,3 +273,4 @@ var disqus_shortname = 'techportalshit';
 }());
 </script>
 </body>
+</html>
