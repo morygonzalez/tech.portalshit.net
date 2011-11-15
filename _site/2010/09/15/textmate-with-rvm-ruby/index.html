@@ -37,6 +37,8 @@
 
 <p>TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、<kbd>⌘</kbd> + <kbd>R</kbd> でさくっと実行結果を確認できます。いちいちTerminal開いて</p>
 
+<p>Liquid error: undefined method `join’ for “\n$ ruby hogehoge.rb\n”:String</p>
+
 <p>とか面倒くさいことをやらずにすみます。</p>
 
 <p>で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに <code>gem update</code> でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。</p>
@@ -45,12 +47,16 @@
 
 <p>しかし先ほどなにげなく</p>
 
+<p>Liquid error: undefined method `join’ for “\n$ rvm 1.9.2 –default\n”:String</p>
+
 <p>としてあげたところ、TextMateでもRVMのRubyが走るようになりました。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
+          
+          <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
@@ -59,8 +65,6 @@
           <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
-          
-          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
         </ul>
       </div>

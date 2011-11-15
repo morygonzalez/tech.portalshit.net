@@ -42,6 +42,8 @@
 	</div>
     <p>こういうコード書いてます。</p>
 
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf148bf620 /></p>
+
 <p>やりたいことは以下のような感じ。</p>
 
 <ol>
@@ -71,11 +73,19 @@
 
 <p>そういうわけで</p>
 
+<p>Liquid error: undefined method `join’ for “\nvar keywords = $(‘li’, keywordList[j]);\n”:String</p>
+
 <p>を</p>
+
+<p>Liquid error: undefined method `join’ for “\nvar keywords = $(‘li a’, keywordList[j]);\n”:String</p>
 
 <p>とし、</p>
 
+<p>Liquid error: undefined method `join’ for “\nif (attrName == keywords[k].textContent)\n”:String</p>
+
 <p>を</p>
+
+<p>Liquid error: undefined method `join’ for “\nif (attrName == keywords[k].firstChild.data)\n”:String</p>
 
 <p>にしてみたところ、ばっちりIEで動くようになった。</p>
 

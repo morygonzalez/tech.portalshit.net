@@ -44,7 +44,11 @@
 
 <p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
 
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf145c46c8 /></p>
+
 <p>つぎにRubyで同じコードを書いてみる。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf145a71e0 /></p>
 
 <p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
 
@@ -69,11 +73,17 @@
 
 <p>これはRailsのプラグインではないのでgemでインストール。</p>
 
+<p>Liquid error: undefined method `join’ for “\n$ sudo gem install bluecloth\n”:String</p>
+
 <p>その後viewで</p>
+
+<p>Liquid error: undefined method `join’ for “\n&lt;%= markdwon(@item.text) %&gt;\n”:String</p>
 
 <p>とか書けばいい。</p>
 
 <p>しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに</p>
+
+<p>Liquid error: undefined method `join’ for “\nconfig.gem "bluecloth"\n”:String</p>
 
 <p>と書いてやる。するとめでたくMarkdownが使えるようになる。</p>
 

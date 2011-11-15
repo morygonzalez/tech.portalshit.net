@@ -49,9 +49,13 @@
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf1465d058 /></p>
+
 <p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
 
 <p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf1465c950 /></p>
 
 <p>これで狙ったことができました。</p>
 
@@ -62,6 +66,8 @@
         <h3>Related Posts</h3>
         <ul>
           
+          <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
+          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
@@ -69,8 +75,6 @@
           <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
-          
-          <li><a href="/2010/05/18/happy-netstalking-with-ruby">たのしいネットストーキング with Ruby</a></li>
           
         </ul>
       </div>

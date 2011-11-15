@@ -43,11 +43,15 @@
 
 <p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p>
 
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf145e9c98 /></p>
+
 <p>ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に <code>function init()</code> みたいのを書き、その中から呼び出せばよい。そしてその <code>init()</code> を上記 <code>// 実行したい処理</code> 内にも書いてあげればオッケーだ（もちろん <code>window.onload</code> で呼び出す必要もある）。</p>
 
 <p>jQueryについては <code>live()</code> というメソッドがある。これは動的に生成された要素にも処理を適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 <code>live()</code> というメソッドと一緒に、処理を一度しか実行しないというメソッド <code>one()</code> も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。</p>
 
 <p><a href="http://stackoverflow.com/questions/3796207/using-one-with-live-jquery">Using .one() with .live() jQuery - Stack Overflow</a></p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf145e9388 /></p>
 
 <p><code>jQuery().data()</code> 、なかなか便利そうだ。</p>
 
@@ -56,6 +60,8 @@
         <h3>Related Posts</h3>
         <ul>
           
+          <li><a href="/2011/01/02/make-javascript-runnable-with-autopagerize">AutoPagerizedなページでもJavaScriptを動かす</a></li>
+          
           <li><a href="/2010/05/07/fuck-ie">IE6, 7, 8でJavaScriptがうまく動いてくれない</a></li>
           
           <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
@@ -63,8 +69,6 @@
           <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
           <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
-          
-          <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
           
         </ul>
       </div>

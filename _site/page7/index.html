@@ -61,6 +61,8 @@
 
 <p>しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、</p>
 
+<p>Liquid error: undefined method `join’ for “\nnew_tweets = neta_tweets - used_tweets\n”:String</p>
+
 <p>とかしてみようとした。</p>
 
 <p><a href="http://gist.github.com/427398" title="gist: 427398">gist: 427398</a>自体がTokyo Tyrantを使っているので、これでなんとか出来ないかなと思った。しかし <code>rdb.put</code> しようとすると、 <code>ArgumentError</code> というのが発生してしまう。ひょっとしたらTokyo Tyrantって配列とかを保存するもんじゃないのかな。</p>
@@ -102,6 +104,8 @@
 <p>で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。</p>
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf14575f00 /></p>
 
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 

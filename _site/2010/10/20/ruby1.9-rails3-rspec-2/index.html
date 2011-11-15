@@ -39,13 +39,19 @@
 
 <p>そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。</p>
 
+<p>Liquid error: undefined method `join’ for “\n$ spec -c spec/*\n”:String</p>
+
 <p>とかやってもエラーが出る。 <code>which spec</code> すると <code>/usr/bin/spec</code> と出ちゃう。どうやら <code>spec</code> で発動されるのはRSpec 1.3のものみたい。</p>
 
 <p>RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。</p>
 
+<p>Liquid error: undefined method `join’ for “\n$ rspec -c spec/*\n”:String</p>
+
 <p>これできちんとテストコードが実行された。かと思いきやFailureが。</p>
 
 <p>Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に</p>
+
+<p>Liquid error: undefined method `join’ for “\n# -<em>- coding: utf-8 -</em>-\n”:String</p>
 
 <p>と書いてテキストエンコーディングを明示してあげないといけない。</p>
 
@@ -54,6 +60,8 @@
         <h3>Related Posts</h3>
         <ul>
           
+          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
+          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
@@ -61,8 +69,6 @@
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
           <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
-          
-          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
           
         </ul>
       </div>

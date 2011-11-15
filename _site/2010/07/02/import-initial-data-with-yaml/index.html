@@ -39,11 +39,17 @@
 
 <p>結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。</p>
 
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf15a05560 /></p>
+
 <p>とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf15a04db8 /></p>
 
 <p>とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。</p>
 
 <p>結局、拾ってきた	コードを参考にして</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007fbf15a04610 /></p>
 
 <p>みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。</p>
 
@@ -52,6 +58,8 @@
         <h3>Related Posts</h3>
         <ul>
           
+          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
+          
           <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></li>
@@ -59,8 +67,6 @@
           <li><a href="/2010/08/25/naughty-boy-am-i">Naughty BoyなのでCakePHPのDBもRailsのActiveRecordを単体で使って操作してやった</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
-          
-          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
         </ul>
       </div>

@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-11-15T14:14:34+09:00</updated>
+  <updated>2011-11-15T20:49:19+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -46,9 +46,15 @@
     <id>http://tech.portalshit.net//2011/07/29/rvm-bad-interpreter-error</id>
     <content type="html">&lt;p&gt;Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14716f80 /&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;code&gt;migrate&lt;/code&gt; を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14716648 /&gt;&lt;/p&gt;
+
 &lt;p&gt;一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14715e28 /&gt;&lt;/p&gt;
 
 &lt;p&gt;shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。&lt;/p&gt;
 
@@ -96,11 +102,15 @@
 
 &lt;p&gt;JekyllのLiquid (テンプレート言語) には &lt;code&gt;{{ sites.categories }}&lt;/code&gt; みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると &lt;code&gt;site.categories&lt;/code&gt; ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf146982c0 /&gt;&lt;/p&gt;
+
 &lt;p&gt;↑みたいな感じのコード書くと何も表示されない。 &lt;code&gt;site.categoires&lt;/code&gt; はHashで、&lt;code&gt;{ &quot;カテゴリ名&quot; =&amp;gt; カテゴリ内の記事一覧 }&lt;/code&gt; みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_category_iterator/tag_category_iterator.rb&quot; title=&quot;tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub&quot;&gt;tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;↑のファイルを &lt;code&gt;JEKYLL_ROOT/_plugins&lt;/code&gt; にコピーする。（&lt;code&gt;_plugins&lt;/code&gt; というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14697870 /&gt;&lt;/p&gt;
 
 &lt;p&gt;2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。&lt;/p&gt;
 
@@ -137,6 +147,9 @@
 
 &lt;p&gt;これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf15955c00 /&gt;&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf159552f0 /&gt;&lt;/p&gt;
 </content>
   </entry>
   
@@ -174,6 +187,8 @@
 
 &lt;p&gt;同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを &lt;code&gt;.zshrc&lt;/code&gt; に書いたところうまくコピペが機能した。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf1491e648 /&gt;&lt;/p&gt;
+
 &lt;p&gt;同じ問題でお困りの方はお試しあれ。&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;追記&lt;/h3&gt;
@@ -188,6 +203,8 @@
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2011/04/24/datamapper-sqlite3-auto-increment-reset</id>
     <content type="html">&lt;p&gt;ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 &lt;code&gt;after(:all)&lt;/code&gt; フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14364068 /&gt;&lt;/p&gt;
 
 &lt;p&gt;しかしこれでは &lt;code&gt;AUTO INCREMENT&lt;/code&gt; の値がリセットされず、テストを繰り返す度に &lt;code&gt;AUTO INCREMENT&lt;/code&gt; の値が増えていってうざかった。&lt;/p&gt;
 
@@ -204,6 +221,8 @@
 &lt;/ul&gt;
 
 &lt;p&gt;最終的な &lt;code&gt;after(:all)&lt;/code&gt; フックはこんな感じ。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14362bc8 /&gt;&lt;/p&gt;
 
 &lt;p&gt;テスト実行後にはすべてのデータがデータベースから削除されて、&lt;code&gt;AUTO INCREMENT&lt;/code&gt; の値もリセットされる。人畜無害なテストコード万歳。&lt;/p&gt;
 </content>
@@ -235,13 +254,19 @@
 
 &lt;p&gt;Jekyllで関連記事を表示するようにした。jekyllを実行するときに &lt;code&gt;jekyll --lsi&lt;/code&gt; とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に &lt;code&gt;gem install gsl&lt;/code&gt; しただけでは以下のようなエラーが出る。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf1413ba20 /&gt;&lt;/p&gt;
+
 &lt;p&gt;GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ brew install gsl\n”:String&lt;/p&gt;
 
 &lt;p&gt;そんでもう一回 &lt;code&gt;gem install gsl&lt;/code&gt; するとうまく入った。 &lt;code&gt;_config.yaml&lt;/code&gt; に &lt;code&gt;lsi: true&lt;/code&gt; という記述を追記して jekyll を実行すると関連記事が表示されるようになった。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;最近の記事表示&lt;/h3&gt;
 
 &lt;p&gt;ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf1413a2b0 /&gt;&lt;/p&gt;
 
 &lt;p&gt;(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)&lt;/p&gt;
 
@@ -303,6 +328,8 @@
 &lt;p&gt;Ubuntuは &lt;code&gt;root&lt;/code&gt; というアカウントがなくてなんでも &lt;code&gt;sudo&lt;/code&gt; するか、 &lt;code&gt;sudo su&lt;/code&gt; で無理矢理rootになるしかないので、rootでログインしてchshしてやるという救済手段がとれず、にっちもさっちもいかなくなってUbuntuを再インストールした。&lt;/p&gt;
 
 &lt;p&gt;ちょっと調べたら、こういうアクシデントを防ぐために、/etc/shells にzshを足さず、chshでデフォルトシェルにもしないという人もいるみたい。&lt;code&gt;.bashrc&lt;/code&gt; に次のように書くそうだ。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nif [ -f /bin/zsh ]; then\n  exec /bin/zsh\nfi\n”:String&lt;/p&gt;
 
 &lt;p&gt;これだと何かのトラブルでzshが起動しないことがあってもbashでログインできるということらしい。zshがちゃんとしてるときはzshでログインするという理屈だ。&lt;/p&gt;
 
@@ -434,9 +461,15 @@
 
 &lt;p&gt;なんと、RVMには &lt;code&gt;rvmsudo&lt;/code&gt; というコマンドがあるらしい！ 試しに&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ rvmsudo passenger-install-nginx-module\n”:String&lt;/p&gt;
+
 &lt;p&gt;を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 &lt;code&gt;nginx.conf&lt;/code&gt; 内で、&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14698180 /&gt;&lt;/p&gt;
+
 &lt;p&gt;となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが &lt;code&gt;rvmsudo&lt;/code&gt; のおかげで &lt;code&gt;nginx.conf&lt;/code&gt; に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf146979d8 /&gt;&lt;/p&gt;
 
 &lt;p&gt;ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。&lt;/p&gt;
 
@@ -451,9 +484,15 @@
     <id>http://tech.portalshit.net//2011/02/08/rvm-with-apache</id>
     <content type="html">&lt;p&gt;RVMを使ってます。RVMで入れたRubyがshebangに &lt;code&gt;#!/usr/bin/env ruby&lt;/code&gt; と書いたときに呼び出されて欲しいと思ってます。シェルから&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n#!/usr/bin/env ruby\n\nputs RUBY_DESCRIPTION\n”:String&lt;/p&gt;
+
 &lt;p&gt;なファイル（hoge.rb）があったとします。これを&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ ruby hoge.rb\n”:String&lt;/p&gt;
+
 &lt;p&gt;とシェルから呼び出したときにはちゃんと&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149fc2b8 /&gt;&lt;/p&gt;
 
 &lt;p&gt;と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。&lt;/p&gt;
 
@@ -478,11 +517,15 @@
 
 &lt;p&gt;いちばん手っ取り早そうだったので、以下のような書き方をした。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf145e9c98 /&gt;&lt;/p&gt;
+
 &lt;p&gt;ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に &lt;code&gt;function init()&lt;/code&gt; みたいのを書き、その中から呼び出せばよい。そしてその &lt;code&gt;init()&lt;/code&gt; を上記 &lt;code&gt;// 実行したい処理&lt;/code&gt; 内にも書いてあげればオッケーだ（もちろん &lt;code&gt;window.onload&lt;/code&gt; で呼び出す必要もある）。&lt;/p&gt;
 
 &lt;p&gt;jQueryについては &lt;code&gt;live()&lt;/code&gt; というメソッドがある。これは動的に生成された要素にも処理を適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 &lt;code&gt;live()&lt;/code&gt; というメソッドと一緒に、処理を一度しか実行しないというメソッド &lt;code&gt;one()&lt;/code&gt; も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3796207/using-one-with-live-jquery&quot;&gt;Using .one() with .live() jQuery - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf145e9388 /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;jQuery().data()&lt;/code&gt; 、なかなか便利そうだ。&lt;/p&gt;
 </content>
@@ -512,7 +555,11 @@
 
 &lt;p&gt;これを参考にとりあえず以下のように &lt;code&gt;.zshrc&lt;/code&gt; に書いた。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf1435cd40 /&gt;&lt;/p&gt;
+
 &lt;p&gt;しかし、これはちょっと自分的にはいただけなかった。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nexport TERM=dtterm\n”:String&lt;/p&gt;
 
 &lt;p&gt;ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： &lt;a href=&quot;http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/&quot; title=&quot;Vimで編集を終了した後、元のコンソールの状態を復元したい \| tech.portalshit.net - CakePHP, Rails, JavaScript&quot;&gt;Vimで編集を終了した後、元のコンソールの状態を復元したい&lt;/a&gt;）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。&lt;/p&gt;
 
@@ -537,13 +584,19 @@
 
 &lt;p&gt;そんで環境を整えてたんだけど、RSpecはRails 3に合わせてVersion 2が出てるみたい。しかも結構変わってる。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ spec -c spec/*\n”:String&lt;/p&gt;
+
 &lt;p&gt;とかやってもエラーが出る。 &lt;code&gt;which spec&lt;/code&gt; すると &lt;code&gt;/usr/bin/spec&lt;/code&gt; と出ちゃう。どうやら &lt;code&gt;spec&lt;/code&gt; で発動されるのはRSpec 1.3のものみたい。&lt;/p&gt;
 
 &lt;p&gt;RSpec 2からはコマンド名が変更されており、テストコードを実行したいときは以下のように書くみたい。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ rspec -c spec/*\n”:String&lt;/p&gt;
+
 &lt;p&gt;これできちんとテストコードが実行された。かと思いきやFailureが。&lt;/p&gt;
 
 &lt;p&gt;Ruby 1.9で動かしてるから、コードの中に日本語を書くときは一行目に&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n# -&lt;em&gt;- coding: utf-8 -&lt;/em&gt;-\n”:String&lt;/p&gt;
 
 &lt;p&gt;と書いてテキストエンコーディングを明示してあげないといけない。&lt;/p&gt;
 </content>
@@ -579,6 +632,8 @@
 
 &lt;p&gt;TextMateで便利なのが “Run” っていう機能です。Rubyのコードを書いていて、&lt;kbd&gt;⌘&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; でさくっと実行結果を確認できます。いちいちTerminal開いて&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ ruby hogehoge.rb\n”:String&lt;/p&gt;
+
 &lt;p&gt;とか面倒くさいことをやらずにすみます。&lt;/p&gt;
 
 &lt;p&gt;で、これからが本題なんですけど、先月Ruby 1.9.2がリリースされて、さらに &lt;code&gt;gem update&lt;/code&gt; でRails 3が入るようになってしまったので、お試しでRuby 1.9.2とRails 3を使ってみることにしました。しかし1.8系を完全に捨てることは恐ろしいので、RVMを使って複数のバージョンのRubyを切り替えながらしばらく過ごしてみることにしたわけです。&lt;/p&gt;
@@ -586,6 +641,8 @@
 &lt;p&gt;上に書いたとおり僕ちゃんは情報弱者なのでTextMateに依存したコーディングライフを送っており、&lt;kbd&gt;⌘&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt; で動くRubyもRVMのRubyにしたいと思ったのですが、これが分からなかった。RVMのサイトを見たらいろいろごちゃごちゃやり方が書いてあるんだけど（&lt;a href=&quot;http://rvm.beginrescueend.com/integration/textmate/&quot; title=&quot;RVM: Ruby Version Manager - Textmate Integration with RVM&quot;&gt;RVM: Ruby Version Manager - Textmate Integration with RVM&lt;/a&gt;）、結局この通りにやってもうまくいかず。&lt;/p&gt;
 
 &lt;p&gt;しかし先ほどなにげなく&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ rvm 1.9.2 –default\n”:String&lt;/p&gt;
 
 &lt;p&gt;としてあげたところ、TextMateでもRVMのRubyが走るようになりました。&lt;/p&gt;
 </content>
@@ -603,6 +660,8 @@
 &lt;p&gt;最悪なことにこのクリッカブルマップのあるページ、頻繁に更新依頼が来るのですよね。依頼が来る度に就業時間中の快適なネットサーフィンが妨げられるので、一発JavaScriptを書いて画像上の座標を取得することにしました。いちいちクソみたいに重いAdobe DreamWeaverとか立ち上げてられるか。&lt;/p&gt;
 
 &lt;p&gt;コードはこんな感じ。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf15996cf0 /&gt;&lt;/p&gt;
 
 &lt;p&gt;Firefoxでしか動作確認してないけど多分IEでは動かないと思います。ここのサイトを参考にさせてもらいました。&lt;/p&gt;
 
@@ -652,7 +711,11 @@
 
 &lt;p&gt;MacPortsの何がバッドノウハウなのかちょっとよく分からなかったんだけど、でもよく考えてみたらMacPortsは &lt;code&gt;.bash_profile&lt;/code&gt; とか &lt;code&gt;.zshrc&lt;/code&gt; とかにへんてこりんなパスを埋め込まないといけないし、PerlとかRubyは一行目に&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n#!/usr/bin/perl\n”:String&lt;/p&gt;
+
 &lt;p&gt;とか &lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n#!/usr/bin/env ruby\n”:String&lt;/p&gt;
 
 &lt;p&gt;とか書くのに使ってるバイナリ本体は &lt;code&gt;/opt/local/bin/&lt;/code&gt; にあるとかは気持ち悪いっちゃ気持ち悪い。&lt;/p&gt;
 
@@ -666,7 +729,11 @@
 
 &lt;p&gt;Homebrew自体は簡単に入った。試しにVimをAppleがコンパイルしたVersion 7.2のものから新しめの7.3に上げて、ついでにRubyオプション入りでコンパイルしたかったので&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ brew install vim\n”:String&lt;/p&gt;
+
 &lt;p&gt;してみた。しかしながら&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nError: No available formula for vim\n”:String&lt;/p&gt;
 
 &lt;p&gt;と出た。GUI版のMacVimはFormulaパッケージがあるらしいけど、フツーのVimはないらしい。「えー、自分でFormulaファイルを書かなきゃいけないの〜？」って感じだったんだけど、GitHubでテケトーに検索したらいろいろ出てきたので、 &lt;code&gt;/usr/local/Library/Formula/&lt;/code&gt; に &lt;code&gt;vim.rb&lt;/code&gt; を作ってコピペした。&lt;/p&gt;
 
@@ -674,7 +741,11 @@
 
 &lt;p&gt;そんで今度は意気揚々と&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ brew install vim\n”:String&lt;/p&gt;
+
 &lt;p&gt;してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf15957348 /&gt;&lt;/p&gt;
 
 &lt;p&gt;Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。&lt;/p&gt;
 
@@ -685,6 +756,8 @@
 &lt;p&gt;&lt;a href=&quot;http://www.python.org/download/releases/&quot; title=&quot;Releases&quot;&gt;Releases&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;その後、もう一度 &lt;code&gt;brew install vim&lt;/code&gt; をしてみたところ、無事make完了。&lt;code&gt;vim --version |grep ruby&lt;/code&gt; で&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n+ruby\n”:String&lt;/p&gt;
 
 &lt;p&gt;となった。&lt;/p&gt;
 
@@ -711,9 +784,13 @@
 
 &lt;p&gt;とりあえず以下のようなファイルを用意。各レコードの &lt;code&gt;name&lt;/code&gt; フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf1465d058 /&gt;&lt;/p&gt;
+
 &lt;p&gt;まず最初に、 &lt;code&gt;no such file to load -- sqlite&lt;/code&gt; みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず &lt;code&gt;sudo gem install sqlite-ruby&lt;/code&gt; したんだけど、それでも &lt;code&gt;no such file to load — sqlite&lt;/code&gt; が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。&lt;/p&gt;
 
 &lt;p&gt;しかしUpdateの部分で失敗。Railsの感覚で &lt;code&gt;hoge.save&lt;/code&gt; とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 &lt;code&gt;update_attribute()&lt;/code&gt; というメソッドをぶちかましてやった。こんな感じ。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf1465c950 /&gt;&lt;/p&gt;
 
 &lt;p&gt;これで狙ったことができました。&lt;/p&gt;
 
@@ -730,13 +807,21 @@
 
 &lt;p&gt;しかしマニュアルをよく読むと、PygmentsってのはPython製のソフトで、こいつを別途インストールする必要があるらしい。なるほどそういうことだったのか。そういうわけで&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n  $ port search pygments\n”:String&lt;/p&gt;
+
 &lt;p&gt;してみたところ、MacPortsでは三つヒットした。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149fb8b8 /&gt;&lt;/p&gt;
+
 &lt;p&gt;しかしSnow LeopardにはPython 2.6.1が入ってるので、&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n  $ easy_install Pygments\n”:String&lt;/p&gt;
 
 &lt;p&gt;でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから &lt;code&gt;py26-pygments&lt;/code&gt; を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 &lt;code&gt;/opt/local/bin/&lt;/code&gt; に &lt;code&gt;python-2.6.5&lt;/code&gt; が入ったが、長々と時間がかかった。&lt;sup&gt;&lt;a href=&quot;#footnote-34-1&quot;&gt;※1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;インストール完了後、これでシャレオツシンタックスハイライティングできるようになったと思い、意気揚々と&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n  $ jekyll –pygments\n”:String&lt;/p&gt;
 
 &lt;p&gt;してみたのだが、一向にハイライトされない。なんか「pygmentizeとか見つからないし」みたいなエラーが出る。なんでじゃ〜とイライラしながら公式Wikiを読んでると、次のような記述があった。&lt;/p&gt;
 
@@ -745,6 +830,8 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;そうなのよ。 &lt;code&gt;pygmentize-1.3.1&lt;/code&gt; っていうバイナリファイルはあってパスは通ってるんだけど、 &lt;code&gt;pygmentize&lt;/code&gt; そのものがないのよ。そういうわけで&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149f94a0 /&gt;&lt;/p&gt;
 
 &lt;p&gt;してやった。すると &lt;code&gt;pygmentize&lt;/code&gt; というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは&lt;a href=&quot;http://github.com/mojombo/tpw/tree/master/css/syntax.css&quot; title=&quot;syntax.css&quot;&gt;Github互換のもの&lt;/a&gt;を拾ってきて入れといた。&lt;/p&gt;
 
@@ -772,7 +859,11 @@
 
 &lt;p&gt;まずSSHのおさらいを。クライアント側で&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ mkdir -p .ssh\n$ ssh-keygen -t rsa （以下略）\n”:String&lt;/p&gt;
+
 &lt;p&gt;したのち、サーバー側の &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; の &lt;code&gt;PasswordAuthentication&lt;/code&gt; を &lt;code&gt;on&lt;/code&gt; にし、パスワードでSSH接続できるようにして&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys\n”:String&lt;/p&gt;
 
 &lt;p&gt;するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で &lt;code&gt;.ssh/&lt;/code&gt; と &lt;code&gt;.ssh/authorized_keys&lt;/code&gt; のパーミッションをそれぞれ700と600に変えてあげるわけですよね。&lt;/p&gt;
 
@@ -780,11 +871,17 @@
 
 &lt;p&gt;前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\nPermission denied (publickey).\n”:String&lt;/p&gt;
+
 &lt;p&gt;というエラーが頻繁にお出になるのですよ。&lt;/p&gt;
 
 &lt;p&gt;しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ sudo /etc/init.d/ssh restart\n”:String&lt;/p&gt;
+
 &lt;p&gt;してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nPermission denied (publickey).\n”:String&lt;/p&gt;
 
 &lt;p&gt;となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。&lt;/p&gt;
 
@@ -815,6 +912,8 @@
     <content type="html">&lt;p&gt;tilyさんのgist&lt;a href=&quot;http://gist.github.com/427398&quot; title=&quot;gist: 427398&quot;&gt;gist: 427398&lt;/a&gt;を使わせてもらってTwitterのボットを何個か作ってみた。結構楽しいですね。&lt;/p&gt;
 
 &lt;p&gt;しかしボットが短時間に何度も同じ発言を繰り返してフバいので、日付が変わるまでは重複発言をしないようにしてみようと思った。Rubyは 配列 - 配列 みたいなエロいことができるみたいなので、&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nnew_tweets = neta_tweets - used_tweets\n”:String&lt;/p&gt;
 
 &lt;p&gt;とかしてみようとした。&lt;/p&gt;
 
@@ -853,6 +952,8 @@
 &lt;p&gt;で、やり方なんですけどちょっとgitに慣れてない人には複雑かもしれない。三つgitのリポジトリを用意する必要がある。&lt;/p&gt;
 
 &lt;p&gt;まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ &lt;code&gt;git --bare init&lt;/code&gt; ）。ここでは &lt;code&gt;blog.git&lt;/code&gt; という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の &lt;code&gt;/blog.git/hooks/&lt;/code&gt; に &lt;code&gt;post-update&lt;/code&gt; というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf14575f00 /&gt;&lt;/p&gt;
 
 &lt;p&gt;そんでもって &lt;code&gt;git clone blog.git &amp;lt;公開用のディレクトリ名&amp;gt;&lt;/code&gt; する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる &lt;code&gt;_site&lt;/code&gt; というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、&lt;code&gt;git push&lt;/code&gt; する度にhookが発動されて、めでたく記事が公開されるという次第です。&lt;/p&gt;
 
@@ -948,11 +1049,17 @@
 
 &lt;p&gt;結果的には無事データをロード出来たんだけど、YAMLの書式が分かってなくて、結局丸一日時間を費やしてしまった。大したデータ量じゃなかったから下手するとちまちま手入力するのと変わらないくらい時間かかったかも。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf15a05560 /&gt;&lt;/p&gt;
+
 &lt;p&gt;とかやんなきゃいけなかったんだけど、YAMLの書き方が分かってなくて、&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf15a04db8 /&gt;&lt;/p&gt;
 
 &lt;p&gt;とか書いてた。どっちも hoge県 に分類されるんでこんなんでいいだろ、みたいなノリ。しかしこれはやっぱり文書の構造がおかしい。これをロードしてみると、 id=2 のものしかロードされなかった。&lt;/p&gt;
 
 &lt;p&gt;結局、拾ってきた	コードを参考にして&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf15a04610 /&gt;&lt;/p&gt;
 
 &lt;p&gt;みたいなやつを書いて、読み込まれる配列の構造を確認しながらYAMLを書いたところうまくいった。&lt;/p&gt;
 </content>
@@ -976,9 +1083,13 @@
 
 &lt;p&gt;そういうわけで正しくは、&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149c22e8 /&gt;&lt;/p&gt;
+
 &lt;p&gt;と書くそうです。&lt;/p&gt;
 
 &lt;p&gt;ところでなんで自分は前回、 &lt;code&gt;@a&lt;/code&gt; というインスタンス変数を使ったのかがよく分からない。Railsでコードを書いていて、Controllerで定義した変数をViewで使うときにインスタンス変数を使うので、そういう風に思い込んでいるのかな。上のコードでは別にインスタンス変数を使う必要はなくて、&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149c1aa0 /&gt;&lt;/p&gt;
 
 &lt;p&gt;でも同じ結果を出力しますね。&lt;/p&gt;
 
@@ -990,7 +1101,11 @@
 
 &lt;p&gt;なるほど！ 例えば上のコードを引数つきのものに改造したとしましょう。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149c0da8 /&gt;&lt;/p&gt;
+
 &lt;p&gt;で、これを実行すると&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nFuga\nPiyo\n”:String&lt;/p&gt;
 
 &lt;p&gt;と表示される。こんな感じで、一つのクラスから複数のインスタンスを生成するときに使うのがインスタンス変数って理解でオーケーなのかなと思います。&lt;/p&gt;
 </content>
@@ -1005,7 +1120,11 @@
 
 &lt;p&gt;オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf145c46c8 /&gt;&lt;/p&gt;
+
 &lt;p&gt;つぎにRubyで同じコードを書いてみる。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf145a71e0 /&gt;&lt;/p&gt;
 
 &lt;p&gt;まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは &lt;code&gt;shift + [&lt;/code&gt; とか &lt;code&gt;shift + ]&lt;/code&gt; とかだから、 &lt;code&gt;shift&lt;/code&gt; の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。&lt;/p&gt;
 
@@ -1028,11 +1147,17 @@
 
 &lt;p&gt;これはRailsのプラグインではないのでgemでインストール。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$ sudo gem install bluecloth\n”:String&lt;/p&gt;
+
 &lt;p&gt;その後viewで&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n&amp;lt;%= markdwon(@item.text) %&amp;gt;\n”:String&lt;/p&gt;
 
 &lt;p&gt;とか書けばいい。&lt;/p&gt;
 
 &lt;p&gt;しかしなんも設定しない状態だとRailsアプリケーションはBlueClothを読み込まないので、config/environment.rbに&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nconfig.gem &quot;bluecloth&quot;\n”:String&lt;/p&gt;
 
 &lt;p&gt;と書いてやる。するとめでたくMarkdownが使えるようになる。&lt;/p&gt;
 </content>
@@ -1129,6 +1254,8 @@
 
 &lt;p&gt;確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n$use = array(&quot;Hoge&quot;);\n”:String&lt;/p&gt;
+
 &lt;p&gt;とかしなきゃいけなかった。&lt;/p&gt;
 
 &lt;p&gt;最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。&lt;/p&gt;
@@ -1143,6 +1270,8 @@
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/06/03/rails-has-subdirectory-in-controller</id>
     <content type="html">&lt;p&gt;なんじゃそれ！ 『Railsによるアジャイル〜』の15章 P239〜P240を読んでいてクリヴィッツテンギョウ！！！  &lt;code&gt;app/controllers/admin/book_controller.rb&lt;/code&gt; ということができるらしい！ んで、そのときのクラス宣言は&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nclass Admin::BookController &amp;lt; ActionController::Base\n”:String&lt;/p&gt;
 
 &lt;p&gt;となるらしい！ 変態だ！！ ぜったい変態だ！！！&lt;/p&gt;
 </content>
@@ -1172,6 +1301,8 @@
     <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
     <id>http://tech.portalshit.net//2010/05/18/happy-netstalking-with-ruby</id>
     <content type="html">&lt;p&gt;この前大阪で第二回アメ村ブルゾンの会をやったんですけど、そこで日夜&lt;del&gt;ネットストーキング&lt;/del&gt;プログラミングにいそしんでおられる皆さんとお会いして、TwitterのStreaming APIの使い方を教えてもらいました。なんか自分でやろうとしてたんだけど、全然見当違いなところを見ていたみたいで、僕もStreaming APIでネットストーキングできるようになりました。pokutunaさんにもらったコードと “Twitter Streaming APIをRubyで試してみる - しばそんノート”:http://d.hatena.ne.jp/shibason/20090816/1250405491 を参考に、以下のような感じにしてみました。&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf146b0500 /&gt;&lt;/p&gt;
 
 &lt;p&gt;教えてもらったコードではTweetの内容を垂れ流しにするやつだったんですけど、自分でちょこっといじってTweet以外のステータスを表示するようにしてみた。しかしなんか調子悪いっぽくて、完全にはStreamを取れてないっぽいです。&lt;/p&gt;
 
@@ -1206,7 +1337,11 @@
 
 &lt;p&gt;『Railsによる〜』で作ってるデモプロジェクトのdpeotのコードを見てみると、RSSを配信するときはControllerに以下のように記述し、&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf145d81f0 /&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;code&gt;config/routes.rb&lt;/code&gt; に&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n    map.connect ‘:controller/:action/:id.:format’\n”:String&lt;/p&gt;
 
 &lt;p&gt;と書いたあと、RSS用のViewを用意してやるだけだ。ものすごくシンプルで簡単だった。&lt;/p&gt;
 
@@ -1276,6 +1411,8 @@
     <id>http://tech.portalshit.net//2010/05/07/fuck-ie</id>
     <content type="html">&lt;p&gt;こういうコード書いてます。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf148bf620 /&gt;&lt;/p&gt;
+
 &lt;p&gt;やりたいことは以下のような感じ。&lt;/p&gt;
 
 &lt;ol&gt;
@@ -1305,11 +1442,19 @@
 
 &lt;p&gt;そういうわけで&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\nvar keywords = $(‘li’, keywordList[j]);\n”:String&lt;/p&gt;
+
 &lt;p&gt;を&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nvar keywords = $(‘li a’, keywordList[j]);\n”:String&lt;/p&gt;
 
 &lt;p&gt;とし、&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\nif (attrName == keywords[k].textContent)\n”:String&lt;/p&gt;
+
 &lt;p&gt;を&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\nif (attrName == keywords[k].firstChild.data)\n”:String&lt;/p&gt;
 
 &lt;p&gt;にしてみたところ、ばっちりIEで動くようになった。&lt;/p&gt;
 
@@ -1390,13 +1535,21 @@
 
 &lt;p&gt;とりあえず tech.portalshit.net というサブドメインを用意し、DreamhostのパネルでPassengerのセットアップ。その後SSHでサーバーに接続し、&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n    $ git clone git://github.com/emk/mephisto.git\n”:String&lt;/p&gt;
+
 &lt;p&gt;してgithubからプロジェクトをclone。&lt;/p&gt;
 
 &lt;p&gt;Mephistoのインストールにはいくつかgemが必要。Dreamhostには結構たくさんgemがインストールしてあるんだけど、いくつか足りないものがあった。とりあえず設置ディレクトリのルートで&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for “\n    $ rake gems:install\n”:String&lt;/p&gt;
+
 &lt;p&gt;と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、&lt;code&gt;gem install&lt;/code&gt; するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。&lt;/p&gt;
 
+&lt;p&gt;Liquid error: undefined method `join’ for #&lt;String:0x007fbf149419e0 /&gt;&lt;/p&gt;
+
 &lt;p&gt;無事インストール成功。その後もう一回 &lt;code&gt;rake gems:install&lt;/code&gt; を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに &lt;code&gt;development:&lt;/code&gt; のDB環境しか記述していなかったこと、 &lt;code&gt;rake db:bootstrap&lt;/code&gt; のときに &lt;code&gt;RAILS_ENV=production&lt;/code&gt; をつけていなかったことが原因だった。そういうわけでdatabase.ymlに &lt;code&gt;production:&lt;/code&gt; の設定（sqlite3を使用）を書き、&lt;/p&gt;
+
+&lt;p&gt;Liquid error: undefined method `join’ for “\n    $ rake db:bootstrap RAILS_ENV=production\n”:String&lt;/p&gt;
 
 &lt;p&gt;ですべてのインストール作業完了。いまこうして動いております。&lt;/p&gt;
 
