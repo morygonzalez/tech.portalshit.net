@@ -37,23 +37,10 @@
       </div>
       <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
-<<<<<<< HEAD
 <p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
 
 <p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
 
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741de1e8 /></p>
-
-<p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741dda40 /></p>
-
-<p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741dd2c0 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
 
 <p>正しい対処方法かどうかは自信がないが、Rubyでサクサクッとshebangを書き換えるやつを書いた。以下みたいなやつ。</p>

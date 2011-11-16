@@ -49,20 +49,10 @@
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741e8f80 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
 
 <p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741e8918 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>これで狙ったことができました。</p>
 
 <p>Rubyいいわー。ほんといいわー。</p>

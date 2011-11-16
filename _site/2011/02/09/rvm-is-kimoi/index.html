@@ -41,17 +41,8 @@
 
 <p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
 
-<<<<<<< HEAD
 <p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
 
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741dab88 /></p>
-
-<p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741da4f8 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
 
 <p>それにしてもRVMは、本当にきもいと思う。<a href="http://d.hatena.ne.jp/rochefort/20100907/p1" title="rvmのirbで日本語入力できない - うんたらかんたら日記">readlineとかまで.rvm内にインストールできる</a>できるし、いったい何考えてるんでしょうかね。きもすぎて便利です。</p>

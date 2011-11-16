@@ -43,22 +43,12 @@
 
 <p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175a72740 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に <code>function init()</code> みたいのを書き、その中から呼び出せばよい。そしてその <code>init()</code> を上記 <code>// 実行したい処理</code> 内にも書いてあげればオッケーだ（もちろん <code>window.onload</code> で呼び出す必要もある）。</p>
 
 <p>jQueryについては <code>live()</code> というメソッドがある。これは動的に生成された要素にも処理を適用してくれる非常にありがたいメソッドだ。しかし個人的な事情で、 <code>live()</code> というメソッドと一緒に、処理を一度しか実行しないというメソッド <code>one()</code> も適用している要素があり、これを二つ両立するのがjQuery的に無理っぽい。単純に処理実行のフラグを作って処理を分ければいいんだけど、これにもjQuery的なかっこいい書き方があることを知った。ネタもとはこちら。</p>
 
 <p><a href="http://stackoverflow.com/questions/3796207/using-one-with-live-jquery">Using .one() with .live() jQuery - Stack Overflow</a></p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175a71d40 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p><code>jQuery().data()</code> 、なかなか便利そうだ。</p>
 
 

@@ -52,15 +52,11 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007ff174122ab0 /></p>
-
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
 <p><a href="https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_category_iterator/tag_category_iterator.rb" title="tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub">tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub</a></p>
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff174120a58 /></p>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 
@@ -97,12 +93,6 @@
 
 <p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175283570 /></p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175282b70 /></p>
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 
     <a href="/2011/05/24/favstream.rb/#disqus_thread">Comments</a>
 
@@ -140,11 +130,6 @@
 
 <p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1748d26c0 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>同じ問題でお困りの方はお試しあれ。</p>
 
 <h3 id="section">追記</h3>
@@ -160,11 +145,6 @@
 	</div>
     <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175946c90 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
 <p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
@@ -181,11 +161,6 @@
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175940fc0 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 
     <a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset/#disqus_thread">Comments</a>

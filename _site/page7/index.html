@@ -44,11 +44,7 @@
 
 <p>まずSSHのおさらいを。クライアント側で</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ mkdir -p .ssh\n$ ssh-keygen -t rsa （以下略）\n”:String</p>
-
 <p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
-
-<p>Liquid error: undefined method `join’ for “\n$ scp id_rsa.pub username@hoge.com:.ssh/authorized_keys\n”:String</p>
 
 <p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
 
@@ -56,17 +52,11 @@
 
 <p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
 
-<p>Liquid error: undefined method `join’ for “\nPermission denied (publickey).\n”:String</p>
-
 <p>というエラーが頻繁にお出になるのですよ。</p>
 
 <p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
 
-<p>Liquid error: undefined method `join’ for “\n$ sudo /etc/init.d/ssh restart\n”:String</p>
-
 <p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
-
-<p>Liquid error: undefined method `join’ for “\nPermission denied (publickey).\n”:String</p>
 
 <p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
 
@@ -144,11 +134,6 @@
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff174125760 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
 <h3 id="section">まとめ</h3>

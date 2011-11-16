@@ -101,11 +101,6 @@
 
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175326dd8 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
 <p><a href="http://vim.1045645.n5.nabble.com/Python-link-errors-td1214971.html" title="Nabble - Vim - Mac - Python link errors">Nabble - Vim - Mac - Python link errors</a></p>
@@ -143,20 +138,10 @@
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741e8f80 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
 
 <p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff1741e8918 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>これで狙ったことができました。</p>
 
 <p>Rubyいいわー。ほんといいわー。</p>
@@ -174,11 +159,6 @@
 
 <p>してみたところ、MacPortsでは三つヒットした。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175325a28 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>しかしSnow LeopardにはPython 2.6.1が入ってるので、</p>
 
 <p>でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから <code>py26-pygments</code> を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 <code>/opt/local/bin/</code> に <code>python-2.6.5</code> が入ったが、長々と時間がかかった。<sup><a href="#footnote-34-1">※1</a></sup></p>
@@ -193,11 +173,6 @@
 
 <p>そうなのよ。 <code>pygmentize-1.3.1</code> っていうバイナリファイルはあってパスは通ってるんだけど、 <code>pygmentize</code> そのものがないのよ。そういうわけで</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175316488 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href="http://github.com/mojombo/tpw/tree/master/css/syntax.css" title="syntax.css">Github互換のもの</a>を拾ってきて入れといた。</p>
 
 <hr />
@@ -217,40 +192,6 @@
 
     <a href="/2010/08/12/fed-up-with-authlogic-oauth/#disqus_thread">Comments</a>
 
-<<<<<<< HEAD
-    <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
-    <div class="articleinfo">Posted on 03 Aug 2010 by 森井ゴンザレス |
-	
-		<a href="categories/Ubuntu/">Ubuntu</a>
-	</div>
-    <p>NECの安サーバーを買ってサーバーを作ってるんですけど、SSHでエラーが出て困ってます。OSはUbuntu Server 10.04.1 LTS。</p>
-
-<p>まずSSHのおさらいを。クライアント側で</p>
-
-<p>したのち、サーバー側の <code>/etc/ssh/sshd_config</code> の <code>PasswordAuthentication</code> を <code>on</code> にし、パスワードでSSH接続できるようにして</p>
-
-<p>するか、あるいはUSBフラッシュメモリで鍵をサーバーに移す。その後サーバー側で <code>.ssh/</code> と <code>.ssh/authorized_keys</code> のパーミッションをそれぞれ700と600に変えてあげるわけですよね。</p>
-
-<p>いっぺんクライアント側で <code>id_rsa.pub</code> を作ってたらそれ以降は単純にこれを接続先のサーバーにコピーしてあげればおｋ。ここまで合ってますかね？</p>
-
-<p>前から使ってる職場内だけで使うサーバーにも同じUbuntu Serverを入れてるんですけど、こっちでは全くトラブルがない。それなのに新しいサーバーでは</p>
-
-<p>というエラーが頻繁にお出になるのですよ。</p>
-
-<p>しかしこのエラー、常に出る訳じゃないんですね。サーバーを直接操作して</p>
-
-<p>してあげると消える訳ですね。そんでしばらくクライアントからSSHで接続したり切断したりを繰り返していると、あるとき突然、</p>
-
-<p>となるわけです。まじでストレスフル。つか、このサーバーは公開用に使うものなので、こんな感じでSSHが不安定だとかまじで困るんですけど。</p>
-
-<p>前述の <code>PasswordAuthentication</code> を <code>on</code> にしとけば、公開鍵認証に失敗した後もパスワードで認証することができるんですが、パスワード認証はなんだか怖いので使いたくないのですよね。どいうしたものか。</p>
-
-<p>ググったらSSHのプロトコルを1と2併用にしたら解決するという情報が出てきたのですけど、これやったら “Disabling protocol version 1. Could not load host key” というエラー？が出てしまったので多分僕の環境では意味なし。「RSAキーやめてDSAにしたらエラーでなくなった」（<a href="http://miyazaki.ddo.jp/mt3/blog/zaurus/20060405-2343.html" title="ぷらぷらブログ \| OpenSSH を導入。接続に四苦八苦！">ぷらぷらブログ | OpenSSH を導入。接続に四苦八苦！</a>）という情報もあるけど面倒くさいのでまだ試していません。</p>
-
-    <a href="/2010/08/03/ubuntu-server-ssh-connection-failing/#disqus_thread">Comments</a>
-
-=======
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 
 				</div>
 

@@ -37,11 +37,6 @@
 
 <p>Jekyllで関連記事を表示するようにした。jekyllを実行するときに <code>jekyll --lsi</code> とするんだけど、Classifierというgemが必要。ただしClassifierを入れてるだけだと似てる記事を探すのにすんごい時間がかかるので、gslというgemを入れる。しかしこれはただ単に <code>gem install gsl</code> しただけでは以下のようなエラーが出る。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175382c78 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>GSL（GNU Scientific Library）が入ってないのがダメらしい。Homebrewでインストールする。</p>
 
 <p>そんでもう一回 <code>gem install gsl</code> するとうまく入った。 <code>_config.yaml</code> に <code>lsi: true</code> という記述を追記して jekyll を実行すると関連記事が表示されるようになった。</p>
@@ -50,11 +45,6 @@
 
 <p>ついでに見た目を調整した。サイドバーに全部の記事が表示されてたのがうざかったので10件だけ表示するようにした。</p>
 
-<<<<<<< HEAD
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007ff175381940 /></p>
-
->>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>(↑Liquidでエスケープする方法がわからんかったので {`% とかなってますけど、正しくは {% です)</p>
 
 <p>Liquidでは配列に対して <code>{&#37; for post in site.posts limit:10 &#37;}</code> という書き方をすることでループ処理の回数をコントロールできるみたい。</p>
