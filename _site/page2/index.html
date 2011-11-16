@@ -35,6 +35,49 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></h2>
+    <div class="articleinfo">Posted on 29 Jun 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Jekyll/">Jekyll</a>
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>Jekyllを使いだしてから気がつくと一年経ってました。いろいろ便利に使えており気に入っております。</p>
+
+<p>PygmentでコードをシンタックスハイライトしたりLSIで関連記事表示したりと結構手を入れてはいたんだけど、いわゆる世間の一般のブログにあるようなカテゴリ一覧表示機能と、カテゴリごとの記事アーカイブ機能がなくて、それを若干不便に思っておりました。</p>
+
+<p>ググってみたところ、プログラマー向けなブログツールなだけあっていろんな方法が出てきました。以下そのまとめ。</p>
+
+<h3 id="section">カテゴリ一覧</h3>
+
+<p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174122ab0 /></p>
+
+<p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
+
+<p><a href="https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_category_iterator/tag_category_iterator.rb" title="tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub">tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub</a></p>
+
+<p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174120a58 /></p>
+
+<p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
+
+<h3 id="section-1">カテゴリごとの記事一覧</h3>
+
+<p>カテゴリごとの記事一覧を表示する方法だけど、こういうのを発見した。</p>
+
+<p><a href="http://recursive-design.com/projects/jekyll-plugins/" title="Jekyll Plugins - Recursive Design">Jekyll Plugins - Recursive Design</a></p>
+
+<p>ここの <code>generate_categories.rb</code> を使えばカテゴリ内の記事一覧を作成できる。こんな感じ。</p>
+
+<p><a href="http://tech.portalshit.net/categories/Ruby/" title="Category: Ruby \| tech.portalshit.net">Category: Ruby | tech.portalshit.net</a></p>
+
+<p>これもさっきのと同じように、<code>JEKYLL_ROOT/_plugins</code> にファイルをコピーする。そんでLiquidテンプレートを書き換えるんだけど詳細はプラグイン内の記事をご確認くだしあ。</p>
+
+    <a href="/2011/06/29/added-category-archives/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></h2>
     <div class="articleinfo">Posted on 24 May 2011 by 森井ゴンザレス |
 	
@@ -54,6 +97,12 @@
 
 <p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175283570 /></p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175282b70 /></p>
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 
     <a href="/2011/05/24/favstream.rb/#disqus_thread">Comments</a>
 
@@ -91,6 +140,11 @@
 
 <p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1748d26c0 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>同じ問題でお困りの方はお試しあれ。</p>
 
 <h3 id="section">追記</h3>
@@ -106,6 +160,11 @@
 	</div>
     <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175946c90 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
 <p>DataMapperの機能で <code>AUTO INCREMENT</code> 値をリセットするのってないのかなと5秒くらい探してみたけど見つからなかったので、SQLを直接実行する方法を採用した。</p>
@@ -122,26 +181,14 @@
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175940fc0 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 
     <a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset/#disqus_thread">Comments</a>
-
-    <h2><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></h2>
-    <div class="articleinfo">Posted on 23 Apr 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Vim/">Vim</a>
-	</div>
-    <h3 id="macvim">MacVimでコピペできないのって仕様？</h3>
-
-<p>MacVimに他のアプリケーションでコピーしたものを貼り付けられないのって仕様？ いろいろ調べてみたけどストライクな解決方法はないみたい。結局CLIのVim使ってる。</p>
-
-<ul>
-  <li><a href="http://d.hatena.ne.jp/sea_mountain/20110421/1303362772" title="【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに">【Vim】【Mac】Vimのヤンクでクリップボードにコピーする - 徒然なるままに</a></li>
-  <li><a href="http://twitter.com/#!/nekoya/status/2647362030" title="Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー ...">Twitter / @nekoya (id:studio-m): MacVim-kaoriyaで単純なペーストがエラー …</a></li>
-  <li><a href="http://twitter.com/#!/marutanm/statuses/51557561425592320" title="Twitter / @marutanm Air: MacVimでpasteboardからペーストできな ...">Twitter / @marutanm Air: MacVimでpasteboardからペーストできな …</a></li>
-</ul>
-
-    <a href="/2011/04/23/macvim-kopipe-dekinai/#disqus_thread">Comments</a>
 
 
 				</div>
@@ -217,6 +264,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
+				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
 					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
@@ -234,8 +283,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>

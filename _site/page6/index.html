@@ -35,6 +35,33 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></h2>
+    <div class="articleinfo">Posted on 31 Aug 2010 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>RubyKaigi 2010に行ったのでその感想を軽く。</p>
+
+<h4 id="section">自分のスペック</h4>
+
+<p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p>
+
+<h4 id="section-1">感想</h4>
+
+<p>永和システムマネジメント<del>永和システム</del>さんの「<a href="http://rubykaigi.org/2010/ja/events/23" title="日本Ruby会議2010, 8月27日〜29日">Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p>
+
+<p>MongoDBについてのプログラム（<a href="http://rubykaigi.org/2010/ja/events/73" title="Practical Ruby Projects with MongoDB">Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p>
+
+<p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p>
+
+<p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p>
+
+<h4 id="section-2">2010年9月26日修正</h4>
+
+<p>すみません、永和システムマネジメントさんのことを「永和システムさん」と書いてました。はてブのコメント欄で角谷さんに指摘されてた！</p>
+
+    <a href="/2010/08/31/rubykaigi2010/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></h2>
     <div class="articleinfo">Posted on 31 Aug 2010 by 森井ゴンザレス |
 	
@@ -74,6 +101,11 @@
 
 <p>してみたんだけど、なんとmakeに失敗する。Python.frameworkを参照してるときにエラーが出てるっぽい。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175326dd8 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>Appleが配布したのではないPythonを使ってるとこういうエラーが出るとかなんとか外人が言ってる。</p>
 
 <p><a href="http://vim.1045645.n5.nabble.com/Python-link-errors-td1214971.html" title="Nabble - Vim - Mac - Python link errors">Nabble - Vim - Mac - Python link errors</a></p>
@@ -111,10 +143,20 @@
 
 <p>とりあえず以下のようなファイルを用意。各レコードの <code>name</code> フィールドの “hogehoge” という部分なのが邪魔なので削りたかった。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741e8f80 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>まず最初に、 <code>no such file to load -- sqlite</code> みたいなエラーが出た。要するに「お前SQLite 2のアダプター入れてねえだろ」というエラー。とりあえず <code>sudo gem install sqlite-ruby</code> したんだけど、それでも <code>no such file to load — sqlite</code> が出るのでMacを再起動したら「Rails 3ではSQLite 2はdeprecatedだからさっさとSQLite 3に移行しろや」みたいなメッセージは出るもののちゃんとDBの内容を読み込めた。CRUDのReadはでけた。</p>
 
 <p>しかしUpdateの部分で失敗。Railsの感覚で <code>hoge.save</code> とかやったんだけどこれは意図したとおりに機能しなかった。しょうがないのでRailsのAPIリファレンスを見ながら、 <code>update_attribute()</code> というメソッドをぶちかましてやった。こんな感じ。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741e8918 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>これで狙ったことができました。</p>
 
 <p>Rubyいいわー。ほんといいわー。</p>
@@ -132,6 +174,11 @@
 
 <p>してみたところ、MacPortsでは三つヒットした。</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175325a28 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>しかしSnow LeopardにはPython 2.6.1が入ってるので、</p>
 
 <p>でもオッケーかも知れない。僕は職場に持ち込んでMacBookにはMacPortsから <code>py26-pygments</code> を入れた。そしたらdependencyが発動してPythonとかXorg何とかというもののダウンロードも始まり、 <code>/opt/local/bin/</code> に <code>python-2.6.5</code> が入ったが、長々と時間がかかった。<sup><a href="#footnote-34-1">※1</a></sup></p>
@@ -146,6 +193,11 @@
 
 <p>そうなのよ。 <code>pygmentize-1.3.1</code> っていうバイナリファイルはあってパスは通ってるんだけど、 <code>pygmentize</code> そのものがないのよ。そういうわけで</p>
 
+<<<<<<< HEAD
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175316488 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>してやった。すると <code>pygmentize</code> というバイナリファイルにパスが通るので、めでたくシャレオツシンッタクスハイライティング環境が手に入った。ちなみにCSSは<a href="http://github.com/mojombo/tpw/tree/master/css/syntax.css" title="syntax.css">Github互換のもの</a>を拾ってきて入れといた。</p>
 
 <hr />
@@ -165,6 +217,7 @@
 
     <a href="/2010/08/12/fed-up-with-authlogic-oauth/#disqus_thread">Comments</a>
 
+<<<<<<< HEAD
     <h2><a href="/2010/08/03/ubuntu-server-ssh-connection-failing">Ubuntu ServerにSSH接続しようとして "Permission denied (publickey)." が出る</a></h2>
     <div class="articleinfo">Posted on 03 Aug 2010 by 森井ゴンザレス |
 	
@@ -196,6 +249,8 @@
 
     <a href="/2010/08/03/ubuntu-server-ssh-connection-failing/#disqus_thread">Comments</a>
 
+=======
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 
 				</div>
 
@@ -270,6 +325,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
+				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
 					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
@@ -287,8 +344,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>

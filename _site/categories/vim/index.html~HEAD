@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Category: Vim |  tech.portalshit.net</title>
+<title>Category: vim |  tech.portalshit.net</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
 <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -25,11 +25,8 @@
 
   			<div class="autopagerize_page_element">
 				  
-    <h2><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></h2>
-    <div class="articleinfo">Posted on 23 Apr 2011 by 森井ゴンザレス | <a href="/categories/Vim/">Vim</a></div>
-
-    <h2><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></h2>
-    <div class="articleinfo">Posted on 26 Oct 2010 by 森井ゴンザレス | <a href="/categories/Mac/">Mac</a> and <a href="/categories/Vim/">Vim</a></div>
+    <h2><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></h2>
+    <div class="articleinfo">Posted on 24 Apr 2011 by 森井ゴンザレス | <a href="/categories/vim/">vim</a></div>
 
 
 				</div>

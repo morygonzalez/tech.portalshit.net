@@ -29,6 +29,35 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></h2>
+    <div class="articleinfo">Posted on 15 Nov 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>RVM、便利に使わせてもらっていたけど、Rubyの新しいのがリリースされるたびにいろいろアレだったので <a href="%link%" title="sstephenson/rbenv - GitHub">rbenv</a> を使ってみることにした。移行、しんどいかなと思ってたけど非常に簡単で大変よかった。</p>
+
+<h3 id="rvm">RVMもキモさ</h3>
+
+<p>RVMの悪いところはググればいろいろ出てくるけど、OSの <code>cd</code> やRubyの <code>gem</code> コマンドをシェルスクリプトで置き換えるとか、行儀が悪いところが問題らしい。個人的に気にくわなかったのがRVMがどんどんでかくなっていって、Rubyのビルドに必要なパッケージまで管理できるようになったところとか（.rvm以下に新しくシステムができるみたいな感じがキモかった）、パッケージインストール用のコマンドがhelpドキュメントでは <code>rvm package install</code> なのに <code>rvm pkg install</code> にいつの間にか変わっていて訳がわからないところとか、よくわからないシェルスクリプトがログイン時に実行されるところとか、 <code>rvmsudo</code> っていうコマンドのキモさとかいろいろ。</p>
+
+<h3 id="rbenv">rbenv</h3>
+
+<p>rbenvはRubyのバージョンを切り替えるためのツールなのでインストールはやってくれないけど、ruby-buildというツールを別に入れることで、 <code>rbenv install 1.9.2-p290</code> とかでRubyのインストールもこなしてくれるようになる。</p>
+
+<p>あまりRVMを使いこなしてたとはいえなかった自分にとってはrbenvくらいでちょうどいいような感じがする。gemsetとか使わんし。そんくらいだったBundler使うし。</p>
+
+<p>インストールは以下のページが参考になります。</p>
+
+<p><a href="%link%" title="rbenv + ruby-buildのインストール方法 - 223 Software">rbenv + ruby-buildのインストール方法 - 223 Software</a></p>
+
+<p>なおrbenvはRubyインストール時のconfigureオプションの指定方法が特殊です。直接は指定できないようなので以下のようにします。（homebrewでインストールしたreadlineとiconvのパスを指定する例）</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1759796e0 /></p>
+
+<p>デフォルトのオプションなしのRubyだとearthquake.gemが動かなかったりjekyllが使えなかったりするので僕は↑のオプションを追加しました。よろしかったらお試し下さい。</p>
+
+    <a href="/2011/11/15/i-am-new-with-rbenv/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></h2>
     <div class="articleinfo">Posted on 31 Oct 2011 by 森井ゴンザレス |
 	
@@ -66,10 +95,23 @@
 	</div>
     <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
+<<<<<<< HEAD
 <p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
 
 <p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
 
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741de1e8 /></p>
+
+<p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741dda40 /></p>
+
+<p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
+
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741dd2c0 /></p>
+
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 <p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
 
 <p>正しい対処方法かどうかは自信がないが、Rubyでサクサクッとshebangを書き換えるやつを書いた。以下みたいなやつ。</p>
@@ -105,6 +147,7 @@
 
     <a href="/2011/07/02/escape-in-liquid/#disqus_thread">Comments</a>
 
+<<<<<<< HEAD
     <h2><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></h2>
     <div class="articleinfo">Posted on 29 Jun 2011 by 森井ゴンザレス |
 	
@@ -144,6 +187,8 @@
 
     <a href="/2011/06/29/added-category-archives/#disqus_thread">Comments</a>
 
+=======
+>>>>>>> d0b25a0b39bd43c131eca9cd893801fd071a6ec3
 
 				</div>
 
@@ -212,6 +257,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
+				
 					<li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
 				
 					<li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
@@ -229,8 +276,6 @@
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-				
-					<li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
 				
 				</ul>
 			</div>
