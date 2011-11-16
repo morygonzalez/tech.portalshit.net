@@ -45,11 +45,7 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf5803a78 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f92eccd8 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174122ab0 /></p>
 
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
@@ -57,11 +53,7 @@
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf5803000 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0fa8589c8 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174120a58 /></p>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 

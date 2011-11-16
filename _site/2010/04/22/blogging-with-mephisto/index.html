@@ -45,11 +45,7 @@
 
 <p>と打ってみたところ、nokogiriとそれに依存するbrynary-webratが入らなかった。原因を調べてみたところ、xsltのライブラリをダウンロードして、<code>gem install</code> するときにパスを指定してあげる必要があるらしい。xsltのライブラリ自体はPHP5をカスタムインストールしたときに入れてあるので、以下のオプションでインストールした。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf47f2260 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8bb18b0 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174155bb8 /></p>
 
 <p>無事インストール成功。その後もう一回 <code>rake gems:install</code> を実行してbrynary-webratも入り、管理ページにアクセスしてみると今度はPassengerのエラーが。これは単純にdatabase.ymlに <code>development:</code> のDB環境しか記述していなかったこと、 <code>rake db:bootstrap</code> のときに <code>RAILS_ENV=production</code> をつけていなかったことが原因だった。そういうわけでdatabase.ymlに <code>production:</code> の設定（sqlite3を使用）を書き、</p>
 

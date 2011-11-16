@@ -52,11 +52,7 @@
 
 <p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf5803a78 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f92eccd8 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174122ab0 /></p>
 
 <p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
 
@@ -64,11 +60,7 @@
 
 <p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf5803000 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0fa8589c8 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff174120a58 /></p>
 
 <p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
 
@@ -105,15 +97,9 @@
 
 <p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf4324418 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175283570 /></p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf431ec48 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c52788 /></p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c521c0 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175282b70 /></p>
 
     <a href="/2011/05/24/favstream.rb/#disqus_thread">Comments</a>
 
@@ -151,11 +137,7 @@
 
 <p>同じくMacVim Kaoriya Wikiで紹介されている、MacVimを起動するコマンドをaliasで化したものを <code>.zshrc</code> に書いたところうまくコピペが機能した。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf40e5670 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8b1df20 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1748d26c0 /></p>
 
 <p>同じ問題でお困りの方はお試しあれ。</p>
 
@@ -172,11 +154,7 @@
 	</div>
     <p>ポータルシットをLokkaに置き換えたくていろいろやってる。ポータルシットの過去記事をYAMLでエクスポートし、それをLokkaのDBに取り込む作業をやってる。TDD BootCampに参加したので、テストファーストしながらの作業。RSpecでテストコードを書き、ログが正しくインポートできることを確認する。テスト終了時 <code>after(:all)</code> フックで、取り込んだログを削除してる。コードはこんな感じ。ちなみにLokkaはDataMapperをORMに採用してるので以下はDataMapperでの話。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf46e5d18 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c57fd0 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175946c90 /></p>
 
 <p>しかしこれでは <code>AUTO INCREMENT</code> の値がリセットされず、テストを繰り返す度に <code>AUTO INCREMENT</code> の値が増えていってうざかった。</p>
 
@@ -194,11 +172,7 @@
 
 <p>最終的な <code>after(:all)</code> フックはこんな感じ。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf46e5340 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c57b20 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175940fc0 /></p>
 
 <p>テスト実行後にはすべてのデータがデータベースから削除されて、<code>AUTO INCREMENT</code> の値もリセットされる。人畜無害なテストコード万歳。</p>
 

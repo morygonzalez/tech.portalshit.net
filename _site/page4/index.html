@@ -155,19 +155,11 @@
 
 <p>を実行してみたところ、お前はroot権限がないんじゃ〜とエラーが出ていたところも無事通過してnginxをインストールできてしまった。以前、sudoで無理矢理nginxをインストールしたときは、 <code>nginx.conf</code> 内で、</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf38810d8 /></p>
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741dab88 /></p>
 
 <p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf3836cb8 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f982ecf0 /></p>
-
-<p>となっていて大変気持ち悪かったし、Passengerも「PassengerとRubyの本体でバージョンの不整合があるだろヴォケ」みたいな警告出してた。それが <code>rvmsudo</code> のおかげで <code>nginx.conf</code> に書き込まれる値も以下の通りとなるので、とりあえずPassenger（RubyGems）とRubyのバージョンが異なるというような問題は回避できる。</p>
-
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f982e818 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1741da4f8 /></p>
 
 <p>ただ、なんでか分からないのだけどnginxがうまく動いてくれなくて、無事Webサーバーを起動できてない感じです。</p>
 
@@ -190,11 +182,7 @@
 
 <p>とシェルから呼び出したときにはちゃんと</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf4594ba8 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f8c0aca8 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff1752bafc0 /></p>
 
 <p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
 
@@ -221,11 +209,7 @@
 
 <p>いちばん手っ取り早そうだったので、以下のような書き方をした。</p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf47da610 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f91f97b8 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175a72740 /></p>
 
 <p>ただ無名関数は呼び出せないので、二回書かなければならなくなる。これはアホっぽい。関数リテラルにして呼び出し用に <code>function init()</code> みたいのを書き、その中から呼び出せばよい。そしてその <code>init()</code> を上記 <code>// 実行したい処理</code> 内にも書いてあげればオッケーだ（もちろん <code>window.onload</code> で呼び出す必要もある）。</p>
 
@@ -233,11 +217,7 @@
 
 <p><a href="http://stackoverflow.com/questions/3796207/using-one-with-live-jquery">Using .one() with .live() jQuery - Stack Overflow</a></p>
 
-<<<<<<< HEAD
-<p>Liquid error: undefined method `join’ for #<String:0x007fedf47d9d78 /></p>
-=======
-<p>Liquid error: undefined method `join’ for #<String:0x007fd0f91f91f0 /></p>
->>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
+<p>Liquid error: undefined method `join’ for #<String:0x007ff175a71d40 /></p>
 
 <p><code>jQuery().data()</code> 、なかなか便利そうだ。</p>
 
