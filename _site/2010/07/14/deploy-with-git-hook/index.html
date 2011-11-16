@@ -45,7 +45,11 @@
 
 <p>まず記事を作成するパソコンでgitとjekyllのセットアップをしたあと、リポジトリを作る（リポジトリ1）。その後Dreamhostの公開ディレクトリでないところに空のリポジトリを作る（ <code>git --bare init</code> ）。ここでは <code>blog.git</code> という名前にしましょう（リポジトリ2）。そんでそこにリポジトリ1をpushする。その後リポジトリ2の <code>/blog.git/hooks/</code> に <code>post-update</code> というファイルを作り、以下のように書く。ファイルに実行可能なアクセス権を与えることを忘れずに。</p>
 
+<<<<<<< HEAD
 <p>Liquid error: undefined method `join’ for #<String:0x007fedf5800dc8 /></p>
+=======
+<p>Liquid error: undefined method `join’ for #<String:0x007fd0fa810358 /></p>
+>>>>>>> 48a46effbd8fb914da3b1e06351b2f0856d4b1de
 
 <p>そんでもって <code>git clone blog.git &lt;公開用のディレクトリ名&gt;</code> する（リポジトリ3）。リポジトリ1から公開用ディレクトリにリポジトリがコピーされるので、この中に含まれる <code>_site</code> というディレクトリを panel.dreamhost.com で公開ディレクトリとして設定すると、<code>git push</code> する度にhookが発動されて、めでたく記事が公開されるという次第です。</p>
 
