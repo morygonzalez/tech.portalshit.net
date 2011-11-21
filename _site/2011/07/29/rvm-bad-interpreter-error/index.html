@@ -37,15 +37,41 @@
       </div>
       <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfdfd8 /></p>
+<div class="highlight"><pre><code class="console"><span class="go">rvm install 1.9.2 --with-readline-dir=/usr/local #homebrewで入れたreadlineのパスを指定</span>
+<span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
+</code></pre>
+</div>
 
 <p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfda38 /></p>
+<div class="highlight"><pre><code class="console"><span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
+<span class="go">Are you sure you wish to MOVE gems from ruby-1.9.2-p180 to ruby-1.9.2-p290?</span>
+<span class="go">This will overwrite existing gems in ruby-1.9.2-p290 and remove them from ruby-1.9.2-p180 (Y/n): Y</span>
+<span class="go">Moving gemsets...</span>
+<span class="go">Moving ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
+<span class="go">Making gemset ruby-1.9.2-p290 pristine.</span>
+<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
+<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
+<span class="go">Moving ruby-1.9.2-p180@global to ruby-1.9.2-p290@global</span>
+<span class="go">Making gemset ruby-1.9.2-p290@global pristine.</span>
+<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
+<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
+<span class="go">Do you wish to move over aliases? (Y/n): Y</span>
+<span class="go">Do you wish to move over wrappers? (Y/n): Y</span>
+<span class="go">Do you also wish to completely remove ruby-1.9.2-p180 (inc. archive)? (Y/n): Y</span>
+<span class="go">Successfully migrated ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
+</code></pre>
+</div>
 
 <p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
 
-<p>Liquid error: undefined method `join’ for #<String:0x007fdb89dfd4c0 /></p>
+<div class="highlight"><pre><code class="console"><span class="go">zsh: /usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake: bad interpreter: /usr/local/rvm/rubies/ruby-1.9.2-p180/bin/ruby: no such file or directory</span>
+<span class="go">rake aborted!</span>
+<span class="go">No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)</span>
+<span class="go">/usr/local/rvm/gems/ruby-1.9.2-p290/gems/rake-0.8.7/lib/rake.rb:2377:in `raw_load_rakefile&#39;</span>
+<span class="go">(See full trace by running task with --trace)</span>
+</code></pre>
+</div>
 
 <p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
 
@@ -70,7 +96,7 @@
           
           <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
           
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
+          <li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
           
         </ul>
       </div>
@@ -103,6 +129,8 @@
         <h3>Latest Posts</h3>
         <ul>
           
+          <li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
+          
           <li><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></li>
           
           <li><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></li>
@@ -120,8 +148,6 @@
           <li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
           
           <li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
-          
-          <li><a href="/2011/04/23/macvim-kopipe-dekinai">MacVimでコピペできないんですけど…</a></li>
           
         </ul>
       </div>

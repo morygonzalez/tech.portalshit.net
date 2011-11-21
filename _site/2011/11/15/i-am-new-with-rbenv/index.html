@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>Jekyllにカテゴリ一覧を追加した |  tech.portalshit.net</title>
+    <title>RVMをやめてrbenvにした |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,82 +19,56 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2011/05/24/favstream.rb" title="User Streamで快適ネットストーキング生活">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/10/31/stopped-using-heroku" title="Herokuを使うのをやめた">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2011/07/02/escape-in-liquid" title="Liquidの中でLiquidをエスケープする">Next Post</a></span>
         
       </div>
 
-      <h2>Jekyllにカテゴリ一覧を追加した</h2>
+      <h2>RVMをやめてrbenvにした</h2>
       <div class="articleinfo">
-        Posted on 29 Jun 2011 by 森井ゴンザレス |
-        
-          <a href="/categories/Jekyll/">Jekyll</a>
+        Posted on 15 Nov 2011 by 森井ゴンザレス |
         
           <a href="/categories/Ruby/">Ruby</a>
         
       </div>
-      <p>Jekyllを使いだしてから気がつくと一年経ってました。いろいろ便利に使えており気に入っております。</p>
+      <p>RVM、便利に使わせてもらっていたけど、Rubyの新しいのがリリースされるたびにいろいろアレだったので <a href="%link%" title="sstephenson/rbenv - GitHub">rbenv</a> を使ってみることにした。移行、しんどいかなと思ってたけど非常に簡単で大変よかった。</p>
 
-<p>PygmentでコードをシンタックスハイライトしたりLSIで関連記事表示したりと結構手を入れてはいたんだけど、いわゆる世間の一般のブログにあるようなカテゴリ一覧表示機能と、カテゴリごとの記事アーカイブ機能がなくて、それを若干不便に思っておりました。</p>
+<h3 id="rvm">RVMもキモさ</h3>
 
-<p>ググってみたところ、プログラマー向けなブログツールなだけあっていろんな方法が出てきました。以下そのまとめ。</p>
+<p>RVMの悪いところはググればいろいろ出てくるけど、OSの <code>cd</code> やRubyの <code>gem</code> コマンドをシェルスクリプトで置き換えるとか、行儀が悪いところが問題らしい。個人的に気にくわなかったのがRVMがどんどんでかくなっていって、Rubyのビルドに必要なパッケージまで管理できるようになったところとか（.rvm以下に新しくシステムができるみたいな感じがキモかった）、パッケージインストール用のコマンドがhelpドキュメントでは <code>rvm package install</code> なのに <code>rvm pkg install</code> にいつの間にか変わっていて訳がわからないところとか、よくわからないシェルスクリプトがログイン時に実行されるところとか、 <code>rvmsudo</code> っていうコマンドのキモさとかいろいろ。</p>
 
-<h3 id="section">カテゴリ一覧</h3>
+<h3 id="rbenv">rbenv</h3>
 
-<p>JekyllのLiquid (テンプレート言語) には <code>{{ sites.categories }}</code> みたいタグがあるんだけど、こいつが意図したとおりに動かない。普通のRuby使いの感覚からすると <code>site.categories</code> ってカテゴリを沢山持った配列になってそうな気がするんだけどこれが違う。</p>
+<p>rbenvはRubyのバージョンを切り替えるためのツールなのでインストールはやってくれないけど、ruby-buildというツールを別に入れることで、 <code>rbenv install 1.9.2-p290</code> とかでRubyのインストールもこなしてくれるようになる。</p>
 
-<div class="highlight"><pre><code class="html"><span class="lineno">1</span> <span class="nt">&lt;ul&gt;</span>
-<span class="lineno">2</span> {{ for category in sites.categories }}
-<span class="lineno">3</span>   <span class="nt">&lt;li&gt;</span>{{ category.name }}<span class="nt">&lt;/li&gt;</span>
-<span class="lineno">4</span> {{ endfor }}
-<span class="lineno">5</span> <span class="nt">&lt;/ul&gt;</span>
+<p>あまりRVMを使いこなしてたとはいえなかった自分にとってはrbenvくらいでちょうどいいような感じがする。gemsetとか使わんし。そんくらいだったBundler使うし。</p>
+
+<p>インストールは以下のページが参考になります。</p>
+
+<p><a href="%link%" title="rbenv + ruby-buildのインストール方法 - 223 Software">rbenv + ruby-buildのインストール方法 - 223 Software</a></p>
+
+<p>なおrbenvはRubyインストール時のconfigureオプションの指定方法が特殊です。直接は指定できないようなので以下のようにします。（homebrewでインストールしたreadlineとiconvのパスを指定する例）</p>
+
+<div class="highlight"><pre><code class="console"><span class="gp">$</span><span class="nv">CONFIGURE_OPTS</span><span class="o">=</span><span class="s2">&quot;--with-readline-dir=/usr/local --with-iconv-dir=/usr/local&quot;</span> rbenv install 1.9.2-p290
 </code></pre>
 </div>
 
-<p>↑みたいな感じのコード書くと何も表示されない。 <code>site.categoires</code> はHashで、<code>{ "カテゴリ名" =&gt; カテゴリ内の記事一覧 }</code> みたいな構造になってる。LiquidでHashのキーを取りだす方法が分からず、どうにもこうにもいかなかったので他の人が作っているプラグインを利用することにした。</p>
-
-<p><a href="https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_category_iterator/tag_category_iterator.rb" title="tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub">tag_category_iterator/tag_category_iterator.rb at master from rfelix/my_jekyll_extensions - GitHub</a></p>
-
-<p>↑のファイルを <code>JEKYLL_ROOT/_plugins</code> にコピーする。（<code>_plugins</code> というディレクトリがなければ作る）。そんでテンプレートを変更する。↑のやつを↓みたいにする。</p>
-
-<div class="highlight"><pre><code class="html"><span class="lineno">1</span> <span class="nt">&lt;ul&gt;</span>
-<span class="lineno">2</span> {{ for category in sites.iterable.categories }}
-<span class="lineno">3</span>   <span class="nt">&lt;li&gt;</span>{{ category.name }}<span class="nt">&lt;/li&gt;</span>
-<span class="lineno">4</span> {{ endfor }}
-<span class="lineno">5</span> <span class="nt">&lt;/ul&gt;</span>
-</code></pre>
-</div>
-
-<p>2行目のところが変更点です。これでカテゴリ一覧表示ができるようになる。</p>
-
-<h3 id="section-1">カテゴリごとの記事一覧</h3>
-
-<p>カテゴリごとの記事一覧を表示する方法だけど、こういうのを発見した。</p>
-
-<p><a href="http://recursive-design.com/projects/jekyll-plugins/" title="Jekyll Plugins - Recursive Design">Jekyll Plugins - Recursive Design</a></p>
-
-<p>ここの <code>generate_categories.rb</code> を使えばカテゴリ内の記事一覧を作成できる。こんな感じ。</p>
-
-<p><a href="http://tech.portalshit.net/categories/Ruby/" title="Category: Ruby \| tech.portalshit.net">Category: Ruby | tech.portalshit.net</a></p>
-
-<p>これもさっきのと同じように、<code>JEKYLL_ROOT/_plugins</code> にファイルをコピーする。そんでLiquidテンプレートを書き換えるんだけど詳細はプラグイン内の記事をご確認くだしあ。</p>
+<p>デフォルトのオプションなしのRubyだとearthquake.gemが動かなかったりjekyllが使えなかったりするので僕は↑のオプションを追加しました。よろしかったらお試し下さい。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
-          <li><a href="/2010/08/13/jekyll-with-pygments">Pygmentsを使ってコードをシンタックスハイライトするようにした</a></li>
+          <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
           
           <li><a href="/2010/08/31/macports-is-deprecated">MacPortsからHomebrewに移行しつつある</a></li>
           
-          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
+          <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
           
-          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
+          <li><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></li>
           
         </ul>
       </div>
@@ -117,8 +91,6 @@
       <div id="sidebar">
         <h3>Categories</h3>
         <ul id="categories">
-          
-          <li><a href="/categories/Jekyll/">Jekyll</a></li>
           
           <li><a href="/categories/Ruby/">Ruby</a></li>
           
