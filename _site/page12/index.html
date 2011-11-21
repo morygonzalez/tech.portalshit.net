@@ -35,6 +35,23 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></h2>
+    <div class="articleinfo">Posted on 08 May 2010 by 森井ゴンザレス |
+	
+		<a href="categories/CakePHP/">CakePHP</a>
+	</div>
+    <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
+
+<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
+
+<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+
+<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+
+<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
+
+    <a href="/2010/05/08/to-what-extent-write-codes-in-mvc/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/05/07/git-branch-usage">Gitのbranchの使い方</a></h2>
     <div class="articleinfo">Posted on 07 May 2010 by 森井ゴンザレス |
 	
@@ -196,21 +213,6 @@
 
     <a href="/2010/05/01/cakephp13/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/04/22/google-analytics-plugin">Google Analytics Pluginが動かない</a></h2>
-    <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
-	
-		<a href="categories/misc/">misc</a>
-	</div>
-    <p>MephistoでGoogle Analytics使おうと思ってググったら <a href="http://www.artweb-design.de/projects/ruby-on-rails-plugin-google-analytics">Ruby on Rails Plugin: Google Analytics (blue egg edition) - artweb design</a> というのが出てきたので、早速インストールしてみたんだけど動いていないっぽい。</p>
-
-<p>Mephistoは「rails blog」でググって一番上に出てきたので深く考えもせずにインストールしてしまったんだけど、一年近くバージョンアップされてないし、いまはあんまり活発に開発が行われてるわけじゃないっぽいな。</p>
-
-<h3 id="section">追記</h3>
-
-<p>一晩寝て起きたら動いてた。</p>
-
-    <a href="/2010/04/22/google-analytics-plugin/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -275,6 +277,8 @@
         
           <li><a href="/categories/rvm/">rvm</a></li>
         
+          <li><a href="/categories/tmux/">tmux</a></li>
+        
           <li><a href="/categories/vim/">vim</a></li>
         
           <li><a href="/categories/zsh/">zsh</a></li>
@@ -284,6 +288,8 @@
         </ul>
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
 				
 					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
@@ -302,8 +308,6 @@
 					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
 				
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
-				
-					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
 				
 				</ul>
 			</div>

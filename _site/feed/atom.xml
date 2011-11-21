@@ -4,12 +4,25 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-11-22T00:32:09+09:00</updated>
+  <updated>2011-11-22T01:08:21+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>MacVimでコピペできない問題の解決方法</title>
+    <link href="/2011/11/22/macvim-kopipe-revival" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/11/22/macvim-kopipe-revival</id>
+    <content type="html">&lt;p&gt;2011年はてなインターンであらせられるuasiさんのはてなブログに解決方法が書いてありました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://uasi.hatenablog.com/entry/2011/11/15/150657&quot; title=&quot;Tmux で pbcopy/pbpaste が効かないやつ - uasi:ウアシー&quot;&gt;Tmux で pbcopy/pbpaste が効かないやつ - uasi:ウアシー&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;MacVimが悪いんじゃなくてtmuxに原因があったみたい。tmuxごしにVimを起動すると、MacVimでなくて普通のVimでもコピペができなくなる不具合があったようです。しかし&lt;a href=&quot;https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard&quot; title=&quot;ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub&quot;&gt;ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub&lt;/a&gt;をインストールすることで解決します。tmuxだけでなくGNU Screen + Vimの組み合わせでも同様の問題が解決するそうです。お困りの方はお試し下さい。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>RVMをやめてrbenvにした</title>

@@ -29,6 +29,21 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></h2>
+    <div class="articleinfo">Posted on 22 Nov 2011 by 森井ゴンザレス |
+	
+		<a href="categories/tmux/">tmux</a>
+	
+		<a href="categories/vim/">vim</a>
+	</div>
+    <p>2011年はてなインターンであらせられるuasiさんのはてなブログに解決方法が書いてありました。</p>
+
+<p><a href="http://uasi.hatenablog.com/entry/2011/11/15/150657" title="Tmux で pbcopy/pbpaste が効かないやつ - uasi:ウアシー">Tmux で pbcopy/pbpaste が効かないやつ - uasi:ウアシー</a></p>
+
+<p>MacVimが悪いんじゃなくてtmuxに原因があったみたい。tmuxごしにVimを起動すると、MacVimでなくて普通のVimでもコピペができなくなる不具合があったようです。しかし<a href="https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard" title="ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub">ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub</a>をインストールすることで解決します。tmuxだけでなくGNU Screen + Vimの組み合わせでも同様の問題が解決するそうです。お困りの方はお試し下さい。</p>
+
+    <a href="/2011/11/22/macvim-kopipe-revival/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></h2>
     <div class="articleinfo">Posted on 15 Nov 2011 by 森井ゴンザレス |
 	
@@ -145,29 +160,6 @@
 
     <a href="/2011/07/29/rvm-bad-interpreter-error/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></h2>
-    <div class="articleinfo">Posted on 02 Jul 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Jekyll/">Jekyll</a>
-	
-		<a href="categories/Liquid/">Liquid</a>
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>JekyllはLiquidというRubyのテンプレートエンジンを採用してるんですが、Liquid内でLiquidの文法をエスケープする方法が分からず大変苦しんでおりました。Jekyllの公式のDocument呼んでもXML出力時とかCGI出力時にコンテンツをエスケープする方法は書いてあるのに、Liquidテンプレート自体をエスケープする方法が書いてなく、大変不満でした。しかしその方法が分かったのでお知らせいたします。元ネタはスタックオーバーフロー。</p>
-
-<p><a href="http://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags" title="web development - How to escape liquid template tags? - Stack Overflow">web development - How to escape liquid template tags? - Stack Overflow</a></p>
-
-<p>例えば <code>{% this }</code> と表示させたかったらこうやります。</p>
-
-<pre>&#123;&#123; "&#123;% this " %}&#125;&#125;&#125;</pre>
-
-<p>ちょっとトリッキーですね。</p>
-
-<p>Pygmentsと組み合わせて使うことも可能ですが、いちいち <code>{% highlight }</code> のなかでコメントアウト処理をしてあげないといけないません。面倒くさいですね。</p>
-
-    <a href="/2011/07/02/escape-in-liquid/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -226,6 +218,8 @@
         
           <li><a href="/categories/rvm/">rvm</a></li>
         
+          <li><a href="/categories/tmux/">tmux</a></li>
+        
           <li><a href="/categories/vim/">vim</a></li>
         
           <li><a href="/categories/zsh/">zsh</a></li>
@@ -235,6 +229,8 @@
         </ul>
 				<h3>Latest Posts</h3>
 				<ul>
+				
+					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
 				
 					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
@@ -253,8 +249,6 @@
 					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
 				
 					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
-				
-					<li><a href="/2011/04/24/datamapper-sqlite3-auto-increment-reset">DataMapperでAUTO INCREMENT値をリセットする</a></li>
 				
 				</ul>
 			</div>
