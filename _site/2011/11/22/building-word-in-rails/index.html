@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>oauth-pluginではまった |  tech.portalshit.net</title>
+    <title>Railsで `building` って予約語なんすかね |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,46 +19,52 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/07/14/deploy-with-git-hook" title="Gitのhookを使ってDreamhost上のJekyllに記事を公開">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/11/15/i-am-new-with-rbenv" title="RVMをやめてrbenvにした">Previous Post</a></a></span>
         
         
-        <span class="next"><a href="/2010/07/26/trial-with-tokyo-tyrant" title="Tokyo Tyrantでvalueに配列を保存したらダメなのかしら">Next Post</a></span>
+        <span class="next"><a href="/2011/11/22/macvim-kopipe-revival" title="MacVimでコピペできない問題の解決方法">Next Post</a></span>
         
       </div>
 
-      <h2>oauth-pluginではまった</h2>
+      <h2>Railsで `building` って予約語なんすかね</h2>
       <div class="articleinfo">
-        Posted on 15 Jul 2010 by 森井ゴンザレス |
+        Posted on 22 Nov 2011 by 森井ゴンザレス |
         
-          <a href="/categories/OAuth/">OAuth</a>
-        
-          <a href="/categories/Rails/">Rails</a>
+          <a href="/categories/rails/">rails</a>
         
       </div>
-      <p>OAuthを導入しようとした。Twitterのだけなら何とか拾ってきたコードで動くとこまで持ってけてたけど、どうせやるならいろんなOAuth Providerに対応したい。oauth-pluginってgemを使えば簡単に沢山のOAuth Providerに対応できるみたいなので導入しようとしたけど、これがくせ者だった。</p>
+      <p>Railsで建物名みたいなカラムに <code>building</code> ってのを当ててたら</p>
 
-<p>まずoauthとoauth-pluginをただ入れるだけじゃ動かない。 <q>acts_as_authenticated, restful_authentication  or restful_openid_authentication</q> というプラグインが入ってて、ユーザー認証をこれらのgemに任せてないとダメ。</p>
+<div class="highlight"><pre><code class="ruby"><span class="no">ActionView</span><span class="o">::</span><span class="no">Template</span><span class="o">::</span><span class="no">Error</span> <span class="p">(</span><span class="n">no</span> <span class="n">block</span> <span class="n">given</span> <span class="p">(</span><span class="k">yield</span><span class="p">)):</span>
+</code></pre>
+</div>
 
-<p>作者がrestful_authenticationをすすめてたのでこれを導入した。（usersテーブルの構造自体が変わるので、ただ単にインストールするだけじゃなくて <code>rake db:drop</code> して古い <code>db/migrate/(日付)_create_users.rb</code> を削除し、もう一回 <code>rake db:migrate</code> しないといけない。さらにControllerとかViewとかもいじらなきゃいけないので地味に結構面倒くさい。</p>
+<p>みたいなエラーが出るんですけど、Railsで <code>building</code> って予約語なんですかね。</p>
 
-<p>しかし何度やってもうまくいかない。「 <code>login_required</code> みたいなメソッドねーし」とかエラーが出る。どうやら昔の restful_authentication にはそういうメソッドがあったらしんだけど、現在の restful_authentication からは削除されてるらしい。他にも <code>current_user</code> っていうのも未定義で、この辺のエラーのおかげで完全に萎えた。</p>
+<p>なんか Rails Wiki の<a href="http://wiki.rubyonrails.org/rails/pages/reservedwords" title="Reserved Words You Can’t Use =&gt; Rails Wiki">Reserved Words You Can’t Use</a> は真っ白だし、古い方のWikiの<a href="http://oldwiki.rubyonrails.org/rails/pages/ReservedWords" title="ReservedWords in Ruby on Rails">予約語一覧</a> にも <code>building</code> は入ってないし。</p>
 
-<p>そういうわけで一週間くらいOAuth対応に向けて頑張ってたけど諦めました。TwitterだけOAuth認証に挑戦してみる。とってきたOAuth Tokenの扱いとかに若干不安があるけどうまくいくかしら。</p>
+<p>とりあえず複数形にして対応したけど気持ち悪い。</p>
+
+<h3 id="section">追記</h3>
+
+<p>どうやらMongoidに起因するエラーのようです。</p>
+
+<p><a href="https://jira.mongodb.org/browse/RUBY-338" title="[#RUBY-338] no block given (yield) - MongoDB">[#RUBY-338] no block given (yield) - MongoDB</a></p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></li>
-          
-          <li><a href="/2010/06/22/installed-rubygems-on-xrea">XREAにRubyGemsをインストール</a></li>
+          <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
           
           <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
           
-          <li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
+          <li><a href="/2010/09/15/textmate-with-rvm-ruby">RVMのRubyをTextMateで使う</a></li>
           
-          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
+          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
+          
+          <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
           
         </ul>
       </div>
@@ -82,9 +88,7 @@
         <h3>Categories</h3>
         <ul id="categories">
           
-          <li><a href="/categories/OAuth/">OAuth</a></li>
-          
-          <li><a href="/categories/Rails/">Rails</a></li>
+          <li><a href="/categories/rails/">rails</a></li>
           
         </ul>
 

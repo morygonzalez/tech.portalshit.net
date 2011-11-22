@@ -1,7 +1,7 @@
 ---
 id: 54
 title: MacVimでコピペできたんですけど…
-category: vim
+category: Vim
 layout: post
 ---
 

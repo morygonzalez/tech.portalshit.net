@@ -4,7 +4,7 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-11-22T01:08:21+09:00</updated>
+  <updated>2011-11-22T11:39:44+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
@@ -21,6 +21,31 @@
 &lt;p&gt;&lt;a href=&quot;http://uasi.hatenablog.com/entry/2011/11/15/150657&quot; title=&quot;Tmux で pbcopy/pbpaste が効かないやつ - uasi:ウアシー&quot;&gt;Tmux で pbcopy/pbpaste が効かないやつ - uasi:ウアシー&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;MacVimが悪いんじゃなくてtmuxに原因があったみたい。tmuxごしにVimを起動すると、MacVimでなくて普通のVimでもコピペができなくなる不具合があったようです。しかし&lt;a href=&quot;https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard&quot; title=&quot;ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub&quot;&gt;ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub&lt;/a&gt;をインストールすることで解決します。tmuxだけでなくGNU Screen + Vimの組み合わせでも同様の問題が解決するそうです。お困りの方はお試し下さい。&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Railsで `building` って予約語なんすかね</title>
+    <link href="/2011/11/22/building-word-in-rails" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/11/22/building-word-in-rails</id>
+    <content type="html">&lt;p&gt;Railsで建物名みたいなカラムに &lt;code&gt;building&lt;/code&gt; ってのを当ててたら&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;ActionView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;no&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;given&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;みたいなエラーが出るんですけど、Railsで &lt;code&gt;building&lt;/code&gt; って予約語なんですかね。&lt;/p&gt;
+
+&lt;p&gt;なんか Rails Wiki の&lt;a href=&quot;http://wiki.rubyonrails.org/rails/pages/reservedwords&quot; title=&quot;Reserved Words You Can’t Use =&amp;gt; Rails Wiki&quot;&gt;Reserved Words You Can’t Use&lt;/a&gt; は真っ白だし、古い方のWikiの&lt;a href=&quot;http://oldwiki.rubyonrails.org/rails/pages/ReservedWords&quot; title=&quot;ReservedWords in Ruby on Rails&quot;&gt;予約語一覧&lt;/a&gt; にも &lt;code&gt;building&lt;/code&gt; は入ってないし。&lt;/p&gt;
+
+&lt;p&gt;とりあえず複数形にして対応したけど気持ち悪い。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;追記&lt;/h3&gt;
+
+&lt;p&gt;どうやらMongoidに起因するエラーのようです。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jira.mongodb.org/browse/RUBY-338&quot; title=&quot;[#RUBY-338] no block given (yield) - MongoDB&quot;&gt;[#RUBY-338] no block given (yield) - MongoDB&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   

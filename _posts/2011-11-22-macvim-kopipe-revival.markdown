@@ -3,7 +3,7 @@ id: 63
 title: MacVimでコピペできない問題の解決方法
 categories: 
 - tmux
-- vim
+- Vim
 layout: post
 ---
 

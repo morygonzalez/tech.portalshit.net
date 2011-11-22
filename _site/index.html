@@ -32,9 +32,9 @@
     <h2><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></h2>
     <div class="articleinfo">Posted on 22 Nov 2011 by 森井ゴンザレス |
 	
-		<a href="categories/tmux/">tmux</a>
+		<a href="categories/Vim/">Vim</a>
 	
-		<a href="categories/vim/">vim</a>
+		<a href="categories/tmux/">tmux</a>
 	</div>
     <p>2011年はてなインターンであらせられるuasiさんのはてなブログに解決方法が書いてありました。</p>
 
@@ -43,6 +43,31 @@
 <p>MacVimが悪いんじゃなくてtmuxに原因があったみたい。tmuxごしにVimを起動すると、MacVimでなくて普通のVimでもコピペができなくなる不具合があったようです。しかし<a href="https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard" title="ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub">ChrisJohnsen/tmux-MacOSX-pasteboard - GitHub</a>をインストールすることで解決します。tmuxだけでなくGNU Screen + Vimの組み合わせでも同様の問題が解決するそうです。お困りの方はお試し下さい。</p>
 
     <a href="/2011/11/22/macvim-kopipe-revival/#disqus_thread">Comments</a>
+
+    <h2><a href="/2011/11/22/building-word-in-rails">Railsで `building` って予約語なんすかね</a></h2>
+    <div class="articleinfo">Posted on 22 Nov 2011 by 森井ゴンザレス |
+	
+		<a href="categories/rails/">rails</a>
+	</div>
+    <p>Railsで建物名みたいなカラムに <code>building</code> ってのを当ててたら</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="no">ActionView</span><span class="o">::</span><span class="no">Template</span><span class="o">::</span><span class="no">Error</span> <span class="p">(</span><span class="n">no</span> <span class="n">block</span> <span class="n">given</span> <span class="p">(</span><span class="k">yield</span><span class="p">)):</span>
+</code></pre>
+</div>
+
+<p>みたいなエラーが出るんですけど、Railsで <code>building</code> って予約語なんですかね。</p>
+
+<p>なんか Rails Wiki の<a href="http://wiki.rubyonrails.org/rails/pages/reservedwords" title="Reserved Words You Can’t Use =&gt; Rails Wiki">Reserved Words You Can’t Use</a> は真っ白だし、古い方のWikiの<a href="http://oldwiki.rubyonrails.org/rails/pages/ReservedWords" title="ReservedWords in Ruby on Rails">予約語一覧</a> にも <code>building</code> は入ってないし。</p>
+
+<p>とりあえず複数形にして対応したけど気持ち悪い。</p>
+
+<h3 id="section">追記</h3>
+
+<p>どうやらMongoidに起因するエラーのようです。</p>
+
+<p><a href="https://jira.mongodb.org/browse/RUBY-338" title="[#RUBY-338] no block given (yield) - MongoDB">[#RUBY-338] no block given (yield) - MongoDB</a></p>
+
+    <a href="/2011/11/22/building-word-in-rails/#disqus_thread">Comments</a>
 
     <h2><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></h2>
     <div class="articleinfo">Posted on 15 Nov 2011 by 森井ゴンザレス |
@@ -103,63 +128,6 @@
 
     <a href="/2011/09/11/amazon-target-killer/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></h2>
-    <div class="articleinfo">Posted on 29 Jul 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	
-		<a href="categories/rvm/">rvm</a>
-	</div>
-    <p>Ruby 1.9.2-p290 がリリースされたので入れてみた。RVMで。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">rvm install 1.9.2 --with-readline-dir=/usr/local #homebrewで入れたreadlineのパスを指定</span>
-<span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
-</code></pre>
-</div>
-
-<p><code>migrate</code> を実行したところ、警告が出ながらも次のような感じでマイグレーションは完了した。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">rvm migrate ruby-1.9.2-p180 ruby-1.9.2-p290</span>
-<span class="go">Are you sure you wish to MOVE gems from ruby-1.9.2-p180 to ruby-1.9.2-p290?</span>
-<span class="go">This will overwrite existing gems in ruby-1.9.2-p290 and remove them from ruby-1.9.2-p180 (Y/n): Y</span>
-<span class="go">Moving gemsets...</span>
-<span class="go">Moving ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
-<span class="go">Making gemset ruby-1.9.2-p290 pristine.</span>
-<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
-<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
-<span class="go">Moving ruby-1.9.2-p180@global to ruby-1.9.2-p290@global</span>
-<span class="go">Making gemset ruby-1.9.2-p290@global pristine.</span>
-<span class="go">ERROR: Error running &#39;rvm gemset pristine&#39; under ,</span>
-<span class="go">please read /usr/local/rvm/log//gemset.pristine.log</span>
-<span class="go">Do you wish to move over aliases? (Y/n): Y</span>
-<span class="go">Do you wish to move over wrappers? (Y/n): Y</span>
-<span class="go">Do you also wish to completely remove ruby-1.9.2-p180 (inc. archive)? (Y/n): Y</span>
-<span class="go">Successfully migrated ruby-1.9.2-p180 to ruby-1.9.2-p290</span>
-</code></pre>
-</div>
-
-<p>一見、問題なく移行できたように思えるのだけど、この後rakeなどexecutableなgemをコマンドラインから実行すると以下のようなエラーが出る。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">zsh: /usr/local/rvm/gems/ruby-1.9.2-p290/bin/rake: bad interpreter: /usr/local/rvm/rubies/ruby-1.9.2-p180/bin/ruby: no such file or directory</span>
-<span class="go">rake aborted!</span>
-<span class="go">No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)</span>
-<span class="go">/usr/local/rvm/gems/ruby-1.9.2-p290/gems/rake-0.8.7/lib/rake.rb:2377:in `raw_load_rakefile&#39;</span>
-<span class="go">(See full trace by running task with --trace)</span>
-</code></pre>
-</div>
-
-<p>shebangに書いてあるrubyのパスがmigrate時に削除した ruby-1.9.2-p180 なのが問題なわけだ。</p>
-
-<p>正しい対処方法かどうかは自信がないが、Rubyでサクサクッとshebangを書き換えるやつを書いた。以下みたいなやつ。</p>
-
-<script src="https://gist.github.com/1092544.js?file=fix_shebang.rb"></script>
-
-<p>こいつを実行してやるとshebangが正しく書き換わったexecutableなgemができる。万が一のためにbackupファイルを作るのでこれをzshで <code>rm *_backup</code> とかしてやるといいと思います。</p>
-
-<p>と思ったけど、結局↑のRubyの入れ方はまずいみたいで、jekyllとかCライブラリに依存する系のgemが動かなくなってしまったので <code>rvm implode</code> してRVMをまるっと入れ替えた（20回くらいRubyをインストールしなおした）。次の記事にでも書きます…。</p>
-
-    <a href="/2011/07/29/rvm-bad-interpreter-error/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -216,11 +184,11 @@
         
           <li><a href="/categories/misc/">misc</a></li>
         
+          <li><a href="/categories/rails/">rails</a></li>
+        
           <li><a href="/categories/rvm/">rvm</a></li>
         
           <li><a href="/categories/tmux/">tmux</a></li>
-        
-          <li><a href="/categories/vim/">vim</a></li>
         
           <li><a href="/categories/zsh/">zsh</a></li>
         
@@ -231,6 +199,8 @@
 				<ul>
 				
 					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
+				
+					<li><a href="/2011/11/22/building-word-in-rails">Railsで `building` って予約語なんすかね</a></li>
 				
 					<li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
 				
@@ -247,8 +217,6 @@
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
 				
 					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
-				
-					<li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
 				
 				</ul>
 			</div>
