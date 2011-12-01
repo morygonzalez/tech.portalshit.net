@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>MVCのViewにどこまで書くか |  tech.portalshit.net</title>
+    <title>RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法 |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,44 +19,70 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/05/07/git-branch-usage" title="Gitのbranchの使い方">Previous Post</a></a></span>
+          <span class="previous"><a href="/2011/11/22/macvim-kopipe-revival" title="MacVimでコピペできない問題の解決方法">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2010/05/11/cakephp-rss-helper-sucks" title="CakePHP 1.2.xのRSSヘルパーはわかりにくい">Next Post</a></span>
         
       </div>
 
-      <h2>MVCのViewにどこまで書くか</h2>
+      <h2>RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</h2>
       <div class="articleinfo">
-        Posted on 08 May 2010 by 森井ゴンザレス |
+        Posted on 01 Dec 2011 by 森井ゴンザレス |
         
-          <a href="/categories/CakePHP/">CakePHP</a>
+          <a href="/categories/rails/">rails</a>
         
       </div>
-      <p>『Railsによるアジャイル〜』とかのコードはViewの部分がスゲーシンプルで、ロジックがほとんど書いてない。これに慣れると、CakePHPに戻って自分が作ってるウェブアプリを見たときに、Viewに結構ロジックが書いてあって愕然とする。例えばフラグをたてて条件にマッチすれば日付を表示し、マッチしなければ表示しないとかしたいとするじゃないですか。Controllerでそういう設定できなくないけど長くなる。Viewの中に書いてしまったら数行で済むし。</p>
+      <p>Railsで画面を作っていて、DBを参照せずにselect -<code>&gt;</code> option なHTML（ドロップダウンリスト）を出力したいと思った。DBに入ってない値をドロップダウンリストとして表示する方法。ググったらこういうやり方がヒットした。</p>
 
-<p>だから僕の作ってるCakePHPアプリはMVCとか名ばかりでViewのコード超きたない。入れ子になったif文がたくさんあるし、正規表現で日付の書式変更とかまでやってる。さすがに関数とかは定義してないですけどね。</p>
+<p><a href="http://stackoverflow.com/questions/637787/rails-non-table-drop-down-list" title="dropdownlist - Rails non-table drop down list - Stack Overflow">dropdownlist - Rails non-table drop down list - Stack Overflow</a></p>
 
-<p>そもそもCake FoundationのCakeBookも結構Viewにロジックが書いてあったりする。というかかなりハードに書いてある。CakePHPってViewとロジックを分離させるのが難しいのかな。</p>
+<p>このやりが方がかっちょいいのかバッドノウハウなのか判別つかないけど、モデルに定数を書いてそこにいろいろ入れてしまうらしい。以下のような感じ。</p>
 
-<p>加えて、Controllerも結構ひどいことになってる。本当はModelに書くべきことを結構Controllerに書いている気がしないではない。サイト検索のためのメソッドとか200行近くあるし、joinとかしまくり。</p>
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Event</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="no">DAYS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.]</span>
+<span class="k">end</span>
+</code></pre>
+</div>
 
-<p>MVCでロジックとヴューを分離することでデザイナーがViewを触れるようになって分業が進むかもとか思ってたけど、到底そんな状況にないですね。</p>
+<p>でこれをモデルから参照するときは以下のようにする。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;%=</span> <span class="nb">select</span><span class="p">(</span><span class="ss">:event</span><span class="p">,</span> <span class="ss">:day</span><span class="p">,</span> <span class="no">Event</span><span class="o">::</span><span class="no">DAYS</span><span class="p">)</span> <span class="o">%&gt;</span>
+</code></pre>
+</div>
+
+<p>これでうまいことドロップダウンリストを表示できる。</p>
+
+<p>ところが一点問題があって、このドロップダウンリストで表示したい値が <code>"</code>（ダブルクオーテーション）を含んでいたとする。ダブルクオーテーションはRailsによって自動的にエスケープ処理されてしまうので、 <code>"</code> と表示させたいのに <code>&amp;quot;</code> とか表示されてしまう。Form系のヘルパーメソッドで <code>text_area_tag</code> なら <code>:escape =&gt; false</code> とか出来るんだけど、<code>select</code> でそれをやるのは不可能だった。</p>
+
+<p>Railsで文字列のエスケープをせずに出力する方法は一般的に</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;%=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;文字列&quot;</span><span class="p">)</span> <span class="o">%&gt;</span>
+</code></pre>
+</div>
+
+<p>とか</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;%=</span> <span class="s2">&quot;文字列&quot;</span><span class="o">.</span><span class="n">html_safe</span> <span class="o">%&gt;</span>
+</code></pre>
+</div>
+
+<p>だけど、「まさかそれをモデルの中でやっちゃってもエラー出るよね？」と思いながらやってみたらちゃんとエスケープせずにHTMLを出力できた。</p>
+
+<p>モデルクラスのなかにヘルパーメソッドを書くのは気持ち悪いと思うけど、それ以外ではビューの中でイテレータを書いて一個一個エスケープしない処理を書くか、独自のヘルパーメソッドを書くしかない。なんかまどろっこしい気がするのでとりあえずこのやり方で行ってみることにします。</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></li>
+          <li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueエスケープする方法</a></li>
           
-          <li><a href="/2010/05/08/to-what-extent-write-codes-in-mvc">MVCのViewにどこまで書くか</a></li>
+          <li><a href="/2010/06/28/i-had-better-review-ruby">インスタンス変数</a></li>
+          
+          <li><a href="/2010/07/02/import-initial-data-with-yaml">YAMLで初期データをRailsアプリケーションのDBにぶっ込む</a></li>
+          
+          <li><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></li>
           
           <li><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></li>
-          
-          <li><a href="/2010/07/07/cakephp1.3-migration-tips">CakePHP 1.2から1.3への移行の個人的メモ</a></li>
-          
-          <li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
           
         </ul>
       </div>
@@ -80,7 +106,7 @@
         <h3>Categories</h3>
         <ul id="categories">
           
-          <li><a href="/categories/CakePHP/">CakePHP</a></li>
+          <li><a href="/categories/rails/">rails</a></li>
           
         </ul>
 

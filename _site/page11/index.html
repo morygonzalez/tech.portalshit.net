@@ -35,6 +35,37 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/03/rails-name-conventions">RailsのMVC間の命名規約</a></h2>
+    <div class="articleinfo">Posted on 03 Jun 2010 by 森井ゴンザレス |
+	
+		<a href="categories/CakePHP/">CakePHP</a>
+	
+		<a href="categories/Rails/">Rails</a>
+	</div>
+    <p>ポータルシットに前も書いたけど、CakePHPの命名規約ではDBにusersというテーブルがあれば、モデルクラスにUser、コントローラークラスにUsersController、viewsディレクトリにusersっていうのが存在するのを前提とする。これに慣れてしまっているので、Railsのやり方にはなんか慣れない。ModelでPeople、コントローラーでUsersControllerとしてても問題ナッシングなわけだ。むしろRailsではこういうのが普通？ Rails使っててCakeをちょこっと触った人のブログにこういう感想があった。</p>
+
+<blockquote cite="http://rails.takeda-soft.jp/blog/show/190" title="Blog-side CakePHP わかりずらい３点">
+<h3>コントロールとモデルが密すぎる。</h3>
+<p>CakePHPは、コントロール名とモデル名が密接すぎる関連を持っています。PostsControllerというコントロールを作ったら、必ずPostというモデルが存在しないと「モデルが見つからないエラー」になる。</p>
+<cite><a href="http://rails.takeda-soft.jp/blog/show/190" title="Blog-side CakePHP わかりずらい３点">Blog-side CakePHP わかりずらい３点</a></cite>
+</blockquote>
+
+<p>ふむふむ〜、ナルホディウスですぞ〜！！！</p>
+
+<p>確かにCakePHPはモデルとコントローラーがガチガチになってて、あるコントローラーが他のモデルクラスにアクセスするときはいちいち</p>
+
+<div class="highlight"><pre><code class="php"><span class="x">$use = array(&quot;Hoge&quot;);</span>
+</code></pre>
+</div>
+
+<p>とかしなきゃいけなかった。</p>
+
+<p>最初の頃はモデル、コントローラー、ビューですべてが一対一に対応してるのですんなりMVCの流れを理解できたんだけど、今にしても思えばこういう考え方はすべてのコントローラーに対応するモデル（つまりDBテーブル）がなければならないというしがらみというか束縛を生じさせる。これでは自由な発想で開発できないし、下手をすると一つのコントローラークラスに大量にメソッドを書いてしまったりして、非常にメンテナンス性の良くないコードを量産してしまう公算がある。本当は機能ごとに細かくクラスは分けた方がいいはずだし、メソッドが一つしかないコントローラークラスがあっても良いはずだ。</p>
+
+<p>そういうわけで、はやくこの辺のCake流の思い込みを排除して皆と同じようにrailsの手術を受けたいです。</p>
+
+    <a href="/2010/06/03/rails-name-conventions/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/03/rails-has-subdirectory-in-controller">Railsはコントローラーのディレクトリにサブディレクトリを作れるのか！</a></h2>
     <div class="articleinfo">Posted on 03 Jun 2010 by 森井ゴンザレス |
 	
@@ -127,24 +158,6 @@
 
     <a href="/2010/05/18/happy-netstalking-with-ruby/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/05/11/rails-app-on-dreamhost">DreamHostでRailsアプリケーションを再起動</a></h2>
-    <div class="articleinfo">Posted on 11 May 2010 by 森井ゴンザレス |
-	
-		<a href="categories/Rails/">Rails</a>
-	</div>
-    <p>レンタルサーバーみたいな共有サーバーとか <code>sudo</code> 権限のないサーバーで動かしてるRailsアプリケーションを再起動したくなることがある。でもApacheをリスタートする権限がない。じゃあどうするかとググっていたらこういう記事にたどり着いた。</p>
-
-<blockquote>
-  <p>To restart your rails app do a “ps x” to get the pid of your dispatch.fcgi process(let’s say it’s 1234) then do a “kill 1234”. This will kill the running process and a new one will be automatically spawned and you should now see your changes. 
-<cite><a href="http://forum.dreamhosters.com/3rdparty/77334-How-do-I-restart-rails-app.htm">How do I restart rails app? - DreamHost Forum</a></cite></p>
-</blockquote>
-
-<p>要するに <code>ps x</code> でRailsアプリケーションのプロセスIDを調べ、 <code>kill #pid</code> しちゃうというわけ。 <code>kill</code> できんのかなと半信半疑だったけどちゃんとできた。</p>
-
-<p>他のレンタルサーバーには当てはまらないかもしれないけどメモっときます。</p>
-
-    <a href="/2010/05/11/rails-app-on-dreamhost/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -221,6 +234,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
+				
 					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
 				
 					<li><a href="/2011/11/22/building-word-in-rails">Railsで `building` って予約語なんすかね</a></li>
@@ -238,8 +253,6 @@
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
-				
-					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
 				
 				</ul>
 			</div>

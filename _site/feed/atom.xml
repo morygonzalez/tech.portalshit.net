@@ -4,12 +4,57 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2011-11-22T11:39:44+09:00</updated>
+  <updated>2011-12-01T21:14:06+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</title>
+    <link href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2011/12/01/how-to-set-escape-false-on-rails-select-tag</id>
+    <content type="html">&lt;p&gt;Railsで画面を作っていて、DBを参照せずにselect -&lt;code&gt;&amp;gt;&lt;/code&gt; option なHTML（ドロップダウンリスト）を出力したいと思った。DBに入ってない値をドロップダウンリストとして表示する方法。ググったらこういうやり方がヒットした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/637787/rails-non-table-drop-down-list&quot; title=&quot;dropdownlist - Rails non-table drop down list - Stack Overflow&quot;&gt;dropdownlist - Rails non-table drop down list - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;このやりが方がかっちょいいのかバッドノウハウなのか判別つかないけど、モデルに定数を書いてそこにいろいろ入れてしまうらしい。以下のような感じ。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;DAYS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Monday&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Tuesday&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Wednesday&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;でこれをモデルから参照するときは以下のようにする。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:day&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;これでうまいことドロップダウンリストを表示できる。&lt;/p&gt;
+
+&lt;p&gt;ところが一点問題があって、このドロップダウンリストで表示したい値が &lt;code&gt;&quot;&lt;/code&gt;（ダブルクオーテーション）を含んでいたとする。ダブルクオーテーションはRailsによって自動的にエスケープ処理されてしまうので、 &lt;code&gt;&quot;&lt;/code&gt; と表示させたいのに &lt;code&gt;&amp;amp;quot;&lt;/code&gt; とか表示されてしまう。Form系のヘルパーメソッドで &lt;code&gt;text_area_tag&lt;/code&gt; なら &lt;code&gt;:escape =&amp;gt; false&lt;/code&gt; とか出来るんだけど、&lt;code&gt;select&lt;/code&gt; でそれをやるのは不可能だった。&lt;/p&gt;
+
+&lt;p&gt;Railsで文字列のエスケープをせずに出力する方法は一般的に&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;raw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;文字列&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;とか&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;文字列&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html_safe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;だけど、「まさかそれをモデルの中でやっちゃってもエラー出るよね？」と思いながらやってみたらちゃんとエスケープせずにHTMLを出力できた。&lt;/p&gt;
+
+&lt;p&gt;モデルクラスのなかにヘルパーメソッドを書くのは気持ち悪いと思うけど、それ以外ではビューの中でイテレータを書いて一個一個エスケープしない処理を書くか、独自のヘルパーメソッドを書くしかない。なんかまどろっこしい気がするのでとりあえずこのやり方で行ってみることにします。&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>MacVimでコピペできない問題の解決方法</title>

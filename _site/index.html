@@ -29,6 +29,51 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></h2>
+    <div class="articleinfo">Posted on 01 Dec 2011 by 森井ゴンザレス |
+	
+		<a href="categories/rails/">rails</a>
+	</div>
+    <p>Railsで画面を作っていて、DBを参照せずにselect -<code>&gt;</code> option なHTML（ドロップダウンリスト）を出力したいと思った。DBに入ってない値をドロップダウンリストとして表示する方法。ググったらこういうやり方がヒットした。</p>
+
+<p><a href="http://stackoverflow.com/questions/637787/rails-non-table-drop-down-list" title="dropdownlist - Rails non-table drop down list - Stack Overflow">dropdownlist - Rails non-table drop down list - Stack Overflow</a></p>
+
+<p>このやりが方がかっちょいいのかバッドノウハウなのか判別つかないけど、モデルに定数を書いてそこにいろいろ入れてしまうらしい。以下のような感じ。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Event</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="no">DAYS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.]</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>でこれをモデルから参照するときは以下のようにする。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;%=</span> <span class="nb">select</span><span class="p">(</span><span class="ss">:event</span><span class="p">,</span> <span class="ss">:day</span><span class="p">,</span> <span class="no">Event</span><span class="o">::</span><span class="no">DAYS</span><span class="p">)</span> <span class="o">%&gt;</span>
+</code></pre>
+</div>
+
+<p>これでうまいことドロップダウンリストを表示できる。</p>
+
+<p>ところが一点問題があって、このドロップダウンリストで表示したい値が <code>"</code>（ダブルクオーテーション）を含んでいたとする。ダブルクオーテーションはRailsによって自動的にエスケープ処理されてしまうので、 <code>"</code> と表示させたいのに <code>&amp;quot;</code> とか表示されてしまう。Form系のヘルパーメソッドで <code>text_area_tag</code> なら <code>:escape =&gt; false</code> とか出来るんだけど、<code>select</code> でそれをやるのは不可能だった。</p>
+
+<p>Railsで文字列のエスケープをせずに出力する方法は一般的に</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;%=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;文字列&quot;</span><span class="p">)</span> <span class="o">%&gt;</span>
+</code></pre>
+</div>
+
+<p>とか</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="o">&lt;%=</span> <span class="s2">&quot;文字列&quot;</span><span class="o">.</span><span class="n">html_safe</span> <span class="o">%&gt;</span>
+</code></pre>
+</div>
+
+<p>だけど、「まさかそれをモデルの中でやっちゃってもエラー出るよね？」と思いながらやってみたらちゃんとエスケープせずにHTMLを出力できた。</p>
+
+<p>モデルクラスのなかにヘルパーメソッドを書くのは気持ち悪いと思うけど、それ以外ではビューの中でイテレータを書いて一個一個エスケープしない処理を書くか、独自のヘルパーメソッドを書くしかない。なんかまどろっこしい気がするのでとりあえずこのやり方で行ってみることにします。</p>
+
+    <a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></h2>
     <div class="articleinfo">Posted on 22 Nov 2011 by 森井ゴンザレス |
 	
@@ -113,21 +158,6 @@
 
     <a href="/2011/10/31/stopped-using-heroku/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></h2>
-    <div class="articleinfo">Posted on 11 Sep 2011 by 森井ゴンザレス |
-	
-		<a href="categories/JavaScript/">JavaScript</a>
-	</div>
-    <p>Amazonの検索結果画面で、個別商品URLへのリンクが <code>target="_blank"</code> 指定となっていてうざかったので <code>target="_self"</code> と置き換えるユーザースクリプトを書いた。</p>
-
-<script src="https://gist.github.com/1208537.js?file=amazon_target_killer.user.js"></script>
-
-<p>地味に便利。</p>
-
-<p><img src="http://gyazo.com/e465873994b9e141005777e2f67431f5.png" alt="Amazon target killer" /></p>
-
-    <a href="/2011/09/11/amazon-target-killer/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -198,6 +228,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
+				
 					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
 				
 					<li><a href="/2011/11/22/building-word-in-rails">Railsで `building` って予約語なんすかね</a></li>
@@ -215,8 +247,6 @@
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
-				
-					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
 				
 				</ul>
 			</div>

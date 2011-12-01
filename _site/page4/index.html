@@ -35,6 +35,21 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/04/16/ruby-rm-dir">確認ダイアログを出しながら削除するスクリプト</a></h2>
+    <div class="articleinfo">Posted on 16 Apr 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>確認ダイアログを出しながらディレクトリやファイルを削除するスクリプトを書いた。大したコード書いてないし逆引きRubyに載ってたコードをまるパクリしてるところもあるけど便利だと思う。</p>
+
+<script src="https://gist.github.com/921460.js?file=cleanup.rb"></script>
+
+<p>そのディレクトリにあるファイル/ディレクトリ一覧を取得した後、「このファイル/ディレクトリは作られてから何日経っています。削除しますか？ (y/n)」というダイアログ（英語）を表示する。<code>y</code> が入力されると削除を行う。地味に使える。</p>
+
+<p>RubyのFileUtilsはすごく便利だと思う。シェルスクリプトでしこしこ書くのがアホらしくなる。RubyがPerlなみにあらゆるuni*x系のサーバーに入るようになったらさぞかし便利だろうと思う。</p>
+
+    <a href="/2011/04/16/ruby-rm-dir/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/03/24/i-am-an-impotent-programmer">TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと</a></h2>
     <div class="articleinfo">Posted on 24 Mar 2011 by 森井ゴンザレス |
 	
@@ -235,41 +250,6 @@
 
     <a href="/2011/02/09/rvm-is-kimoi/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/02/08/rvm-with-apache">RVMで入れたRubyをApacheとかから使いたい</a></h2>
-    <div class="articleinfo">Posted on 08 Feb 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>RVMを使ってます。RVMで入れたRubyがshebangに <code>#!/usr/bin/env ruby</code> と書いたときに呼び出されて欲しいと思ってます。シェルから</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-
-<span class="nb">puts</span> <span class="no">RUBY_DESCRIPTION</span>
-</code></pre>
-</div>
-
-<p>なファイル（hoge.rb）があったとします。これを</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby hoge.rb
-</code></pre>
-</div>
-
-<p>とシェルから呼び出したときにはちゃんと</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span> ruby 1.9.2p136 <span class="o">(</span>2010-12-25 revision 30365<span class="o">)</span> <span class="o">[</span>x86_64-darwin10.6.0<span class="o">]</span>
-</code></pre>
-</div>
-
-<p>と表示されます。しかしTextMateでRunしたときや、Apacheから同じshebangで呼び出したときには、systemのRubyが呼ばれます。</p>
-
-<p>これ、もう半年くらい解決方法探してる気がする。</p>
-
-<p>TextMateでRunしたときにsystemのRubyが呼ばれるのはともかくとして（テストするときはシェルから呼び出すのでRVMのRubyで実行できる）、Apacheで新しめのRubyを使いたいときはどうすればよいのでしょう。まさかshebangに <code>~/.rvm/bin/ruby-1.9.2-p136</code> とか書くんじゃろか。</p>
-
-<p>cxxさんに質問したら <a href="http://rvm.beginrescueend.com/deployment/system-wide/">RVM: Ruby Version Manager - Installing RVM System Wide</a> というURLを教えてもらった。今日は眠いのでまた今度試す。</p>
-
-    <a href="/2011/02/08/rvm-with-apache/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -346,6 +326,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
+				
 					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
 				
 					<li><a href="/2011/11/22/building-word-in-rails">Railsで `building` って予約語なんすかね</a></li>
@@ -363,8 +345,6 @@
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
-				
-					<li><a href="/2011/05/03/titanium-era-has-come">Titanium Mobileでなんか作りたい</a></li>
 				
 				</ul>
 			</div>
