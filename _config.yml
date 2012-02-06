@@ -4,3 +4,4 @@ exclude: task
 pygments: true
 markdown: kramdown
 lsi: true
+exclude: [Rakefile, task]
