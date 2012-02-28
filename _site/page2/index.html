@@ -35,6 +35,19 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2011/10/31/stopped-using-heroku">Herokuを使うのをやめた</a></h2>
+    <div class="articleinfo">Posted on 31 Oct 2011 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>LokkaをCMSに採用している <a href="http://www.portalshit.net">ポータルシット</a> はHerokuで動かしてたんだけど、Lokkaをカスタマイズして使っているためか、デプロイしてもApplication Errorばかり出るようになってしまった。ローカルのMacではうまくいくのに。一週間くらい直そうと努力してみたけど直りそうにないのでHerokuでの運用を諦めてさくらVPS上のUbuntuで運用することにした。すこぶる快適。</p>
+
+<p>Herokuは確かに便利なんだけど、Herokuの中でどういう風にアプリケーションが動いているのかを把握しづらい。ファイルシステムに直接アクセスできないので、ログを見るにも <code>heroku logs</code> とかやんないといけない。</p>
+
+<p>その点、自分で環境をいじれるサーバーだったらウェブアプリケーションのログはおろかシステムログまで見られるし、無理にHerokuで運用してHerokuで運用するために時間を割くのは馬鹿らしいような気がする。</p>
+
+    <a href="/2011/10/31/stopped-using-heroku/#disqus_thread">Comments</a>
+
     <h2><a href="/2011/09/11/amazon-target-killer">Amazonの検索結果が新規ウィンドウで開かれるのを殺すユーザースクリプト</a></h2>
     <div class="articleinfo">Posted on 11 Sep 2011 by 森井ゴンザレス |
 	
@@ -185,36 +198,6 @@
 
     <a href="/2011/06/29/added-category-archives/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></h2>
-    <div class="articleinfo">Posted on 24 May 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>暇だったので自動で特定のユーザーを延々favし続けるスクリプトを書いた。</p>
-
-<script src="https://gist.github.com/972943.js?file=favstream.rb"></script>
-
-<p>ヒトデ君が書いた <a href="https://github.com/hitode909/user-stream-receiver" title="hitode909/user-stream-receiver - GitHub">hitode909/user-stream-receiver - GitHub</a> と<a href="http://d.hatena.ne.jp/aquarla/20101020/1287540883" title="Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux \| grep aquarla">Ruby+User Stream APIで無言リプライに高速返信するbotを作りました - ps aux | grep aquarla</a> を参考にさせてもらった。というかほとんどまるパクリ。またOAuthのところはtily氏の <a href="https://github.com/tily/ruby-oauth-cli-twitter">tily/ruby-oauth-cli-twitter - GitHub</a> に全面的に依存している。</p>
-
-<p>User Stremを受診してるのでcronとかの設定なしでネットストーキングしたい相手のことを延々追跡できる。しかも発言があった瞬間に即favする。大変気持ち悪いですね。</p>
-
-<p>しかしUser Streamはときどき調子が悪く、発言を拾い落とすこともある。そんなときは以下のコードを使う。</p>
-
-<script src="https://gist.github.com/972943.js?file=favoritter.rb"></script>
-
-<p>これでUser Stream経由で取りこぼした発言もfavできる。それぞれ使い方はこんな感じ。</p>
-
-<div class="highlight"><pre><code class="console"><span class="go">  ruby favoritter.rb ストーキングしたい相手のユーザー名</span>
-</code></pre>
-</div>
-
-<div class="highlight"><pre><code class="console"><span class="go">  ruby favstream.rb ストーキングしたい相手のユーザー名</span>
-</code></pre>
-</div>
-
-
-    <a href="/2011/05/24/favstream.rb/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -291,6 +274,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj">iTerm で Ctrl + Shift + J でかな入力変換する方法</a></li>
+				
 					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
 				
 					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
@@ -308,8 +293,6 @@
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
 				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
-				
-					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
 				
 				</ul>
 			</div>

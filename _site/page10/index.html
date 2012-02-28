@@ -35,6 +35,53 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/06/25/i-realized-php-is-crap">Rubyがエレガントだって言われるのがわかってきたような気がする</a></h2>
+    <div class="articleinfo">Posted on 25 Jun 2010 by 森井ゴンザレス |
+	
+		<a href="categories/Ruby/">Ruby</a>
+	</div>
+    <p>「PHPは汚い、Rubyはきれい」とかそういう言説の意味が昔は分からなかったんだけど、昨日今日、久々にCakePHPで作ったサイトのメンテナンスをしてて「PHP、確かにきちゃないわ」と思った。</p>
+
+<p>オブジェクト指向っぽい何がしかのコードをPHPで書いてみる。</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Hoge</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">$a</span><span class="p">;</span> 
+  <span class="k">function</span> <span class="nf">hoge</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$fuga</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Hoge</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$fuga</span><span class="o">-&gt;</span><span class="na">hoge</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre>
+</div>
+
+<p>つぎにRubyで同じコードを書いてみる。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Hoge</span>
+  <span class="vi">@a</span>  
+  <span class="k">def</span> <span class="nf">hoge</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="s2">&quot;hogehoge&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">fuga</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+<span class="nb">puts</span> <span class="n">fuga</span><span class="o">.</span><span class="n">hoge</span>
+</code></pre>
+</div>
+
+<p>まずPHPは中括弧たくさん書かないといけない。これが面倒くさい。中括弧はキーボードでは <code>shift + [</code> とか <code>shift + ]</code> とかだから、 <code>shift</code> の分だけキーボードをたたく回数が増える。実にめんどい。最初はRubyのインデントでブロックを表現するところに慣れなかったけど、慣れたらちまちま中括弧をかかないとダメなPHPにいらいらするようになった。中括弧の閉じ忘れでエラーが出ることとかも多いし。</p>
+
+<p>さらにメソッドとか変数へのアクセスもめんどい。Rubyだと <code>.</code> でアクセスできるのに、PHPだと <code>-&gt;</code> だ。入力するときはキーボードに <code>-</code> と <code>shift + .</code> と打たなきゃいけない。アホか。Rubyだとキーを一個打つので済むのが、PHPだと三個だ。</p>
+
+<p>他にも予約語が長いとか、変数のスコープがおかしいんじゃねとか、Rubyを触る前は分からなかったPHPの変態的なところが目につくようになってきた。</p>
+
+<p>PHPちゃん、僕もう疲れたよ（特にCakePHPの配列地獄）。</p>
+
+    <a href="/2010/06/25/i-realized-php-is-crap/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/06/23/how-to-use-markdown-with-rails">RailsアプリケーションでMarkdownを使う</a></h2>
     <div class="articleinfo">Posted on 23 Jun 2010 by 森井ゴンザレス |
 	
@@ -135,15 +182,6 @@
 
     <a href="/2010/06/14/migrated-to-jekyll/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/06/04/i-like-ruby">Rubyいいわー</a></h2>
-    <div class="articleinfo">Posted on 04 Jun 2010 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>irbが素晴らしい！ 惚れた！！ PHPとかクソ！！！</p>
-
-    <a href="/2010/06/04/i-like-ruby/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -220,6 +258,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj">iTerm で Ctrl + Shift + J でかな入力変換する方法</a></li>
+				
 					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
 				
 					<li><a href="/2011/11/22/macvim-kopipe-revival">MacVimでコピペできない問題の解決方法</a></li>
@@ -237,8 +277,6 @@
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
 				
 					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
-				
-					<li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
 				
 				</ul>
 			</div>
