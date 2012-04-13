@@ -31,6 +31,21 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/04/22/cakephp-mediaplugin">CakePHPのMedia Pluginは神だけど設置が面倒</a></h2>
+    <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
+	
+		<a href="categories/CakePHP/">CakePHP</a>
+	</div>
+    <p>CakePHPには <a href="http://github.com/davidpersson/media">Media Plugin</a> というのがあって、これがすこぶる便利。画像や文書の他に、動画ファイルまで扱うことができる。PHPではファイルアップロードのところにセキュリティリスクが潜んでいそうなイメージだし、自分のような素人に毛が生えたようなレベルの人間は素直にこういう便利なプラグインを使った方がいい。</p>
+
+<p>しかしこのMedia Plugin、設置が少々面倒だ。情報も英語のものも含めて少ない。僕は二つのプロジェクトでこのMedia Pluginを使ったけど、とても設置に苦労した。はまるポイントはいくつかあるんだけど、今日はDBについて書いておこうと思う。</p>
+
+<p>Media Pluginは <code>attachments</code> というテーブルをつくり、ここにファイルのメタデータを格納していく。これはアプリケーションのルート（ <code>APP</code> ディレクトリ）で <code>cake media init</code> というコマンドをTerminalで打ってやると（ただし <code>/cake/console</code> にパスを通しておく必要あり）、Bakeのときのような画面が出てきて初期設定をやってくれる（ <code>app/config/database.php</code> の情報にあわせてテーブルも作ってくれる）。しかしCakePHPのデフォルトDBがMySQLであるためMedia PluginもMySQLを想定しているのか、 <code>app/plugins/media/config/sql/media.sql</code> のSQL文を単純に実行してしまうと不具合が生じる。実は僕はここで結構はまってた。僕は全部のプロジェクトでSQLiteを使っているので、単純にこのSQLを実行すると、 <code>attachments.id</code> のデータ型が <code>INT(10)</code> とかになってしまい、エラーに遭遇し続けることになってしまった。SQLiteの場合、idカラムのデータ型は <code>INTEGER</code> でなければならないのだ。</p>
+
+<p>これはMedia Pluginに限らないけど、Convention Over Configuration なフレームワークを使うときは、DBのテーブル名に注意をはらわなければならない。否、先にも書いたとおりそれだけでは不十分で、さらにカラムのデータ型とかも規約に沿ったものにしないと、原因不明の謎のエラーに遭遇して開発が停滞する。おっちょこちょいな人（僕も含めて）はその辺の基本的な部分をおろそかにしない方がいいと思った</p>
+
+    <a href="/2010/04/22/cakephp-mediaplugin/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/04/22/blogging-with-mephisto">Mephistoで技術ブログをやることにした</a></h2>
     <div class="articleinfo">Posted on 22 Apr 2010 by 森井ゴンザレス |
 	
@@ -145,6 +160,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2012/04/13/easiest-way-to-search-github-wiki">The easiest way to search GitHub Wiki</a></li>
+				
 					<li><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj">iTerm で Ctrl + Shift + J でかな入力変換する方法</a></li>
 				
 					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
@@ -162,8 +179,6 @@
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
-				
-					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 				</ul>
 			</div>

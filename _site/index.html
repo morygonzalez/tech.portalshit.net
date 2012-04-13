@@ -29,6 +29,31 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2012/04/13/easiest-way-to-search-github-wiki">The easiest way to search GitHub Wiki</a></h2>
+    <div class="articleinfo">Posted on 13 Apr 2012 by 森井ゴンザレス |
+	
+		<a href="categories/JavaScript/">JavaScript</a>
+	</div>
+    <p>I know why you came here. BECAUSE IT’S HARD TO FIND CONTENT IN GITHUB WIKI!!!</p>
+
+<p>Here is a solution.</p>
+
+<p>My colleague <a href="http://tomohisaoda.com/posts/2012/created_github_wiki_search.html" title="GithubでWikiを検索するUserScript書いた">Tomohisa</a> created a nice userscript. It provides you an ability to search GitHub Wiki in pretty easy way.</p>
+
+<p>Install the script from his GitHub repository. It’s compatible with Firefox (with Greasemonkey, of course), Google Chrome and Safari (with Nijakit).</p>
+
+<p><a href="https://github.com/linyows/github-wiki-search/blob/master/github-wiki-search.user.js" title="github-wiki-search/github-wiki-search.user.js at master · linyows/github-wiki-search · GitHub">github-wiki-search/github-wiki-search.user.js at master · linyows/github-wiki-search · GitHub</a></p>
+
+<p>Then you will find search box on right above “Page History” button.</p>
+
+<p><img src="https://github.com/linyows/github-wiki-search/raw/master/images/1.png" alt="1.png (640×457)" title="1.png (640×457)" /></p>
+
+<p><img src="https://github.com/linyows/github-wiki-search/raw/master/images/2.png" alt="2.png (640×457)" title="2.png (640×457)" /></p>
+
+<p>Now search all the wiki content with github-wiki-search.user.js!</p>
+
+    <a href="/2012/04/13/easiest-way-to-search-github-wiki/#disqus_thread">Comments</a>
+
     <h2><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj">iTerm で Ctrl + Shift + J でかな入力変換する方法</a></h2>
     <div class="articleinfo">Posted on 28 Feb 2012 by 森井ゴンザレス |
 	
@@ -135,37 +160,6 @@
 
     <a href="/2011/11/22/building-word-in-rails/#disqus_thread">Comments</a>
 
-    <h2><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></h2>
-    <div class="articleinfo">Posted on 15 Nov 2011 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>RVM、便利に使わせてもらっていたけど、Rubyの新しいのがリリースされるたびにいろいろアレだったので <a href="%link%" title="sstephenson/rbenv - GitHub">rbenv</a> を使ってみることにした。移行、しんどいかなと思ってたけど非常に簡単で大変よかった。</p>
-
-<h3 id="rvm">RVMもキモさ</h3>
-
-<p>RVMの悪いところはググればいろいろ出てくるけど、OSの <code>cd</code> やRubyの <code>gem</code> コマンドをシェルスクリプトで置き換えるとか、行儀が悪いところが問題らしい。個人的に気にくわなかったのがRVMがどんどんでかくなっていって、Rubyのビルドに必要なパッケージまで管理できるようになったところとか（.rvm以下に新しくシステムができるみたいな感じがキモかった）、パッケージインストール用のコマンドがhelpドキュメントでは <code>rvm package install</code> なのに <code>rvm pkg install</code> にいつの間にか変わっていて訳がわからないところとか、よくわからないシェルスクリプトがログイン時に実行されるところとか、 <code>rvmsudo</code> っていうコマンドのキモさとかいろいろ。</p>
-
-<h3 id="rbenv">rbenv</h3>
-
-<p>rbenvはRubyのバージョンを切り替えるためのツールなのでインストールはやってくれないけど、ruby-buildというツールを別に入れることで、 <code>rbenv install 1.9.2-p290</code> とかでRubyのインストールもこなしてくれるようになる。</p>
-
-<p>あまりRVMを使いこなしてたとはいえなかった自分にとってはrbenvくらいでちょうどいいような感じがする。gemsetとか使わんし。そんくらいだったBundler使うし。</p>
-
-<p>インストールは以下のページが参考になります。</p>
-
-<p><a href="%link%" title="rbenv + ruby-buildのインストール方法 - 223 Software">rbenv + ruby-buildのインストール方法 - 223 Software</a></p>
-
-<p>なおrbenvはRubyインストール時のconfigureオプションの指定方法が特殊です。直接は指定できないようなので以下のようにします。（homebrewでインストールしたreadlineとiconvのパスを指定する例）</p>
-
-<div class="highlight"><pre><code class="console"><span class="gp">$</span><span class="nv">CONFIGURE_OPTS</span><span class="o">=</span><span class="s2">&quot;--with-readline-dir=/usr/local --with-iconv-dir=/usr/local&quot;</span> rbenv install 1.9.2-p290
-</code></pre>
-</div>
-
-<p>デフォルトのオプションなしのRubyだとearthquake.gemが動かなかったりjekyllが使えなかったりするので僕は↑のオプションを追加しました。よろしかったらお試し下さい。</p>
-
-    <a href="/2011/11/15/i-am-new-with-rbenv/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -236,6 +230,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2012/04/13/easiest-way-to-search-github-wiki">The easiest way to search GitHub Wiki</a></li>
+				
 					<li><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj">iTerm で Ctrl + Shift + J でかな入力変換する方法</a></li>
 				
 					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
@@ -253,8 +249,6 @@
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
-				
-					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 				</ul>
 			</div>

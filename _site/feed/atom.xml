@@ -4,12 +4,37 @@
   <title>tech.portalshit.net</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
-  <updated>2012-02-28T10:14:08+09:00</updated>
+  <updated>2012-04-13T10:19:55+09:00</updated>
   <id>http://tech.portalshit.net/</id>
   <author>
     <name>森井ゴンザレス</name>
   </author>
   
+  
+  <entry>
+    <title>The easiest way to search GitHub Wiki</title>
+    <link href="/2012/04/13/easiest-way-to-search-github-wiki" />
+    <updated>Liquid error: undefined method `xmlschema' for nil:NilClass</updated>
+    <id>http://tech.portalshit.net//2012/04/13/easiest-way-to-search-github-wiki</id>
+    <content type="html">&lt;p&gt;I know why you came here. BECAUSE IT’S HARD TO FIND CONTENT IN GITHUB WIKI!!!&lt;/p&gt;
+
+&lt;p&gt;Here is a solution.&lt;/p&gt;
+
+&lt;p&gt;My colleague &lt;a href=&quot;http://tomohisaoda.com/posts/2012/created_github_wiki_search.html&quot; title=&quot;GithubでWikiを検索するUserScript書いた&quot;&gt;Tomohisa&lt;/a&gt; created a nice userscript. It provides you an ability to search GitHub Wiki in pretty easy way.&lt;/p&gt;
+
+&lt;p&gt;Install the script from his GitHub repository. It’s compatible with Firefox (with Greasemonkey, of course), Google Chrome and Safari (with Nijakit).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/linyows/github-wiki-search/blob/master/github-wiki-search.user.js&quot; title=&quot;github-wiki-search/github-wiki-search.user.js at master · linyows/github-wiki-search · GitHub&quot;&gt;github-wiki-search/github-wiki-search.user.js at master · linyows/github-wiki-search · GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Then you will find search box on right above “Page History” button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/linyows/github-wiki-search/raw/master/images/1.png&quot; alt=&quot;1.png (640×457)&quot; title=&quot;1.png (640×457)&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/linyows/github-wiki-search/raw/master/images/2.png&quot; alt=&quot;2.png (640×457)&quot; title=&quot;2.png (640×457)&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now search all the wiki content with github-wiki-search.user.js!&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>iTerm で Ctrl + Shift + J でかな入力変換する方法</title>

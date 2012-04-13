@@ -35,6 +35,48 @@
 
   			<div class="autopagerize_page_element">
 				  
+    <h2><a href="/2010/10/26/iterm-arrow-key-issue">iTermでVimを使うと矢印キーでカーソル移動できない</a></h2>
+    <div class="articleinfo">Posted on 26 Oct 2010 by 森井ゴンザレス |
+	
+		<a href="categories/Mac/">Mac</a>
+	
+		<a href="categories/Vim/">Vim</a>
+	</div>
+    <p>iTerm 2が素晴らしいということなのでiTermをぼちぼち使ってるんですけど、Vimを起動したときに矢印キーで移動できないことが分かった。「Vimで矢印キーでカーソル移動とか小学生かよ」みたいなご意見もあるでしょうけど、入力モードのときに移動したくなったら <code>j, k, h, l</code> じゃ移動できないでしょ？ そこで矢印キーですよ。</p>
+
+<p>iTermでVimを使っているときも矢印キーでカーソル移動できないものかと、軽くググってみたところ次のような記事に遭遇した。</p>
+
+<p><a href="http://d.hatena.ne.jp/takimo/20080308/1205047505" title="MacBookのiTermでVimを使う時矢印キーで移動が出来ないときの解決方法 - Nobody is perfect.">MacBookのiTermでVimを使う時矢印キーで移動が出来ないときの解決方法 - Nobody is perfect.</a></p>
+
+<p>これを参考にとりあえず以下のように <code>.zshrc</code> に書いた。</p>
+
+<div class="highlight"><pre><code class="bash"><span class="k">case</span> <span class="s2">&quot;${TERM_PROGRAM}&quot;</span> in
+iTerm*<span class="o">)</span>
+  <span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>dtterm
+<span class="k">esac</span>
+</code></pre>
+</div>
+
+<p>しかし、これはちょっと自分的にはいただけなかった。</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>dtterm
+</code></pre>
+</div>
+
+<p>ってやると、termcap的な何かの作用で、Vimを閉じたときにコンソールを復元できなくなる（参照： <a href="http://tech.portalshit.net/2010/07/07/finish-editing-then-restore-console/" title="Vimで編集を終了した後、元のコンソールの状態を復元したい \| tech.portalshit.net - CakePHP, Rails, JavaScript">Vimで編集を終了した後、元のコンソールの状態を復元したい</a>）。僕はVimを閉じた後はコンソールを復元したい派なので、このやり方は受け入れられなかった。</p>
+
+<p><code>.termcap</code> に何か書くことも考えたけど、 <code>.termcap</code> で条件分岐する書き方が分からなかったのでさらにググってみた。すると外人が「iTermの設定で何とかできる」みたいなことを書いてるのを発見した。</p>
+
+<p><a href="http://www.help2go.com/Tutorials/Mac_OS/Using_Arrow_Keys_in_iTerm_with_vi.html" title="Help2Go - free computer help and advice - Using Arrow Keys in iTerm with vi">Help2Go - free computer help and advice - Using Arrow Keys in iTerm with vi</a></p>
+
+<p>なるほど、 <code>.vimrc</code> とか <code>.zshrc</code> とか側で回避する方法ばかり考えていたけどiTermで回避する方法を考えればよいわけか。</p>
+
+<p>で、iTermを開いてみたところ、iTerm 1の頃から引き継いでいるBookmarkのDefaultの設定がよくなかったみたい。具体的には矢印キーそれぞれに <code>^[[A</code> とか <code>^[[B</code> みたいなキーが割り振られていて、このせいで矢印キーが使えなくなっていたわけだ。</p>
+
+<p>Load Presetから “Use xterm Defaults” を選んでみたところ、無事矢印キーでカーソル移動できるようになった。めでたしめでたし。</p>
+
+    <a href="/2010/10/26/iterm-arrow-key-issue/#disqus_thread">Comments</a>
+
     <h2><a href="/2010/10/20/ruby1.9-rails3-rspec-2">Ruby 1.9とRails 3とRSpec 2と</a></h2>
     <div class="articleinfo">Posted on 20 Oct 2010 by 森井ゴンザレス |
 	
@@ -170,33 +212,6 @@
 
     <a href="/2010/09/02/clickable-map-coordinates-with-javascript/#disqus_thread">Comments</a>
 
-    <h2><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></h2>
-    <div class="articleinfo">Posted on 31 Aug 2010 by 森井ゴンザレス |
-	
-		<a href="categories/Ruby/">Ruby</a>
-	</div>
-    <p>RubyKaigi 2010に行ったのでその感想を軽く。</p>
-
-<h4 id="section">自分のスペック</h4>
-
-<p>Rubyは使い始めて8ヶ月くらい。元々何もできなかったのでいまも初心者レベル。プレゼンテーション聞いてても分からないことが多かった。</p>
-
-<h4 id="section-1">感想</h4>
-
-<p>永和システムマネジメント<del>永和システム</del>さんの「<a href="http://rubykaigi.org/2010/ja/events/23" title="日本Ruby会議2010, 8月27日〜29日">Head First ふつうのシステム開発</a>」は面白かった。プログラミングのやり方を人から教わったことがないので、普通の会社はこうやって開発してるんだってのが分かった。テストの様子を見られて参考になった。あとVimがすごくカスタマイズしてあってすごかった。用事があって途中までしか見られなかったのが残念。</p>
-
-<p>MongoDBについてのプログラム（<a href="http://rubykaigi.org/2010/ja/events/73" title="Practical Ruby Projects with MongoDB">Practical Ruby Projects with MongoDB</a>）で、気にはなっていたけどよく分からなかったMongoDBのことがより一層気になった。情報の連結とかそういうコムズイことはSQLでやるんじゃなくてプログラム側でやるべき、ってことなのかな。</p>
-
-<p>クックパッドのセッションも見学した。CTO氏が質疑応答で「専属デザイナーはいなくてデザインもできるプログラマーがデザインやってる」って言ってたのにびっくりした。大規模サービスをやってたら負荷分散のテクニックとか参考になったかもだけど、自分が作ってるサイトは多くても5000UU/日くらいなので「ふーん」という感じで聞いてた。</p>
-
-<p>東京とつくばの移動に時間がかかったこと、他にも予定があったこと、帰りの飛行機の都合、などなどであまりゆっくり参加できなかったのが残念だったです。28日は用事があったので基調講演見られないから生Matzを拝むの諦めてたけど、Jeremy Kemperの基調講演がキャンセルになったかわりにトークセッションがあってて、そこにMatzも登場しててRubyの教祖を拝めたのでまぁ良かったと思います。あとジュンク堂RubyKaigi支店でで技術書買いすぎて散在した！</p>
-
-<h4 id="section-2">2010年9月26日修正</h4>
-
-<p>すみません、永和システムマネジメントさんのことを「永和システムさん」と書いてました。はてブのコメント欄で角谷さんに指摘されてた！</p>
-
-    <a href="/2010/08/31/rubykaigi2010/#disqus_thread">Comments</a>
-
 
 				</div>
 
@@ -273,6 +288,8 @@
 				<h3>Latest Posts</h3>
 				<ul>
 				
+					<li><a href="/2012/04/13/easiest-way-to-search-github-wiki">The easiest way to search GitHub Wiki</a></li>
+				
 					<li><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj">iTerm で Ctrl + Shift + J でかな入力変換する方法</a></li>
 				
 					<li><a href="/2011/12/01/how-to-set-escape-false-on-rails-select-tag">RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法</a></li>
@@ -290,8 +307,6 @@
 					<li><a href="/2011/07/29/rvm-bad-interpreter-error">RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る</a></li>
 				
 					<li><a href="/2011/07/02/escape-in-liquid">Liquidの中でLiquidをエスケープする</a></li>
-				
-					<li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
 				
 				</ul>
 			</div>

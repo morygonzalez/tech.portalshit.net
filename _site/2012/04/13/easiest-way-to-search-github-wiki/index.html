@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>OAuthがwakaranai |  tech.portalshit.net</title>
+    <title>The easiest way to search GitHub Wiki |  tech.portalshit.net</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="/stylesheets/base.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/red.css" rel="stylesheet" type="text/css" />
@@ -19,55 +19,50 @@
       <div id="content">
         <div class="paginator">
           
-          <span class="previous"><a href="/2010/07/07/finish-editing-then-restore-console" title="Vimで編集を終了した後、元のコンソールの状態を復元したい">Previous Post</a></a></span>
+          <span class="previous"><a href="/2012/02/28/chage-input-mode-in-iterm-with-ctrl%2Bshift%2Bj" title="iTerm で Ctrl + Shift + J でかな入力変換する方法">Previous Post</a></a></span>
         
-        
-        <span class="next"><a href="/2010/07/14/deploy-with-git-hook" title="Gitのhookを使ってDreamhost上のJekyllに記事を公開">Next Post</a></span>
         
       </div>
 
-      <h2>OAuthがwakaranai</h2>
+      <h2>The easiest way to search GitHub Wiki</h2>
       <div class="articleinfo">
-        Posted on 09 Jul 2010 by 森井ゴンザレス |
+        Posted on 13 Apr 2012 by 森井ゴンザレス |
         
-          <a href="/categories/OAuth/">OAuth</a>
-        
-          <a href="/categories/Rails/">Rails</a>
-        
-          <a href="/categories/Ruby/">Ruby</a>
+          <a href="/categories/JavaScript/">JavaScript</a>
         
       </div>
-      <p>RailsでOAuthを使ってTwitterとかで認証させたい。oauth-pluginを使おうとしてるけど全然うまくいかない。イメージとしてはこんな感じ。</p>
+      <p>I know why you came here. BECAUSE IT’S HARD TO FIND CONTENT IN GITHUB WIKI!!!</p>
 
-<p><img src="http://tech.portalshit.net/images/27-oauth.png" alt="OAuthの利用イメージ" /></p>
+<p>Here is a solution.</p>
 
-<p>疑問点がいくつかある。</p>
+<p>My colleague <a href="http://tomohisaoda.com/posts/2012/created_github_wiki_search.html" title="GithubでWikiを検索するUserScript書いた">Tomohisa</a> created a nice userscript. It provides you an ability to search GitHub Wiki in pretty easy way.</p>
 
-<ul>
-  <li>
-    <p>Userモデルで <code>validate_presence_of</code> をパスワードフィールドにかけてるけど、OAuth経由でユーザーが追加されたときはどうすればいいんだろう。OAuth経由ではパスワードは預からないので、 <code>validate_presence_of</code> でエラーが出るはず。</p>
-  </li>
-  <li>
-    <p>Userモデルで <code>has_many :oauth_tokens</code> とかリレーションの設定をしてしまったとして、OAuth経由ではなく普通にサインアップしたユーザーの扱いはどうなるんだろう？ 「 <code>oauth_tokens</code> にそんな <code>user_id</code> の人いないし」みたいなエラーが出るような気がする。</p>
-  </li>
-</ul>
+<p>Install the script from his GitHub repository. It’s compatible with Firefox (with Greasemonkey, of course), Google Chrome and Safari (with Nijakit).</p>
 
-<p>他にもいろいろ気になる点があったような気がするけど分からなくなってしまった。</p>
+<p><a href="https://github.com/linyows/github-wiki-search/blob/master/github-wiki-search.user.js" title="github-wiki-search/github-wiki-search.user.js at master · linyows/github-wiki-search · GitHub">github-wiki-search/github-wiki-search.user.js at master · linyows/github-wiki-search · GitHub</a></p>
+
+<p>Then you will find search box on right above “Page History” button.</p>
+
+<p><img src="https://github.com/linyows/github-wiki-search/raw/master/images/1.png" alt="1.png (640×457)" title="1.png (640×457)" /></p>
+
+<p><img src="https://github.com/linyows/github-wiki-search/raw/master/images/2.png" alt="2.png (640×457)" title="2.png (640×457)" /></p>
+
+<p>Now search all the wiki content with github-wiki-search.user.js!</p>
 
 
       <div id="related-post">
         <h3>Related Posts</h3>
         <ul>
           
-          <li><a href="/2010/07/09/cant-live-up-with-oauth">OAuthがwakaranai</a></li>
+          <li><a href="/2010/06/14/migrated-to-jekyll">Jekyllに変えた</a></li>
           
-          <li><a href="/2011/05/24/favstream.rb">User Streamで快適ネットストーキング生活</a></li>
+          <li><a href="/2011/04/24/macvim-de-kopipe-dekita">MacVimでコピペできたんですけど…</a></li>
           
-          <li><a href="/2010/08/31/rubykaigi2010">RubyKaigi 2010の感想</a></li>
+          <li><a href="/2011/11/15/i-am-new-with-rbenv">RVMをやめてrbenvにした</a></li>
           
-          <li><a href="/2010/12/11/open-source-conference">オープンソースカンファレンス福岡2010</a></li>
+          <li><a href="/2011/04/17/related-post-in-jekyll">Jekyllで関連ポストを表示する</a></li>
           
-          <li><a href="/2010/07/27/masuda-san">増田のRSSをRubyのRSS:ParserでParseしようとしたけどやらせてもらえなかったのでHpricotを使った話</a></li>
+          <li><a href="/2011/06/29/added-category-archives">Jekyllにカテゴリ一覧を追加した</a></li>
           
         </ul>
       </div>
@@ -91,11 +86,7 @@
         <h3>Categories</h3>
         <ul id="categories">
           
-          <li><a href="/categories/OAuth/">OAuth</a></li>
-          
-          <li><a href="/categories/Rails/">Rails</a></li>
-          
-          <li><a href="/categories/Ruby/">Ruby</a></li>
+          <li><a href="/categories/JavaScript/">JavaScript</a></li>
           
         </ul>
 
