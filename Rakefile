@@ -20,8 +20,8 @@ desc "Publish"
 task :publish do
   path = File.expand_path("_site")
   if system("rsync -avz --delete #{path}/ morygonzalez@portalshit.net:sites/tech.portalshit.net/_site/")
-    "Your blog was successfully published!"
+    puts "Your blog was successfully published!"
   else
-    "Something went wrong..."
+    puts "Something went wrong..."
   end
 end
