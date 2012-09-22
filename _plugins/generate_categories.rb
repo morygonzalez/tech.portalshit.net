@@ -1,7 +1,7 @@
 # Jekyll category page generator.
 # http://recursive-design.com/projects/jekyll-plugins/
 #
-# Version: 0.1.4 (201101061053)
+# Version: 0.1.8 (201108151628)
 #
 # Copyright (c) 2010 Dave Perrett, http://recursive-design.com/
 # Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
@@ -68,23 +68,12 @@ module Jekyll
       meta_description_prefix  = site.config['category_meta_description_prefix'] || 'Category: '
       self.data['description'] = "#{meta_description_prefix}#{category}"
     end
-  end
 
-  class CategoryList < Page
-    def initialize(site,  base, dir, categories)
-      @site = site
-      @base = base
-      @dir = dir
-      @name = 'index.html'
-
-      self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), 'category_list.html')
-      self.data['categories'] = categories
-    end
   end
 
   # The Site class is a built-in Jekyll class with access to global site config information.
   class Site
+
     # Creates an instance of CategoryIndex for each category page, renders it, and
     # writes the output to a file.
     #
@@ -105,11 +94,13 @@ module Jekyll
         self.categories.keys.each do |category|
           self.write_category_index(File.join(dir, category), category)
         end
+
       # Throw an exception if the layout couldn't be found.
       else
         throw "No 'category_index' layout found."
       end
     end
+
   end
 
   # Jekyll hook - the generate method is called by jekyll, and generates all of the category pages.
@@ -120,10 +111,12 @@ module Jekyll
     def generate(site)
       site.write_category_indexes
     end
+
   end
 
   # Adds some extra filters used during the category creation process.
   module Filters
+
     # Outputs a list of categories as comma-separated <a> links. This is used
     # to output the category list for each post on a category page.
     #
@@ -132,7 +125,7 @@ module Jekyll
     # Returns string
     def category_links(categories)
       categories = categories.sort!.map do |item|
-        '<a href="/categories/'+item+'/">'+item+'</a>'
+        '<a href="/blog/category/'+item+'/">'+item+'</a>'
       end
 
       connector = "and"
@@ -159,5 +152,7 @@ module Jekyll
       result += date.strftime('<span class="year">%Y</span> ')
       result
     end
+
   end
+
 end
