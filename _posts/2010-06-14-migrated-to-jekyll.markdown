@@ -1,7 +1,9 @@
 ---
 id: 17
 title: Jekyllに変えた
-category: misc
+categores:
+- misc
+- jekyll
 layout: post
 ---
 

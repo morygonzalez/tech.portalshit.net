@@ -1,7 +1,7 @@
 ---
 id: 34
 title: Pygmentsを使ってコードをシンタックスハイライトするようにした
-category: Jekyll
+category: jekyll
 layout: post
 ---
 
