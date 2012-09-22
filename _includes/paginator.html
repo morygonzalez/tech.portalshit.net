@@ -1,0 +1,29 @@
+        <div class="paginator">
+        {% if paginator %}
+          {% if paginator.previous_page %}
+          <span class="previous">
+            {% if paginator.previous_page == 1 %}
+            <a href="../" rel="prev">Previous Page</a>
+            {% else %}
+            <a href="../page{{ paginator.previous_page }}/" rel="prev">&lt;&lt; Previous Page</a>
+            {% endif %}
+          </span>
+          {% endif %}
+          {% if paginator.next_page %}
+          <span class="next">
+            <a href="../page{{ paginator.next_page }}/" rel="next">Next Page &gt;&gt;</a>
+          </span>
+          {% endif %}
+        {% elsif page %}
+          {% if page.previous.url %}
+          <span class="previous">
+            <a href="{{ page.previous.url }}" title="{{page.previous.title}}">&lt;&lt; Previous Post</a>
+          </span>
+          {% endif %}
+          {% if page.next.url %}
+          <span class="next">
+            <a href="{{ page.next.url }}" title="{{ page.next.title }}">Next Post &gt;&gt;</a>
+          </span>
+          {% endif %}
+        {% endif %}
+        </div>
