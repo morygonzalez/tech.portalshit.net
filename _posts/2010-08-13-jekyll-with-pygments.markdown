@@ -1,7 +1,7 @@
 ---
 id: 34
 title: Pygmentsを使ってコードをシンタックスハイライトするようにした
-category: jekyll
+category: Jekyll
 layout: post
 ---
 
@@ -19,13 +19,13 @@ layout: post
 {% highlight console %}
   py-pygments @1.0 (python, devel)
       Python syntax highlighter
-  
+
   py25-pygments @1.0 (python, devel)
       Python syntax highlighter
-  
+
   py26-pygments @1.3.1 (python, devel)
       Python syntax highlighter
-  
+
   Found 3 ports.
 {% endhighlight %}
 

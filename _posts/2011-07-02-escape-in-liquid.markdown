@@ -2,9 +2,8 @@
 id: 58
 title: Liquidの中でLiquidをエスケープする
 categories:
-- jekyll
-- ruby
-- liquid
+- Jekyll
+- Ruby
 layout: post
 ---
 

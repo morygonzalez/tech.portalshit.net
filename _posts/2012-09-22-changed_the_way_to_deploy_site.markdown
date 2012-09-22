@@ -1,6 +1,6 @@
 ---
 layout: post
-category: jekyll
+category: Jekyll
 title: Jekyll のデプロイ手順を改めた
 date: 2012-09-22 11:15:50
 ---

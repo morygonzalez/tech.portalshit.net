@@ -2,7 +2,7 @@
 layout: post
 title: "Kobito いい"
 published: false
-category: mac
+category: Mac
 ---
 
 Qiita の Kobito、入れてみた。いい気がする。

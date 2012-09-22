@@ -1,7 +1,7 @@
 ---
 id: 64
 title: RailsのViewでselectタグを使って生成されるoptionタグの中のvalueをエスケープする方法
-category: rails
+category: Rails
 layout: post
 ---
 

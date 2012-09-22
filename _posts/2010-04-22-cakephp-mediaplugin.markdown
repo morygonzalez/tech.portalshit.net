@@ -1,8 +1,8 @@
 ---
 id: 2
 title: CakePHPのMedia Pluginは神だけど設置が面倒
-category: cakephp
-layout: post
+category: CakePHP
+Layout: post
 ---
 
 

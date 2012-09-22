@@ -2,7 +2,6 @@
 id: 59
 title: RVMでRubyをアップグレードしたら "bad interpreter" という警告が出る
 categories:
-- rvm
 - Ruby
 layout: post
 ---

@@ -1,7 +1,7 @@
 ---
 id: 43
 title: オープンソースカンファレンス福岡2010
-categoriy: その他
+categoriy: misc
 layout: post
 ---
 

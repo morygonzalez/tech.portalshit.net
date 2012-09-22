@@ -1,7 +1,7 @@
 ---
 id: 64
 title: Railsで `building` って予約語なんすかね
-category: rails
+category: Rails
 layout: post
 ---
 

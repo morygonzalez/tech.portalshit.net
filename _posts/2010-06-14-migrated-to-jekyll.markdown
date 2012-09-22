@@ -3,7 +3,7 @@ id: 17
 title: Jekyllに変えた
 categores:
 - misc
-- jekyll
+- Jekyll
 layout: post
 ---
 

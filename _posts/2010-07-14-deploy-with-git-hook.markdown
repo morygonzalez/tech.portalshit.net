@@ -2,8 +2,8 @@
 id: 28
 title: Gitのhookを使ってDreamhost上のJekyllに記事を公開
 categories:
-- jekyll
-- git
+- Jekyll
+- Git
 layout: post
 ---
 

@@ -3,7 +3,7 @@ id: 49
 title: Ubuntuでは使うあてなくてもユーザーアカウントは複数作った方がいい
 categories:
 - Ubuntu
-- zsh
+- Zsh
 layout: post
 ---
 

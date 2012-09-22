@@ -1,7 +1,9 @@
 ---
 id: 56
 title: RSpecでinitializeメソッドをスキップしたい
-category: RSpec
+categores:
+- RSpec
+- Ruby
 layout: post
 published: false
 ---

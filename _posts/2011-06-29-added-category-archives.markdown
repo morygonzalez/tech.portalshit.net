@@ -2,8 +2,8 @@
 id: 57
 title: Jekyllにカテゴリ一覧を追加した
 categories:
-- jekyll
-- ruby
+- Jekyll
+- Ruby
 layout: post
 ---
 

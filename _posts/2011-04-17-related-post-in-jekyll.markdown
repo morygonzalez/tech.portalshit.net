@@ -1,7 +1,7 @@
 ---
 id: 51
 title: Jekyllで関連ポストを表示する
-category: jekyll
+category: Jekyll
 layout: post
 ---
 
