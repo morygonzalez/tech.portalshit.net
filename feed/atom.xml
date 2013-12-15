@@ -5,7 +5,6 @@ title: tech.portalshit.net
 
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title>{{ page.title }}</title>
   <link href="http://tech.portalshit.net/feed/atom.xml" rel="self" />
   <link href="http://tech.portalshit.net/" />
@@ -14,7 +13,6 @@ title: tech.portalshit.net
   <author>
     <name>森井ゴンザレス</name>
   </author>
-
   {% for post in site.posts %}
   <entry>
     <title>{{ post.title }}</title>
@@ -24,5 +22,4 @@ title: tech.portalshit.net
     <content type="html">{{ post.content | xml_escape }}</content>
   </entry>
   {% endfor %}
-
 </feed>
