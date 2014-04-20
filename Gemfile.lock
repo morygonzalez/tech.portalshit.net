@@ -58,7 +58,7 @@ GEM
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
     rb-fsevent (0.9.3)
-    rb-gsl (1.15.3.1)
+    rb-gsl (1.16.0)
       narray (>= 0.5.9)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
