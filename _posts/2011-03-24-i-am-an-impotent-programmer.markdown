@@ -1,6 +1,6 @@
 ---
 id: 48
-title: TDD Boot Campの感想2 &mdash; ペアプログラミングで気づいたこと
+title: TDD Boot Campの感想2 — ペアプログラミングで気づいたこと
 category: 勉強会
 layout: post
 ---
