@@ -13,7 +13,7 @@ title: tech.portalshit.net
   <author>
     <name>森井ゴンザレス</name>
   </author>
-  {% for post in site.posts %}
+  {% for post in site.posts limit:5 %}
   <entry>
     <title>{{ post.title }}</title>
     <link href="http://tech.portalshit.net{{ post.url }}" />
