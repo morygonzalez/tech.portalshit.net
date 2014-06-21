@@ -1,4 +1,4 @@
-pre { overflow: auto; border: 1px solid #fffeff; padding: 10px; }
+pre { overflow: auto; border: 1px solid #fffeff; padding: 10px; text-align: left; }
 .gist-highlight, .highlight { background: #f8f8ff; font: 14px/1.3em Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
