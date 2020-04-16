@@ -5,3 +5,4 @@ _site/*
 .bundle
 /vendor/
 _jekyll_s3.yml
+.env
